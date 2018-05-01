@@ -18,9 +18,17 @@ namespace InvoiceMaker
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+      
+
+        private void addButton_Click(object sender, EventArgs e)
         {
             Debug.Print("hi");
+            CustomerForm customerForm = new CustomerForm();
+            customerForm.Size = new System.Drawing.Size(460, 610);
+            customerForm.Font = new Font(customerForm.Font.Name, customerForm.Font.Size+1, customerForm.Font.Style);
+            customerForm.Show();
         }
+
+        
     }
 }
