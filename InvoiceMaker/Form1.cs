@@ -22,8 +22,9 @@ namespace InvoiceMaker
         private void button1_Click(object sender, EventArgs e)
         {
             Debug.Print("hi");
-            ProductForm m = new ProductForm();
-            m.Show();
+            ProductForm productForm = new ProductForm();
+            productForm.Font = new Font(productForm.Font.Name, productForm.Font.Size + 1, productForm.Font.Style);
+            productForm.Show();
         }
     }
 }
