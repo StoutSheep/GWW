@@ -91,5 +91,104 @@ namespace InvoiceMaker
 
 
 
+        static void AddProduct(String storeName, String shippingAddress, String storeContact, int phoneNumber, 
+            String PaymentTerms, String ShippingInstructions, String SpecialNotes)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=password";
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "INSERT INTO Products (StoreName, ShippingAddress, StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, SpecialNotes) " +
+                    "VALUES (" +
+                    "'" + storeName + "'," +
+                    "'" + shippingAddress + "'," +
+                    "'" + storeContact + "'," +
+                    "'" + phoneNumber + "'," +
+                    "'" + PaymentTerms + "'," +
+                    "'" + ShippingInstructions + "'," +
+                    "'" + SpecialNotes + "'," +
+                    ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+        static void AddCustomer(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, String upc)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=password";
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "INSERT INTO Products Customers (" +
+                    "'" + itemNo + "'," +
+                    "'" + itemDesc + "'," +
+                    "'" + perCarton + "'," +
+                    "'" + location + "'," +
+                    "'" + cost + "'," +
+                    "'" + sellPrice + "'," +
+                    "'" + upc + "'," +
+                    ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+
+        static void AddProvinceTax(String province, int tax)
+        { 
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=password";
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "INSERT INTO PovinceTax VALUES (" +
+                    "'" + province + "'," +
+                    "'" + tax + "'," +
+                    ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+
+
     }
 }
