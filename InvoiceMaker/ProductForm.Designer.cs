@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.itemNumber_textBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.itemDescription_textBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cartonPack_textBox = new System.Windows.Forms.TextBox();
+            this.warehouseLoc_textBox = new System.Windows.Forms.TextBox();
+            this.cost_textBox = new System.Windows.Forms.TextBox();
+            this.sellingPrice_textBox = new System.Windows.Forms.TextBox();
+            this.upc_textBox = new System.Windows.Forms.TextBox();
+            this.cancel_button = new System.Windows.Forms.Button();
+            this.submit_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -56,13 +56,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Item Number";
             // 
-            // textBox1
+            // itemNumber_textBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(69, 87);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(175, 31);
-            this.textBox1.TabIndex = 1;
+            this.itemNumber_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemNumber_textBox.Location = new System.Drawing.Point(69, 87);
+            this.itemNumber_textBox.Name = "itemNumber_textBox";
+            this.itemNumber_textBox.Size = new System.Drawing.Size(175, 31);
+            this.itemNumber_textBox.TabIndex = 1;
             // 
             // label2
             // 
@@ -74,13 +74,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Item Description";
             // 
-            // textBox2
+            // itemDescription_textBox
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(69, 185);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(655, 31);
-            this.textBox2.TabIndex = 3;
+            this.itemDescription_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemDescription_textBox.Location = new System.Drawing.Point(69, 185);
+            this.itemDescription_textBox.Name = "itemDescription_textBox";
+            this.itemDescription_textBox.Size = new System.Drawing.Size(655, 31);
+            this.itemDescription_textBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -132,84 +132,86 @@
             this.label7.TabIndex = 8;
             this.label7.Text = "UPC";
             // 
-            // textBox3
+            // cartonPack_textBox
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(69, 293);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 31);
-            this.textBox3.TabIndex = 9;
+            this.cartonPack_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartonPack_textBox.Location = new System.Drawing.Point(69, 293);
+            this.cartonPack_textBox.Name = "cartonPack_textBox";
+            this.cartonPack_textBox.Size = new System.Drawing.Size(100, 31);
+            this.cartonPack_textBox.TabIndex = 9;
             // 
-            // textBox4
+            // warehouseLoc_textBox
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(332, 292);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 31);
-            this.textBox4.TabIndex = 10;
+            this.warehouseLoc_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warehouseLoc_textBox.Location = new System.Drawing.Point(332, 292);
+            this.warehouseLoc_textBox.Name = "warehouseLoc_textBox";
+            this.warehouseLoc_textBox.Size = new System.Drawing.Size(100, 31);
+            this.warehouseLoc_textBox.TabIndex = 10;
             // 
-            // textBox5
+            // cost_textBox
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(69, 375);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 31);
-            this.textBox5.TabIndex = 11;
+            this.cost_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cost_textBox.Location = new System.Drawing.Point(69, 375);
+            this.cost_textBox.Name = "cost_textBox";
+            this.cost_textBox.Size = new System.Drawing.Size(100, 31);
+            this.cost_textBox.TabIndex = 11;
             // 
-            // textBox6
+            // sellingPrice_textBox
             // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(337, 375);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 31);
-            this.textBox6.TabIndex = 12;
+            this.sellingPrice_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sellingPrice_textBox.Location = new System.Drawing.Point(337, 375);
+            this.sellingPrice_textBox.Name = "sellingPrice_textBox";
+            this.sellingPrice_textBox.Size = new System.Drawing.Size(100, 31);
+            this.sellingPrice_textBox.TabIndex = 12;
             // 
-            // textBox7
+            // upc_textBox
             // 
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(69, 465);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 31);
-            this.textBox7.TabIndex = 13;
+            this.upc_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.upc_textBox.Location = new System.Drawing.Point(69, 465);
+            this.upc_textBox.Name = "upc_textBox";
+            this.upc_textBox.Size = new System.Drawing.Size(100, 31);
+            this.upc_textBox.TabIndex = 13;
             // 
-            // button1
+            // cancel_button
             // 
-            this.button1.Location = new System.Drawing.Point(443, 609);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 49);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cancel_button.Location = new System.Drawing.Point(443, 603);
+            this.cancel_button.Name = "cancel_button";
+            this.cancel_button.Size = new System.Drawing.Size(114, 55);
+            this.cancel_button.TabIndex = 14;
+            this.cancel_button.Text = "Cancel";
+            this.cancel_button.UseVisualStyleBackColor = true;
+            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
             // 
-            // button2
+            // submit_button
             // 
-            this.button2.Location = new System.Drawing.Point(578, 609);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 49);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Submit";
-            this.button2.UseVisualStyleBackColor = true;
+            this.submit_button.Location = new System.Drawing.Point(578, 603);
+            this.submit_button.Name = "submit_button";
+            this.submit_button.Size = new System.Drawing.Size(115, 55);
+            this.submit_button.TabIndex = 15;
+            this.submit_button.Text = "Submit";
+            this.submit_button.UseVisualStyleBackColor = true;
+            this.submit_button.Click += new System.EventHandler(this.submit_button_Click);
             // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 670);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.submit_button);
+            this.Controls.Add(this.cancel_button);
+            this.Controls.Add(this.upc_textBox);
+            this.Controls.Add(this.sellingPrice_textBox);
+            this.Controls.Add(this.cost_textBox);
+            this.Controls.Add(this.warehouseLoc_textBox);
+            this.Controls.Add(this.cartonPack_textBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.itemDescription_textBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.itemNumber_textBox);
             this.Controls.Add(this.label1);
             this.Name = "ProductForm";
             this.Text = "ProductForm";
@@ -221,20 +223,20 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox itemNumber_textBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox itemDescription_textBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox cartonPack_textBox;
+        private System.Windows.Forms.TextBox warehouseLoc_textBox;
+        private System.Windows.Forms.TextBox cost_textBox;
+        private System.Windows.Forms.TextBox sellingPrice_textBox;
+        private System.Windows.Forms.TextBox upc_textBox;
+        private System.Windows.Forms.Button cancel_button;
+        private System.Windows.Forms.Button submit_button;
     }
 }
