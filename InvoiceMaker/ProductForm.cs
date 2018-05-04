@@ -14,13 +14,13 @@ namespace InvoiceMaker
 {
     public partial class ProductForm : Form
     {
-        String itemNo = "";
-        String itemDesc = "";
+        String itemNo;
+        String itemDesc;
         int perCarton;
-        String location = "";
+        String location;
         double cost;
         double sellPrice;
-        String upc = "";
+        String upc;
 
         public ProductForm()
         {
@@ -34,23 +34,60 @@ namespace InvoiceMaker
 
         private void submit_button_Click(object sender, EventArgs e)
         {
+            Boolean allValid = true;
             itemNo = itemNumber_textBox.Text;
             itemDesc = itemDescription_textBox.Text;
-            if(cartonPack_textBox.Text.Length > 0)
-                perCarton = Int32.Parse(cartonPack_textBox.Text);
+            Int32.TryParse(cartonPack_textBox.Text, out perCarton);
             location = warehouseLoc_textBox.Text;
-            if (cost_textBox.Text.Length > 0)
-                cost = Double.Parse(cost_textBox.Text);
-            if (sellingPrice_textBox.Text.Length > 0)
-                sellPrice = Double.Parse(sellingPrice_textBox.Text);
+            //cost = cost_textBox.Text;
+            //sellPrice = sellingPrice_textBox.Text;
             upc = upc_textBox.Text;
             if(!validItemNumber(itemNo))
             {
                 Debug.Print("Failed");
-                return;
+                allValid = false;
             }
-            Program.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
-            this.Close();
+            if(!validStringLength(itemDesc, 50))
+            {
+                Debug.Print("Description Failed");
+                allValid = false;
+            }
+
+            if (!Int32.TryParse(cartonPack_textBox.Text, out perCarton))
+            {
+                Debug.Print("PerCarton Failed");
+                allValid = false;
+            }
+
+            if (!validStringLength(location, 10))
+            {
+                Debug.Print("Location Failed");
+                allValid = false;
+            }
+
+            if(!Double.TryParse(cost_textBox.Text, out cost))
+            {
+                Debug.Print("Cost Failed");
+                allValid = false;
+            }
+
+            if (!Double.TryParse(sellingPrice_textBox.Text, out sellPrice))
+            {
+                Debug.Print("Selling Price Failed");
+                allValid = false;
+            }
+
+            if (!validStringLength(upc, 20))
+            {
+                Debug.Print("UPC Failed");
+                allValid = false;
+            }
+
+            if (allValid)
+            {
+                Program.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+                this.Close();
+            }
         }
 
         private Boolean validItemNumber(String itemNo)
@@ -84,5 +121,12 @@ namespace InvoiceMaker
             }
             return true;
         }
+
+        private Boolean validMonetaryValue(double value)
+        {
+            return true;
+        }
+
+
     }
 }

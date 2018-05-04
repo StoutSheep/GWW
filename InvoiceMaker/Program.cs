@@ -151,7 +151,7 @@ namespace InvoiceMaker
         }
 
 
-        static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, String upc)
+        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, String upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -319,6 +319,39 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
 
+
+        }
+
+        public static ArrayList SearchProductsByItemNo(String itemNo)
+        {
+            ArrayList result = new ArrayList();
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT ItemNo FROM Products WHERE ItemNo = " + itemNo + ";";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    result.Add(rdr[0]);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+            return result;
 
         }
 
