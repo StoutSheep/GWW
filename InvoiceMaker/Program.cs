@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using MySql.Data;
 using MySql.Data.MySqlClient;
+
 
 namespace InvoiceMaker
 {
@@ -20,7 +21,7 @@ namespace InvoiceMaker
         static void Main()
         {
             InitializeDatabase();
-            //AddProduct("ewrwe", "asdas", 2, "sad", 3.2, 3.5, "sadasd");
+
             
             AddProvinceTax("BC", 20);
             Application.EnableVisualStyles();
@@ -36,6 +37,7 @@ namespace InvoiceMaker
 
 
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -110,6 +112,7 @@ namespace InvoiceMaker
 
 
 
+
         static void AddCustomer(String storeName, String emailAddress,  String shippingAddress, String storeContact, int phoneNumber, 
             String PaymentTerms, String ShippingInstructions, String SpecialNotes)
         {
@@ -120,6 +123,7 @@ namespace InvoiceMaker
                 conn.Open();
                 MySqlCommand cmd;
                 string sql;
+
 
                 sql = "INSERT INTO Customers (StoreName, EmailAddress, ShippingAddress, StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, SpecialNotes) " +
                     "VALUES (" +
@@ -146,7 +150,8 @@ namespace InvoiceMaker
 
         }
 
-        static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, String upc)
+
+        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, String upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -182,6 +187,7 @@ namespace InvoiceMaker
 
 
         static void AddProvinceTax(String province, int tax)
+
         { 
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -190,6 +196,7 @@ namespace InvoiceMaker
                 conn.Open();
                 MySqlCommand cmd;
                 string sql;
+
 
                 sql = "INSERT INTO ProvinceTax VALUES (" +
                     "'" + province + "'," 
@@ -206,7 +213,6 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
-
 
         }
 
@@ -271,6 +277,7 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+
             }
             catch (Exception ex)
             {
@@ -279,6 +286,7 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
+
 
 
         }
@@ -311,6 +319,39 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
 
+
+        }
+
+        public static ArrayList SearchProductsByItemNo(String itemNo)
+        {
+            ArrayList result = new ArrayList();
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT ItemNo FROM Products WHERE ItemNo = " + itemNo + ";";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    result.Add(rdr[0]);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+            return result;
 
         }
 
