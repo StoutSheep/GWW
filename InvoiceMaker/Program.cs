@@ -45,7 +45,6 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-
                 sql = "DROP TABLE Customers;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -58,7 +57,13 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-              
+                sql = "DROP TABLE Invoices;";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                sql = "DROP TABLE InvoiceContents;";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
 
                 sql = "CREATE TABLE IF NOT EXISTS Customers (" +
                     "StoreID int NOT NULL AUTO_INCREMENT," +
@@ -94,6 +99,28 @@ namespace InvoiceMaker
                    "Tax int NOT NULL," +
                    "CHECK (Tax >= 0 AND Tax <=30)," +
                    "PRIMARY KEY (Province)" +
+                   ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                sql = "CREATE TABLE IF NOT EXISTS Invoices (" +
+                   "InvoiceID int NOT NULL AUTO_INCREMENT," +
+                   "StoreID int NOT NULL," +
+                   "InvoiceNo int," +
+                   "PRIMARY KEY (InvoiceID)" +
+                   "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +
+                   ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                sql = "CREATE TABLE IF NOT EXISTS InvoiceContents (" +
+                   "EntryID int NOT NULL AUTO_INCREMENT," +
+                   "InvoiceID int NOT NULL" +
+                   "ItemNo varchar(10) NOT NULL," +
+                   "Quantity int NOT NULL," +
+                   "PRIMARY KEY (EntryID)" +
+                   "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID)" +
+                   "FOREIGN KEY (ItemNo) REFERENCES Products(ItemNo)" +
                    ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
