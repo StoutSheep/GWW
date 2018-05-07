@@ -117,7 +117,7 @@ namespace InvoiceMaker
 
         private Boolean isUniqueItemNo(String itemNo)
         {
-            ArrayList result = Program.SearchProductsByItemNo(itemNo);
+            List<Product> result = Program.SearchProductsByItemNo(itemNo);
             if(result.Count > 0)
             {
                 return false;
