@@ -9,44 +9,47 @@ namespace InvoiceMaker
     class Product
     {
         // Unique identifier for product
-        internal String ItemNumber { get; set; }
-        internal String ItemDescription { get; set; }
+
+        String ItemNo { get; set; }
+        String ItemDesc { get; set; }
         // Items come in packs of cartons
         // TODO: Validation CANNOT BE ZERO
-        internal Int32 CartonTotal { get; set; }
+        int PerCarton { get; set; }
         // Location in GWW Warehouse
         // TODO: Determine if it is a fixed amount of locations
-        internal String WarehouseLocation { get; set; }
+        String Location { get; set; }
         // Cost for GWW
         // DO NOT GIVE THIS INFO IN INVOICE
-        internal float WholesaleCost { get; set; }
+        float Cost { get; set; }
         // Price for GWW Customer
-        internal float SalePrice { get; set; }
+        float SellPrice { get; set; }
         // Barcode; Sometimes information not available
-        internal String UPC { get; set; }
+        int UPC { get; set; }
 
         // Everything is filled.
-        public Product(string itemNumber, string itemDescription, Int32 cartonTotal, string warehouseLocation, float wholesaleCost, float salePrice, String uPC)
+        public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, int upc)
+
         {
-            ItemNumber = itemNumber;
-            ItemDescription = itemDescription;
-            CartonTotal = cartonTotal;
-            WarehouseLocation = warehouseLocation;
-            WholesaleCost = wholesaleCost;
-            SalePrice = salePrice;
-            UPC = uPC;
+            ItemNo = itemNo;
+            ItemDesc = itemDesc;
+            PerCarton = perCarton;
+            Location = location;
+            Cost = cost;
+            SellPrice = sellPrice;
+            UPC = upc;
         }
 
         // Missing UPC
-        public Product(string itemNumber, string itemDescription, Int32 cartonTotal, string warehouseLocation, float wholesaleCost, float salePrice)
+
+        public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice)
         {
-            ItemNumber = itemNumber;
-            ItemDescription = itemDescription;
-            CartonTotal = cartonTotal;
-            WarehouseLocation = warehouseLocation;
-            WholesaleCost = wholesaleCost;
-            SalePrice = salePrice;
-            UPC = null;
+            ItemNo = itemNo;
+            ItemDesc = itemDesc;
+            PerCarton = perCarton;
+            Location = location;
+            Cost = cost;
+            SellPrice = sellPrice;
+            UPC = 0;
         }
     }
 }
