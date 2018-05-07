@@ -9,6 +9,7 @@ namespace InvoiceMaker
     class Product
     {
         // Unique identifier for product
+
         String ItemNo { get; set; }
         String ItemDesc { get; set; }
         // Items come in packs of cartons
@@ -27,6 +28,7 @@ namespace InvoiceMaker
 
         // Everything is filled.
         public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, int upc)
+
         {
             ItemNo = itemNo;
             ItemDesc = itemDesc;
@@ -38,6 +40,7 @@ namespace InvoiceMaker
         }
 
         // Missing UPC
+
         public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice)
         {
             ItemNo = itemNo;
