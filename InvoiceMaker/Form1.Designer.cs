@@ -40,6 +40,7 @@
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.addButton_Click);
+
             // 
             // Form1
             // 

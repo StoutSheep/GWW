@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data;
+
 
 namespace InvoiceMaker
 {
@@ -17,8 +19,6 @@ namespace InvoiceMaker
         {
             InitializeComponent();
         }
-
-      
 
         private void addButton_Click(object sender, EventArgs e)
         {
@@ -31,7 +31,5 @@ namespace InvoiceMaker
             //invoiceForm.Size = new System.Drawing.Size(800, 600);
             invoiceForm.Show();
         }
-
-        
     }
 }
