@@ -152,7 +152,7 @@ namespace InvoiceMaker
         private void Qty_TextChanged(object sender, EventArgs e)
         {
             TextBox t = (TextBox)sender;
-            this.panel1.Controls["amount" + t.AccessibleName].Text = "amount here";
+            //this.panel1.Controls["amount" + t.AccessibleName].Text = "amount here";
 
             if(Int32.Parse(t.AccessibleName) == i)
             {
@@ -224,11 +224,16 @@ namespace InvoiceMaker
         private void C_TextChanged(object sender, EventArgs e)
         {
             ComboBox c = (ComboBox)sender;
-            this.panel1.Controls["loc" + c.AccessibleName].Text = "loc here";
-            this.panel1.Controls["desc" + c.AccessibleName].Text = "description here";
-            this.panel1.Controls["carton" + c.AccessibleName].Text = "carton here";
-            this.panel1.Controls["cost" + c.AccessibleName].Text = "cost here";
-            this.panel1.Controls["amount" + c.AccessibleName].Text = "amount here";
+            Product product = Program.SearchProductByItemNo(c.Text);
+            if (product != null)
+            {
+                this.panel1.Controls["loc" + c.AccessibleName].Text = product.Location;
+                this.panel1.Controls["desc" + c.AccessibleName].Text = product.ItemDesc;
+                this.panel1.Controls["carton" + c.AccessibleName].Text = product.PerCarton.ToString();
+                this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString();
+                this.panel1.Controls["amount" + c.AccessibleName].Text = (Int32.Parse(this.panel1.Controls["" + c.AccessibleName].Text) * product.Cost).ToString();
+
+            }
         }
 
         private void Desc_Enter(object sender, EventArgs e)
@@ -247,12 +252,16 @@ namespace InvoiceMaker
 
             c.SelectionStart = c.Text.Length;
 
-            c.Items.AddRange(new object[] {
-            "212",
-            "212a",
-            "10222",
-            "10222a",
-            "101"});
+            List<Product> productList = Program.SearchProductsByItemNo(c.Text);
+            
+                Object[] arr = new Object[productList.Count];
+                for (int i = 0; i < productList.Count; i++)
+                {
+                    arr[i] = productList[i].ItemNo;
+                }
+                c.Items.AddRange(arr);
+            
+
 
         }
 

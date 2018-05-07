@@ -451,5 +451,38 @@ namespace InvoiceMaker
 
         }
 
+        public static Product SearchProductByItemNo(String itemNo)
+        {
+
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT * FROM Products WHERE ItemNo LIKE '" + itemNo + "';";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                conn.Close();
+                if(rdr.HasRows)
+                {
+                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
+                    return temp;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            Console.WriteLine("Done.");
+            return null;
+
+        }
+
     }
 }
