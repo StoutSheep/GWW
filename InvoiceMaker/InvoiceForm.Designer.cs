@@ -51,7 +51,7 @@
             this.ok_button.TabIndex = 1;
             this.ok_button.Text = "OK";
             this.ok_button.UseVisualStyleBackColor = true;
-            this.ok_button.Click += new System.EventHandler(this.button1_Click);
+            this.ok_button.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancel_button
             // 
@@ -61,6 +61,7 @@
             this.cancel_button.TabIndex = 2;
             this.cancel_button.Text = "Cancel";
             this.cancel_button.UseVisualStyleBackColor = true;
+            this.cancel_button.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // InvoiceForm
             // 
