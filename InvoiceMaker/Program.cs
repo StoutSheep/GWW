@@ -15,14 +15,11 @@ namespace InvoiceMaker
 
         static String pswd = "password";
        
-
-
         [STAThread]
         static void Main()
         {
             InitializeDatabase();
 
-            
             AddProvinceTax("BC", 20);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -33,11 +30,7 @@ namespace InvoiceMaker
 
         static void InitializeDatabase()
         {
-
-
-
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -45,21 +38,27 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-
-                sql = "DROP TABLE Customers;";
+                sql = "DROP TABLE IF EXISTS Invoices;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "DROP TABLE Products;";
+                sql = "DROP TABLE IF EXISTS InvoiceContents;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "DROP TABLE ProvinceTax;";
+                sql = "DROP TABLE IF EXISTS Customers;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-              
+                sql = "DROP TABLE IF EXISTS Products;";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
 
+                sql = "DROP TABLE IF EXISTS ProvinceTax;";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+               
                 sql = "CREATE TABLE IF NOT EXISTS Customers (" +
                     "StoreID int NOT NULL AUTO_INCREMENT," +
                     "StoreName varchar(50) NOT NULL," +
@@ -83,7 +82,7 @@ namespace InvoiceMaker
                     "Location varchar(10) NOT NULL," +
                     "Cost decimal(10,2) NOT NULL," +
                     "SellPrice decimal(10,2) NOT NULL," +
-                    "UPC varchar(20) NOT NULL," +
+                    "UPC int," +
                     "PRIMARY KEY (ItemNo)" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
@@ -94,6 +93,28 @@ namespace InvoiceMaker
                    "Tax int NOT NULL," +
                    "CHECK (Tax >= 0 AND Tax <=30)," +
                    "PRIMARY KEY (Province)" +
+                   ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                sql = "CREATE TABLE IF NOT EXISTS Invoices (" +
+                   "InvoiceID int NOT NULL AUTO_INCREMENT," +
+                   "StoreID int NOT NULL," +
+                   "InvoiceNo int," +
+                   "PRIMARY KEY (InvoiceID)," +
+                   "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +
+                   ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                sql = "CREATE TABLE IF NOT EXISTS InvoiceContents (" +
+                   "EntryID int NOT NULL AUTO_INCREMENT," +
+                   "InvoiceID int NOT NULL," +
+                   "ItemNo varchar(10) NOT NULL," +
+                   "Quantity int NOT NULL," +
+                   "PRIMARY KEY (EntryID)," +
+                   "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID)," +
+                   "FOREIGN KEY (ItemNo) REFERENCES Products(ItemNo)" +
                    ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -114,7 +135,7 @@ namespace InvoiceMaker
 
 
         static void AddCustomer(String storeName, String emailAddress,  String shippingAddress, String storeContact, int phoneNumber, 
-            String PaymentTerms, String ShippingInstructions, String SpecialNotes)
+            String paymentTerms, String shippingInstructions, String specialNotes)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -132,9 +153,9 @@ namespace InvoiceMaker
                     "'" + shippingAddress + "'," +
                     "'" + storeContact + "'," +
                     "'" + phoneNumber + "'," +
-                    "'" + PaymentTerms + "'," +
-                    "'" + ShippingInstructions + "'," +
-                    "'" + SpecialNotes + "'," +
+                    "'" + paymentTerms + "'," +
+                    "'" + shippingInstructions + "'," +
+                    "'" + specialNotes + "'," +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -151,7 +172,7 @@ namespace InvoiceMaker
         }
 
 
-        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, String upc)
+        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -164,11 +185,11 @@ namespace InvoiceMaker
                 sql = "INSERT INTO Products VALUES (" +
                     "'" + itemNo + "'," +
                     "'" + itemDesc + "'," +
-                    + perCarton + "," +
+                    perCarton + "," +
                     "'" + location + "'," +
-                    + cost + "," +
-                    + sellPrice + "," +
-                    "'" + upc + "'" +
+                    cost + "," +
+                    sellPrice + "," +
+                    upc +
                     ");";
 
                 cmd = new MySqlCommand(sql, conn);
@@ -199,8 +220,8 @@ namespace InvoiceMaker
 
 
                 sql = "INSERT INTO ProvinceTax VALUES (" +
-                    "'" + province + "'," 
-                    + tax +
+                    "'" + province + "'," +
+                    tax +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -214,6 +235,34 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
 
+        }
+
+        static void AddInvoice(int storeID, int invoiceNo)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+
+                sql = "INSERT INTO Invoices (StoreID, InvoiceNo) VALUES (" +
+                    storeID + "," +
+                    invoiceNo +
+                    ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
         }
 
 
@@ -254,7 +303,7 @@ namespace InvoiceMaker
         }
 
 
-        static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, String upc)
+        static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -319,6 +368,35 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
 
+
+        }
+
+        static void EditInvoice(int invoiceID, int storeID, int invoiceNo)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+
+                sql = "INSERT INTO Invoices (StoreID, InvoiceNo) VALUES (" +
+                    storeID + "," +
+                    invoiceNo +
+                    ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
 
         }
 
