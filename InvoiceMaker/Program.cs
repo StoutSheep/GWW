@@ -7,12 +7,10 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-
 namespace InvoiceMaker
 {
     static class Program
     {
-
         static String pswd = "password";
        
         [STAThread]
@@ -25,8 +23,6 @@ namespace InvoiceMaker
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-
-
 
         static void InitializeDatabase()
         {
@@ -432,8 +428,6 @@ namespace InvoiceMaker
             return result;
 
         }
-
-
 
     }
 }
