@@ -29,12 +29,16 @@ namespace InvoiceMaker
             //ProductForm productForm = new ProductForm();
             //productForm.Font = new Font(productForm.Font.Name, productForm.Font.Size + 1, productForm.Font.Style);
             //productForm.Show();
+
+            /*
             OpenFileDialog fd = new OpenFileDialog();
 
             if (fd.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
+            */
+
             //ExcelReadWindow prog = new ExcelReadWindow(fd.FileName);
             //prog.Show();
 

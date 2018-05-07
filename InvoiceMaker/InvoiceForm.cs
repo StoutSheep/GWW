@@ -47,23 +47,37 @@ namespace InvoiceMaker
             itemNoLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(itemNoLabel);
 
+            Label locLabel = new Label();
+            locLabel.Text = "Location";
+            locLabel.Location = new Point(x + 170, y);
+            locLabel.AutoSize = true;
+            locLabel.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(locLabel);
+
             Label descLabel = new Label();
             descLabel.Text = "Description";
-            descLabel.Location = new Point(x+170, y);
+            descLabel.Location = new Point(x+240, y);
             descLabel.AutoSize = true;
             descLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(descLabel);
 
+            Label cartonLabel = new Label();
+            cartonLabel.Text = "Pack";
+            cartonLabel.Location = new Point(x + 460, y);
+            cartonLabel.AutoSize = true;
+            cartonLabel.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(cartonLabel);
+
             Label costLabel = new Label();
             costLabel.Text = "Cost";
-            costLabel.Location = new Point(x + 390, y);
+            costLabel.Location = new Point(x + 510, y);
             costLabel.AutoSize = true;
             costLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(costLabel);
 
             Label amountLabel = new Label();
             amountLabel.Text = "Amount";
-            amountLabel.Location = new Point(x + 460, y);
+            amountLabel.Location = new Point(x + 580, y);
             amountLabel.AutoSize = true;
             amountLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(amountLabel);
@@ -86,8 +100,17 @@ namespace InvoiceMaker
             itemNumber.AccessibleName = "" + i;
             panel1.Controls.Add(itemNumber);
 
+            TextBox loc = new TextBox();
+            loc.Location = new Point(170, 0 + i * 25);
+            loc.Size = new Size(50, 25);
+            loc.ReadOnly = true;
+            loc.Enter += Desc_Enter;
+            loc.Name = "loc" + i;
+            loc.AccessibleName = "" + i;
+            panel1.Controls.Add(loc);
+
             TextBox desc = new TextBox();
-            desc.Location = new Point(170, 0 + i * 25);
+            desc.Location = new Point(240, 0 + i * 25);
             desc.Size = new Size(200, 25);
             desc.ReadOnly = true;
             desc.Enter += Desc_Enter;
@@ -95,8 +118,17 @@ namespace InvoiceMaker
             desc.AccessibleName = "" + i;
             panel1.Controls.Add(desc);
 
+            TextBox cartonPack = new TextBox();
+            cartonPack.Location = new Point(460, 0 + i * 25);
+            cartonPack.Size = new Size(30, 25);
+            cartonPack.ReadOnly = true;
+            cartonPack.Enter += Desc_Enter;
+            cartonPack.Name = "carton" + i;
+            cartonPack.AccessibleName = "" + i;
+            panel1.Controls.Add(cartonPack);
+
             TextBox cost = new TextBox();
-            cost.Location = new Point(390, 0 + i * 25);
+            cost.Location = new Point(510, 0 + i * 25);
             cost.Size = new Size(50, 25);
             cost.ReadOnly = true;
             cost.Enter += Desc_Enter;
@@ -105,7 +137,7 @@ namespace InvoiceMaker
             panel1.Controls.Add(cost);
 
             TextBox amount = new TextBox();
-            amount.Location = new Point(460, 0 + i * 25);
+            amount.Location = new Point(580, 0 + i * 25);
             amount.Size = new Size(50, 25);
             amount.ReadOnly = true;
             amount.Enter += Desc_Enter;
@@ -142,8 +174,17 @@ namespace InvoiceMaker
                 itemNumber.AccessibleName = "" + i;
                 panel1.Controls.Add(itemNumber);
 
+                TextBox loc = new TextBox();
+                loc.Location = new Point(170, 0 + i * 25);
+                loc.Size = new Size(50, 25);
+                loc.ReadOnly = true;
+                loc.Enter += Desc_Enter;
+                loc.Name = "loc" + i;
+                loc.AccessibleName = "" + i;
+                panel1.Controls.Add(loc);
+
                 TextBox desc = new TextBox();
-                desc.Location = new Point(170, 0 + i * 25);
+                desc.Location = new Point(240, 0 + i * 25);
                 desc.Size = new Size(200, 25);
                 desc.ReadOnly = true;
                 desc.Enter += Desc_Enter;
@@ -151,8 +192,17 @@ namespace InvoiceMaker
                 desc.AccessibleName = "" + i;
                 panel1.Controls.Add(desc);
 
+                TextBox cartonPack = new TextBox();
+                cartonPack.Location = new Point(460, 0 + i * 25);
+                cartonPack.Size = new Size(30, 25);
+                cartonPack.ReadOnly = true;
+                cartonPack.Enter += Desc_Enter;
+                cartonPack.Name = "carton" + i;
+                cartonPack.AccessibleName = "" + i;
+                panel1.Controls.Add(cartonPack);
+
                 TextBox cost = new TextBox();
-                cost.Location = new Point(390, 0 + i * 25);
+                cost.Location = new Point(510, 0 + i * 25);
                 cost.Size = new Size(50, 25);
                 cost.ReadOnly = true;
                 cost.Enter += Desc_Enter;
@@ -161,7 +211,7 @@ namespace InvoiceMaker
                 panel1.Controls.Add(cost);
 
                 TextBox amount = new TextBox();
-                amount.Location = new Point(460, 0 + i * 25);
+                amount.Location = new Point(580, 0 + i * 25);
                 amount.Size = new Size(50, 25);
                 amount.ReadOnly = true;
                 amount.Enter += Desc_Enter;
@@ -174,7 +224,9 @@ namespace InvoiceMaker
         private void C_TextChanged(object sender, EventArgs e)
         {
             ComboBox c = (ComboBox)sender;
+            this.panel1.Controls["loc" + c.AccessibleName].Text = "loc here";
             this.panel1.Controls["desc" + c.AccessibleName].Text = "description here";
+            this.panel1.Controls["carton" + c.AccessibleName].Text = "carton here";
             this.panel1.Controls["cost" + c.AccessibleName].Text = "cost here";
             this.panel1.Controls["amount" + c.AccessibleName].Text = "amount here";
         }
@@ -209,7 +261,12 @@ namespace InvoiceMaker
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void okButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
         {
 
         }
