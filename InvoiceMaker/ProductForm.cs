@@ -20,7 +20,7 @@ namespace InvoiceMaker
         String location;
         double cost;
         double sellPrice;
-        String upc;
+        int upc;
 
         public ProductForm()
         {
@@ -41,7 +41,8 @@ namespace InvoiceMaker
             location = warehouseLoc_textBox.Text;
             //cost = cost_textBox.Text;
             //sellPrice = sellingPrice_textBox.Text;
-            upc = upc_textBox.Text;
+            Int32.TryParse(upc_textBox.Text, out upc);
+           // upc = upc_textBox.Text;
             if(!validItemNumber(itemNo))
             {
                 Debug.Print("Failed");
@@ -77,11 +78,13 @@ namespace InvoiceMaker
                 allValid = false;
             }
 
+            /*
             if (!validStringLength(upc, 20))
             {
                 Debug.Print("UPC Failed");
                 allValid = false;
             }
+            */
 
             if (allValid)
             {

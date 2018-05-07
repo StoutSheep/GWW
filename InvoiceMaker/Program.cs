@@ -15,14 +15,11 @@ namespace InvoiceMaker
 
         static String pswd = "password";
        
-
-
         [STAThread]
         static void Main()
         {
             InitializeDatabase();
 
-            
             AddProvinceTax("BC", 20);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -33,9 +30,7 @@ namespace InvoiceMaker
 
         static void InitializeDatabase()
         {
-
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -43,26 +38,27 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "DROP TABLE Customers;";
+                sql = "DROP TABLE IF EXISTS Invoices;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "DROP TABLE Products;";
+                sql = "DROP TABLE IF EXISTS InvoiceContents;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "DROP TABLE ProvinceTax;";
+                sql = "DROP TABLE IF EXISTS Customers;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "DROP TABLE Invoices;";
+                sql = "DROP TABLE IF EXISTS Products;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "DROP TABLE InvoiceContents;";
+                sql = "DROP TABLE IF EXISTS ProvinceTax;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+               
                 sql = "CREATE TABLE IF NOT EXISTS Customers (" +
                     "StoreID int NOT NULL AUTO_INCREMENT," +
                     "StoreName varchar(50) NOT NULL," +
@@ -113,10 +109,10 @@ namespace InvoiceMaker
 
                 sql = "CREATE TABLE IF NOT EXISTS InvoiceContents (" +
                    "EntryID int NOT NULL AUTO_INCREMENT," +
-                   "InvoiceID int NOT NULL" +
+                   "InvoiceID int NOT NULL," +
                    "ItemNo varchar(10) NOT NULL," +
                    "Quantity int NOT NULL," +
-                   "PRIMARY KEY (EntryID)" +
+                   "PRIMARY KEY (EntryID)," +
                    "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID)," +
                    "FOREIGN KEY (ItemNo) REFERENCES Products(ItemNo)" +
                    ");";
@@ -267,7 +263,6 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
-
         }
 
 
