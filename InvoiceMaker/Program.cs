@@ -18,10 +18,14 @@ namespace InvoiceMaker
         {
             InitializeDatabase();
 
-            AddProvinceTax("BC", 20);
+            //AddProvinceTax("BC", 20);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            List<Product> asd = SearchProductsByItemNo("123");
             Application.Run(new Form1());
+
+
         }
 
         static void InitializeDatabase()
@@ -34,11 +38,11 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "DROP TABLE IF EXISTS Invoices;";
+                sql = "DROP TABLE IF EXISTS InvoiceContents;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "DROP TABLE IF EXISTS InvoiceContents;";
+                sql = "DROP TABLE IF EXISTS Invoices;";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -116,6 +120,9 @@ namespace InvoiceMaker
                 cmd.ExecuteNonQuery();
 
 
+                SeedData();
+
+
             }
             catch (Exception ex)
             {
@@ -126,6 +133,17 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
 
         }
+
+        static void SeedData()
+        {
+            AddProduct("1234a", "cats", 3, "sdas", 34.2, 78.3, 3242);
+            AddProduct("1234b", "dog", 3, "sdas", 34.2, 78.3, 3242);
+            AddProduct("1234c", "animal", 3, "sdas", 34.2, 78.3, 3242);
+            AddProduct("1234d", "kangaroo", 3, "sdas", 34.2, 78.3, 3242);
+            AddProduct("1234e", "rat", 3, "sdas", 34.2, 78.3, 3242);
+            AddProduct("1234f", "snek", 3, "sdas", 34.2, 78.3, 3242);
+        }
+
 
 
 
@@ -396,9 +414,10 @@ namespace InvoiceMaker
 
         }
 
-        public static ArrayList SearchProductsByItemNo(String itemNo)
+        public static List<Product> SearchProductsByItemNo(String itemNo)
         {
-            ArrayList result = new ArrayList();
+            
+            List<Product> productList = new List<Product>();
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
@@ -408,13 +427,16 @@ namespace InvoiceMaker
                 MySqlDataReader rdr;
                 string sql;
 
-                sql = "SELECT ItemNo FROM Products WHERE ItemNo = " + itemNo + ";";
+                sql = "SELECT * FROM Products WHERE ItemNo LIKE '" + itemNo + "%';";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    result.Add(rdr[0]);
+
+                  
+                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
+                    productList.Add(temp);
                 }
 
             }
@@ -425,7 +447,7 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
-            return result;
+            return productList;
 
         }
 

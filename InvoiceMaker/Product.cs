@@ -10,21 +10,21 @@ namespace InvoiceMaker
     {
         // Unique identifier for product
 
-        String ItemNo { get; set; }
-        String ItemDesc { get; set; }
+        internal String ItemNo { get; set; }
+        internal String ItemDesc { get; set; }
         // Items come in packs of cartons
         // TODO: Validation CANNOT BE ZERO
-        int PerCarton { get; set; }
+        internal int PerCarton { get; set; }
         // Location in GWW Warehouse
         // TODO: Determine if it is a fixed amount of locations
-        String Location { get; set; }
+        internal String Location { get; set; }
         // Cost for GWW
         // DO NOT GIVE THIS INFO IN INVOICE
-        float Cost { get; set; }
+        internal float Cost { get; set; }
         // Price for GWW Customer
-        float SellPrice { get; set; }
+        internal float SellPrice { get; set; }
         // Barcode; Sometimes information not available
-        int UPC { get; set; }
+        internal int UPC { get; set; }
 
         // Everything is filled.
         public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, int upc)
