@@ -9,24 +9,24 @@ namespace InvoiceMaker
     class Product
     {
         // Unique identifier for product
-        String ItemNumber { get; set; }
-        String ItemDescription { get; set; }
+        internal String ItemNumber { get; set; }
+        internal String ItemDescription { get; set; }
         // Items come in packs of cartons
         // TODO: Validation CANNOT BE ZERO
-        String CartonTotal { get; set; }
+        internal Int32 CartonTotal { get; set; }
         // Location in GWW Warehouse
         // TODO: Determine if it is a fixed amount of locations
-        String WarehouseLocation { get; set; }
+        internal String WarehouseLocation { get; set; }
         // Cost for GWW
         // DO NOT GIVE THIS INFO IN INVOICE
-        float WholesaleCost { get; set; }
+        internal float WholesaleCost { get; set; }
         // Price for GWW Customer
-        float SalePrice { get; set; }
+        internal float SalePrice { get; set; }
         // Barcode; Sometimes information not available
-        float UPC { get; set; }
+        internal String UPC { get; set; }
 
         // Everything is filled.
-        public Product(string itemNumber, string itemDescription, string cartonTotal, string warehouseLocation, float wholesaleCost, float salePrice, float uPC)
+        public Product(string itemNumber, string itemDescription, Int32 cartonTotal, string warehouseLocation, float wholesaleCost, float salePrice, String uPC)
         {
             ItemNumber = itemNumber;
             ItemDescription = itemDescription;
@@ -38,7 +38,7 @@ namespace InvoiceMaker
         }
 
         // Missing UPC
-        public Product(string itemNumber, string itemDescription, string cartonTotal, string warehouseLocation, float wholesaleCost, float salePrice)
+        public Product(string itemNumber, string itemDescription, Int32 cartonTotal, string warehouseLocation, float wholesaleCost, float salePrice)
         {
             ItemNumber = itemNumber;
             ItemDescription = itemDescription;
@@ -46,7 +46,7 @@ namespace InvoiceMaker
             WarehouseLocation = warehouseLocation;
             WholesaleCost = wholesaleCost;
             SalePrice = salePrice;
-            UPC = 0;
+            UPC = null;
         }
     }
 }

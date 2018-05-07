@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,37 +8,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data;
 using ExcelLibrary.SpreadSheet;
 
 namespace InvoiceMaker
 {
-    public partial class Form1 : Form
+    public partial class ExcelReadWindow : Form
     {
-        public Form1()
+        String file;
+        public ExcelReadWindow(String excelFile)
         {
+            
             InitializeComponent();
+            file = excelFile;
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.RunWorkerAsync();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            //Debug.Print("hi");
-            //ProductForm productForm = new ProductForm();
-            //productForm.Font = new Font(productForm.Font.Name, productForm.Font.Size + 1, productForm.Font.Style);
-            //productForm.Show();
-            OpenFileDialog fd = new OpenFileDialog();
-
-            if (fd.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-            ExcelReadWindow prog = new ExcelReadWindow(fd.FileName);
-            prog.Show();
-            /*
-            FileInfo excelFile = new FileInfo(fd.FileName);
-            Workbook ex = Workbook.Load(fd.FileName);
+            Product prod = new Product("", "", 0, "", 0, 0, "");
+            int tempCart;
+            float tempCost;
+            Workbook ex = Workbook.Load(file);
             Worksheet worksheet = ex.Worksheets[0];
             int maxRow = worksheet.Cells.Rows.Count;
+            double readProgress = 100d / maxRow;
             for (int row = 4; row < maxRow; ++row)
             {
                 prod.ItemNumber = worksheet.Cells[row, 0].Value.ToString();
@@ -66,9 +59,23 @@ namespace InvoiceMaker
                 else
                     prod.UPC = null;
                 Program.AddProduct(prod.ItemNumber, prod.ItemDescription, prod.CartonTotal, prod.WarehouseLocation, prod.WholesaleCost, prod.SalePrice, prod.UPC);
-            }*/
-            
+                int stuff = (int)readProgress * row;
+                Debug.Print(stuff + "");
+                backgroundWorker1.ReportProgress((int)(readProgress * row));
+            }
         }
-        
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar1.Value = 100;
+            this.Close();
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+            //Debug.Print(progressBar1.Value+"");
+           // progressBar1.Update();
+        }
     }
 }
