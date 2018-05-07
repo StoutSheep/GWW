@@ -14,6 +14,7 @@ namespace InvoiceMaker
 {
     public partial class ExcelReadWindow : Form
     {
+        
         String file;
         public ExcelReadWindow(String excelFile)
         {
@@ -26,6 +27,7 @@ namespace InvoiceMaker
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            /*
             Product prod = new Product("", "", 0, "", 0, 0, "");
             int tempCart;
             float tempCost;
@@ -62,7 +64,7 @@ namespace InvoiceMaker
                 int stuff = (int)readProgress * row;
                 Debug.Print(stuff + "");
                 backgroundWorker1.ReportProgress((int)(readProgress * row));
-            }
+            }*/
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

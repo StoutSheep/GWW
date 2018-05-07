@@ -32,16 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-
     <Reference Include="ExcelLibrary">
       <HintPath>..\..\..\Downloads\ExcelLibrary.dll</HintPath>
     </Reference>
-
     <Reference Include="MySql.Data, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\MySql.Data.dll</HintPath>
     </Reference>
-
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -62,14 +59,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-
     <Compile Include="ExcelReadWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ExcelReadWindow.Designer.cs">
       <DependentUpon>ExcelReadWindow.cs</DependentUpon>
     </Compile>
-
     <Compile Include="CustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,7 +88,6 @@
     <EmbeddedResource Include="InvoiceForm.resx">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
-
     <Compile Include="ProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,16 +95,12 @@
       <DependentUpon>ProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Product.cs" />
-
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ExcelReadWindow.resx">
       <DependentUpon>ExcelReadWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
