@@ -24,10 +24,10 @@ namespace InvoiceMaker
         // Price for GWW Customer
         internal float SellPrice { get; set; }
         // Barcode; Sometimes information not available
-        internal int UPC { get; set; }
+        internal Int64 UPC { get; set; }
 
         // Everything is filled.
-        public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, int upc)
+        public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, Int64 upc)
 
         {
             ItemNo = itemNo;
