@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace InvoiceMaker
 {
@@ -136,7 +137,7 @@ namespace InvoiceMaker
 
         static void SeedData()
         {
-            AddProduct("1234a", "cats", 3, "sdas", 34.2, 78.3, 3242);
+            AddProduct("1234a", "cats", 3, "sdas", 34.0, 78.3, 3242);
             AddProduct("1234b", "dog", 3, "sdas", 34.2, 78.3, 3242);
             AddProduct("1234c", "animal", 3, "sdas", 34.2, 78.3, 3242);
             AddProduct("1234d", "kangaroo", 3, "sdas", 34.2, 78.3, 3242);
@@ -463,14 +464,15 @@ namespace InvoiceMaker
                 MySqlDataReader rdr;
                 string sql;
 
-                sql = "SELECT * FROM Products WHERE ItemNo LIKE '" + itemNo + "';";
+                sql = "SELECT * FROM Products WHERE ItemNo='" + itemNo + "';";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
-
-                conn.Close();
+                
                 if(rdr.HasRows)
                 {
+                    rdr.Read();
                     Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
+                    conn.Close();
                     return temp;
                 }
                 return null;

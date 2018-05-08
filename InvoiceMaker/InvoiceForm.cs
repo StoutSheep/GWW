@@ -227,11 +227,12 @@ namespace InvoiceMaker
             Product product = Program.SearchProductByItemNo(c.Text);
             if (product != null)
             {
+    
                 this.panel1.Controls["loc" + c.AccessibleName].Text = product.Location;
                 this.panel1.Controls["desc" + c.AccessibleName].Text = product.ItemDesc;
                 this.panel1.Controls["carton" + c.AccessibleName].Text = product.PerCarton.ToString();
                 this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString();
-                this.panel1.Controls["amount" + c.AccessibleName].Text = (Int32.Parse(this.panel1.Controls["" + c.AccessibleName].Text) * product.Cost).ToString();
+                this.panel1.Controls["amount" + c.AccessibleName].Text = "" + (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost);
 
             }
         }
@@ -272,7 +273,7 @@ namespace InvoiceMaker
 
         private void okButton_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
