@@ -28,35 +28,155 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.AddCustomer = new System.Windows.Forms.Button();
+            this.CustomerLabel = new System.Windows.Forms.Label();
+            this.ViewCustomer = new System.Windows.Forms.Button();
+            this.ViewProduct = new System.Windows.Forms.Button();
+            this.ProductLabel = new System.Windows.Forms.Label();
+            this.AddProduct = new System.Windows.Forms.Button();
+            this.ReadProductExcel = new System.Windows.Forms.Button();
+            this.ViewInvoice = new System.Windows.Forms.Button();
+            this.OrderLabel = new System.Windows.Forms.Label();
+            this.AddInvoice = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // AddCustomer
             // 
-            this.button1.Location = new System.Drawing.Point(281, 160);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 79);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.addButton_Click);
-
+            this.AddCustomer.Location = new System.Drawing.Point(324, 159);
+            this.AddCustomer.Name = "AddCustomer";
+            this.AddCustomer.Size = new System.Drawing.Size(150, 80);
+            this.AddCustomer.TabIndex = 0;
+            this.AddCustomer.Text = "Add";
+            this.AddCustomer.UseVisualStyleBackColor = true;
+            this.AddCustomer.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // CustomerLabel
+            // 
+            this.CustomerLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CustomerLabel.AutoSize = true;
+            this.CustomerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerLabel.Location = new System.Drawing.Point(397, 57);
+            this.CustomerLabel.Name = "CustomerLabel";
+            this.CustomerLabel.Size = new System.Drawing.Size(209, 51);
+            this.CustomerLabel.TabIndex = 1;
+            this.CustomerLabel.Text = "Customer";
+            // 
+            // ViewCustomer
+            // 
+            this.ViewCustomer.Location = new System.Drawing.Point(537, 159);
+            this.ViewCustomer.Name = "ViewCustomer";
+            this.ViewCustomer.Size = new System.Drawing.Size(150, 80);
+            this.ViewCustomer.TabIndex = 2;
+            this.ViewCustomer.Text = "View/Modify";
+            this.ViewCustomer.UseVisualStyleBackColor = true;
+            this.ViewCustomer.Click += new System.EventHandler(this.ViewCustomer_Click);
+            // 
+            // ViewProduct
+            // 
+            this.ViewProduct.Location = new System.Drawing.Point(434, 382);
+            this.ViewProduct.Name = "ViewProduct";
+            this.ViewProduct.Size = new System.Drawing.Size(150, 80);
+            this.ViewProduct.TabIndex = 5;
+            this.ViewProduct.Text = "View/Modify";
+            this.ViewProduct.UseVisualStyleBackColor = true;
+            this.ViewProduct.Click += new System.EventHandler(this.ViewProduct_Click);
+            // 
+            // ProductLabel
+            // 
+            this.ProductLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ProductLabel.AutoSize = true;
+            this.ProductLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductLabel.Location = new System.Drawing.Point(413, 288);
+            this.ProductLabel.Name = "ProductLabel";
+            this.ProductLabel.Size = new System.Drawing.Size(171, 51);
+            this.ProductLabel.TabIndex = 4;
+            this.ProductLabel.Text = "Product";
+            // 
+            // AddProduct
+            // 
+            this.AddProduct.Location = new System.Drawing.Point(221, 382);
+            this.AddProduct.Name = "AddProduct";
+            this.AddProduct.Size = new System.Drawing.Size(150, 80);
+            this.AddProduct.TabIndex = 3;
+            this.AddProduct.Text = "Add";
+            this.AddProduct.UseVisualStyleBackColor = true;
+            this.AddProduct.Click += new System.EventHandler(this.AddProduct_Click);
+            // 
+            // ReadProductExcel
+            // 
+            this.ReadProductExcel.Location = new System.Drawing.Point(638, 382);
+            this.ReadProductExcel.Name = "ReadProductExcel";
+            this.ReadProductExcel.Size = new System.Drawing.Size(150, 80);
+            this.ReadProductExcel.TabIndex = 6;
+            this.ReadProductExcel.Text = "Read Excel";
+            this.ReadProductExcel.UseVisualStyleBackColor = true;
+            this.ReadProductExcel.Click += new System.EventHandler(this.ReadProductExcel_Click);
+            // 
+            // ViewInvoice
+            // 
+            this.ViewInvoice.Location = new System.Drawing.Point(537, 617);
+            this.ViewInvoice.Name = "ViewInvoice";
+            this.ViewInvoice.Size = new System.Drawing.Size(150, 80);
+            this.ViewInvoice.TabIndex = 9;
+            this.ViewInvoice.Text = "View/Modify";
+            this.ViewInvoice.UseVisualStyleBackColor = true;
+            this.ViewInvoice.Click += new System.EventHandler(this.ViewInvoice_Click);
+            // 
+            // OrderLabel
+            // 
+            this.OrderLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.OrderLabel.AutoSize = true;
+            this.OrderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderLabel.Location = new System.Drawing.Point(413, 532);
+            this.OrderLabel.Name = "OrderLabel";
+            this.OrderLabel.Size = new System.Drawing.Size(182, 51);
+            this.OrderLabel.TabIndex = 8;
+            this.OrderLabel.Text = "Invoices";
+            // 
+            // AddInvoice
+            // 
+            this.AddInvoice.Location = new System.Drawing.Point(324, 617);
+            this.AddInvoice.Name = "AddInvoice";
+            this.AddInvoice.Size = new System.Drawing.Size(150, 80);
+            this.AddInvoice.TabIndex = 7;
+            this.AddInvoice.Text = "New";
+            this.AddInvoice.UseVisualStyleBackColor = true;
+            this.AddInvoice.Click += new System.EventHandler(this.AddInvoice_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 559);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1095, 1002);
+            this.Controls.Add(this.ViewInvoice);
+            this.Controls.Add(this.OrderLabel);
+            this.Controls.Add(this.AddInvoice);
+            this.Controls.Add(this.ReadProductExcel);
+            this.Controls.Add(this.ViewProduct);
+            this.Controls.Add(this.ProductLabel);
+            this.Controls.Add(this.AddProduct);
+            this.Controls.Add(this.ViewCustomer);
+            this.Controls.Add(this.CustomerLabel);
+            this.Controls.Add(this.AddCustomer);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AddCustomer;
+        private System.Windows.Forms.Label CustomerLabel;
+        private System.Windows.Forms.Button ViewCustomer;
+        private System.Windows.Forms.Button ViewProduct;
+        private System.Windows.Forms.Label ProductLabel;
+        private System.Windows.Forms.Button AddProduct;
+        private System.Windows.Forms.Button ReadProductExcel;
+        private System.Windows.Forms.Button ViewInvoice;
+        private System.Windows.Forms.Label OrderLabel;
+        private System.Windows.Forms.Button AddInvoice;
     }
 }
 

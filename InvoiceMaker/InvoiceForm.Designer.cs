@@ -61,7 +61,7 @@
             this.cancel_button.TabIndex = 2;
             this.cancel_button.Text = "Cancel";
             this.cancel_button.UseVisualStyleBackColor = true;
-            this.cancel_button.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
             // 
             // InvoiceForm
             // 
