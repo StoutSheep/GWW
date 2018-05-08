@@ -168,7 +168,7 @@ namespace InvoiceMaker
 
 
 
-            InvoiceDatabase.AddInvoice(custID2, 0);
+            InvoiceDatabase.AddInvoice(custID, 0);
 
 
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10);
