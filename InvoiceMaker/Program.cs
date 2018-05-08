@@ -82,7 +82,7 @@ namespace InvoiceMaker
                     "Location varchar(10) NOT NULL," +
                     "Cost decimal(10,2) NOT NULL," +
                     "SellPrice decimal(10,2) NOT NULL," +
-                    "UPC int," +
+                    "UPC bigint," +
                     "PRIMARY KEY (ItemNo)" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
@@ -186,7 +186,7 @@ namespace InvoiceMaker
         }
 
 
-        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
+        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -219,6 +219,8 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
 
         }
+
+      
 
 
         static void AddProvinceTax(String province, int tax)
@@ -317,7 +319,7 @@ namespace InvoiceMaker
         }
 
 
-        static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
+        public static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -328,15 +330,15 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "UPDATE Products " +
-                    "SET ItemNo = " + newItemNo +
-                    ",ItemDesc = " + itemDesc +
-                    ",PerCarton = " + perCarton +
-                    ",Location = " + location +
-                    ",Cost = " + cost +
+                    "SET ItemNo = '" + newItemNo +
+                    "',ItemDesc = '" + itemDesc +
+                    "',PerCarton = " + perCarton +
+                    ",Location = '" + location +
+                    "',Cost = " + cost +
                     ",SellPrice = " + sellPrice +
                     ",UPC = " + upc +
-                    ",WHERE ItemNo = " + oldItemNo +
-                    ";";
+                    " WHERE ItemNo = '" + oldItemNo +
+                    "';";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -348,7 +350,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            Console.WriteLine("Done Updating.");
 
 
 
@@ -435,7 +437,7 @@ namespace InvoiceMaker
                 {
 
                   
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
+                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()));
                     productList.Add(temp);
                 }
 
