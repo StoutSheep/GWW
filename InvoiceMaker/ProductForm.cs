@@ -88,7 +88,7 @@ namespace InvoiceMaker
 
             if (allValid)
             {
-                Program.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+                ProductDatabase.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
                 this.Close();
             }
         }
@@ -117,7 +117,7 @@ namespace InvoiceMaker
 
         private Boolean isUniqueItemNo(String itemNo)
         {
-            List<Product> result = Program.SearchProductsByItemNo(itemNo);
+            List<Product> result = ProductDatabase.SearchProductsByItemNo(itemNo);
             if(result.Count > 0)
             {
                 return false;
