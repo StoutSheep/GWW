@@ -35,7 +35,7 @@ namespace InvoiceMaker
         private void Qty_TextChanged(object sender, EventArgs e)
         {
             TextBox t = (TextBox)sender;
-            Product product = Program.SearchProductByItemNo(this.panel1.Controls["itemNumber" + t.AccessibleName].Text);
+            Product product = ProductDatabase.SearchProductByItemNo(this.panel1.Controls["itemNumber" + t.AccessibleName].Text);
             if (product != null && this.panel1.Controls["qty" + t.AccessibleName].Text.Length > 0)
             {
                 this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.Cost).ToString("0.00");
@@ -59,7 +59,7 @@ namespace InvoiceMaker
         private void C_TextChanged(object sender, EventArgs e)
         {
             ComboBox c = (ComboBox)sender;
-            Product product = Program.SearchProductByItemNo(c.Text);
+            Product product = ProductDatabase.SearchProductByItemNo(c.Text);
             if (product != null)
             {
                 this.panel1.Controls["loc" + c.AccessibleName].Text = product.Location;
@@ -103,7 +103,7 @@ namespace InvoiceMaker
 
             c.SelectionStart = c.Text.Length;
 
-            List<Product> productList = Program.SearchProductsByItemNo(c.Text);
+            List<Product> productList = ProductDatabase.SearchProductsByItemNo(c.Text);
             
                 Object[] arr = new Object[productList.Count];
                 for (int i = 0; i < productList.Count; i++)
