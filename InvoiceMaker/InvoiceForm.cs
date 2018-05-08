@@ -247,6 +247,7 @@ namespace InvoiceMaker
             amount.Name = "amount" + i;
             amount.AccessibleName = "" + i;
             panel1.Controls.Add(amount);
+
         }
     }
 }
