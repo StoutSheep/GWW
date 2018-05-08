@@ -1,9 +1,9 @@
 language: csharp
-dist: trusty
-mono: none
-dotnet: 1.1.5
-install:
-- dotnet restore
-script:
-- dotnet build
-- dotnet test Core.Shogi.Tests/Core.Shogi.Tests.csproj
+solution: travis-mono-test.sln
+
+matrix:
+  include:
+    - dotnet: 1.1.5
+      mono: none
+      env: DOTNETCORE=1  # optional, can be used to take different code paths in your script
+    - mono: latest
