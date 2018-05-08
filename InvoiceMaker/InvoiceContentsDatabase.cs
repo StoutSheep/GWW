@@ -8,13 +8,12 @@ using MySql.Data.MySqlClient;
 
 namespace InvoiceMaker
 {
-    static class CustomerDatabase
+    static class InvoiceContentsDatabase
     {
 
         static String pswd = "password";
-
-        internal static void AddCustomer(String storeName, String emailAddress, String shippingAddress, String storeContact, String phoneNumber,
-          String paymentTerms, String shippingInstructions, String specialNotes)
+       
+        internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity) 
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -24,17 +23,10 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-
-                sql = "INSERT INTO Customers (StoreName, EmailAddress, ShippingAddress, StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, SpecialNotes) " +
-                    "VALUES (" +
-                    "'" + storeName + "'," +
-                    "'" + emailAddress + "'," +
-                    "'" + shippingAddress + "'," +
-                    "'" + storeContact + "'," +
-                    "'" + phoneNumber + "'," +
-                    "'" + paymentTerms + "'," +
-                    "'" + shippingInstructions + "'," +
-                    "'" + specialNotes + "'" +
+                sql = "INSERT INTO InvoiceContents (InvoiceID, ItemNo, Quantity) VALUES (" +
+                    invoiceID + "," +
+                    "'" + itemNo + "'," + 
+                    quantity +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -47,12 +39,11 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
-
         }
 
 
-        internal static void EditCustomer(int storeId, String storeName, String emailAddress, String shippingAddress, String storeContact, String phoneNumber,
-            String PaymentTerms, String ShippingInstructions, String SpecialNotes)
+
+        internal static void EditInvoiceContent(int entryID, int invoiceID, String itemNo, int quantity)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -62,45 +53,11 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "UPDATE Customers " +
-                    "SET StoreName = '" + storeName + "'" +
-                    ",EmailAddress = '" + emailAddress + "'" +
-                    ",ShippingAddress = '" + shippingAddress + "'" +
-                    ",StoreContact = '" + storeContact + "'" +
-                    ",PhoneNumber = '" + phoneNumber + "'" +
-                    ",PaymentTerms = '" + PaymentTerms + "'" +
-                    ",ShippingInstructions = '" + ShippingInstructions + "'" +
-                    ",SpecialNotes = '" + SpecialNotes + "'" +
-                    " WHERE StoreID = " + storeId +
-                    ";";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-
-
-        }
-
-
-        internal static void DeleteCustomer(int storeID)
-        {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-                sql = "DELETE FROM Customers" +
-                  " WHERE StoreID = " + storeID +
+                sql = "UPDATE InvoiceContents " +
+                  "SET ItemNo = " + itemNo +
+                  ",Quantity = " + quantity +
+                  ",InvoiceID = " + invoiceID +
+                  " WHERE EntryID = " + entryID +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -118,7 +75,37 @@ namespace InvoiceMaker
 
 
 
-        internal static int GetStoreID(String storeName, String shippingAddress)
+        internal static void DeleteInvoiceContent(int entryID)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "DELETE FROM InvoiceContents" +
+                  " WHERE EntryID = " + entryID +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+
+
+
+        internal static int GetEntryID(int invoiceID, String itemNo)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -129,8 +116,8 @@ namespace InvoiceMaker
                 string sql;
                 MySqlDataReader rdr;
 
-                sql = "SELECT StoreID FROM Customers" +
-                  " WHERE StoreName = '" + storeName + "' AND ShippingAddress = '" + shippingAddress + "'" +
+                sql = "SELECT EntryID FROM InvoiceContents" +
+                  " WHERE InvoiceID = " + invoiceID + " AND ItemNo = " + itemNo + 
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
@@ -139,12 +126,12 @@ namespace InvoiceMaker
                 if (rdr.HasRows)
                 {
                     rdr.Read();
-                    int temp = Int32.Parse(rdr[0].ToString());
+                    int temp =  Int32.Parse(rdr[0].ToString());
                     conn.Close();
                     rdr.Close();
                     return temp;
                 }
-
+                
             }
             catch (Exception ex)
             {
@@ -156,5 +143,12 @@ namespace InvoiceMaker
             return 0;
 
         }
+
+        
+
+
+
+
+
     }
 }

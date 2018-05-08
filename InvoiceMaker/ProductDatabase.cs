@@ -60,18 +60,46 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "UPDATE Products " +
-                    "SET ItemNo = " + newItemNo +
-                    ",ItemDesc = " + itemDesc +
+                    "SET ItemNo = '" + newItemNo + "'" +
+                    ",ItemDesc = '" + itemDesc + "'" +
                     ",PerCarton = " + perCarton +
-                    ",Location = " + location +
+                    ",Location = '" + location + "'" +
                     ",Cost = " + cost +
                     ",SellPrice = " + sellPrice +
                     ",UPC = " + upc +
-                    ",WHERE ItemNo = " + oldItemNo +
+                    " WHERE ItemNo = '" + oldItemNo + "'" +
                     ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+        }
+
+
+
+        internal static void DeleteProduct(String itemNo)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "DELETE FROM Products" +
+                  " WHERE ItemNo = '" + itemNo + "'" +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
 
             }
             catch (Exception ex)

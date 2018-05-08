@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerDatabase.cs" />
+    <Compile Include="InvoiceContentsDatabase.cs" />
     <Compile Include="InvoiceDatabase.cs" />
     <Compile Include="ProductDatabase.cs" />
     <Compile Include="Customer.cs" />

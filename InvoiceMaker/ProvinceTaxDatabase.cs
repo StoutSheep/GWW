@@ -44,7 +44,7 @@ namespace InvoiceMaker
 
 
 
-        internal static void EditProvinceTax(String oldProvince, String newProvince, String tax)
+        internal static void EditProvinceTax(String oldProvince, String newProvince, int tax)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -55,9 +55,9 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "UPDATE ProvinceTax " +
-                   "SET Province = " + newProvince +
+                   "SET Province = '" + newProvince + "'" +
                    ",tax = " + tax +
-                   ",WHERE Province = " + oldProvince +
+                   " WHERE Province = '" + oldProvince + "'" +
                    ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
