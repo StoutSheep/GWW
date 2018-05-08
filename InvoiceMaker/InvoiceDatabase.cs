@@ -37,7 +37,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
 
-            conn.Close();
+            conn.Close(); 
             Console.WriteLine("Done.");
         }
 
@@ -53,11 +53,12 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-
-                sql = "INSERT INTO Invoices (StoreID, InvoiceNo) VALUES (" +
-                    storeID + "," +
-                    invoiceNo +
-                    ");";
+            
+                sql = "UPDATE Invoices " +
+                   "SET StoreID = " + storeID +
+                   ",InvoiceNo = " + invoiceNo +
+                   " WHERE InvoiceID = " + invoiceID +
+                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 

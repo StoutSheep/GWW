@@ -70,7 +70,7 @@ namespace InvoiceMaker
                     ",PaymentTerms = " + PaymentTerms +
                     ",ShippingInstructions = " + ShippingInstructions +
                     ",SpecialNotes = " + SpecialNotes +
-                    ",WHERE StoreID = " + storeId +
+                    " WHERE StoreID = " + storeId +
                     ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -84,6 +84,75 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
 
+
+        }
+
+
+        internal static void DeleteCustomer(int storeID)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "DELETE FROM Customers" +
+                  " WHERE StoreID = " + storeID +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+
+
+        internal static int GetStoreID(String storeName, String shippingAddresso)
+        {
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+                MySqlDataReader rdr;
+
+                sql = "SELECT EntryID FROM InvoiceContents" +
+                  " WHERE StoreName = " + storeName + " AND ShippingAddresso = " + shippingAddresso +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+
+                if (rdr.HasRows)
+                {
+                    rdr.Read();
+                    int temp = Int32.Parse(rdr[0].ToString());
+                    conn.Close();
+                    rdr.Close();
+                    return temp;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+            return 0;
 
         }
     }

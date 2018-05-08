@@ -8,12 +8,14 @@ using MySql.Data.MySqlClient;
 
 namespace InvoiceMaker
 {
-    static class ProductDatabase
+    static class InvoiceContentsDatabase
     {
 
         static String pswd = "password";
 
-        internal static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
+
+       
+        internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity) 
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -23,16 +25,11 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "INSERT INTO Products VALUES (" +
-                    "'" + itemNo + "'," +
-                    "'" + itemDesc + "'," +
-                    perCarton + "," +
-                    "'" + location + "'," +
-                    cost + "," +
-                    sellPrice + "," +
-                    upc +
+                sql = "INSERT INTO InvoiceContents (InvoiceID, ItemNo, Quantity) VALUES (" +
+                    invoiceID + "," +
+                    "'" + itemNo + "'," + 
+                    quantity +
                     ");";
-
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -41,15 +38,14 @@ namespace InvoiceMaker
             {
                 Console.WriteLine(ex.ToString());
             }
+
             conn.Close();
             Console.WriteLine("Done.");
-
         }
 
 
 
-
-        internal static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
+        internal static void EditInvoiceContent(int entryID, int invoiceID, String itemNo, int quantity)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -59,19 +55,14 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "UPDATE Products " +
-                    "SET ItemNo = " + newItemNo +
-                    ",ItemDesc = " + itemDesc +
-                    ",PerCarton = " + perCarton +
-                    ",Location = " + location +
-                    ",Cost = " + cost +
-                    ",SellPrice = " + sellPrice +
-                    ",UPC = " + upc +
-                    " WHERE ItemNo = " + oldItemNo +
-                    ";";
+                sql = "UPDATE InvoiceContents " +
+                  "SET ItemNo = " + itemNo +
+                  ",Quantity = " + quantity +
+                  ",InvoiceID = " + invoiceID +
+                  " WHERE EntryID = " + entryID +
+                  ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-
 
             }
             catch (Exception ex)
@@ -81,11 +72,12 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
+
         }
 
 
 
-        internal static void DeleteProduct(String itemNo)
+        internal static void DeleteInvoiceContent(int entryID)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -96,7 +88,7 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "DELETE FROM InvoiceContents" +
-                  " WHERE ItemNo = " + itemNo +
+                  " WHERE EntryID = " + entryID +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -115,47 +107,7 @@ namespace InvoiceMaker
 
 
 
-
-        internal static List<Product> SearchProductsByItemNo(String itemNo)
-        {
-
-            List<Product> productList = new List<Product>();
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                MySqlDataReader rdr;
-                string sql;
-
-                sql = "SELECT * FROM Products WHERE ItemNo LIKE '" + itemNo + "%';";
-                cmd = new MySqlCommand(sql, conn);
-                rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-
-
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
-                    productList.Add(temp);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            conn.Close();
-            Console.WriteLine("Done.");
-            return productList;
-        }
-
-
-
-
-
-        internal static Product SearchProductByItemNo(String itemNo)
+        internal static int GetEntryID(int invoiceID, String itemNo)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -163,30 +115,41 @@ namespace InvoiceMaker
             {
                 conn.Open();
                 MySqlCommand cmd;
-                MySqlDataReader rdr;
                 string sql;
+                MySqlDataReader rdr;
 
-                sql = "SELECT * FROM Products WHERE ItemNo='" + itemNo + "';";
+                sql = "SELECT EntryID FROM InvoiceContents" +
+                  " WHERE InvoiceID = " + invoiceID + " AND ItemNo = " + itemNo + 
+                  ";";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
+
 
                 if (rdr.HasRows)
                 {
                     rdr.Read();
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
+                    int temp =  Int32.Parse(rdr[0].ToString());
                     conn.Close();
+                    rdr.Close();
                     return temp;
                 }
-                return null;
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+
+            conn.Close();
             Console.WriteLine("Done.");
-            return null;
+            return 0;
 
         }
+
+        
+
+
+
 
 
     }

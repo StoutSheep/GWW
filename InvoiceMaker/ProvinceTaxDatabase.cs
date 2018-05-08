@@ -57,7 +57,7 @@ namespace InvoiceMaker
                 sql = "UPDATE ProvinceTax " +
                    "SET Province = " + newProvince +
                    ",tax = " + tax +
-                   ",WHERE Province = " + oldProvince +
+                   " WHERE Province = " + oldProvince +
                    ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();

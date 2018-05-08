@@ -25,8 +25,6 @@ namespace InvoiceMaker
 
             List<Product> asd = ProductDatabase.SearchProductsByItemNo("123");
             Application.Run(new Form1());
-
-
         }
 
         static void InitializeDatabase()
