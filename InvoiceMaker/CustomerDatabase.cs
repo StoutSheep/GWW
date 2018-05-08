@@ -13,7 +13,7 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        static void AddCustomer(String storeName, String emailAddress, String shippingAddress, String storeContact, int phoneNumber,
+        internal static void AddCustomer(String storeName, String emailAddress, String shippingAddress, String storeContact, int phoneNumber,
           String paymentTerms, String shippingInstructions, String specialNotes)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
@@ -51,7 +51,7 @@ namespace InvoiceMaker
         }
 
 
-        static void EditCustomer(int storeId, String storeName, String shippingAddress, String storeContact, int phoneNumber,
+        internal static void EditCustomer(int storeId, String storeName, String shippingAddress, String storeContact, int phoneNumber,
             String PaymentTerms, String ShippingInstructions, String SpecialNotes)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;

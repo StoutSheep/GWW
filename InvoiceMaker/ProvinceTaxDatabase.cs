@@ -13,7 +13,7 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        static void AddProvinceTax(String province, int tax)
+        internal static void AddProvinceTax(String province, int tax)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -41,10 +41,10 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
 
         }
-        
 
 
-        static void EditProvinceTax(String oldProvince, String newProvince, String tax)
+
+        internal static void EditProvinceTax(String oldProvince, String newProvince, String tax)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);

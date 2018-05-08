@@ -74,10 +74,10 @@ namespace InvoiceMaker
                 {
                     prod.UPC = 0;
                 }
-                if (Program.SearchProductsByItemNo(prod.ItemNo).Count == 0)
-                    Program.AddProduct(prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC);
+                if (ProductDatabase.SearchProductsByItemNo(prod.ItemNo).Count == 0)
+                    ProductDatabase.AddProduct(prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC);
                 else
-                    Program.EditProduct(prod.ItemNo, prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC);
+                    ProductDatabase.EditProduct(prod.ItemNo, prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC);
                 backgroundWorker1.ReportProgress((int)(readProgress * row));
                 lastrow = row;
             }

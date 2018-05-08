@@ -13,7 +13,7 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        static void AddInvoice(int storeID, int invoiceNo)
+        internal static void AddInvoice(int storeID, int invoiceNo)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -43,7 +43,7 @@ namespace InvoiceMaker
 
 
 
-        static void EditInvoice(int invoiceID, int storeID, int invoiceNo)
+        internal static void EditInvoice(int invoiceID, int storeID, int invoiceNo)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);

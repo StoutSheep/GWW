@@ -13,7 +13,7 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
+        internal static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -49,7 +49,7 @@ namespace InvoiceMaker
 
 
 
-        static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
+        internal static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -88,7 +88,7 @@ namespace InvoiceMaker
 
 
 
-        public static List<Product> SearchProductsByItemNo(String itemNo)
+        internal static List<Product> SearchProductsByItemNo(String itemNo)
         {
 
             List<Product> productList = new List<Product>();
@@ -127,7 +127,7 @@ namespace InvoiceMaker
 
 
 
-        public static Product SearchProductByItemNo(String itemNo)
+        internal static Product SearchProductByItemNo(String itemNo)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
