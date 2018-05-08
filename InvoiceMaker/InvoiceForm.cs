@@ -224,7 +224,7 @@ namespace InvoiceMaker
         private void C_TextChanged(object sender, EventArgs e)
         {
             ComboBox c = (ComboBox)sender;
-            Product product = Program.SearchProductByItemNo(c.Text);
+            Product product = ProductDatabase.SearchProductByItemNo(c.Text);
             if (product != null)
             {
     
@@ -253,7 +253,7 @@ namespace InvoiceMaker
 
             c.SelectionStart = c.Text.Length;
 
-            List<Product> productList = Program.SearchProductsByItemNo(c.Text);
+            List<Product> productList = ProductDatabase.SearchProductsByItemNo(c.Text);
             
                 Object[] arr = new Object[productList.Count];
                 for (int i = 0; i < productList.Count; i++)
