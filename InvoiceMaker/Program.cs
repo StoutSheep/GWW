@@ -83,7 +83,7 @@ namespace InvoiceMaker
                     "Location varchar(10) NOT NULL," +
                     "Cost decimal(10,2) NOT NULL," +
                     "SellPrice decimal(10,2) NOT NULL," +
-                    "UPC int," +
+                    "UPC bigint," +
                     "PRIMARY KEY (ItemNo)" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
@@ -144,14 +144,6 @@ namespace InvoiceMaker
             ProductDatabase.AddProduct("1234e", "rat", 3, "sdas", 34.2, 78.3, 3242);
             ProductDatabase.AddProduct("1234f", "snek", 3, "sdas", 34.2, 78.3, 3242);
         }
-
-
-
-
-
-      
-
-
 
     }
 }
