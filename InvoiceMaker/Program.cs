@@ -19,7 +19,13 @@ namespace InvoiceMaker
         {
             InitializeDatabase();
 
-            //AddProvinceTax("BC", 20);
+
+            TestFunctions();
+
+
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -61,10 +67,10 @@ namespace InvoiceMaker
                 sql = "CREATE TABLE IF NOT EXISTS Customers (" +
                     "StoreID int NOT NULL AUTO_INCREMENT," +
                     "StoreName varchar(50) NOT NULL," +
-                    "EmailAddress varchar(50) NOT NULL," +
+                    "EmailAddress varchar(50)," +
                     "ShippingAddress varchar(50) NOT NULL," +
-                    "StoreContact varchar(50) NOT NULL," +
-                    "PhoneNumber char(50) NOT NULL," +
+                    "StoreContact varchar(50)," +
+                    "PhoneNumber char(10)," +
                     "PaymentTerms varchar(50)," +
                     "ShippingInstructions varchar(50)," +
                     "SpecialNotes varchar(50)," +
@@ -135,13 +141,41 @@ namespace InvoiceMaker
 
         static void SeedData()
         {
-            ProductDatabase.AddProduct("1234a", "cats", 3, "sdas", 34.0, 78.3, 3242);
-            ProductDatabase.AddProduct("1234b", "dog", 3, "sdas", 34.2, 78.3, 3242);
-            ProductDatabase.AddProduct("1234c", "animal", 3, "sdas", 34.2, 78.3, 3242);
-            ProductDatabase.AddProduct("1234d", "kangaroo", 3, "sdas", 34.2, 78.3, 3242);
-            ProductDatabase.AddProduct("1234e", "rat", 3, "sdas", 34.2, 78.3, 3242);
-            ProductDatabase.AddProduct("1234f", "snek", 3, "sdas", 34.2, 78.3, 3242);
+            ProductDatabase.AddProduct("1234a", "cats", 3, "sdaccs", 34.0, 78.3, 3232);
+            ProductDatabase.AddProduct("1234b", "dog", 3, "sdadfs", 34.2, 78.3, 32422);
+            ProductDatabase.AddProduct("1234c", "animal", 3, "sd44as", 34.2, 78.3, 63242);
+            ProductDatabase.AddProduct("1234d", "kangaroo", 3, "sdras", 34.2, 78.3, 73242);
+            ProductDatabase.AddProduct("1234e", "rat", 3, "sdasw", 34.2, 78.3, 453242);
+            ProductDatabase.AddProduct("1234f", "snek", 3, "sdas", 34.2, 78.3, 324542);
         }
+
+
+        static void TestFunctions()
+        {
+            ProvinceTaxDatabase.AddProvinceTax("BC", 20);
+            ProvinceTaxDatabase.EditProvinceTax("BC", "ON", 10);
+
+            ProductDatabase.AddProduct("1234g", "gecko", 3, "ssdas", 34.2, 78.3, 3242);
+            ProductDatabase.EditProduct("1234g", "9876a", "notGecko", 5, "s4453das", 3.2, 7.3, 0003242);
+            ProductDatabase.DeleteProduct("1234a");
+
+            CustomerDatabase.AddCustomer("Toys", "toyts@gmail.com", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a");
+            CustomerDatabase.AddCustomer("Games", "Games@gmail.com", "somehwereElse 9931", "Hill", "6047990643", "n/a", "n/a", "n/a");
+            int custID = CustomerDatabase.GetStoreID("Toys", "somehwere 2131");
+            CustomerDatabase.EditCustomer(custID, "UpdatedToys", "toyts@gmail.com", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a");
+            int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
+            CustomerDatabase.DeleteCustomer(custID2);
+
+
+
+            InvoiceDatabase.AddInvoice(custID2, 0);
+
+
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10);
+
+
+        }
+
 
     }
 }

@@ -60,14 +60,14 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "UPDATE Products " +
-                    "SET ItemNo = " + newItemNo +
-                    ",ItemDesc = " + itemDesc +
+                    "SET ItemNo = '" + newItemNo + "'" +
+                    ",ItemDesc = '" + itemDesc + "'" +
                     ",PerCarton = " + perCarton +
-                    ",Location = " + location +
+                    ",Location = '" + location + "'" +
                     ",Cost = " + cost +
                     ",SellPrice = " + sellPrice +
                     ",UPC = " + upc +
-                    " WHERE ItemNo = " + oldItemNo +
+                    " WHERE ItemNo = '" + oldItemNo + "'" +
                     ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -95,8 +95,8 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "DELETE FROM InvoiceContents" +
-                  " WHERE ItemNo = " + itemNo +
+                sql = "DELETE FROM Products" +
+                  " WHERE ItemNo = '" + itemNo + "'" +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();

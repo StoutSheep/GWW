@@ -13,7 +13,7 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        internal static void AddCustomer(String storeName, String emailAddress, String shippingAddress, String storeContact, int phoneNumber,
+        internal static void AddCustomer(String storeName, String emailAddress, String shippingAddress, String storeContact, String phoneNumber,
           String paymentTerms, String shippingInstructions, String specialNotes)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
@@ -34,7 +34,7 @@ namespace InvoiceMaker
                     "'" + phoneNumber + "'," +
                     "'" + paymentTerms + "'," +
                     "'" + shippingInstructions + "'," +
-                    "'" + specialNotes + "'," +
+                    "'" + specialNotes + "'" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -51,7 +51,7 @@ namespace InvoiceMaker
         }
 
 
-        internal static void EditCustomer(int storeId, String storeName, String shippingAddress, String storeContact, int phoneNumber,
+        internal static void EditCustomer(int storeId, String storeName, String emailAddress, String shippingAddress, String storeContact, String phoneNumber,
             String PaymentTerms, String ShippingInstructions, String SpecialNotes)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
@@ -63,13 +63,14 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "UPDATE Customers " +
-                    "SET StoreName = " + storeName +
-                    ",shippingAddress = " + shippingAddress +
-                    ",storeContact = " + storeContact +
-                    ",phoneNumber = " + phoneNumber +
-                    ",PaymentTerms = " + PaymentTerms +
-                    ",ShippingInstructions = " + ShippingInstructions +
-                    ",SpecialNotes = " + SpecialNotes +
+                    "SET StoreName = '" + storeName + "'" +
+                    ",EmailAddress = '" + emailAddress + "'" +
+                    ",ShippingAddress = '" + shippingAddress + "'" +
+                    ",StoreContact = '" + storeContact + "'" +
+                    ",PhoneNumber = '" + phoneNumber + "'" +
+                    ",PaymentTerms = '" + PaymentTerms + "'" +
+                    ",ShippingInstructions = '" + ShippingInstructions + "'" +
+                    ",SpecialNotes = '" + SpecialNotes + "'" +
                     " WHERE StoreID = " + storeId +
                     ";";
                 cmd = new MySqlCommand(sql, conn);
@@ -117,7 +118,7 @@ namespace InvoiceMaker
 
 
 
-        internal static int GetStoreID(String storeName, String shippingAddresso)
+        internal static int GetStoreID(String storeName, String shippingAddress)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -128,8 +129,8 @@ namespace InvoiceMaker
                 string sql;
                 MySqlDataReader rdr;
 
-                sql = "SELECT EntryID FROM InvoiceContents" +
-                  " WHERE StoreName = " + storeName + " AND ShippingAddresso = " + shippingAddresso +
+                sql = "SELECT StoreID FROM Customers" +
+                  " WHERE StoreName = '" + storeName + "' AND ShippingAddress = '" + shippingAddress + "'" +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();

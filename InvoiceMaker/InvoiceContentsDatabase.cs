@@ -12,8 +12,6 @@ namespace InvoiceMaker
     {
 
         static String pswd = "password";
-
-
        
         internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity) 
         {
