@@ -9,13 +9,14 @@ namespace InvoiceMaker
     class Customer
     {
         // Unique identifier for customer; Managed in DB and used as PK
-        public int CustID { get; set; }
+        public int StoreID { get; set; }
         public String StoreName { get; set; }
+        public String StoreDetails { get; set; }
         // Head Office or Billing Address
         public String OfficeAddress { get; set; }
         // Address to send order
-        public String ShippingAddress { get; set; }
         public String StoreContact { get; set; }
+        public String ShippingAddress { get; set; }
         public String PhoneNumber { get; set; }
         // Shipping company...Clarify.
         public String PaymentTerms { get; set; }
@@ -23,31 +24,26 @@ namespace InvoiceMaker
         public String SpecialNotes { get; set; }
         // Unique identifier for product
         public String Email { get; set; }
+        public String Province { get; set; }
 
-        public Customer(int custID, string storeName, string officeAddress, string shippingAddress, string storeContact, string phoneNumber, string paymentTerms, string specialNotes, string email)
+        public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+            String paymentTerms, String shippingInstructions, String specialNotes, String province)
         {
-            CustID = custID;
+
+            StoreID = storeId;
             StoreName = storeName;
+            StoreDetails = storeDetails;
             OfficeAddress = officeAddress;
             ShippingAddress = shippingAddress;
             StoreContact = storeContact;
             PhoneNumber = phoneNumber;
             PaymentTerms = paymentTerms;
             SpecialNotes = specialNotes;
-            Email = email;
+            Email = emailAddress;
+            Province = province;
+
         }
 
-        public Customer(int custID, string storeName, string officeAddress, string shippingAddress, string storeContact, string phoneNumber, string email)
-        {
-            CustID = custID;
-            StoreName = storeName;
-            OfficeAddress = officeAddress;
-            ShippingAddress = shippingAddress;
-            StoreContact = storeContact;
-            PhoneNumber = phoneNumber;
-            PaymentTerms = null;
-            SpecialNotes = null;
-            Email = email;
-        }
+       
     }
 }

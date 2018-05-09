@@ -13,8 +13,8 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        internal static void AddCustomer(String storeName, String emailAddress, String shippingAddress, String storeContact, String phoneNumber,
-          String paymentTerms, String shippingInstructions, String specialNotes)
+        internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+          String paymentTerms, String shippingInstructions, String specialNotes, String province)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -25,16 +25,20 @@ namespace InvoiceMaker
                 string sql;
 
 
-                sql = "INSERT INTO Customers (StoreName, EmailAddress, ShippingAddress, StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, SpecialNotes) " +
+                sql = "INSERT INTO Customers (StoreName, StoreDetails, EmailAddress, OfficeAddress, ShippingAddress, " +
+                    "StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, SpecialNotes, Province) " +
                     "VALUES (" +
                     "'" + storeName + "'," +
+                    "'" + storeDetails + "'," +
                     "'" + emailAddress + "'," +
                     "'" + shippingAddress + "'," +
+                    "'" + officeAddress + "'," +
                     "'" + storeContact + "'," +
                     "'" + phoneNumber + "'," +
                     "'" + paymentTerms + "'," +
                     "'" + shippingInstructions + "'," +
-                    "'" + specialNotes + "'" +
+                    "'" + specialNotes + "'," +
+                    "'" + province + "'" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -51,8 +55,8 @@ namespace InvoiceMaker
         }
 
 
-        internal static void EditCustomer(int storeId, String storeName, String emailAddress, String shippingAddress, String storeContact, String phoneNumber,
-            String PaymentTerms, String ShippingInstructions, String SpecialNotes)
+        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+            String paymentTerms, String shippingInstructions, String specialNotes, String province)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -64,13 +68,16 @@ namespace InvoiceMaker
 
                 sql = "UPDATE Customers " +
                     "SET StoreName = '" + storeName + "'" +
+                    ",StoreDetails = '" + storeDetails + "'" +
                     ",EmailAddress = '" + emailAddress + "'" +
+                    ",OfficeAddress = '" + officeAddress + "'" +
                     ",ShippingAddress = '" + shippingAddress + "'" +
                     ",StoreContact = '" + storeContact + "'" +
                     ",PhoneNumber = '" + phoneNumber + "'" +
-                    ",PaymentTerms = '" + PaymentTerms + "'" +
-                    ",ShippingInstructions = '" + ShippingInstructions + "'" +
-                    ",SpecialNotes = '" + SpecialNotes + "'" +
+                    ",PaymentTerms = '" + paymentTerms + "'" +
+                    ",ShippingInstructions = '" + shippingInstructions + "'" +
+                    ",SpecialNotes = '" + specialNotes + "'" +
+                    ",Province = '" + province + "'" +
                     " WHERE StoreID = " + storeId +
                     ";";
                 cmd = new MySqlCommand(sql, conn);
@@ -135,7 +142,6 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
 
-
                 if (rdr.HasRows)
                 {
                     rdr.Read();
@@ -155,6 +161,39 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
             return 0;
 
+        }
+
+
+        internal static List<Customer> SearchCustomersByStoreName(String storeName)
+        {
+
+            List<Customer> customerList = new List<Customer>();
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT * FROM Customers WHERE ItemNo LIKE '" + storeName + "%';";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Customer temp = new Customer(Int32.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), rdr[5].ToString(), rdr[6].ToString(), rdr[7].ToString(), rdr[8].ToString(), rdr[9].ToString(), rdr[10].ToString(), rdr[11].ToString());
+                    customerList.Add(temp);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            Console.WriteLine("Done.");
+            return customerList;
         }
     }
 }
