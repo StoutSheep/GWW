@@ -64,6 +64,10 @@
             this.specialNotes_textBox = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.storeDetails_textBox = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.provinceTax_comboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +77,7 @@
             this.button1.Location = new System.Drawing.Point(731, 1012);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 59);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 20;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.okButton_Click);
@@ -82,8 +86,8 @@
             // 
             this.storeName_textBox.Location = new System.Drawing.Point(74, 46);
             this.storeName_textBox.Name = "storeName_textBox";
-            this.storeName_textBox.Size = new System.Drawing.Size(556, 31);
-            this.storeName_textBox.TabIndex = 1;
+            this.storeName_textBox.Size = new System.Drawing.Size(492, 31);
+            this.storeName_textBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -369,7 +373,7 @@
             // 
             this.paymentTerms_textBox.Location = new System.Drawing.Point(74, 610);
             this.paymentTerms_textBox.Name = "paymentTerms_textBox";
-            this.paymentTerms_textBox.Size = new System.Drawing.Size(709, 31);
+            this.paymentTerms_textBox.Size = new System.Drawing.Size(333, 31);
             this.paymentTerms_textBox.TabIndex = 14;
             // 
             // label15
@@ -416,11 +420,63 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(585, 18);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(135, 25);
+            this.label17.TabIndex = 21;
+            this.label17.Text = "Store Details";
+            // 
+            // storeDetails_textBox
+            // 
+            this.storeDetails_textBox.Location = new System.Drawing.Point(591, 46);
+            this.storeDetails_textBox.Name = "storeDetails_textBox";
+            this.storeDetails_textBox.Size = new System.Drawing.Size(259, 31);
+            this.storeDetails_textBox.TabIndex = 1;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(431, 582);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(132, 25);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "ProvinceTax";
+            // 
+            // provinceTax_comboBox
+            // 
+            this.provinceTax_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.provinceTax_comboBox.FormattingEnabled = true;
+            this.provinceTax_comboBox.Items.AddRange(new object[] {
+            "Alberta",
+            "British Columbia",
+            "Manitoba",
+            "New Brunswick",
+            "Newfoundland and Labrador",
+            "Nova Scotia",
+            "Northwest Territories",
+            "Nunavut",
+            "Ontario",
+            "Prince Edward Island",
+            "Quebec",
+            "Saskatchewan",
+            "Yukon Territories"});
+            this.provinceTax_comboBox.Location = new System.Drawing.Point(436, 610);
+            this.provinceTax_comboBox.Name = "provinceTax_comboBox";
+            this.provinceTax_comboBox.Size = new System.Drawing.Size(347, 33);
+            this.provinceTax_comboBox.TabIndex = 15;
+            // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 1131);
+            this.Controls.Add(this.provinceTax_comboBox);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.storeDetails_textBox);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.specialNotes_textBox);
             this.Controls.Add(this.label16);
@@ -486,5 +542,9 @@
         private System.Windows.Forms.RichTextBox specialNotes_textBox;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox storeDetails_textBox;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox provinceTax_comboBox;
     }
 }

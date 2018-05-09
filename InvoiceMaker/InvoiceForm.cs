@@ -14,12 +14,17 @@ namespace InvoiceMaker
 {
     public partial class InvoiceForm : Form
     {
-        String[] a = new String[50];
+        Panel panel1 = new Panel();
         int i = 0;
         public InvoiceForm()
         {
             InitializeComponent();
 
+            panel1.Location = new Point(30, 195);
+            panel1.Size = new Size(800, 300);
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+
+            this.Controls.Add(panel1);
             AddLabels();
             AddCustomerBoxes();
             AddItemBoxes();
@@ -190,6 +195,13 @@ namespace InvoiceMaker
             amountLabel.AutoSize = true;
             amountLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(amountLabel);
+
+            Label specialNotesLabel = new Label();
+            specialNotesLabel.Text = "Special Notes";
+            specialNotesLabel.Location = new Point(x + 640, y);
+            specialNotesLabel.AutoSize = true;
+            specialNotesLabel.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(specialNotesLabel);
         }
 
         private void AddCustomerBoxes()
@@ -293,6 +305,13 @@ namespace InvoiceMaker
             amount.Name = "amount" + i;
             amount.AccessibleName = "" + i;
             panel1.Controls.Add(amount);
+
+            TextBox specialNotes = new TextBox();
+            specialNotes.Location = new Point(640, 0 + i * 25);
+            specialNotes.Size = new Size(140, 25);
+            specialNotes.Name = "specialNotes" + i;
+            specialNotes.AccessibleName = "" + i;
+            panel1.Controls.Add(specialNotes);
 
         }
     }
