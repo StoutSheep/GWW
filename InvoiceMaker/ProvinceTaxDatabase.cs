@@ -13,7 +13,7 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        internal static void AddProvinceTax(String province, int tax)
+        internal static void AddProvinceTax(String province, int pst, int gst)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -26,7 +26,8 @@ namespace InvoiceMaker
 
                 sql = "INSERT INTO ProvinceTax VALUES (" +
                     "'" + province + "'," +
-                    tax +
+                    pst + "," +
+                    gst +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -44,7 +45,7 @@ namespace InvoiceMaker
 
 
 
-        internal static void EditProvinceTax(String oldProvince, String newProvince, int tax)
+        internal static void EditProvinceTax(String oldProvince, String newProvince, int pst, int gst)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -56,7 +57,8 @@ namespace InvoiceMaker
 
                 sql = "UPDATE ProvinceTax " +
                    "SET Province = '" + newProvince + "'" +
-                   ",tax = " + tax +
+                   ",pst = " + pst +
+                   ",gst = " + gst +
                    " WHERE Province = '" + oldProvince + "'" +
                    ";";
                 cmd = new MySqlCommand(sql, conn);

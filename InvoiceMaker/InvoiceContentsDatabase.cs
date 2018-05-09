@@ -13,7 +13,7 @@ namespace InvoiceMaker
 
         static String pswd = "password";
        
-        internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity) 
+        internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity, String specialNotes) 
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -23,10 +23,11 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "INSERT INTO InvoiceContents (InvoiceID, ItemNo, Quantity) VALUES (" +
+                sql = "INSERT INTO InvoiceContents (InvoiceID, ItemNo, Quantity, SpecialNotes) VALUES (" +
                     invoiceID + "," +
                     "'" + itemNo + "'," + 
-                    quantity +
+                    quantity + "," +
+                    "'" + specialNotes + "'" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -43,7 +44,7 @@ namespace InvoiceMaker
 
 
 
-        internal static void EditInvoiceContent(int entryID, int invoiceID, String itemNo, int quantity)
+        internal static void EditInvoiceContent(int entryID, int invoiceID, String itemNo, int quantity, String specialNotes)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -57,6 +58,7 @@ namespace InvoiceMaker
                   "SET ItemNo = " + itemNo +
                   ",Quantity = " + quantity +
                   ",InvoiceID = " + invoiceID +
+                  ",SpecialNotes = " + specialNotes +
                   " WHERE EntryID = " + entryID +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
