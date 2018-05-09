@@ -31,8 +31,8 @@ namespace InvoiceMaker
                     "'" + storeName + "'," +
                     "'" + storeDetails + "'," +
                     "'" + emailAddress + "'," +
-                    "'" + shippingAddress + "'," +
                     "'" + officeAddress + "'," +
+                    "'" + shippingAddress + "'," +
                     "'" + storeContact + "'," +
                     "'" + phoneNumber + "'," +
                     "'" + paymentTerms + "'," +
@@ -177,7 +177,7 @@ namespace InvoiceMaker
                 MySqlDataReader rdr;
                 string sql;
 
-                sql = "SELECT * FROM Customers WHERE ItemNo LIKE '%" + storeName + "%';";
+                sql = "SELECT * FROM Customers WHERE StoreName LIKE '%" + storeName + "%';";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
 
