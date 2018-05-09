@@ -19,14 +19,18 @@ namespace InvoiceMaker
         {
             InitializeDatabase();
 
-            //AddProvinceTax("BC", 20);
+
+            TestFunctions();
+
+
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            List<Product> asd = SearchProductsByItemNo("123");
+            List<Product> asd = ProductDatabase.SearchProductsByItemNo("123");
             Application.Run(new Form1());
-
-
         }
 
         static void InitializeDatabase()
@@ -63,10 +67,10 @@ namespace InvoiceMaker
                 sql = "CREATE TABLE IF NOT EXISTS Customers (" +
                     "StoreID int NOT NULL AUTO_INCREMENT," +
                     "StoreName varchar(50) NOT NULL," +
-                    "EmailAddress varchar(50) NOT NULL," +
+                    "EmailAddress varchar(50)," +
                     "ShippingAddress varchar(50) NOT NULL," +
-                    "StoreContact varchar(50) NOT NULL," +
-                    "PhoneNumber char(50) NOT NULL," +
+                    "StoreContact varchar(50)," +
+                    "PhoneNumber char(10)," +
                     "PaymentTerms varchar(50)," +
                     "ShippingInstructions varchar(50)," +
                     "SpecialNotes varchar(50)," +
@@ -83,7 +87,7 @@ namespace InvoiceMaker
                     "Location varchar(10) NOT NULL," +
                     "Cost decimal(10,2) NOT NULL," +
                     "SellPrice decimal(10,2) NOT NULL," +
-                    "UPC int," +
+                    "UPC bigint," +
                     "PRIMARY KEY (ItemNo)" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
@@ -137,354 +141,41 @@ namespace InvoiceMaker
 
         static void SeedData()
         {
-            AddProduct("1234a", "cats", 3, "sdas", 34.0, 78.3, 3242);
-            AddProduct("1234b", "dog", 3, "sdas", 34.2, 78.3, 3242);
-            AddProduct("1234c", "animal", 3, "sdas", 34.2, 78.3, 3242);
-            AddProduct("1234d", "kangaroo", 3, "sdas", 34.2, 78.3, 3242);
-            AddProduct("1234e", "rat", 3, "sdas", 34.2, 78.3, 3242);
-            AddProduct("1234f", "snek", 3, "sdas", 34.2, 78.3, 3242);
+            ProductDatabase.AddProduct("1234a", "cats", 3, "sdaccs", 34.0, 78.3, 3232);
+            ProductDatabase.AddProduct("1234b", "dog", 3, "sdadfs", 34.2, 78.3, 32422);
+            ProductDatabase.AddProduct("1234c", "animal", 3, "sd44as", 34.2, 78.3, 63242);
+            ProductDatabase.AddProduct("1234d", "kangaroo", 3, "sdras", 34.2, 78.3, 73242);
+            ProductDatabase.AddProduct("1234e", "rat", 3, "sdasw", 34.2, 78.3, 453242);
+            ProductDatabase.AddProduct("1234f", "snek", 3, "sdas", 34.2, 78.3, 324542);
         }
 
 
-
-
-
-        static void AddCustomer(String storeName, String emailAddress,  String shippingAddress, String storeContact, int phoneNumber, 
-            String paymentTerms, String shippingInstructions, String specialNotes)
+        static void TestFunctions()
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
+            ProvinceTaxDatabase.AddProvinceTax("BC", 20);
+            ProvinceTaxDatabase.EditProvinceTax("BC", "ON", 10);
+
+            ProductDatabase.AddProduct("1234g", "gecko", 3, "ssdas", 34.2, 78.3, 3242);
+            ProductDatabase.EditProduct("1234g", "9876a", "notGecko", 5, "s4453das", 3.2, 7.3, 0003242);
+            ProductDatabase.DeleteProduct("1234a");
+
+            CustomerDatabase.AddCustomer("Toys", "toyts@gmail.com", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a");
+            CustomerDatabase.AddCustomer("Games", "Games@gmail.com", "somehwereElse 9931", "Hill", "6047990643", "n/a", "n/a", "n/a");
+            int custID = CustomerDatabase.GetStoreID("Toys", "somehwere 2131");
+            CustomerDatabase.EditCustomer(custID, "UpdatedToys", "toyts@gmail.com", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a");
+            int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
+            CustomerDatabase.DeleteCustomer(custID2);
 
 
-                sql = "INSERT INTO Customers (StoreName, EmailAddress, ShippingAddress, StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, SpecialNotes) " +
-                    "VALUES (" +
-                    "'" + storeName + "'," +
-                    "'" + emailAddress + "'," +
-                    "'" + shippingAddress + "'," +
-                    "'" + storeContact + "'," +
-                    "'" + phoneNumber + "'," +
-                    "'" + paymentTerms + "'," +
-                    "'" + shippingInstructions + "'," +
-                    "'" + specialNotes + "'," +
-                    ");";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-
-        }
+            InvoiceDatabase.AddInvoice(custID, 0);
 
 
-        public static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
-        {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-                sql = "INSERT INTO Products VALUES (" +
-                    "'" + itemNo + "'," +
-                    "'" + itemDesc + "'," +
-                    perCarton + "," +
-                    "'" + location + "'," +
-                    cost + "," +
-                    sellPrice + "," +
-                    upc +
-                    ");";
-
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-
-        }
-
-
-        static void AddProvinceTax(String province, int tax)
-
-        { 
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-
-                sql = "INSERT INTO ProvinceTax VALUES (" +
-                    "'" + province + "'," +
-                    tax +
-                    ");";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-
-        }
-
-        static void AddInvoice(int storeID, int invoiceNo)
-        {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-
-                sql = "INSERT INTO Invoices (StoreID, InvoiceNo) VALUES (" +
-                    storeID + "," +
-                    invoiceNo +
-                    ");";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-        }
-
-
-        static void EditCustomer(int storeId, String storeName, String shippingAddress, String storeContact, int phoneNumber,
-            String PaymentTerms, String ShippingInstructions, String SpecialNotes)
-        {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-                sql = "UPDATE Customers " +
-                    "SET StoreName = " + storeName +
-                    ",shippingAddress = " + shippingAddress +
-                    ",storeContact = " + storeContact +
-                    ",phoneNumber = " + phoneNumber +
-                    ",PaymentTerms = " + PaymentTerms +
-                    ",ShippingInstructions = " + ShippingInstructions +
-                    ",SpecialNotes = " + SpecialNotes +
-                    ",WHERE StoreID = " + storeId +
-                    ";";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10);
 
 
         }
 
-
-        static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, int upc)
-        {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-                sql = "UPDATE Products " +
-                    "SET ItemNo = " + newItemNo +
-                    ",ItemDesc = " + itemDesc +
-                    ",PerCarton = " + perCarton +
-                    ",Location = " + location +
-                    ",Cost = " + cost +
-                    ",SellPrice = " + sellPrice +
-                    ",UPC = " + upc +
-                    ",WHERE ItemNo = " + oldItemNo +
-                    ";";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-
-
-
-        }
-
-
-        static void EditProvinceTax(String oldProvince, String newProvince, String tax)
-        {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-                sql = "UPDATE ProvinceTax " +
-                   "SET Province = " + newProvince +
-                   ",tax = " + tax +
-                   ",WHERE Province = " + oldProvince +
-                   ";";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-
-
-        }
-
-        static void EditInvoice(int invoiceID, int storeID, int invoiceNo)
-        {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-
-                sql = "INSERT INTO Invoices (StoreID, InvoiceNo) VALUES (" +
-                    storeID + "," +
-                    invoiceNo +
-                    ");";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-
-        }
-
-        public static List<Product> SearchProductsByItemNo(String itemNo)
-        {
-            
-            List<Product> productList = new List<Product>();
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                MySqlDataReader rdr;
-                string sql;
-
-                sql = "SELECT * FROM Products WHERE ItemNo LIKE '" + itemNo + "%';";
-                cmd = new MySqlCommand(sql, conn);
-                rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-
-                  
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
-                    productList.Add(temp);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-            return productList;
-
-        }
-
-        public static Product SearchProductByItemNo(String itemNo)
-        {
-
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                MySqlDataReader rdr;
-                string sql;
-
-                sql = "SELECT * FROM Products WHERE ItemNo='" + itemNo + "';";
-                cmd = new MySqlCommand(sql, conn);
-                rdr = cmd.ExecuteReader();
-                
-                if(rdr.HasRows)
-                {
-                    rdr.Read();
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int32.Parse(rdr[6].ToString()));
-                    conn.Close();
-                    return temp;
-                }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            Console.WriteLine("Done.");
-            return null;
-
-        }
 
     }
 }

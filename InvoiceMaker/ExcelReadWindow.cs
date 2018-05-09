@@ -27,44 +27,61 @@ namespace InvoiceMaker
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            /*
-            Product prod = new Product("", "", 0, "", 0, 0, "");
+            
+            Product prod = new Product("", "", 0, "", 0, 0, 0);
             int tempCart;
-            float tempCost;
+            Int64 tempUPC;
+            float tempCost, tempPrice;
             Workbook ex = Workbook.Load(file);
             Worksheet worksheet = ex.Worksheets[0];
             int maxRow = worksheet.Cells.Rows.Count;
             double readProgress = 100d / maxRow;
+            int lastrow = 0;
             for (int row = 4; row < maxRow; ++row)
             {
-                prod.ItemNumber = worksheet.Cells[row, 0].Value.ToString();
-                prod.WarehouseLocation = worksheet.Cells[row, 1].Value.ToString();
-                prod.ItemDescription = worksheet.Cells[row, 2].Value.ToString();
+                prod.ItemNo = worksheet.Cells[row, 0].Value.ToString();
+                prod.Location = worksheet.Cells[row, 1].Value.ToString();
+                prod.ItemDesc = worksheet.Cells[row, 2].Value.ToString();
                 if (worksheet.Cells[row, 3].Value != null && Int32.TryParse(worksheet.Cells[row, 3].Value.ToString(), out tempCart))
                 {
-                    prod.CartonTotal = tempCart;
+                    prod.PerCarton = tempCart;
                 }
                 else
                 {
-                    prod.CartonTotal = 1;
+                    prod.PerCarton = 1;
                 }
                 if (worksheet.Cells[row, 4].Value != null && Single.TryParse(worksheet.Cells[row, 4].Value.ToString(), out tempCost))
                 {
-                    prod.WholesaleCost = tempCost;
+                    prod.Cost = tempCost;
                 }
                 else
                 {
-                    prod.WholesaleCost = 0;
+                    prod.Cost = 0;
                 }
-                if (worksheet.Cells[row, 5].Value != null)
-                    prod.UPC = worksheet.Cells[row, 5].Value.ToString();
+                if (worksheet.Cells[row, 5].Value != null && Single.TryParse(worksheet.Cells[row, 5].Value.ToString(), out tempPrice))
+                {
+                    prod.SellPrice = tempPrice;
+                }
                 else
-                    prod.UPC = null;
-                Program.AddProduct(prod.ItemNumber, prod.ItemDescription, prod.CartonTotal, prod.WarehouseLocation, prod.WholesaleCost, prod.SalePrice, prod.UPC);
-                int stuff = (int)readProgress * row;
-                Debug.Print(stuff + "");
+                {
+                    prod.SellPrice = 0;
+                }
+                if (worksheet.Cells[row, 6].Value != null && Int64.TryParse(worksheet.Cells[row, 6].Value.ToString(), out tempUPC))
+                {
+                    prod.UPC = tempUPC;
+                }
+                else
+                {
+                    prod.UPC = 0;
+                }
+                if (ProductDatabase.SearchProductsByItemNo(prod.ItemNo).Count == 0)
+                    ProductDatabase.AddProduct(prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC);
+                else
+                    ProductDatabase.EditProduct(prod.ItemNo, prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC);
                 backgroundWorker1.ReportProgress((int)(readProgress * row));
-            }*/
+                lastrow = row;
+            }
+            Debug.Print("Last Row is " + lastrow);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -76,8 +93,6 @@ namespace InvoiceMaker
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            //Debug.Print(progressBar1.Value+"");
-           // progressBar1.Update();
         }
     }
 }

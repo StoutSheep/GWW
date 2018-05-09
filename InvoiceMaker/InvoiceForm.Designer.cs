@@ -37,15 +37,15 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(53, 188);
+            this.panel1.Location = new System.Drawing.Point(63, 370);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1264, 614);
+            this.panel1.Size = new System.Drawing.Size(1350, 614);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // ok_button
             // 
-            this.ok_button.Location = new System.Drawing.Point(1215, 820);
+            this.ok_button.Location = new System.Drawing.Point(1225, 1002);
             this.ok_button.Name = "ok_button";
             this.ok_button.Size = new System.Drawing.Size(102, 51);
             this.ok_button.TabIndex = 1;
@@ -55,19 +55,19 @@
             // 
             // cancel_button
             // 
-            this.cancel_button.Location = new System.Drawing.Point(1093, 820);
+            this.cancel_button.Location = new System.Drawing.Point(1103, 1002);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(102, 51);
             this.cancel_button.TabIndex = 2;
             this.cancel_button.Text = "Cancel";
             this.cancel_button.UseVisualStyleBackColor = true;
-            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
+            this.cancel_button.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1342, 917);
+            this.ClientSize = new System.Drawing.Size(1432, 1103);
             this.Controls.Add(this.cancel_button);
             this.Controls.Add(this.ok_button);
             this.Controls.Add(this.panel1);

@@ -29,81 +29,64 @@
         private void InitializeComponent()
         {
             this.ProductView = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.CancelProduct = new System.Windows.Forms.Button();
             this.DeleteProduct = new System.Windows.Forms.Button();
             this.ModProduct = new System.Windows.Forms.Button();
+            this.productTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // ProductView
             // 
             this.ProductView.AutoSize = true;
             this.ProductView.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductView.Location = new System.Drawing.Point(424, 31);
+            this.ProductView.Location = new System.Drawing.Point(876, 25);
             this.ProductView.Name = "ProductView";
             this.ProductView.Size = new System.Drawing.Size(249, 42);
             this.ProductView.TabIndex = 1;
             this.ProductView.Text = "Find Products";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(234, 108);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(673, 33);
-            this.comboBox1.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(63, 193);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1048, 628);
-            this.panel1.TabIndex = 3;
-            // 
             // CancelProduct
             // 
-            this.CancelProduct.Location = new System.Drawing.Point(195, 842);
+            this.CancelProduct.Location = new System.Drawing.Point(0, 0);
             this.CancelProduct.Name = "CancelProduct";
-            this.CancelProduct.Size = new System.Drawing.Size(202, 66);
-            this.CancelProduct.TabIndex = 8;
-            this.CancelProduct.Text = "Cancel";
-            this.CancelProduct.UseVisualStyleBackColor = true;
-            this.CancelProduct.Click += new System.EventHandler(this.CancelProduct_Click);
+            this.CancelProduct.Size = new System.Drawing.Size(75, 23);
+            this.CancelProduct.TabIndex = 11;
             // 
             // DeleteProduct
             // 
-            this.DeleteProduct.Location = new System.Drawing.Point(783, 842);
+            this.DeleteProduct.Location = new System.Drawing.Point(0, 0);
             this.DeleteProduct.Name = "DeleteProduct";
-            this.DeleteProduct.Size = new System.Drawing.Size(202, 66);
-            this.DeleteProduct.TabIndex = 7;
-            this.DeleteProduct.Text = "Delete";
-            this.DeleteProduct.UseVisualStyleBackColor = true;
-            this.DeleteProduct.Click += new System.EventHandler(this.DeleteProduct_Click);
+            this.DeleteProduct.Size = new System.Drawing.Size(75, 23);
+            this.DeleteProduct.TabIndex = 12;
             // 
             // ModProduct
             // 
-            this.ModProduct.Location = new System.Drawing.Point(490, 842);
+            this.ModProduct.Location = new System.Drawing.Point(0, 0);
             this.ModProduct.Name = "ModProduct";
-            this.ModProduct.Size = new System.Drawing.Size(202, 66);
-            this.ModProduct.TabIndex = 6;
-            this.ModProduct.Text = "Modify";
-            this.ModProduct.UseVisualStyleBackColor = true;
-            this.ModProduct.Click += new System.EventHandler(this.ModProduct_Click);
+            this.ModProduct.Size = new System.Drawing.Size(75, 23);
+            this.ModProduct.TabIndex = 13;
+            // 
+            // productTextBox
+            // 
+            this.productTextBox.Location = new System.Drawing.Point(691, 86);
+            this.productTextBox.Name = "productTextBox";
+            this.productTextBox.Size = new System.Drawing.Size(674, 31);
+            this.productTextBox.TabIndex = 10;
+            this.productTextBox.TextChanged += new System.EventHandler(this.productTextBox_TextChanged);
             // 
             // ViewProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 929);
+            this.ClientSize = new System.Drawing.Size(1760, 929);
+            this.Controls.Add(this.productTextBox);
             this.Controls.Add(this.CancelProduct);
             this.Controls.Add(this.DeleteProduct);
             this.Controls.Add(this.ModProduct);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.ProductView);
             this.Name = "ViewProduct";
             this.Text = "ViewProduct";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ViewProduct_MouseClick);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,10 +95,9 @@
         #endregion
 
         private System.Windows.Forms.Label ProductView;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button CancelProduct;
         private System.Windows.Forms.Button DeleteProduct;
         private System.Windows.Forms.Button ModProduct;
+        private System.Windows.Forms.TextBox productTextBox;
     }
 }

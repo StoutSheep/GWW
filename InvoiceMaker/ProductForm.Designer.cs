@@ -63,6 +63,7 @@
             this.itemNumber_textBox.Name = "itemNumber_textBox";
             this.itemNumber_textBox.Size = new System.Drawing.Size(175, 31);
             this.itemNumber_textBox.TabIndex = 1;
+            this.itemNumber_textBox.TextChanged += new System.EventHandler(this.itemNumber_textBox_TextChanged);
             // 
             // label2
             // 

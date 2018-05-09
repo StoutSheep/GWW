@@ -21,10 +21,29 @@ namespace InvoiceMaker
         double cost;
         double sellPrice;
         int upc;
+        String replacedItemNo = null;
+        bool editMode = false;
 
+        //for adding new item
         public ProductForm()
         {
             InitializeComponent();
+        }
+
+        //for editting
+        public ProductForm(String itemNumber, String desc, String cp, String loc, String cost, String price, String upc)
+        {
+            InitializeComponent();
+            replacedItemNo = itemNumber;
+            itemNumber_textBox.Text = itemNumber;
+            itemDescription_textBox.Text = desc;
+            cartonPack_textBox.Text = cp;
+            warehouseLoc_textBox.Text = loc;
+            cost_textBox.Text = cost;
+            sellingPrice_textBox.Text = price;
+            upc_textBox.Text = upc;
+            editMode = true;
+            itemNumber_textBox.BackColor = Color.White;
         }
 
         private void cancel_button_Click(object sender, EventArgs e)
@@ -35,6 +54,7 @@ namespace InvoiceMaker
         private void submit_button_Click(object sender, EventArgs e)
         {
             Boolean allValid = true;
+            Boolean editValid = true;
             itemNo = itemNumber_textBox.Text;
             itemDesc = itemDescription_textBox.Text;
             Int32.TryParse(cartonPack_textBox.Text, out perCarton);
@@ -52,30 +72,35 @@ namespace InvoiceMaker
             {
                 Debug.Print("Description Failed");
                 allValid = false;
+                editValid = false;
             }
 
             if (!Int32.TryParse(cartonPack_textBox.Text, out perCarton))
             {
                 Debug.Print("PerCarton Failed");
                 allValid = false;
+                editValid = false;
             }
 
             if (!validStringLength(location, 10))
             {
                 Debug.Print("Location Failed");
                 allValid = false;
+                editValid = false;
             }
 
-            if(!Double.TryParse(cost_textBox.Text, out cost))
+            if (!Double.TryParse(cost_textBox.Text, out cost))
             {
                 Debug.Print("Cost Failed");
                 allValid = false;
+                editValid = false;
             }
 
             if (!Double.TryParse(sellingPrice_textBox.Text, out sellPrice))
             {
                 Debug.Print("Selling Price Failed");
                 allValid = false;
+                editValid = false;
             }
 
             /*
@@ -86,9 +111,23 @@ namespace InvoiceMaker
             }
             */
 
-            if (allValid)
+            if (editMode == false && allValid)
             {
-                Program.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+                ProductDatabase.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+                if(replacedItemNo != null)
+                {
+                    ProductDatabase.DeleteProductByItemNo(replacedItemNo);
+                }
+                this.Close();   
+            }
+            else if(editMode && editValid)
+            {
+                if (replacedItemNo != null)
+                {
+                    ProductDatabase.DeleteProductByItemNo(replacedItemNo);
+                }
+                ProductDatabase.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+                
                 this.Close();
             }
         }
@@ -117,7 +156,7 @@ namespace InvoiceMaker
 
         public Boolean isUniqueItemNo(String itemNo)
         {
-            List<Product> result = Program.SearchProductsByItemNo(itemNo);
+            List<Product> result = ProductDatabase.SearchProductsByItemNo(itemNo);
             if(result.Count > 0)
             {
                 return false;
@@ -128,6 +167,26 @@ namespace InvoiceMaker
         public Boolean validMonetaryValue(double value)
         {
             return true;
+        }
+
+        private void itemNumber_textBox_TextChanged(object sender, EventArgs e)
+        {
+            if(editMode == false)
+            {
+                if(ProductDatabase.SearchProductByItemNo(itemNumber_textBox.Text) != null)
+                {
+                    itemNumber_textBox.BackColor = Color.Red;
+                }
+                else
+                {
+                    itemNumber_textBox.BackColor = Color.White;
+                }
+            }
+            else
+            {
+                itemNumber_textBox.BackColor = Color.White;
+            }
+
         }
     }
 }
