@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceMaker", "InvoiceMaker\InvoiceMaker.csproj", "{4129BAF4-30C2-4507-8F51-871A912517E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceMakerTests", "InvoiceMakerTests\InvoiceMakerTests.csproj", "{C52458B7-FDE1-4774-A958-B25ACD93ACC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4129BAF4-30C2-4507-8F51-871A912517E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4129BAF4-30C2-4507-8F51-871A912517E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4129BAF4-30C2-4507-8F51-871A912517E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C52458B7-FDE1-4774-A958-B25ACD93ACC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C52458B7-FDE1-4774-A958-B25ACD93ACC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C52458B7-FDE1-4774-A958-B25ACD93ACC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C52458B7-FDE1-4774-A958-B25ACD93ACC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

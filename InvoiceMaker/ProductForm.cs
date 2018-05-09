@@ -93,7 +93,7 @@ namespace InvoiceMaker
             }
         }
 
-        private Boolean validItemNumber(String itemNo)
+        public Boolean validItemNumber(String itemNo)
         {
             if(!validStringLength(itemNo, 10))
             {
@@ -106,7 +106,7 @@ namespace InvoiceMaker
             return true;
         }
 
-        private Boolean validStringLength(String text, int max)
+        public Boolean validStringLength(String text, int max)
         {
             if (text.Length <= 0 || text.Length > max)
             {
@@ -115,7 +115,7 @@ namespace InvoiceMaker
             return true;
         }
 
-        private Boolean isUniqueItemNo(String itemNo)
+        public Boolean isUniqueItemNo(String itemNo)
         {
             List<Product> result = Program.SearchProductsByItemNo(itemNo);
             if(result.Count > 0)
@@ -125,11 +125,9 @@ namespace InvoiceMaker
             return true;
         }
 
-        private Boolean validMonetaryValue(double value)
+        public Boolean validMonetaryValue(double value)
         {
             return true;
         }
-
-
     }
 }
