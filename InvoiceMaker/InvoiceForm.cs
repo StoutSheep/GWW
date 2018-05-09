@@ -21,7 +21,8 @@ namespace InvoiceMaker
             InitializeComponent();
 
             AddLabels();
-            AddBoxes();
+            AddCustomerBoxes();
+            AddItemBoxes();
         }
 
         private void Qty_KeyPress(object sender, KeyPressEventArgs e)
@@ -43,7 +44,7 @@ namespace InvoiceMaker
             if (Int32.Parse(t.AccessibleName) == i)
             {
                 i++;
-                AddBoxes();
+                AddItemBoxes();
             }
 
             if(this.panel1.Controls["itemNumber" + t.AccessibleName].Text.Length == 0 && this.panel1.Controls["qty" + t.AccessibleName].Text.Length == 0)
@@ -75,9 +76,10 @@ namespace InvoiceMaker
             if (Int32.Parse(c.AccessibleName) == i)
             {
                 i++;
-                AddBoxes();
+                AddItemBoxes();
             }
 
+            //qty and itemNo empty
             if (this.panel1.Controls["itemNumber" + c.AccessibleName].Text.Length == 0 && this.panel1.Controls["qty" + c.AccessibleName].Text.Length == 0)
             {
                 this.panel1.Controls["loc" + c.AccessibleName].Text = "";
@@ -131,7 +133,14 @@ namespace InvoiceMaker
         private void AddLabels()
         {
             int x = 30;
-            int y = 80;
+            int y = 180;
+
+            Label storeNameLabel = new Label();
+            storeNameLabel.Text = "Store name";
+            storeNameLabel.Location = new Point(30, 10);
+            storeNameLabel.AutoSize = true;
+            storeNameLabel.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(storeNameLabel);
 
             Label qtyLabel = new Label();
             qtyLabel.Text = "Qty";
@@ -183,7 +192,44 @@ namespace InvoiceMaker
             this.Controls.Add(amountLabel);
         }
 
-        private void AddBoxes()
+        private void AddCustomerBoxes()
+        {
+            ComboBox storeName = new ComboBox();
+            storeName.TextChanged += StoreName_TextChanged;
+            storeName.TextUpdate += StoreName_TextUpdate;
+            storeName.Location = new Point(30, 25);
+            storeName.Size = new Size(100, 25);
+            storeName.Name = "storeName";
+            this.Controls.Add(storeName);
+        }
+
+        private void StoreName_TextUpdate(object sender, EventArgs e)
+        {
+            ComboBox c = (ComboBox) sender;
+
+            c.DroppedDown = true;
+
+            c.Items.Clear();
+            c.SelectionLength = 0;
+
+            c.SelectionStart = c.Text.Length;
+
+            List<Product> productList = ProductDatabase.SearchProductsByItemNo(c.Text);
+
+            Object[] arr = new Object[productList.Count];
+            for (int i = 0; i < productList.Count; i++)
+            {
+                arr[i] = productList[i].ItemNo;
+            }
+            c.Items.AddRange(arr);
+        }
+
+        private void StoreName_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void AddItemBoxes()
         {
             TextBox qty = new TextBox();
             qty.Location = new Point(0, 0 + i * 25);
