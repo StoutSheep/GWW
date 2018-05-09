@@ -177,7 +177,7 @@ namespace InvoiceMaker
                 MySqlDataReader rdr;
                 string sql;
 
-                sql = "SELECT * FROM Customers WHERE ItemNo LIKE '" + storeName + "%';";
+                sql = "SELECT * FROM Customers WHERE ItemNo LIKE '%" + storeName + "%';";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
 

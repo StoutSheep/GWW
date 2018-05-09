@@ -23,7 +23,6 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-
                 sql = "INSERT INTO Invoices (StoreID, PurchaseOrder, SpecialNotes, InvoiceNo) VALUES (" +
                     storeID + "," +
                     "'" + purchaseOrder + "'," +

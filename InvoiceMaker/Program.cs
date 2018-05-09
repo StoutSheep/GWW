@@ -73,7 +73,7 @@ namespace InvoiceMaker
 
 
                 sql = "CREATE TABLE IF NOT EXISTS Customers (" +
-                    "StoreID bigint NOT NULL AUTO_INCREMENT," +
+                    "StoreID int NOT NULL AUTO_INCREMENT," +
                     "StoreName varchar(50) NOT NULL," +
                     "StoreDetails varchar(50)," +
                     "EmailAddress varchar(50)," +
@@ -108,11 +108,11 @@ namespace InvoiceMaker
                
 
                 sql = "CREATE TABLE IF NOT EXISTS Invoices (" +
-                   "InvoiceID bigint NOT NULL AUTO_INCREMENT," +
-                   "StoreID bigint NOT NULL," +
+                   "InvoiceID int NOT NULL AUTO_INCREMENT," +
+                   "StoreID int NOT NULL," +
                    "PurchaseOrder varchar(20)," +
                    "SpecialNotes varchar(100)," +
-                   "InvoiceNo bigint," +
+                   "InvoiceNo int," +
                    "PRIMARY KEY (InvoiceID)," +
                    "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +
                    ");";
@@ -121,7 +121,7 @@ namespace InvoiceMaker
 
                 sql = "CREATE TABLE IF NOT EXISTS InvoiceContents (" +
                    "EntryID bigint NOT NULL AUTO_INCREMENT," +
-                   "InvoiceID bigint NOT NULL," +
+                   "InvoiceID int NOT NULL," +
                    "ItemNo varchar(10) NOT NULL," +
                    "Quantity int NOT NULL," +
                    "SpecialNotes varchar(40)," +
@@ -168,11 +168,14 @@ namespace InvoiceMaker
             CustomerDatabase.AddCustomer("Toys", "gift shop", "toyts@gmail.com", "asdas", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
             CustomerDatabase.AddCustomer("Games", "", "Games@gmail.com", "sadsads", "somehwereElse 9931", "Hill", "6047990643", "n/a", "n/a", "n/a", "ON");
             int custID = CustomerDatabase.GetStoreID("Toys", "somehwere 2131");
-            CustomerDatabase.EditCustomer(custID, "UpdatedToys", "notgiftshop", "toyts@gmail.com", "asdewr", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
+            //CustomerDatabase.EditCustomer(custID, "UpdatedToys", "notgiftshop", "toyts@gmail.com", "asdewr", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
             int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
-            CustomerDatabase.DeleteCustomer(custID2);
-            InvoiceDatabase.AddInvoice(custID, "sadasd", "n/a", 0);
+            //CustomerDatabase.DeleteCustomer(custID2);
+            InvoiceDatabase.AddInvoice(1, "sadasd", "n/a", 0);
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
+
+
+            //List<Customer> sd = CustomerDatabase.SearchCustomersByStoreName("Updated");
 
 
         }
