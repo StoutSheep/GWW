@@ -50,7 +50,7 @@ namespace InvoiceMaker
         {
             Debug.Print("InvoiceForm");
             InvoiceForm invoiceForm = new InvoiceForm();
-            invoiceForm.Size = new System.Drawing.Size(750, 600);
+            invoiceForm.Size = new System.Drawing.Size(900, 600);
             invoiceForm.Show();
         }
 
@@ -58,6 +58,7 @@ namespace InvoiceMaker
         {
             Debug.Print("ViewCustomer");
             ViewCustomer viewCustomer = new ViewCustomer();
+            viewCustomer.Size = new System.Drawing.Size(1200, 700);
             viewCustomer.Show();
         }
 
