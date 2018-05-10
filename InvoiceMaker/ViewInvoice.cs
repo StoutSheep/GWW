@@ -9,11 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dapper;
 
 namespace InvoiceMaker
 {
     public partial class ViewInvoice : Form
     {
+        static String pswd = "password";
+
         public ViewInvoice()
         {
             InitializeComponent();
@@ -59,6 +62,11 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

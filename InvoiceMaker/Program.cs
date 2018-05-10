@@ -176,8 +176,22 @@ namespace InvoiceMaker
             CustomerDatabase.EditCustomer(custID, "UpdatedToys", "notgiftshop", "toyts@gmail.com", "asdewr", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
             int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
             //CustomerDatabase.DeleteCustomer(custID);
-            InvoiceDatabase.AddInvoice(1, "sadasd", "n/a", 0, 10, 5, 7, 12, 1);
-            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
+
+            InvoiceDatabase.AddInvoice(1, "Invoice 1", "n/a", 0, 10, 5, 7, 12, 1);
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234a", 10, "2 red");
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 4, "Bork");
+
+            InvoiceDatabase.AddInvoice(1, "Invoice 2", "n/a", 1, 10, 5, 7, 12, 1);
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 10, "Fork");
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234d", 4, "Dork");
+
+            InvoiceDatabase.AddInvoice(2, "Invoice 3", "n/a", 2, 10, 5, 7, 12, 1);
+            InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
+            InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
+
+            InvoiceDatabase.AddInvoice(2, "Invoice 4", "n/a", 3, 10, 5, 7, 12, 1);
+            InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
+            InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
 
 
             List<Customer> sd = CustomerDatabase.SearchCustomersByStoreName("Updated");

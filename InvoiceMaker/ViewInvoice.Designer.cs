@@ -101,14 +101,15 @@
             this.dataGridView1.Location = new System.Drawing.Point(42, 183);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(2642, 630);
+            this.dataGridView1.Size = new System.Drawing.Size(1172, 612);
             this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ViewInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2855, 1275);
+            this.ClientSize = new System.Drawing.Size(1259, 1231);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.PrintInvoice);
             this.Controls.Add(this.CancelInvoice);

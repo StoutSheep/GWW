@@ -10,13 +10,24 @@ namespace InvoiceMaker
     {
         public Customer currentCustomer { get; set; }
 
-        public String CompanyName = "Great West Wholesale";
-        public String CompanyAddress = "1670 PANDORA ST. VANCOUVER, BC V5L 1L6";
-        public String CompanyPhoneNumber= "604-255-9588";
-        public String CompanyFax = "604-255-9589";
-        public String CompanyTollFree = "1-800-901-9588";
+        // String info for User Company
+        public String CompanyName = "Wholesaler";
+        public String CompanyAddress = "1234 GRANOLA ST. NEW WESTMINISTER, BC W4T 4U2";
+        public String CompanyPhoneNumber= "123-456-7890";
+        public String CompanyFax = "123-456-7890";
+        public String CompanyTollFree = "1-800-123-4567";
 
+        // TODO: Query Invoices by Stage 1; Stage 2 and Stage 3
 
+        // TODO: Query Customer with associated Invoice IDS
+
+        // TODO: Join Customers based on stages
+
+        //TODO: Query all invoice items based on Invoice IDS
+        //SELECT invoicecontents.InvoiceID, invoicecontents.Quantity, invoicecontents.Quantity/products.PerCarton AS 'Grab Carton', products.Location, products.ItemDesc, products.PerCarton, products.SellPrice, invoicecontents.Quantity* products.SellPrice AS 'Amount' from invoicecontents
+        //NATURAL JOIN products;
+
+        // TODO: Join all invoice items with invoice ID based on customer and selected invoice ID
 
     }
 }
