@@ -113,10 +113,11 @@ namespace InvoiceMaker
                    "PurchaseOrder varchar(20)," +
                    "SpecialNotes varchar(100)," +
                    "InvoiceNo int," +
-                   "Subtotal NUMERIC," +
+                   "SubTotal NUMERIC," +
                    "Gst NUMERIC," +
-                   "Pst NuMERIC," +
+                   "Pst NUMERIC," +
                    "NetTotal NUMERIC," +
+                   "Stage int NOT NULL," +
                    "PRIMARY KEY (InvoiceID)," +
                    "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +
                    ");";
@@ -175,8 +176,8 @@ namespace InvoiceMaker
             CustomerDatabase.EditCustomer(custID, "UpdatedToys", "notgiftshop", "toyts@gmail.com", "asdewr", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
             int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
             //CustomerDatabase.DeleteCustomer(custID);
-            //InvoiceDatabase.AddInvoice(1, "sadasd", "n/a", 0);
-            //InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
+            InvoiceDatabase.AddInvoice(1, "sadasd", "n/a", 0, 10, 5, 7, 12, 1);
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
 
 
             List<Customer> sd = CustomerDatabase.SearchCustomersByStoreName("Updated");

@@ -13,7 +13,9 @@ namespace InvoiceMaker
 
         static String pswd = "password";
 
-        internal static void AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo)
+       
+
+        internal static void AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subTotal, int gst, int pst, int netTotal, int stage)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -23,11 +25,16 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                sql = "INSERT INTO Invoices (StoreID, PurchaseOrder, SpecialNotes, InvoiceNo) VALUES (" +
+                sql = "INSERT INTO Invoices (StoreID, PurchaseOrder, SpecialNotes, InvoiceNo, SubTotal, Gst, Pst, NetTotal, Stage) VALUES (" +
                     storeID + "," +
                     "'" + purchaseOrder + "'," +
                     "'" + specialNotes + "'," +
-                    invoiceNo +
+                    invoiceNo + "," +
+                    subTotal + "," +
+                    gst + "," +
+                    pst + "," +
+                    netTotal + "," +
+                    stage + 
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -44,7 +51,7 @@ namespace InvoiceMaker
 
 
 
-        internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo)
+        internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subtotal, int gst, int pst, int netTotal, int stage)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -59,7 +66,12 @@ namespace InvoiceMaker
                    "SET StoreID = " + storeID +
                    ",PurchaseOrder = " + purchaseOrder +
                    ",SpecialNotes = " + specialNotes +
-                   ",InvoiceNo = " + invoiceNo +    
+                   ",InvoiceNo = " + invoiceNo +
+                   ",Subtotal = " + invoiceNo +
+                   ",Gst = " + gst +
+                   ",Pst = " + pst +
+                   ",NetTotal = " + netTotal +
+                   ",Stage = " + stage +
                    " WHERE InvoiceID = " + invoiceID +
                    ";";
                 cmd = new MySqlCommand(sql, conn);
