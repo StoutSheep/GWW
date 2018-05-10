@@ -1,6 +1,6 @@
 ﻿namespace InvoiceMaker
 {
-    partial class InvoiceReport
+    partial class ViewInvoiceReport
     {
         /// <summary>
         /// Required designer variable.

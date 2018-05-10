@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelLibrary">
       <HintPath>..\Libraries\ExcelLibrary.dll</HintPath>
     </Reference>
@@ -79,13 +82,19 @@
       <DependentUpon>AddProvinceTaxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerDatabase.cs" />
+    <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceContentsDatabase.cs" />
     <Compile Include="InvoiceDatabase.cs" />
-    <Compile Include="InvoiceReport.cs">
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ViewInvoiceReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InvoiceReport.Designer.cs">
-      <DependentUpon>InvoiceReport.cs</DependentUpon>
+    <Compile Include="ViewInvoiceReport.Designer.cs">
+      <DependentUpon>ViewInvoiceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductDatabase.cs" />
     <Compile Include="Customer.cs" />
@@ -173,6 +182,10 @@
     <EmbeddedResource Include="ExcelReadWindow.resx">
       <DependentUpon>ExcelReadWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceReport.rdlc" />
+    <EmbeddedResource Include="ViewInvoiceReport.resx">
+      <DependentUpon>ViewInvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,19 +216,26 @@
     <EmbeddedResource Include="ViewProduct.resx">
       <DependentUpon>ViewProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="gwwDataSet.xsc">
+      <DependentUpon>gwwDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="gwwDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="gwwDataSet.xss">
+      <DependentUpon>gwwDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\CustomerDatabase.datasource" />
+    <None Include="Properties\DataSources\InvoiceDatabase.datasource" />
+    <None Include="Properties\DataSources\ProductDatabase.datasource" />
+    <None Include="Properties\DataSources\ProvinceTaxDatabase.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

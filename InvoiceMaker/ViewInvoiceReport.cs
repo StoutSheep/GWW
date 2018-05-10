@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace InvoiceMaker
 {
-    public partial class InvoiceReport : Form
+    public partial class ViewInvoiceReport : Form
     {
-        public InvoiceReport()
+        public ViewInvoiceReport()
         {
             InitializeComponent();
         }

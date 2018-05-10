@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="gwwDataSet" targetNamespace="http://tempuri.org/gwwDataSet.xsd" xmlns:mstns="http://tempuri.org/gwwDataSet.xsd" xmlns="http://tempuri.org/gwwDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="gwwConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="gwwConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.InvoiceMaker.Properties.Settings.GlobalReference.Default.gwwConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="customersTableAdapter" GeneratorDataComponentClassName="customersTableAdapter" Name="customers" UserDataComponentName="customersTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="gwwConnectionString (Settings)" DbObjectName="gww.customers" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT StoreID, StoreName, EmailAddress, ShippingAddress, StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, SpecialNotes FROM customers</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="invoicecontentsTableAdapter" GeneratorDataComponentClassName="invoicecontentsTableAdapter" Name="invoicecontents" UserDataComponentName="invoicecontentsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="gwwConnectionString (Settings)" DbObjectName="gww.invoicecontents" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT EntryID, InvoiceID, ItemNo, Quantity FROM invoicecontents</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="invoicesTableAdapter" GeneratorDataComponentClassName="invoicesTableAdapter" Name="invoices" UserDataComponentName="invoicesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="gwwConnectionString (Settings)" DbObjectName="gww.invoices" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT InvoiceID, StoreID, InvoiceNo FROM invoices</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="productsTableAdapter" GeneratorDataComponentClassName="productsTableAdapter" Name="products" UserDataComponentName="productsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="gwwConnectionString (Settings)" DbObjectName="gww.products" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ItemNo, ItemDesc, PerCarton, Location, Cost, SellPrice, UPC FROM products</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="provincetaxTableAdapter" GeneratorDataComponentClassName="provincetaxTableAdapter" Name="provincetax" UserDataComponentName="provincetaxTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="gwwConnectionString (Settings)" DbObjectName="gww.provincetax" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Province, Tax FROM provincetax</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="gwwDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="gwwDataSet" msprop:Generator_UserDSName="gwwDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="customers" msprop:Generator_TableClassName="customersDataTable" msprop:Generator_TableVarName="tablecustomers" msprop:Generator_TablePropName="customers" msprop:Generator_RowDeletingName="customersRowDeleting" msprop:Generator_RowChangingName="customersRowChanging" msprop:Generator_RowEvHandlerName="customersRowChangeEventHandler" msprop:Generator_RowDeletedName="customersRowDeleted" msprop:Generator_UserTableName="customers" msprop:Generator_RowChangedName="customersRowChanged" msprop:Generator_RowEvArgName="customersRowChangeEvent" msprop:Generator_RowClassName="customersRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="invoicecontents" msprop:Generator_TableClassName="invoicecontentsDataTable" msprop:Generator_TableVarName="tableinvoicecontents" msprop:Generator_TablePropName="invoicecontents" msprop:Generator_RowDeletingName="invoicecontentsRowDeleting" msprop:Generator_RowChangingName="invoicecontentsRowChanging" msprop:Generator_RowEvHandlerName="invoicecontentsRowChangeEventHandler" msprop:Generator_RowDeletedName="invoicecontentsRowDeleted" msprop:Generator_UserTableName="invoicecontents" msprop:Generator_RowChangedName="invoicecontentsRowChanged" msprop:Generator_RowEvArgName="invoicecontentsRowChangeEvent" msprop:Generator_RowClassName="invoicecontentsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="invoices" msprop:Generator_TableClassName="invoicesDataTable" msprop:Generator_TableVarName="tableinvoices" msprop:Generator_TablePropName="invoices" msprop:Generator_RowDeletingName="invoicesRowDeleting" msprop:Generator_RowChangingName="invoicesRowChanging" msprop:Generator_RowEvHandlerName="invoicesRowChangeEventHandler" msprop:Generator_RowDeletedName="invoicesRowDeleted" msprop:Generator_UserTableName="invoices" msprop:Generator_RowChangedName="invoicesRowChanged" msprop:Generator_RowEvArgName="invoicesRowChangeEvent" msprop:Generator_RowClassName="invoicesRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="products" msprop:Generator_TableClassName="productsDataTable" msprop:Generator_TableVarName="tableproducts" msprop:Generator_TablePropName="products" msprop:Generator_RowDeletingName="productsRowDeleting" msprop:Generator_RowChangingName="productsRowChanging" msprop:Generator_RowEvHandlerName="productsRowChangeEventHandler" msprop:Generator_RowDeletedName="productsRowDeleted" msprop:Generator_UserTableName="products" msprop:Generator_RowChangedName="productsRowChanged" msprop:Generator_RowEvArgName="productsRowChangeEvent" msprop:Generator_RowClassName="productsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="provincetax" msprop:Generator_TableClassName="provincetaxDataTable" msprop:Generator_TableVarName="tableprovincetax" msprop:Generator_TablePropName="provincetax" msprop:Generator_RowDeletingName="provincetaxRowDeleting" msprop:Generator_RowChangingName="provincetaxRowChanging" msprop:Generator_RowEvHandlerName="provincetaxRowChangeEventHandler" msprop:Generator_RowDeletedName="provincetaxRowDeleted" msprop:Generator_UserTableName="provincetax" msprop:Generator_RowChangedName="provincetaxRowChanged" msprop:Generator_RowEvArgName="provincetaxRowChangeEvent" msprop:Generator_RowClassName="provincetaxRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
