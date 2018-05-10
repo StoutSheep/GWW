@@ -68,6 +68,8 @@
             this.storeDetails_textBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.provinceTax_comboBox = new System.Windows.Forms.ComboBox();
+            this.email_textBox = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -339,9 +341,9 @@
             // 
             // storeContact_textBox
             // 
-            this.storeContact_textBox.Location = new System.Drawing.Point(74, 534);
+            this.storeContact_textBox.Location = new System.Drawing.Point(85, 534);
             this.storeContact_textBox.Name = "storeContact_textBox";
-            this.storeContact_textBox.Size = new System.Drawing.Size(333, 31);
+            this.storeContact_textBox.Size = new System.Drawing.Size(328, 31);
             this.storeContact_textBox.TabIndex = 12;
             // 
             // label13
@@ -363,7 +365,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(74, 582);
+            this.label14.Location = new System.Drawing.Point(80, 687);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(162, 25);
             this.label14.TabIndex = 14;
@@ -371,15 +373,15 @@
             // 
             // paymentTerms_textBox
             // 
-            this.paymentTerms_textBox.Location = new System.Drawing.Point(74, 610);
+            this.paymentTerms_textBox.Location = new System.Drawing.Point(85, 715);
             this.paymentTerms_textBox.Name = "paymentTerms_textBox";
-            this.paymentTerms_textBox.Size = new System.Drawing.Size(333, 31);
+            this.paymentTerms_textBox.Size = new System.Drawing.Size(328, 31);
             this.paymentTerms_textBox.TabIndex = 14;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(74, 664);
+            this.label15.Location = new System.Drawing.Point(431, 687);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(212, 25);
             this.label15.TabIndex = 16;
@@ -387,24 +389,24 @@
             // 
             // shippingInstructions_textBox
             // 
-            this.shippingInstructions_textBox.Location = new System.Drawing.Point(74, 693);
+            this.shippingInstructions_textBox.Location = new System.Drawing.Point(436, 715);
             this.shippingInstructions_textBox.Name = "shippingInstructions_textBox";
-            this.shippingInstructions_textBox.Size = new System.Drawing.Size(716, 108);
+            this.shippingInstructions_textBox.Size = new System.Drawing.Size(347, 34);
             this.shippingInstructions_textBox.TabIndex = 15;
             this.shippingInstructions_textBox.Text = "";
             // 
             // specialNotes_textBox
             // 
-            this.specialNotes_textBox.Location = new System.Drawing.Point(69, 854);
+            this.specialNotes_textBox.Location = new System.Drawing.Point(69, 810);
             this.specialNotes_textBox.Name = "specialNotes_textBox";
-            this.specialNotes_textBox.Size = new System.Drawing.Size(716, 108);
+            this.specialNotes_textBox.Size = new System.Drawing.Size(714, 154);
             this.specialNotes_textBox.TabIndex = 19;
             this.specialNotes_textBox.Text = "";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(69, 825);
+            this.label16.Location = new System.Drawing.Point(69, 781);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(145, 25);
             this.label16.TabIndex = 18;
@@ -439,7 +441,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(431, 582);
+            this.label18.Location = new System.Drawing.Point(434, 590);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(132, 25);
             this.label18.TabIndex = 12;
@@ -449,30 +451,34 @@
             // 
             this.provinceTax_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.provinceTax_comboBox.FormattingEnabled = true;
-            this.provinceTax_comboBox.Items.AddRange(new object[] {
-            "Alberta",
-            "British Columbia",
-            "Manitoba",
-            "New Brunswick",
-            "Newfoundland and Labrador",
-            "Nova Scotia",
-            "Northwest Territories",
-            "Nunavut",
-            "Ontario",
-            "Prince Edward Island",
-            "Quebec",
-            "Saskatchewan",
-            "Yukon Territories"});
-            this.provinceTax_comboBox.Location = new System.Drawing.Point(436, 610);
+            this.provinceTax_comboBox.Location = new System.Drawing.Point(436, 626);
             this.provinceTax_comboBox.Name = "provinceTax_comboBox";
             this.provinceTax_comboBox.Size = new System.Drawing.Size(347, 33);
             this.provinceTax_comboBox.TabIndex = 15;
+            // 
+            // email_textBox
+            // 
+            this.email_textBox.Location = new System.Drawing.Point(80, 626);
+            this.email_textBox.Name = "email_textBox";
+            this.email_textBox.Size = new System.Drawing.Size(333, 31);
+            this.email_textBox.TabIndex = 22;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(80, 590);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 25);
+            this.label19.TabIndex = 23;
+            this.label19.Text = "Email";
             // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 1131);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.email_textBox);
             this.Controls.Add(this.provinceTax_comboBox);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.storeDetails_textBox);
@@ -546,5 +552,7 @@
         private System.Windows.Forms.TextBox storeDetails_textBox;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox provinceTax_comboBox;
+        private System.Windows.Forms.TextBox email_textBox;
+        private System.Windows.Forms.Label label19;
     }
 }

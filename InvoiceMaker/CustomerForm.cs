@@ -17,6 +17,16 @@ namespace InvoiceMaker
         public CustomerForm()
         {
             InitializeComponent();
+
+            List<ProvinceTax> provinceTaxList = ProvinceTaxDatabase.GetAllProvinces();
+
+            Object[] arr = new Object[provinceTaxList.Count];
+            for (int i = 0; i < provinceTaxList.Count; i++)
+            {
+                arr[i] = provinceTaxList[i].provinceTax + " - GST: " + provinceTaxList[i].gst + "%/PST: " + provinceTaxList[i].pst + "%";
+            }
+            provinceTax_comboBox.Items.AddRange(arr);
+            
         }
 
         private String provinceConverter(String province)
