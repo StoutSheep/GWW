@@ -10,7 +10,6 @@ namespace InvoiceMaker
 {
     static class CustomerDatabase
     {
-
         static String pswd = "password";
 
         internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
@@ -54,7 +53,6 @@ namespace InvoiceMaker
 
         }
 
-
         internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String specialNotes, String province)
         {
@@ -91,10 +89,7 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
-
-
         }
-
 
         internal static void DeleteCustomer(int storeID)
         {
@@ -111,7 +106,6 @@ namespace InvoiceMaker
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -122,8 +116,6 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
 
         }
-
-
 
         internal static int GetStoreID(String storeName, String shippingAddress)
         {
