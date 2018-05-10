@@ -26,6 +26,20 @@ namespace InvoiceMaker
                 arr[i] = provinceTaxList[i].provinceTax + " - GST: " + provinceTaxList[i].gst + "%/PST: " + provinceTaxList[i].pst + "%";
             }
             provinceTax_comboBox.Items.AddRange(arr);
+
+            foreach (TextBox tb in this.Controls.OfType<TextBox>())
+            {
+                if(tb != phoneNumber_textBox)
+                {
+                    tb.MaxLength = 50;
+                }
+                
+                else 
+                {
+                    tb.MaxLength = 15;
+                }
+            }
+            specialNotes_textBox.MaxLength = 150;
             
         }
 
