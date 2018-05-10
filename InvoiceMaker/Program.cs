@@ -170,9 +170,9 @@ namespace InvoiceMaker
             int custID = CustomerDatabase.GetStoreID("Toys", "somehwere 2131");
             CustomerDatabase.EditCustomer(custID, "UpdatedToys", "notgiftshop", "toyts@gmail.com", "asdewr", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
             int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
-            CustomerDatabase.DeleteCustomer(custID2);
-            InvoiceDatabase.AddInvoice(1, "sadasd", "n/a", 0);
-            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
+            //CustomerDatabase.DeleteCustomer(custID);
+            //InvoiceDatabase.AddInvoice(1, "sadasd", "n/a", 0);
+            //InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
 
 
             List<Customer> sd = CustomerDatabase.SearchCustomersByStoreName("Updated");

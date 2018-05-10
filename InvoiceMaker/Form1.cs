@@ -49,16 +49,16 @@ namespace InvoiceMaker
         private void AddInvoice_Click(object sender, EventArgs e)
         {
             Debug.Print("InvoiceForm");
-            InvoiceForm invoiceForm = new InvoiceForm();
-            invoiceForm.Size = new System.Drawing.Size(900, 600);
-            invoiceForm.Show();
+            SelectCustomer selectCustomer = new SelectCustomer();
+            selectCustomer.Size = new System.Drawing.Size(1300, 700);
+            selectCustomer.Show();
         }
 
         private void ViewCustomer_Click(object sender, EventArgs e)
         {
             Debug.Print("ViewCustomer");
             ViewCustomer viewCustomer = new ViewCustomer();
-            viewCustomer.Size = new System.Drawing.Size(1200, 700);
+            viewCustomer.Size = new System.Drawing.Size(1300, 700);
             viewCustomer.Show();
         }
 
@@ -77,5 +77,9 @@ namespace InvoiceMaker
             viewProduct.Show();
         }
 
+        private void provinceTaxesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

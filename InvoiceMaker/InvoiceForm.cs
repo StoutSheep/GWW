@@ -15,8 +15,10 @@ namespace InvoiceMaker
     public partial class InvoiceForm : Form
     {
         Panel panel1 = new Panel();
-        int i = 0;
-        public InvoiceForm()
+        int i = 0; //# of current items
+        bool PST = true; //pst of customer
+
+        public InvoiceForm(int customerID)
         {
             InitializeComponent();
 
@@ -25,9 +27,12 @@ namespace InvoiceMaker
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
             this.Controls.Add(panel1);
-            AddLabels();
-            AddCustomerBoxes();
+            AddLabels(customerID);
+            AddTotalBoxes(customerID);
             AddItemBoxes();
+
+            
+
         }
 
         private void Qty_KeyPress(object sender, KeyPressEventArgs e)
@@ -120,33 +125,83 @@ namespace InvoiceMaker
                 c.Items.AddRange(arr);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void okButton_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void AddLabels()
+        private void AddLabels(int customerID)
         {
             int x = 30;
             int y = 180;
 
+            Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+            
+            //customer labels
             Label storeNameLabel = new Label();
-            storeNameLabel.Text = "Store name";
+            if (cust.StoreDetails.Length != 0)
+            {
+                storeNameLabel.Text = "Store name: " + cust.StoreName + " - " + cust.StoreDetails;
+            }
+            else
+            {
+                storeNameLabel.Text = "Store name: " + cust.StoreName;
+            }
             storeNameLabel.Location = new Point(30, 10);
             storeNameLabel.AutoSize = true;
-            storeNameLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(storeNameLabel);
 
+            Label officeLabel = new Label();
+            officeLabel.Text = "Office Address: " + cust.OfficeAddress;
+            officeLabel.Location = new Point(30, 25);
+            officeLabel.AutoSize = true;
+            this.Controls.Add(officeLabel);
+
+            Label shippingLabel = new Label();
+            shippingLabel.Text = "Shipping Address: " + cust.ShippingAddress;
+            shippingLabel.Location = new Point(30, 40);
+            shippingLabel.AutoSize = true;
+            this.Controls.Add(shippingLabel);
+
+            Label contactLabel = new Label();
+            contactLabel.Text = "Store Contact: " + cust.StoreContact;
+            contactLabel.Location = new Point(30, 55);
+            contactLabel.AutoSize = true;
+            this.Controls.Add(contactLabel);
+
+            Label emailLabel = new Label();
+            emailLabel.Text = "Email: " + cust.Email;
+            emailLabel.Location = new Point(30, 70);
+            emailLabel.AutoSize = true;
+            this.Controls.Add(emailLabel);
+
+            Label phoneLabel = new Label();
+            phoneLabel.Text = "Phone: " + cust.PhoneNumber;
+            phoneLabel.Location = new Point(30, 85);
+            phoneLabel.AutoSize = true;
+            this.Controls.Add(phoneLabel);
+
+            Label provinceLabel = new Label();
+            provinceLabel.Text = "Province Tax: " + cust.Province;
+            provinceLabel.Location = new Point(30, 100);
+            provinceLabel.AutoSize = true;
+            this.Controls.Add(provinceLabel);
+
+            Label paymentLabel = new Label();
+            paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
+            paymentLabel.Location = new Point(30, 115);
+            paymentLabel.AutoSize = true;
+            this.Controls.Add(paymentLabel);
+
+            Label shippingInstructionsLabel = new Label();
+            shippingInstructionsLabel.Text = "Shipping Instructions: " + cust.ShippingInstructions;
+            shippingInstructionsLabel.Location = new Point(30, 130);
+            shippingInstructionsLabel.AutoSize = true;
+            this.Controls.Add(shippingInstructionsLabel);
+
+            Label specialCustomerNotesLabel = new Label();
+            specialCustomerNotesLabel.Text = "Special Notes: " + cust.SpecialNotes;
+            specialCustomerNotesLabel.Location = new Point(30, 130);
+            specialCustomerNotesLabel.AutoSize = true;
+            this.Controls.Add(specialCustomerNotesLabel);
+            
+
+            //Invoice column headers
             Label qtyLabel = new Label();
             qtyLabel.Text = "Qty";
             qtyLabel.Location = new Point(x, y);
@@ -202,43 +257,123 @@ namespace InvoiceMaker
             specialNotesLabel.AutoSize = true;
             specialNotesLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(specialNotesLabel);
+
+            Button cancelButton = new Button();
+            cancelButton.Location = new Point(720, 620);
+            cancelButton.Size = new Size(50, 25);
+            cancelButton.Text = "Cancel";
+            cancelButton.Click += CancelButton_Click;
+            this.Controls.Add(cancelButton);
+
+            Button okButton = new Button();
+            okButton.Location = new Point(780, 620);
+            okButton.Size = new Size(50, 25);
+            okButton.Text = "OK";
+            okButton.Click += OkButton_Click;
+            this.Controls.Add(okButton);
         }
 
-        private void AddCustomerBoxes()
+        private void OkButton_Click(object sender, EventArgs e)
         {
-            ComboBox storeName = new ComboBox();
-            storeName.TextChanged += StoreName_TextChanged;
-            storeName.TextUpdate += StoreName_TextUpdate;
-            storeName.Location = new Point(30, 25);
-            storeName.Size = new Size(100, 25);
-            storeName.Name = "storeName";
-            this.Controls.Add(storeName);
+            throw new NotImplementedException();
         }
 
-        private void StoreName_TextUpdate(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            ComboBox c = (ComboBox) sender;
+            throw new NotImplementedException();
+        }
 
-            c.DroppedDown = true;
+        private void AddTotalBoxes(int customerID)
+        {
+            Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-            c.Items.Clear();
-            c.SelectionLength = 0;
+            Label subtotalLabel = new Label();
+            subtotalLabel.Text = "Subtotal";
+            subtotalLabel.Location = new Point(562, 500);
+            subtotalLabel.AutoSize = true;
+            this.Controls.Add(subtotalLabel);
 
-            c.SelectionStart = c.Text.Length;
+            TextBox subtotalAmount = new TextBox();
+            subtotalAmount.Location = new Point(610, 500);
+            subtotalAmount.Size = new Size(50, 25);
+            subtotalAmount.ReadOnly = true;
+            subtotalAmount.Name = "subtotalAmount";
+            subtotalAmount.AccessibleName = "subtotalAmount";
+            subtotalAmount.TextChanged += SubtotalAmount_TextChanged;
+            this.Controls.Add(subtotalAmount);
 
-            List<Product> productList = ProductDatabase.SearchProductsByItemNo(c.Text);
+            Label gstLabel = new Label();
+            gstLabel.Text = "GST";
+            gstLabel.Location = new Point(560, 530);
+            gstLabel.Size = new Size(50, 25);
+            gstLabel.TextAlign = ContentAlignment.TopRight;
+            this.Controls.Add(gstLabel);
 
-            Object[] arr = new Object[productList.Count];
-            for (int i = 0; i < productList.Count; i++)
+            TextBox gst = new TextBox();
+            gst.Location = new Point(610, 530);
+            gst.Size = new Size(50, 25);
+            gst.ReadOnly = true;
+            gst.Name = "gst";
+            gst.AccessibleName = "gst";
+            this.Controls.Add(gst);
+
+            if(PST)
             {
-                arr[i] = productList[i].ItemNo;
+                Label pstLabel = new Label();
+                pstLabel.Text = "PST";
+                pstLabel.Location = new Point(560, 560);
+                pstLabel.Size = new Size(50,25);
+                pstLabel.TextAlign = ContentAlignment.TopRight;
+                this.Controls.Add(pstLabel);
+
+                TextBox pst = new TextBox();
+                pst.Location = new Point(610, 560);
+                pst.Size = new Size(50, 25);
+                pst.ReadOnly = true;
+                pst.Name = "pst";
+                pst.AccessibleName = "pst";
+                this.Controls.Add(pst);
+
+                Label invoiceTotalLabel = new Label();
+                invoiceTotalLabel.Text = "Invoice Total";
+                invoiceTotalLabel.Location = new Point(540, 590);
+                invoiceTotalLabel.AutoSize = true;
+                this.Controls.Add(invoiceTotalLabel);
+
+                TextBox invoiceTotal = new TextBox();
+                invoiceTotal.Location = new Point(610, 590);
+                invoiceTotal.Size = new Size(50, 25);
+                invoiceTotal.ReadOnly = true;
+                invoiceTotal.Name = "invoiceTotal";
+                invoiceTotal.AccessibleName = "invoiceTotal";
+                this.Controls.Add(invoiceTotal);
             }
-            c.Items.AddRange(arr);
+            else //no pst
+            {
+                Label invoiceTotalLabel = new Label();
+                invoiceTotalLabel.Text = "Invoice Total";
+                invoiceTotalLabel.Location = new Point(540, 560);
+                invoiceTotalLabel.AutoSize = true;
+                this.Controls.Add(invoiceTotalLabel);
+
+                TextBox invoiceTotal = new TextBox();
+                invoiceTotal.Location = new Point(610, 560);
+                invoiceTotal.Size = new Size(50, 25);
+                invoiceTotal.ReadOnly = true;
+                invoiceTotal.Name = "invoiceTotal";
+                invoiceTotal.AccessibleName = "invoiceTotal";
+                this.Controls.Add(invoiceTotal);
+            }
         }
 
-        private void StoreName_TextChanged(object sender, EventArgs e)
+        private void SubtotalAmount_TextChanged(object sender, EventArgs e)
         {
-            
+            this.Controls["gst"].Text = "gst here";
+            if(PST)
+            {
+                this.Controls["pst"].Text = "pst here";
+            }
+            this.Controls["invoiceTotal"].Text = "invoice total";
         }
 
         private void AddItemBoxes()
@@ -257,6 +392,7 @@ namespace InvoiceMaker
             itemNumber.Size = new Size(100, 25);
             itemNumber.TextUpdate += C_TextUpdated;
             itemNumber.TextChanged += C_TextChanged;
+            itemNumber.LostFocus += ItemNumber_LostFocus;
             itemNumber.Name = "itemNumber" + i;
             itemNumber.AccessibleName = "" + i;
             panel1.Controls.Add(itemNumber);
@@ -302,6 +438,7 @@ namespace InvoiceMaker
             amount.Size = new Size(50, 25);
             amount.ReadOnly = true;
             amount.Enter += Desc_Enter;
+            amount.TextChanged += Amount_TextChanged;
             amount.Name = "amount" + i;
             amount.AccessibleName = "" + i;
             panel1.Controls.Add(amount);
@@ -313,6 +450,54 @@ namespace InvoiceMaker
             specialNotes.AccessibleName = "" + i;
             panel1.Controls.Add(specialNotes);
 
+        }
+
+        private void ItemNumber_LostFocus(object sender, EventArgs e)
+        {
+            ComboBox c = (ComboBox)sender;
+            Product product = ProductDatabase.SearchProductByItemNo(c.Text);
+            if (product != null)
+            {
+                this.panel1.Controls["loc" + c.AccessibleName].Text = product.Location;
+                this.panel1.Controls["desc" + c.AccessibleName].Text = product.ItemDesc;
+                this.panel1.Controls["carton" + c.AccessibleName].Text = product.PerCarton.ToString();
+                this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString("0.00");
+                if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length > 0)
+                {
+                    this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost).ToString("0.00");
+                }
+            }
+
+            if (Int32.Parse(c.AccessibleName) == i)
+            {
+                i++;
+                AddItemBoxes();
+            }
+
+            //qty and itemNo empty
+            if (this.panel1.Controls["itemNumber" + c.AccessibleName].Text.Length == 0 && this.panel1.Controls["qty" + c.AccessibleName].Text.Length == 0)
+            {
+                this.panel1.Controls["loc" + c.AccessibleName].Text = "";
+                this.panel1.Controls["desc" + c.AccessibleName].Text = "";
+                this.panel1.Controls["carton" + c.AccessibleName].Text = "";
+                this.panel1.Controls["cost" + c.AccessibleName].Text = "";
+                this.panel1.Controls["amount" + c.AccessibleName].Text = "";
+            }
+        }
+
+        //update total amount
+        private void Amount_TextChanged(object sender, EventArgs e)
+        {
+            float total = 0;
+            for(int j=0; j<i; j++)
+            {
+                if (this.panel1.Controls["amount" + j].Text.Length != 0)
+                {
+                    total += Single.Parse(this.panel1.Controls["amount" + j].Text);
+                }
+            }
+
+            this.Controls["subtotalAmount"].Text = total.ToString("0.00");
         }
     }
 }
