@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InvoiceMaker
 {
-    class Customer
+    public class Customer
     {
         // Unique identifier for customer; Managed in DB and used as PK
         public int StoreID { get; set; }

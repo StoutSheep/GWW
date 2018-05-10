@@ -30,6 +30,13 @@
         {
             this.InvoiceView = new System.Windows.Forms.Label();
             this.invoices_textBox = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ModInvoice = new System.Windows.Forms.Button();
+            this.DeleteInvoice = new System.Windows.Forms.Button();
+            this.CancelInvoice = new System.Windows.Forms.Button();
+            this.PrintInvoice = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // InvoiceView
@@ -48,6 +55,63 @@
             this.invoices_textBox.Name = "invoices_textBox";
             this.invoices_textBox.Size = new System.Drawing.Size(660, 31);
             this.invoices_textBox.TabIndex = 2;
+            //
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(247, 121);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(660, 31);
+            this.textBox1.TabIndex = 2;
+            // 
+            // ModInvoice
+            // 
+            this.ModInvoice.Location = new System.Drawing.Point(291, 841);
+            this.ModInvoice.Name = "ModInvoice";
+            this.ModInvoice.Size = new System.Drawing.Size(202, 66);
+            this.ModInvoice.TabIndex = 3;
+            this.ModInvoice.Text = "Modify";
+            this.ModInvoice.UseVisualStyleBackColor = true;
+            this.ModInvoice.Click += new System.EventHandler(this.ModInvoice_Click);
+            // 
+            // DeleteInvoice
+            // 
+            this.DeleteInvoice.Location = new System.Drawing.Point(522, 841);
+            this.DeleteInvoice.Name = "DeleteInvoice";
+            this.DeleteInvoice.Size = new System.Drawing.Size(202, 66);
+            this.DeleteInvoice.TabIndex = 4;
+            this.DeleteInvoice.Text = "Delete";
+            this.DeleteInvoice.UseVisualStyleBackColor = true;
+            this.DeleteInvoice.Click += new System.EventHandler(this.DeleteInvoice_Click);
+            // 
+            // CancelInvoice
+            // 
+            this.CancelInvoice.Location = new System.Drawing.Point(62, 841);
+            this.CancelInvoice.Name = "CancelInvoice";
+            this.CancelInvoice.Size = new System.Drawing.Size(202, 66);
+            this.CancelInvoice.TabIndex = 5;
+            this.CancelInvoice.Text = "Cancel";
+            this.CancelInvoice.UseVisualStyleBackColor = true;
+            this.CancelInvoice.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // PrintInvoice
+            // 
+            this.PrintInvoice.Location = new System.Drawing.Point(908, 841);
+            this.PrintInvoice.Name = "PrintInvoice";
+            this.PrintInvoice.Size = new System.Drawing.Size(202, 66);
+            this.PrintInvoice.TabIndex = 6;
+            this.PrintInvoice.Text = "View";
+            this.PrintInvoice.UseVisualStyleBackColor = true;
+            this.PrintInvoice.Click += new System.EventHandler(this.ViewInvoice_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(42, 183);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 33;
+            this.dataGridView1.Size = new System.Drawing.Size(1172, 612);
+            this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ViewInvoice
             // 
@@ -55,9 +119,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1804, 929);
             this.Controls.Add(this.invoices_textBox);
+
+            this.ClientSize = new System.Drawing.Size(1259, 1231);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.PrintInvoice);
+            this.Controls.Add(this.CancelInvoice);
+            this.Controls.Add(this.DeleteInvoice);
+            this.Controls.Add(this.ModInvoice);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.InvoiceView);
             this.Name = "ViewInvoice";
             this.Text = "ViewInvoice";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -67,5 +140,13 @@
 
         private System.Windows.Forms.Label InvoiceView;
         private System.Windows.Forms.TextBox invoices_textBox;
+
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button ModInvoice;
+        private System.Windows.Forms.Button DeleteInvoice;
+        private System.Windows.Forms.Button CancelInvoice;
+        private System.Windows.Forms.Button PrintInvoice;
+        private System.Windows.Forms.DataGridView dataGridView1;
+
     }
 }
