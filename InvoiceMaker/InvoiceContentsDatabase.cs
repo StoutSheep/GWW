@@ -12,10 +12,11 @@ namespace InvoiceMaker
     {
 
         static String pswd = "password";
-       
+        static String user = "root";
+        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
+
         internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity, String specialNotes) 
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -39,14 +40,13 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            Console.WriteLine("Done Inserting Details.");
         }
 
 
 
         internal static void EditInvoiceContent(int entryID, int invoiceID, String itemNo, int quantity, String specialNotes)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -79,7 +79,6 @@ namespace InvoiceMaker
 
         internal static void DeleteInvoiceContent(int entryID)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -109,7 +108,6 @@ namespace InvoiceMaker
 
         internal static int GetEntryID(int invoiceID, String itemNo)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {

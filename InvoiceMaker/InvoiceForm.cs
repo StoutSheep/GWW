@@ -131,9 +131,9 @@ namespace InvoiceMaker
             List<Product> productList = ProductDatabase.SearchProductsByItemNo(c.Text);
             
                 Object[] arr = new Object[productList.Count];
-                for (int i = 0; i < productList.Count; i++)
+                for (int j = 0; j < productList.Count; j++)
                 {
-                    arr[i] = productList[i].ItemNo;
+                    arr[j] = productList[j].ItemNo;
                 }
                 c.Items.AddRange(arr);
         }
@@ -305,14 +305,22 @@ namespace InvoiceMaker
         {
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-            InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, cust.SpecialNotes, 0,
+            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, cust.SpecialNotes, 0,
                 Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
                 Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
 
-
-            for(int j=0; j<i; i++)
+            for(int j=0; j<i; j++)
             {
-                InvoiceContentsDatabase.AddInvoiceContent(1,this.Controls["itemNumber" + j].Text, Int32.Parse(this.Controls["qty"+j].Text), this.Controls["specialNotes"+j].Text);
+
+                String itemNo = this.panel1.Controls["itemNumber" + j].Text;
+                Debug.Print(itemNo);
+                int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
+                Debug.Print("" + qty);
+
+                String notes = this.panel1.Controls["specialNotes" + j].Text;
+                Debug.Print(notes);
+
+                InvoiceContentsDatabase.AddInvoiceContent(invoiceID,itemNo, qty, notes);
             }
 
         }
@@ -435,6 +443,7 @@ namespace InvoiceMaker
             itemNumber.TextChanged += C_TextChanged;
             itemNumber.LostFocus += ItemNumber_LostFocus;
             itemNumber.Name = "itemNumber" + i;
+            Debug.Print(itemNumber.Name);
             itemNumber.AccessibleName = "" + i;
             panel1.Controls.Add(itemNumber);
 

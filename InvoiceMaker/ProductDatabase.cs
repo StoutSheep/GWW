@@ -12,10 +12,11 @@ namespace InvoiceMaker
     {
 
         static String pswd = "password";
+        static String user = "root";
+        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
 
         internal static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -51,7 +52,6 @@ namespace InvoiceMaker
 
         internal static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -87,7 +87,6 @@ namespace InvoiceMaker
 
         internal static void DeleteProduct(String itemNo)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -120,7 +119,6 @@ namespace InvoiceMaker
         {
 
             List<Product> productList = new List<Product>();
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -155,7 +153,6 @@ namespace InvoiceMaker
         {
 
             List<Product> productList = new List<Product>();
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -188,7 +185,6 @@ namespace InvoiceMaker
 
         internal static Product SearchProductByItemNo(String itemNo)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -222,7 +218,6 @@ namespace InvoiceMaker
         {
 
             List<Product> productList = new List<Product>();
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -255,7 +250,6 @@ namespace InvoiceMaker
 
         internal static void DeleteProductByItemNo(String itemNo)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
