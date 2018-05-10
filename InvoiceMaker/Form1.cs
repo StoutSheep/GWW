@@ -65,6 +65,8 @@ namespace InvoiceMaker
         private void ViewInvoice_Click(object sender, EventArgs e)
         {
             Debug.Print("ViewInvoice");
+            //ViewInvoiceReport viewInvoiceReport = new ViewInvoiceReport();
+            //viewInvoiceReport.Show();
             ViewInvoice viewInvoice = new ViewInvoice();
             viewInvoice.Show();
         }

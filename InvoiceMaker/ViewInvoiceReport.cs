@@ -1,47 +1,32 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dapper;
+using MySql.Data.MySqlClient;
 
 namespace InvoiceMaker
 {
-    public partial class ViewInvoice : Form
+    public partial class ViewInvoiceReport : Form
     {
+
         static String pswd = "password";
 
-        public ViewInvoice()
+        public ViewInvoiceReport()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void InvoiceReport_Load(object sender, EventArgs e)
         {
-            this.Close();
-        }
 
-        private void ModInvoice_Click(object sender, EventArgs e)
-        {
-            Debug.Print("ModInvoice");
-            // TODO: Link to Invoice DB
-        }
 
-        private void DeleteInvoice_Click(object sender, EventArgs e)
-        {
-            Debug.Print("DeleteInvoice");
-            // TODO: Link to Invoice DB
-        }
-
-        private void ViewInvoice_Click(object sender, EventArgs e)
-        {
-            Debug.Print("View Invoice");
+            this.reportViewer1.RefreshReport();
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
@@ -64,9 +49,5 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }
