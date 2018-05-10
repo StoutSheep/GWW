@@ -113,6 +113,10 @@ namespace InvoiceMaker
                    "PurchaseOrder varchar(20)," +
                    "SpecialNotes varchar(100)," +
                    "InvoiceNo int," +
+                   "Subtotal NUMERIC," +
+                   "Gst NUMERIC," +
+                   "Pst NuMERIC," +
+                   "NetTotal NUMERIC," +
                    "PRIMARY KEY (InvoiceID)," +
                    "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +
                    ");";
@@ -160,7 +164,7 @@ namespace InvoiceMaker
 
         static void TestFunctions()
         {
-            ProvinceTaxDatabase.AddProvinceTax("BC", 7, 5);
+            ProvinceTaxDatabase.AddProvinceTax("ON", 7, 5);
             //ProvinceTaxDatabase.EditProvinceTax("BC", "ON", 10, 12);
             ProductDatabase.AddProduct("1234g", "gecko", 3, "ssdas", 34.2, 78.3, 3242);
             ProductDatabase.EditProduct("1234g", "9876a", "notGecko", 5, "s4453das", 3.2, 7.3, 0003242);
