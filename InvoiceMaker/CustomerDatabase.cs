@@ -195,5 +195,37 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
             return customerList;
         }
+
+        internal static Customer SearchCustomersByID(int custID)
+        {
+
+            Customer customer = null;
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT * FROM Customers WHERE StoreID = " + custID + ";";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    customer = new Customer(Int32.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), rdr[5].ToString(), rdr[6].ToString(), rdr[7].ToString(), rdr[8].ToString(), rdr[9].ToString(), rdr[10].ToString(), rdr[11].ToString());
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            Console.WriteLine("Done.");
+            return customer;
+        }
     }
 }

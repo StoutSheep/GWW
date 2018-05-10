@@ -21,6 +21,7 @@ namespace InvoiceMaker
         // Shipping company...Clarify.
         public String PaymentTerms { get; set; }
         // Instructions
+        public String ShippingInstructions { get; set; }
         public String SpecialNotes { get; set; }
         // Unique identifier for product
         public String Email { get; set; }
@@ -38,6 +39,7 @@ namespace InvoiceMaker
             StoreContact = storeContact;
             PhoneNumber = phoneNumber;
             PaymentTerms = paymentTerms;
+            ShippingInstructions = shippingInstructions;
             SpecialNotes = specialNotes;
             Email = emailAddress;
             Province = province;

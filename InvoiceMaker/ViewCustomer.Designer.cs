@@ -44,6 +44,7 @@
             this.CustomerView.Size = new System.Drawing.Size(262, 42);
             this.CustomerView.TabIndex = 1;
             this.CustomerView.Text = "Find Customer";
+            this.CustomerView.Click += new System.EventHandler(this.CustomerView_Click);
             // 
             // customerTextBox
             // 
@@ -51,7 +52,7 @@
             this.customerTextBox.Name = "customerTextBox";
             this.customerTextBox.Size = new System.Drawing.Size(674, 31);
             this.customerTextBox.TabIndex = 11;
-            this.customerTextBox.TextChanged += new System.EventHandler(this.productTextBox_TextChanged);
+            this.customerTextBox.TextChanged += new System.EventHandler(this.customerTextBox_TextChanged);
             // 
             // ModCustomer
             // 
