@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddProvinceTaxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddProvinceTaxForm.Designer.cs">
+      <DependentUpon>AddProvinceTaxForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerDatabase.cs" />
     <Compile Include="InvoiceContentsDatabase.cs" />
     <Compile Include="InvoiceDatabase.cs" />
@@ -81,7 +87,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinceTax.cs" />
     <Compile Include="ProvinceTaxDatabase.cs" />
+    <Compile Include="ProvinceTaxesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProvinceTaxesForm.Designer.cs">
+      <DependentUpon>ProvinceTaxesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReadProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +156,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ProvinceTaxesForm.resx">
+      <DependentUpon>ProvinceTaxesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReadProduct.resx">
       <DependentUpon>ReadProduct.cs</DependentUpon>
     </EmbeddedResource>

@@ -79,7 +79,9 @@ namespace InvoiceMaker
 
         private void provinceTaxesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ProvinceTaxesForm provinceTaxesForm = new ProvinceTaxesForm();
+            provinceTaxesForm.Size = new System.Drawing.Size(300, 500);
+            provinceTaxesForm.Show();
         }
     }
 }
