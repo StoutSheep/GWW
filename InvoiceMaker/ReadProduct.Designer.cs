@@ -30,36 +30,29 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.BrowseExcelProduct = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.ReadProductError = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CancelRead = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(40, 81);
+            this.textBox1.Location = new System.Drawing.Point(49, 81);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(597, 31);
+            this.textBox1.Size = new System.Drawing.Size(663, 31);
             this.textBox1.TabIndex = 0;
             // 
             // BrowseExcelProduct
             // 
-            this.BrowseExcelProduct.Location = new System.Drawing.Point(665, 65);
+            this.BrowseExcelProduct.Location = new System.Drawing.Point(785, 65);
             this.BrowseExcelProduct.Name = "BrowseExcelProduct";
             this.BrowseExcelProduct.Size = new System.Drawing.Size(224, 62);
             this.BrowseExcelProduct.TabIndex = 1;
             this.BrowseExcelProduct.Text = "Browse";
             this.BrowseExcelProduct.UseVisualStyleBackColor = true;
             this.BrowseExcelProduct.Click += new System.EventHandler(this.BrowseExcelProduct_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(40, 200);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(979, 551);
-            this.panel1.TabIndex = 2;
             // 
             // ReadProductError
             // 
@@ -83,23 +76,32 @@
             // 
             // CancelRead
             // 
-            this.CancelRead.Location = new System.Drawing.Point(454, 784);
+            this.CancelRead.Location = new System.Drawing.Point(844, 548);
             this.CancelRead.Name = "CancelRead";
             this.CancelRead.Size = new System.Drawing.Size(165, 51);
             this.CancelRead.TabIndex = 5;
-            this.CancelRead.Text = "Cancel";
+            this.CancelRead.Text = "Back";
             this.CancelRead.UseVisualStyleBackColor = true;
             this.CancelRead.Click += new System.EventHandler(this.CancelRead_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 25;
+            this.listBox1.Location = new System.Drawing.Point(49, 180);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(960, 329);
+            this.listBox1.TabIndex = 6;
             // 
             // ReadProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 874);
+            this.ClientSize = new System.Drawing.Size(1073, 631);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.CancelRead);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ReadProductError);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.BrowseExcelProduct);
             this.Controls.Add(this.textBox1);
             this.Name = "ReadProduct";
@@ -113,9 +115,9 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button BrowseExcelProduct;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label ReadProductError;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button CancelRead;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
