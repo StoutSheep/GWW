@@ -16,13 +16,14 @@ namespace InvoiceMaker
         static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
 
 
-        internal static void AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subTotal, int gst, int pst, int netTotal, int stage)
+        internal static int AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subTotal, int gst, int pst, int netTotal, int stage)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
                 conn.Open();
                 MySqlCommand cmd;
+                MySqlDataReader rdr;
                 string sql;
 
                 sql = "INSERT INTO Invoices (StoreID, PurchaseOrder, SpecialNotes, InvoiceNo, SubTotal, Gst, Pst, NetTotal, Stage) VALUES (" +
@@ -39,6 +40,26 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+
+               
+
+
+                sql = "SELECT MAX(InvoiceID) " +
+                    "FROM Invoices;";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+
+                if (rdr.HasRows)
+                {
+                    rdr.Read();
+                    int temp = Int32.Parse(rdr[0].ToString());
+                    conn.Close();
+                    rdr.Close();
+                    return temp;
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -47,6 +68,7 @@ namespace InvoiceMaker
 
             conn.Close(); 
             Console.WriteLine("Done.");
+            return 0;
         }
 
 
