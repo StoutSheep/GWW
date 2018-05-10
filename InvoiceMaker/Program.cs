@@ -18,8 +18,6 @@ namespace InvoiceMaker
         static void Main()
         {
             InitializeDatabase();
-
-
             TestFunctions();
 
             Application.EnableVisualStyles();
