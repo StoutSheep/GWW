@@ -14,8 +14,12 @@ namespace InvoiceMaker
         static String pswd = "password";
 
        
-
-        internal static void AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subTotal, int gst, int pst, int netTotal, int stage)
+        /*
+         * stage 1 = picking stage
+         * stage 2 = double check stage
+         * stage 3 = done
+         */
+        internal static void AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subTotal, float gst, float pst, float netTotal, int stage)
         {
             string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);

@@ -85,10 +85,19 @@ namespace InvoiceMaker
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            ProvinceTaxDatabase.AddProvinceTax(provinceTax.Text, Int32.Parse(gstTax.Text), Int32.Parse(pstTax.Text));
+            int pst = 0;
+            if(pstTax.Text.Length == 0)
+            {
+                pst = 0;
+            }
+            else
+            {
+                Int32.Parse(pstTax.Text);
+            }
+            ProvinceTaxDatabase.AddProvinceTax(provinceTax.Text, Int32.Parse(gstTax.Text), pst);
             if(editMode)
             {
-                ProvinceTaxDatabase.EditProvinceTax(provinceTax.Text, Int32.Parse(gstTax.Text), Int32.Parse(pstTax.Text));
+                ProvinceTaxDatabase.EditProvinceTax(provinceTax.Text, Int32.Parse(gstTax.Text), pst);
             }
             this.Close();
             ProvinceTaxesForm provinceTaxesForm = new ProvinceTaxesForm();

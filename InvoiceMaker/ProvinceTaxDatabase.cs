@@ -113,5 +113,37 @@ namespace InvoiceMaker
             return provinceTaxList;
         }
 
+
+        internal static ProvinceTax GetProvinceByName(string province)
+        {
+
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT * FROM ProvinceTax WHERE Province = '" + province + "';";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    ProvinceTax temp = new ProvinceTax(rdr[0].ToString(), Int32.Parse(rdr[1].ToString()), Int32.Parse(rdr[2].ToString()));
+                    conn.Close();
+                    return temp;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            Console.WriteLine("Done.");
+            return null;
+        }
     }
 }

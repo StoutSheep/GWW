@@ -113,10 +113,10 @@ namespace InvoiceMaker
                    "PurchaseOrder varchar(20)," +
                    "SpecialNotes varchar(100)," +
                    "InvoiceNo int," +
-                   "SubTotal NUMERIC," +
-                   "Gst NUMERIC," +
-                   "Pst NUMERIC," +
-                   "NetTotal NUMERIC," +
+                   "SubTotal DECIMAL(10,2)," +
+                   "Gst DECIMAL(10,2)," +
+                   "Pst DECIMAL(10,2)," +
+                   "NetTotal DECIMAL(10,2)," +
                    "Stage int NOT NULL," +
                    "PRIMARY KEY (InvoiceID)," +
                    "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +

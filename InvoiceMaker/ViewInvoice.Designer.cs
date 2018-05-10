@@ -29,89 +29,32 @@
         private void InitializeComponent()
         {
             this.InvoiceView = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.ModInvoice = new System.Windows.Forms.Button();
-            this.DeleteInvoice = new System.Windows.Forms.Button();
-            this.CancelInvoice = new System.Windows.Forms.Button();
-            this.PrintInvoice = new System.Windows.Forms.Button();
+            this.invoices_textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // InvoiceView
             // 
             this.InvoiceView.AutoSize = true;
             this.InvoiceView.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InvoiceView.Location = new System.Drawing.Point(425, 39);
+            this.InvoiceView.Location = new System.Drawing.Point(1049, 35);
             this.InvoiceView.Name = "InvoiceView";
             this.InvoiceView.Size = new System.Drawing.Size(238, 42);
             this.InvoiceView.TabIndex = 0;
             this.InvoiceView.Text = "Find Invoices";
             // 
-            // panel1
+            // invoices_textBox
             // 
-            this.panel1.Location = new System.Drawing.Point(62, 196);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1048, 628);
-            this.panel1.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(247, 121);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(660, 31);
-            this.textBox1.TabIndex = 2;
-            // 
-            // ModInvoice
-            // 
-            this.ModInvoice.Location = new System.Drawing.Point(291, 841);
-            this.ModInvoice.Name = "ModInvoice";
-            this.ModInvoice.Size = new System.Drawing.Size(202, 66);
-            this.ModInvoice.TabIndex = 3;
-            this.ModInvoice.Text = "Modify";
-            this.ModInvoice.UseVisualStyleBackColor = true;
-            this.ModInvoice.Click += new System.EventHandler(this.ModInvoice_Click);
-            // 
-            // DeleteInvoice
-            // 
-            this.DeleteInvoice.Location = new System.Drawing.Point(522, 841);
-            this.DeleteInvoice.Name = "DeleteInvoice";
-            this.DeleteInvoice.Size = new System.Drawing.Size(202, 66);
-            this.DeleteInvoice.TabIndex = 4;
-            this.DeleteInvoice.Text = "Delete";
-            this.DeleteInvoice.UseVisualStyleBackColor = true;
-            this.DeleteInvoice.Click += new System.EventHandler(this.DeleteInvoice_Click);
-            // 
-            // CancelInvoice
-            // 
-            this.CancelInvoice.Location = new System.Drawing.Point(62, 841);
-            this.CancelInvoice.Name = "CancelInvoice";
-            this.CancelInvoice.Size = new System.Drawing.Size(202, 66);
-            this.CancelInvoice.TabIndex = 5;
-            this.CancelInvoice.Text = "Cancel";
-            this.CancelInvoice.UseVisualStyleBackColor = true;
-            this.CancelInvoice.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // PrintInvoice
-            // 
-            this.PrintInvoice.Location = new System.Drawing.Point(908, 841);
-            this.PrintInvoice.Name = "PrintInvoice";
-            this.PrintInvoice.Size = new System.Drawing.Size(202, 66);
-            this.PrintInvoice.TabIndex = 6;
-            this.PrintInvoice.Text = "View";
-            this.PrintInvoice.UseVisualStyleBackColor = true;
-            this.PrintInvoice.Click += new System.EventHandler(this.ViewInvoice_Click);
+            this.invoices_textBox.Location = new System.Drawing.Point(859, 97);
+            this.invoices_textBox.Name = "invoices_textBox";
+            this.invoices_textBox.Size = new System.Drawing.Size(660, 31);
+            this.invoices_textBox.TabIndex = 2;
             // 
             // ViewInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 929);
-            this.Controls.Add(this.PrintInvoice);
-            this.Controls.Add(this.CancelInvoice);
-            this.Controls.Add(this.DeleteInvoice);
-            this.Controls.Add(this.ModInvoice);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1804, 929);
+            this.Controls.Add(this.invoices_textBox);
             this.Controls.Add(this.InvoiceView);
             this.Name = "ViewInvoice";
             this.Text = "ViewInvoice";
@@ -123,11 +66,6 @@
         #endregion
 
         private System.Windows.Forms.Label InvoiceView;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button ModInvoice;
-        private System.Windows.Forms.Button DeleteInvoice;
-        private System.Windows.Forms.Button CancelInvoice;
-        private System.Windows.Forms.Button PrintInvoice;
+        private System.Windows.Forms.TextBox invoices_textBox;
     }
 }
