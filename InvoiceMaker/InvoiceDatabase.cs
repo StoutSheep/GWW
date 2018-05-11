@@ -40,10 +40,6 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-
-               
-
-
                 sql = "SELECT MAX(InvoiceID) " +
                     "FROM Invoices;";
                 cmd = new MySqlCommand(sql, conn);
@@ -108,6 +104,8 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
 
         }
+
+
 
 
 
