@@ -146,10 +146,10 @@ namespace InvoiceMaker
 
 
 
-        internal static List<String> GetInvoiceContents(int invoiceID)
+        internal static List<InvoiceContentInfo> GetInvoiceContents(int invoiceID)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
-            List<String> items = new List<string>();
+            List<InvoiceContentInfo> items = new List<InvoiceContentInfo>();
             try
             {
                 conn.Open();
@@ -157,16 +157,17 @@ namespace InvoiceMaker
                 string sql;
                 MySqlDataReader rdr;
 
-                sql = "SELECT ItemNo FROM InvoiceContents" +
+                sql = "SELECT * FROM InvoiceContents" +
                   " WHERE InvoiceID = " + invoiceID +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
+                InvoiceContentInfo temp;
 
 
                 while (rdr.Read())
                 {
-                    String temp = rdr[0].ToString();
+                    temp = new InvoiceContentInfo(rdr[2].ToString(), Int32.Parse(rdr[3].ToString()), Int32.Parse(rdr[4].ToString()), rdr[5].ToString());
                     items.Add(temp);
                 }
 
@@ -184,6 +185,32 @@ namespace InvoiceMaker
         }
 
 
+        internal static void UpdateBackorder(int entryID, int backorder)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "UPDATE InvoiceContents " +
+                  "SET Backorder = " + backorder +
+                  " WHERE EntryID = " + entryID +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
 
 
 
