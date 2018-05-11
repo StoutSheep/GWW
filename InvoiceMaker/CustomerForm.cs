@@ -14,6 +14,9 @@ namespace InvoiceMaker
     public partial class CustomerForm : Form
     {
 
+        bool editMode = false;
+        int storeNumber;
+
         public CustomerForm()
         {
             InitializeComponent();
@@ -27,19 +30,53 @@ namespace InvoiceMaker
             }
             provinceTax_comboBox.Items.AddRange(arr);
 
+            setTextBoxLimits();
+            
+        }
+
+        public CustomerForm(String storeName, String storeDetails, String officeAddress, String shippingAddress, String storeContact, String emailAddress, String phoneNumber
+          , String province ,String paymentTerms, String shippingInstructions)
+        {
+            InitializeComponent();
+            List<ProvinceTax> provinceTaxList = ProvinceTaxDatabase.GetAllProvinces();
+
+            Object[] arr = new Object[provinceTaxList.Count];
+            for (int i = 0; i < provinceTaxList.Count; i++)
+            {
+                arr[i] = provinceTaxList[i].provinceTax + " - GST: " + provinceTaxList[i].gst + "%/PST: " + provinceTaxList[i].pst + "%";
+            }
+            provinceTax_comboBox.Items.AddRange(arr);
+
+            setTextBoxLimits();
+            storeName_textBox.Text = storeName;
+            storeDetails_textBox.Text = storeDetails;
+            parseStringToGroup(officeAddress, groupBox1);
+            parseStringToGroup(shippingAddress, groupBox2);
+            storeContact_textBox.Text = storeContact;
+            email_textBox.Text = emailAddress;
+            phoneNumber_textBox.Text = phoneNumber;
+            paymentTerms_textBox.Text = paymentTerms;
+            shippingInstructions_textBox.Text = shippingInstructions;
+            provinceTax_comboBox.Text = provinceTax_comboBox.Items[provinceTax_comboBox.FindString(province)].ToString();
+            editMode = true;
+            storeNumber = CustomerDatabase.GetStoreID(storeName, shippingAddress);
+            
+        }
+
+        private void setTextBoxLimits()
+        {
             foreach (TextBox tb in this.Controls.OfType<TextBox>())
             {
-                if(tb != phoneNumber_textBox)
+                if (tb != phoneNumber_textBox)
                 {
                     tb.MaxLength = 50;
                 }
-                
-                else 
+
+                else
                 {
                     tb.MaxLength = 15;
                 }
             }
-            
         }
 
         private String provinceConverter(String province)
@@ -77,15 +114,97 @@ namespace InvoiceMaker
             }
         }
 
+        private String provinceCodeConverter(String province)
+        {
+            switch (province)
+            {
+                case "AB":
+                    return "Alberta";
+                case "BC":
+                    return "British Columbia";
+                case "MB":
+                    return "Manitoba";
+                case "NB":
+                    return "New Brunswick";
+                case "NL":
+                    return "Newfoundland and Labrador";
+                case "NT":
+                    return "Northwest Territories";
+                case "NS":
+                    return "Nova Scotia";
+                case "NU":
+                    return "Nunavut";
+                case "ON":
+                    return "Ontario";
+                case "PE":
+                    return "Prince Edward Island";
+                case "QC":
+                    return "Quebec";
+                case "SK":
+                    return "Saskatchewan";
+                case "YT":
+                    return "Yukon Territories";
+                default:
+                    return "";
+            }
+        }
+
+        private void parseStringToGroup(String str, GroupBox box)
+        {
+            TextBox street = null, unit = null, city = null, postal = null;
+            ComboBox prov =  null;
+            foreach (TextBox tb in box.Controls.OfType<TextBox>())
+            {
+                if (tb.Name.Contains("Street"))
+                {
+                    street = tb;
+                }
+                else if (tb.Name.Contains("Unit"))
+                {
+                    unit = tb;
+                }
+                else if (tb.Name.Contains("City"))
+                {
+                    city = tb;
+                }
+                else
+                {
+                    postal = tb;
+                }
+            }
+
+            foreach (ComboBox cb in box.Controls.OfType<ComboBox>())
+            {
+                prov = cb;
+            }
+
+            String[] fields = str.Split(new String[] { " - ", ", ", "  " }, StringSplitOptions.None);
+            if(fields.Length == 5)
+            {
+                unit.Text = fields[0];
+                street.Text = fields[1];
+                city.Text = fields[2];
+                prov.Text = provinceCodeConverter(fields[3]);
+                postal.Text = fields[4];
+            }
+            else
+            {
+                street.Text = fields[0];
+                city.Text = fields[1];
+                prov.Text = provinceCodeConverter(fields[2]);
+                postal.Text = fields[3];
+            }
+        }
+
         private void okButton_Click(object sender, EventArgs e)
         {
             Boolean err = false;
-            String officeAddress = (officeUnit_textBox.Text != String.Empty ? officeUnit_textBox.Text + " - " : "") + officeStreet_textBox.Text + " " + 
-                officeCity_textBox.Text + ", " + provinceConverter(officeProvince_comboBox.Text) + " " + officePostal_textBox.Text;
+            String officeAddress = (officeUnit_textBox.Text != String.Empty ? officeUnit_textBox.Text + " - " : "") + officeStreet_textBox.Text + ", " + 
+                officeCity_textBox.Text + ", " + provinceConverter(officeProvince_comboBox.Text) + "  " + officePostal_textBox.Text;
 
 
-            String shippingAddress = (shippingUnit_textBox.Text != String.Empty ? shippingUnit_textBox.Text + " - " : "") + shippingStreet_textBox.Text + " " +
-                shippingCity_textBox.Text + ", " + provinceConverter(shippingProvince_comboBox.Text) + " " + shippingPostal_textBox.Text;
+            String shippingAddress = (shippingUnit_textBox.Text != String.Empty ? shippingUnit_textBox.Text + " - " : "") + shippingStreet_textBox.Text + ", " +
+                shippingCity_textBox.Text + ", " + provinceConverter(shippingProvince_comboBox.Text) + "  " + shippingPostal_textBox.Text;
             if (storeName_textBox.Text == String.Empty)
             {
                 label1.ForeColor = Color.Red;
@@ -119,10 +238,19 @@ namespace InvoiceMaker
             {
                 return;
             }
-            CustomerDatabase.AddCustomer(storeName_textBox.Text, storeDetails_textBox.Text, email_textBox.Text, officeAddress,
-                shippingAddress, storeContact_textBox.Text, phoneNumber_textBox.Text, paymentTerms_textBox.Text,
-                shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0]);
-
+            if (editMode)
+            {
+                CustomerDatabase.EditCustomer(storeNumber, storeName_textBox.Text, storeDetails_textBox.Text, email_textBox.Text, officeAddress,
+                    shippingAddress, storeContact_textBox.Text, phoneNumber_textBox.Text, paymentTerms_textBox.Text,
+                    shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0]);
+            }
+            else
+            {
+                CustomerDatabase.AddCustomer(storeName_textBox.Text, storeDetails_textBox.Text, email_textBox.Text, officeAddress,
+                    shippingAddress, storeContact_textBox.Text, phoneNumber_textBox.Text, paymentTerms_textBox.Text,
+                    shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0]);
+            }
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
