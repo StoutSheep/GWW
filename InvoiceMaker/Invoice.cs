@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
-=======
 using MySql.Data;
 using MySql.Data.MySqlClient;
->>>>>>> develop
+
 
 namespace InvoiceMaker
 {
     public class Invoice
     {
-<<<<<<< HEAD
-        public Customer currentCustomer { get; set; }
 
+        public Customer currentCustomer { get; set; }
         // String info for User Company
         public String CompanyName = "Wholesaler";
         public String CompanyAddress = "1234 GRANOLA ST. NEW WESTMINISTER, BC W4T 4U2";
         public String CompanyPhoneNumber= "123-456-7890";
         public String CompanyFax = "123-456-7890";
         public String CompanyTollFree = "1-800-123-4567";
-=======
+
         public Customer customer { get; set; }
         public int InvoiceID { get; set; }
         public String PurchaseOrder { get; set; }
@@ -100,11 +97,6 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
         }
-        
-
-
-
->>>>>>> develop
 
         // TODO: Query Invoices by Stage 1; Stage 2 and Stage 3
 

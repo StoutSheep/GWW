@@ -29,10 +29,7 @@
         private void InitializeComponent()
         {
             this.InvoiceView = new System.Windows.Forms.Label();
-<<<<<<< HEAD
-=======
             this.invoices_textBox = new System.Windows.Forms.TextBox();
->>>>>>> develop
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.ModInvoice = new System.Windows.Forms.Button();
             this.DeleteInvoice = new System.Windows.Forms.Button();
@@ -52,8 +49,7 @@
             this.InvoiceView.TabIndex = 0;
             this.InvoiceView.Text = "Find Invoices";
             // 
-<<<<<<< HEAD
-=======
+
             // invoices_textBox
             // 
             this.invoices_textBox.Location = new System.Drawing.Point(859, 97);
@@ -61,7 +57,7 @@
             this.invoices_textBox.Size = new System.Drawing.Size(660, 31);
             this.invoices_textBox.TabIndex = 2;
             //
->>>>>>> develop
+
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(247, 121);
@@ -123,12 +119,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-=======
             this.ClientSize = new System.Drawing.Size(1804, 929);
             this.Controls.Add(this.invoices_textBox);
-
->>>>>>> develop
             this.ClientSize = new System.Drawing.Size(1259, 1231);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.PrintInvoice);
@@ -148,20 +140,13 @@
         #endregion
 
         private System.Windows.Forms.Label InvoiceView;
-<<<<<<< HEAD
-=======
         private System.Windows.Forms.TextBox invoices_textBox;
-
->>>>>>> develop
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button ModInvoice;
         private System.Windows.Forms.Button DeleteInvoice;
         private System.Windows.Forms.Button CancelInvoice;
         private System.Windows.Forms.Button PrintInvoice;
         private System.Windows.Forms.DataGridView dataGridView1;
-<<<<<<< HEAD
-=======
 
->>>>>>> develop
     }
 }

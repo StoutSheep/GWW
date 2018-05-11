@@ -176,30 +176,15 @@ namespace InvoiceMaker
             //CustomerDatabase.DeleteCustomer(custID);
 
             InvoiceDatabase.AddInvoice(1, "Invoice 1", "n/a", 0, 10, 5, 7, 12, 1);
-<<<<<<< HEAD
-            InvoiceContentsDatabase.AddInvoiceContent(1, "1234a", 10, "2 red");
-            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 4, "Bork");
-
-=======
 
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 4, "Bork");
 
             /*
->>>>>>> develop
             InvoiceDatabase.AddInvoice(1, "Invoice 2", "n/a", 1, 10, 5, 7, 12, 1);
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234d", 4, "Dork");
 
-<<<<<<< HEAD
-            InvoiceDatabase.AddInvoice(2, "Invoice 3", "n/a", 2, 10, 5, 7, 12, 1);
-            InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
-            InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
-
-            InvoiceDatabase.AddInvoice(2, "Invoice 4", "n/a", 3, 10, 5, 7, 12, 1);
-=======
-            InvoiceDatabase.AddInvoice(1, "Invoice 3", "n/a", 2, 10, 5, 7, 12, 1);
->>>>>>> develop
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
 
