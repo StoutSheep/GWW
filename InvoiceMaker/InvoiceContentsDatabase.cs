@@ -144,7 +144,46 @@ namespace InvoiceMaker
 
         }
 
-        
+
+
+        internal static List<String> GetInvoiceContents(int invoiceID)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            List<String> items = new List<string>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+                MySqlDataReader rdr;
+
+                sql = "SELECT ItemNo FROM InvoiceContents" +
+                  " WHERE InvoiceID = " + invoiceID +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+
+                while (rdr.Read())
+                {
+                    String temp = rdr[0].ToString();
+                    items.Add(temp);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+            
+            return items;
+       
+        }
+
+
 
 
 
