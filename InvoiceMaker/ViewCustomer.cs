@@ -19,6 +19,8 @@ namespace InvoiceMaker
 
             InitializeComponent();
             AddButtons();
+            custList.MultiSelect = false;
+            custList.FullRowSelect = true;
             custList.Size = new Size(1250, 500);
             custList.Location = new Point(25, 100);
 
@@ -32,14 +34,14 @@ namespace InvoiceMaker
             custList.Columns.Add("Province Tax", -2, HorizontalAlignment.Left);
             custList.Columns.Add("Payment Terms", -2, HorizontalAlignment.Left);
             custList.Columns.Add("Shipping Instr", -2, HorizontalAlignment.Left);
-            custList.Columns.Add("Special Notes ", -2, HorizontalAlignment.Left);
+            //custList.Columns.Add("Special Notes ", -2, HorizontalAlignment.Left);
             
 
 
             custList.GridLines = true;
             custList.Scrollable = true;
             custList.View = System.Windows.Forms.View.Details;
-            //custList.DoubleClick += CustomerList_DoubleClick;
+            custList.DoubleClick += CustomerList_DoubleClick;
 
             this.Controls.Add(custList);
 
@@ -55,8 +57,25 @@ namespace InvoiceMaker
                 */
                 
                 custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
-                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions,c.SpecialNotes}));
+                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions}));
             }
+
+        }
+
+        private void CustomerList_DoubleClick(object sender, EventArgs e)
+        {
+            ListView.SelectedListViewItemCollection customer = custList.SelectedItems;
+            
+            ListViewItem.ListViewSubItemCollection row = customer[0].SubItems;
+            CustomerForm editCust = new CustomerForm(row[0].Text, row[1].Text, row[2].Text, row[3].Text, row[4].Text,
+                row[5].Text, row[6].Text, row[7].Text, row[8].Text, row[9].Text);
+            editCust.Size = new System.Drawing.Size(460, 500);
+            editCust.Font = new Font(editCust.Font.Name, editCust.Font.Size + 1, editCust.Font.Style);
+            if( editCust.ShowDialog() == DialogResult.OK)
+            {
+                RefreshView();
+            }
+            
 
         }
 
@@ -103,6 +122,20 @@ namespace InvoiceMaker
         private void ModCustomer_Click(object sender, EventArgs e)
         {
             Debug.Print("ModCustomer");
+            ListView.SelectedListViewItemCollection customer = custList.SelectedItems;
+            if (customer.Count > 0)
+            {
+                ListViewItem.ListViewSubItemCollection row = customer[0].SubItems;
+                CustomerForm editCust = new CustomerForm(row[0].Text, row[1].Text, row[2].Text, row[3].Text, row[4].Text, 
+                    row[5].Text, row[6].Text, row[7].Text, row[8].Text, row[9].Text);
+                editCust.Size = new System.Drawing.Size(460, 500);
+                editCust.Font = new Font(editCust.Font.Name, editCust.Font.Size + 1, editCust.Font.Style);
+                if (editCust.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshView();
+                }
+            }
+            
         }
 
         private void DeleteCustomer_Click(object sender, EventArgs e)
@@ -120,6 +153,7 @@ namespace InvoiceMaker
         {
             RefreshView();
         }
+
 
         private void RefreshView()
         {
@@ -140,7 +174,7 @@ namespace InvoiceMaker
             foreach (Customer c in list)
             {
                 custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
-                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions,c.SpecialNotes}));
+                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions}));
             }
         }
 

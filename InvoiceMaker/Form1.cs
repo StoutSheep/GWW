@@ -26,7 +26,7 @@ namespace InvoiceMaker
         {
             Debug.Print("Customer Form");
             CustomerForm customerForm = new CustomerForm();
-            customerForm.Size = new System.Drawing.Size(460, 610);
+            customerForm.Size = new System.Drawing.Size(460, 500);
             customerForm.Font = new Font(customerForm.Font.Name, customerForm.Font.Size + 1, customerForm.Font.Style);
             customerForm.Show();
         }
