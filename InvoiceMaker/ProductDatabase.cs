@@ -201,6 +201,7 @@ namespace InvoiceMaker
                 {
                     rdr.Read();
                     Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()));
+                    
                     conn.Close();
                     return temp;
                 }

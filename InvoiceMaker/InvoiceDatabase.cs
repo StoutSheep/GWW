@@ -22,7 +22,6 @@ namespace InvoiceMaker
          * stage 3 = done
          */
         internal static int AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subTotal, float gst, float pst, float netTotal, int stage)
-
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             try
@@ -90,7 +89,7 @@ namespace InvoiceMaker
                    ",PurchaseOrder = " + purchaseOrder +
                    ",SpecialNotes = " + specialNotes +
                    ",InvoiceNo = " + invoiceNo +
-                   ",Subtotal = " + invoiceNo +
+                   ",Subtotal = " + subtotal +
                    ",Gst = " + gst +
                    ",Pst = " + pst +
                    ",NetTotal = " + netTotal +
@@ -112,6 +111,65 @@ namespace InvoiceMaker
         }
 
 
+        internal static void UpdateTotals(int invoiceID, int subtotal, int gst, int pst, int netTotal)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+
+                sql = "UPDATE Invoices " +
+                   "SET Subtotal = " + subtotal +
+                   ",Gst = " + gst +
+                   ",Pst = " + pst +
+                   ",NetTotal = " + netTotal +
+                   " WHERE InvoiceID = " + invoiceID +
+                   ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+
+        internal static void UpdateStage(int invoiceID, int stage)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+
+                sql = "UPDATE Invoices " +
+                   "SET Stage = " + stage +
+                   " WHERE InvoiceID = " + invoiceID +
+                   ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
 
 
 

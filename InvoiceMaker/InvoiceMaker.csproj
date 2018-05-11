@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="CustomerDatabase.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="InvoiceContentInfo.cs" />
     <Compile Include="InvoiceContentsDatabase.cs" />
     <Compile Include="InvoiceDatabase.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

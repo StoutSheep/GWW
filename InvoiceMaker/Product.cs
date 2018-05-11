@@ -26,13 +26,13 @@ namespace InvoiceMaker
         // Barcode; Sometimes information not available
         internal Int64 UPC { get; set; }
 
-
-
+        
 
         //invoiceContent info
         internal int Quantity { get; set; }
         internal String SpecialNotes { get; set; }
-        
+        internal int BackOrder { get; set; }
+
 
         //Everything is filled.
         public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, Int64 upc)
