@@ -12,17 +12,24 @@ namespace InvoiceMaker
     {
 
         static String pswd = "password";
+        static String user = "root";
+        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
 
        
+        /*
+         * stage 1 = picking stage
+         * stage 2 = double check stage
+         * stage 3 = done
+         */
+        internal static int AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subTotal, float gst, float pst, float netTotal, int stage)
 
-        internal static void AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subTotal, int gst, int pst, int netTotal, int stage)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
                 conn.Open();
                 MySqlCommand cmd;
+                MySqlDataReader rdr;
                 string sql;
 
                 sql = "INSERT INTO Invoices (StoreID, PurchaseOrder, SpecialNotes, InvoiceNo, SubTotal, Gst, Pst, NetTotal, Stage) VALUES (" +
@@ -39,6 +46,22 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+                sql = "SELECT MAX(InvoiceID) " +
+                    "FROM Invoices;";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+
+                if (rdr.HasRows)
+                {
+                    rdr.Read();
+                    int temp = Int32.Parse(rdr[0].ToString());
+                    conn.Close();
+                    rdr.Close();
+                    return temp;
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -47,13 +70,13 @@ namespace InvoiceMaker
 
             conn.Close(); 
             Console.WriteLine("Done.");
+            return 0;
         }
 
 
 
         internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subtotal, int gst, int pst, int netTotal, int stage)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -87,6 +110,8 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
 
         }
+
+
 
 
 

@@ -18,8 +18,6 @@ namespace InvoiceMaker
         static void Main()
         {
             InitializeDatabase();
-
-
             TestFunctions();
 
             Application.EnableVisualStyles();
@@ -104,8 +102,7 @@ namespace InvoiceMaker
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-
-               
+                
 
                 sql = "CREATE TABLE IF NOT EXISTS Invoices (" +
                    "InvoiceID int NOT NULL AUTO_INCREMENT," +
@@ -113,16 +110,17 @@ namespace InvoiceMaker
                    "PurchaseOrder varchar(20)," +
                    "SpecialNotes varchar(100)," +
                    "InvoiceNo int," +
-                   "SubTotal NUMERIC," +
-                   "Gst NUMERIC," +
-                   "Pst NUMERIC," +
-                   "NetTotal NUMERIC," +
+                   "SubTotal DECIMAL(10,2)," +
+                   "Gst DECIMAL(10,2)," +
+                   "Pst DECIMAL(10,2)," +
+                   "NetTotal DECIMAL(10,2)," +
                    "Stage int NOT NULL," +
                    "PRIMARY KEY (InvoiceID)," +
                    "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +
                    ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
+
 
                 sql = "CREATE TABLE IF NOT EXISTS InvoiceContents (" +
                    "EntryID bigint NOT NULL AUTO_INCREMENT," +
@@ -178,23 +176,44 @@ namespace InvoiceMaker
             //CustomerDatabase.DeleteCustomer(custID);
 
             InvoiceDatabase.AddInvoice(1, "Invoice 1", "n/a", 0, 10, 5, 7, 12, 1);
+<<<<<<< HEAD
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234a", 10, "2 red");
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 4, "Bork");
 
+=======
+
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
+            InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 4, "Bork");
+
+            /*
+>>>>>>> develop
             InvoiceDatabase.AddInvoice(1, "Invoice 2", "n/a", 1, 10, 5, 7, 12, 1);
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234d", 4, "Dork");
 
+<<<<<<< HEAD
             InvoiceDatabase.AddInvoice(2, "Invoice 3", "n/a", 2, 10, 5, 7, 12, 1);
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
 
             InvoiceDatabase.AddInvoice(2, "Invoice 4", "n/a", 3, 10, 5, 7, 12, 1);
+=======
+            InvoiceDatabase.AddInvoice(1, "Invoice 3", "n/a", 2, 10, 5, 7, 12, 1);
+>>>>>>> develop
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
 
+            InvoiceDatabase.AddInvoice(1, "Invoice 4", "n/a", 3, 10, 5, 7, 12, 1);
+            InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
+            InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
 
+    */
             List<Customer> sd = CustomerDatabase.SearchCustomersByStoreName("Updated");
+
+            List<String> sad = InvoiceContentsDatabase.GetInvoiceContents(1);
+
+            Invoice jk = new Invoice(1);
+            int sdas = 1;
 
 
         }

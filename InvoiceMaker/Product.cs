@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InvoiceMaker
 {
-    class Product
+    public class Product
     {
         // Unique identifier for product
 
@@ -26,7 +26,15 @@ namespace InvoiceMaker
         // Barcode; Sometimes information not available
         internal Int64 UPC { get; set; }
 
-        // Everything is filled.
+
+
+
+        //invoiceContent info
+        internal int Quantity { get; set; }
+        internal String SpecialNotes { get; set; }
+        
+
+        //Everything is filled.
         public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, Int64 upc)
 
         {
@@ -51,5 +59,10 @@ namespace InvoiceMaker
             SellPrice = sellPrice;
             UPC = 0;
         }
+
+
+
+
+       
     }
 }

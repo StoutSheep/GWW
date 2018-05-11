@@ -12,10 +12,11 @@ namespace InvoiceMaker
     {
 
         static String pswd = "password";
+        static String user = "root";
+        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
 
         internal static void AddProvinceTax(String province, int pst, int gst)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -47,7 +48,6 @@ namespace InvoiceMaker
 
         internal static void EditProvinceTax(String province, int pst, int gst)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -55,14 +55,6 @@ namespace InvoiceMaker
                 MySqlCommand cmd;
                 string sql;
 
-                /*
-                sql = "UPDATE ProvinceTax " +
-                   "SET Province = '" + newProvince + "'" +
-                   ",pst = " + pst +
-                   ",gst = " + gst +
-                   " WHERE Province = '" + oldProvince + "'" +
-                   ";";
-                   */
                 sql = "UPDATE ProvinceTax " +
                 "SET pst = " + pst +
                 ",gst = " + gst +
@@ -85,7 +77,6 @@ namespace InvoiceMaker
         {
 
             List<ProvinceTax> provinceTaxList = new List<ProvinceTax>();
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -113,5 +104,37 @@ namespace InvoiceMaker
             return provinceTaxList;
         }
 
+
+        internal static ProvinceTax GetProvinceByName(string province)
+        {
+
+            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT * FROM ProvinceTax WHERE Province = '" + province + "';";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    ProvinceTax temp = new ProvinceTax(rdr[0].ToString(), Int32.Parse(rdr[1].ToString()), Int32.Parse(rdr[2].ToString()));
+                    conn.Close();
+                    return temp;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            Console.WriteLine("Done.");
+            return null;
+        }
     }
 }

@@ -12,10 +12,11 @@ namespace InvoiceMaker
     {
 
         static String pswd = "password";
-       
+        static String user = "root";
+        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
+
         internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity, String specialNotes) 
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -39,14 +40,13 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            Console.WriteLine("Done Inserting Details.");
         }
 
 
 
         internal static void EditInvoiceContent(int entryID, int invoiceID, String itemNo, int quantity, String specialNotes)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -79,7 +79,6 @@ namespace InvoiceMaker
 
         internal static void DeleteInvoiceContent(int entryID)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -109,7 +108,6 @@ namespace InvoiceMaker
 
         internal static int GetEntryID(int invoiceID, String itemNo)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -146,7 +144,46 @@ namespace InvoiceMaker
 
         }
 
-        
+
+
+        internal static List<String> GetInvoiceContents(int invoiceID)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            List<String> items = new List<string>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+                MySqlDataReader rdr;
+
+                sql = "SELECT ItemNo FROM InvoiceContents" +
+                  " WHERE InvoiceID = " + invoiceID +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+
+                while (rdr.Read())
+                {
+                    String temp = rdr[0].ToString();
+                    items.Add(temp);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+            
+            return items;
+       
+        }
+
+
 
 
 

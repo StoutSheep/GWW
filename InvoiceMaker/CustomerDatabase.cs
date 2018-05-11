@@ -11,11 +11,12 @@ namespace InvoiceMaker
     static class CustomerDatabase
     {
         static String pswd = "password";
+        static String user = "root";
+        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
 
         internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
           String paymentTerms, String shippingInstructions, String specialNotes, String province)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -56,7 +57,6 @@ namespace InvoiceMaker
         internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String specialNotes, String province)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -93,7 +93,6 @@ namespace InvoiceMaker
 
         internal static void DeleteCustomer(int storeID)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -119,7 +118,6 @@ namespace InvoiceMaker
 
         internal static int GetStoreID(String storeName, String shippingAddress)
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -160,7 +158,6 @@ namespace InvoiceMaker
         {
 
             List<Customer> customerList = new List<Customer>();
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
@@ -192,7 +189,6 @@ namespace InvoiceMaker
         {
 
             Customer customer = null;
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
