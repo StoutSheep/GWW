@@ -195,7 +195,7 @@ namespace InvoiceMaker
             this.Controls.Add(shippingInstructionsLabel);
 
             Label specialCustomerNotesLabel = new Label();
-            specialCustomerNotesLabel.Text = "Special Notes: " + cust.SpecialNotes;
+            //specialCustomerNotesLabel.Text = "Special Notes: " + cust.SpecialNotes;
             specialCustomerNotesLabel.Location = new Point(30, 130);
             specialCustomerNotesLabel.AutoSize = true;
             this.Controls.Add(specialCustomerNotesLabel);

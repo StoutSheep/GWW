@@ -22,13 +22,12 @@ namespace InvoiceMaker
         public String PaymentTerms { get; set; }
         // Instructions
         public String ShippingInstructions { get; set; }
-        public String SpecialNotes { get; set; }
         // Unique identifier for product
         public String Email { get; set; }
         public String Province { get; set; }
 
         public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
-            String paymentTerms, String shippingInstructions, String specialNotes, String province)
+            String paymentTerms, String shippingInstructions, String province)
         {
 
             StoreID = storeId;
@@ -40,7 +39,6 @@ namespace InvoiceMaker
             PhoneNumber = phoneNumber;
             PaymentTerms = paymentTerms;
             ShippingInstructions = shippingInstructions;
-            SpecialNotes = specialNotes;
             Email = emailAddress;
             Province = province;
 

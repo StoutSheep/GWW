@@ -81,7 +81,6 @@ namespace InvoiceMaker
                     "PhoneNumber varchar(15)," +
                     "PaymentTerms varchar(50)," +
                     "ShippingInstructions varchar(50)," +
-                    "SpecialNotes varchar(150)," +
                     "Province varchar(3) NOT NULL," +
                     "PRIMARY KEY (StoreID)," +
                     "FOREIGN KEY (Province) REFERENCES ProvinceTax(Province)" +
@@ -168,10 +167,10 @@ namespace InvoiceMaker
             ProductDatabase.AddProduct("1234g", "gecko", 3, "ssdas", 34.2, 78.3, 3242);
             ProductDatabase.EditProduct("1234g", "9876a", "notGecko", 5, "s4453das", 3.2, 7.3, 0003242);
             ProductDatabase.DeleteProduct("1234a");
-            CustomerDatabase.AddCustomer("Toys", "gift shop", "toyts@gmail.com", "asdas", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
-            CustomerDatabase.AddCustomer("Games", "", "Games@gmail.com", "sadsads", "somehwereElse 9931", "Hill", "6047990643", "n/a", "n/a", "n/a", "ON");
+            CustomerDatabase.AddCustomer("Toys", "gift shop", "toyts@gmail.com", "asdas", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "ON");
+            CustomerDatabase.AddCustomer("Games", "", "Games@gmail.com", "sadsads", "somehwereElse 9931", "Hill", "6047990643", "n/a", "n/a", "ON");
             int custID = CustomerDatabase.GetStoreID("Toys", "somehwere 2131");
-            CustomerDatabase.EditCustomer(custID, "UpdatedToys", "notgiftshop", "toyts@gmail.com", "asdewr", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "n/a", "ON");
+            CustomerDatabase.EditCustomer(custID, "UpdatedToys", "notgiftshop", "toyts@gmail.com", "asdewr", "somehwere 2131", "Hank", "6047990643", "n/a", "n/a", "ON");
             int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
             //CustomerDatabase.DeleteCustomer(custID);
 

@@ -39,7 +39,6 @@ namespace InvoiceMaker
                     tb.MaxLength = 15;
                 }
             }
-            specialNotes_textBox.MaxLength = 150;
             
         }
 
@@ -80,22 +79,51 @@ namespace InvoiceMaker
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            Debug.Print(storeName_textBox.Text);
-
-            String officeAddress = officeUnit_textBox.Text + " - " + officeStreet_textBox.Text + " " + 
+            Boolean err = false;
+            String officeAddress = (officeUnit_textBox.Text != String.Empty ? officeUnit_textBox.Text + " - " : "") + officeStreet_textBox.Text + " " + 
                 officeCity_textBox.Text + ", " + provinceConverter(officeProvince_comboBox.Text) + " " + officePostal_textBox.Text;
-            Debug.Print(officeAddress);
 
-            String shippingAddress = shippingUnit_textBox.Text + " - " + shippingStreet_textBox.Text + " " +
+
+            String shippingAddress = (shippingUnit_textBox.Text != String.Empty ? shippingUnit_textBox.Text + " - " : "") + shippingStreet_textBox.Text + " " +
                 shippingCity_textBox.Text + ", " + provinceConverter(shippingProvince_comboBox.Text) + " " + shippingPostal_textBox.Text;
-            Debug.Print(shippingAddress);
+            if (storeName_textBox.Text == String.Empty)
+            {
+                label1.ForeColor = Color.Red;
+                err = true;
+            }
+            else
+            {
+                label1.ForeColor = Color.Black;
+            }
 
-            Debug.Print(storeContact_textBox.Text);
-            Debug.Print(phoneNumber_textBox.Text);
+            if (shippingAddress.Length < 10)
+            {
+                groupBox2.ForeColor = Color.Red;
+                err = true;
+            }
+            else
+            {
+                groupBox2.ForeColor = Color.Black;
+            }
 
-            Debug.Print(paymentTerms_textBox.Text);
-            Debug.Print(shippingInstructions_textBox.Text);
-            Debug.Print(specialNotes_textBox.Text);
+            if(provinceTax_comboBox.Text == String.Empty)
+            {
+                label18.ForeColor = Color.Red;
+                err = true;
+            }
+            else
+            {
+                label18.ForeColor = Color.Black;
+            }
+            if(err)
+            {
+                return;
+            }
+            CustomerDatabase.AddCustomer(storeName_textBox.Text, storeDetails_textBox.Text, email_textBox.Text, officeAddress,
+                shippingAddress, storeContact_textBox.Text, phoneNumber_textBox.Text, paymentTerms_textBox.Text,
+                shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0]);
+
+            this.Close();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

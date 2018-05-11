@@ -19,6 +19,8 @@ namespace InvoiceMaker
 
             InitializeComponent();
             AddButtons();
+            custList.MultiSelect = false;
+            custList.FullRowSelect = true;
             custList.Size = new Size(1250, 500);
             custList.Location = new Point(25, 100);
 
@@ -32,7 +34,7 @@ namespace InvoiceMaker
             custList.Columns.Add("Province Tax", -2, HorizontalAlignment.Left);
             custList.Columns.Add("Payment Terms", -2, HorizontalAlignment.Left);
             custList.Columns.Add("Shipping Instr", -2, HorizontalAlignment.Left);
-            custList.Columns.Add("Special Notes ", -2, HorizontalAlignment.Left);
+            //custList.Columns.Add("Special Notes ", -2, HorizontalAlignment.Left);
             
 
 
@@ -55,7 +57,7 @@ namespace InvoiceMaker
                 */
                 
                 custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
-                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions,c.SpecialNotes}));
+                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions}));
             }
 
         }
@@ -103,6 +105,12 @@ namespace InvoiceMaker
         private void ModCustomer_Click(object sender, EventArgs e)
         {
             Debug.Print("ModCustomer");
+            ListView.SelectedListViewItemCollection customer = custList.SelectedItems[0];
+            if (customer.Count > 0)
+            {
+
+            }
+            
         }
 
         private void DeleteCustomer_Click(object sender, EventArgs e)
@@ -140,7 +148,7 @@ namespace InvoiceMaker
             foreach (Customer c in list)
             {
                 custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
-                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions,c.SpecialNotes}));
+                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions}));
             }
         }
 

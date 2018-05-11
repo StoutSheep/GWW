@@ -61,8 +61,6 @@
             this.paymentTerms_textBox = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.shippingInstructions_textBox = new System.Windows.Forms.RichTextBox();
-            this.specialNotes_textBox = new System.Windows.Forms.RichTextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.storeDetails_textBox = new System.Windows.Forms.TextBox();
@@ -76,7 +74,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(731, 1012);
+            this.button1.Location = new System.Drawing.Point(731, 795);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 59);
             this.button1.TabIndex = 20;
@@ -395,26 +393,9 @@
             this.shippingInstructions_textBox.TabIndex = 17;
             this.shippingInstructions_textBox.Text = "";
             // 
-            // specialNotes_textBox
-            // 
-            this.specialNotes_textBox.Location = new System.Drawing.Point(69, 810);
-            this.specialNotes_textBox.Name = "specialNotes_textBox";
-            this.specialNotes_textBox.Size = new System.Drawing.Size(714, 154);
-            this.specialNotes_textBox.TabIndex = 18;
-            this.specialNotes_textBox.Text = "";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(69, 781);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(145, 25);
-            this.label16.TabIndex = 18;
-            this.label16.Text = "Special Notes";
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(591, 1012);
+            this.button2.Location = new System.Drawing.Point(590, 795);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(119, 59);
             this.button2.TabIndex = 19;
@@ -476,7 +457,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 1131);
+            this.ClientSize = new System.Drawing.Size(918, 903);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.email_textBox);
             this.Controls.Add(this.provinceTax_comboBox);
@@ -484,8 +465,6 @@
             this.Controls.Add(this.storeDetails_textBox);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.specialNotes_textBox);
-            this.Controls.Add(this.label16);
             this.Controls.Add(this.shippingInstructions_textBox);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.paymentTerms_textBox);
@@ -545,8 +524,6 @@
         private System.Windows.Forms.TextBox paymentTerms_textBox;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RichTextBox shippingInstructions_textBox;
-        private System.Windows.Forms.RichTextBox specialNotes_textBox;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox storeDetails_textBox;
