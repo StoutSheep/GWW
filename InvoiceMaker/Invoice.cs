@@ -10,6 +10,8 @@ namespace InvoiceMaker
 {
     public class Invoice
     {
+
+        //All data fields of an invoice
         public Customer customer { get; set; }
         public int InvoiceID { get; set; }
         public String PurchaseOrder { get; set; }
@@ -20,12 +22,12 @@ namespace InvoiceMaker
         public float Pst { get; set; }
         public float NetTotal { get; set; }
         public int Stage { get; set; }
-
         public List<Product> Items { get; set; }
 
+
+        //constructor
         public Invoice(int invoiceID)
         {
-
             Items = new List<Product>();
             String pswd = "password";
             String user = "root";
@@ -42,38 +44,32 @@ namespace InvoiceMaker
                 sql = "SELECT * FROM Invoices WHERE InvoiceID = " + invoiceID + ";";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
-
-
-                //InvoiceID | StoreID | PurchaseOrder | SpecialNotes | InvoiceNo | SubTotal | Gst | Pst | NetTotal | Stage |
-
+                
 
                 if (rdr.HasRows)
                 {
                     rdr.Read();
-
                     InvoiceID = Int32.Parse(rdr[0].ToString());
-
                     customer = CustomerDatabase.SearchCustomersByID(Int32.Parse(rdr[1].ToString()));
-
                     PurchaseOrder = rdr[2].ToString();
-
                     SpecialNotes = rdr[3].ToString();
+                    InvoiceNo = Int32.Parse(rdr[4].ToString());
+                    SubTotal = Single.Parse(rdr[5].ToString());
 
-                    SubTotal = Single.Parse(rdr[4].ToString());
-
-                    Gst = Single.Parse(rdr[5].ToString());
-                    Pst = Single.Parse(rdr[6].ToString());
-                    NetTotal = Single.Parse(rdr[7].ToString());
-                    Stage = Int32.Parse(rdr[7].ToString());
-
-
-                    List<String> items = InvoiceContentsDatabase.GetInvoiceContents(InvoiceID);
+                    Gst = Single.Parse(rdr[6].ToString());
+                    Pst = Single.Parse(rdr[7].ToString());
+                    NetTotal = Single.Parse(rdr[8].ToString());
+                    Stage = Int32.Parse(rdr[9].ToString());
+                    List<InvoiceContentInfo> items = InvoiceContentsDatabase.GetInvoiceContents(InvoiceID);
                     Product temp;
                     for (int i = 0; i < items.Count; i ++)
                     {
-                        temp = ProductDatabase.SearchProductByItemNo(items[i]);
+                        temp = ProductDatabase.SearchProductByItemNo(items[i].ItemNo);
+                        temp.SpecialNotes = items[i].SpecialNotes;
+                        temp.Quantity = items[i].Quantity;
+                        temp.BackOrder = items[i].Backorder;
                         Items.Add(temp);
-
+                        
                     }
                     
                 }

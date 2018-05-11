@@ -127,6 +127,7 @@ namespace InvoiceMaker
                    "InvoiceID int NOT NULL," +
                    "ItemNo varchar(10) NOT NULL," +
                    "Quantity int NOT NULL," +
+                   "Backorder int DEFAULT 0," +
                    "SpecialNotes varchar(40)," +
                    "PRIMARY KEY (EntryID)," +
                    "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID)," +
@@ -196,7 +197,8 @@ namespace InvoiceMaker
     */
             List<Customer> sd = CustomerDatabase.SearchCustomersByStoreName("Updated");
 
-            List<String> sad = InvoiceContentsDatabase.GetInvoiceContents(1);
+            List<InvoiceContentInfo> sad = InvoiceContentsDatabase.GetInvoiceContents(1);
+
 
             Invoice jk = new Invoice(1);
             int sdas = 1;
