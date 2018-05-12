@@ -68,6 +68,7 @@ namespace InvoiceMaker
             //ViewInvoiceReport viewInvoiceReport = new ViewInvoiceReport();
             //viewInvoiceReport.Show();
             ViewInvoice viewInvoice = new ViewInvoice();
+            viewInvoice.Size = new System.Drawing.Size(1200, 700);
             viewInvoice.Show();
         }
 

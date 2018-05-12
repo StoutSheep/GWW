@@ -32,6 +32,7 @@ namespace InvoiceMaker
 
             productList.GridLines = true;
             productList.Scrollable = true;
+            productList.FullRowSelect = true;
             productList.View = System.Windows.Forms.View.Details;
             productList.DoubleClick += ProductList_DoubleClick;
 
