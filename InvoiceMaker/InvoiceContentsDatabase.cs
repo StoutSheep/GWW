@@ -117,8 +117,8 @@ namespace InvoiceMaker
                 MySqlDataReader rdr;
 
                 sql = "SELECT EntryID FROM InvoiceContents" +
-                  " WHERE InvoiceID = " + invoiceID + " AND ItemNo = " + itemNo + 
-                  ";";
+                  " WHERE InvoiceID = " + invoiceID + " AND ItemNo = '" + itemNo + 
+                  "';";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
 
