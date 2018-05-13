@@ -17,11 +17,12 @@ namespace InvoiceMaker
         int i = 0; //# of current items
         bool PST = false; //pst of customer
         int customerID;
+        Invoice invoice;
 
         public InvoicePickingStage(int invoiceID)
         {
             InitializeComponent();
-
+            invoice = new Invoice(1);
             this.customerID = customerID;
             Customer c = CustomerDatabase.SearchCustomersByID(customerID);
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(c.Province);
@@ -206,12 +207,6 @@ namespace InvoiceMaker
             shippingInstructionsLabel.AutoSize = true;
             this.Controls.Add(shippingInstructionsLabel);
 
-            Label specialCustomerNotesLabel = new Label();
-            specialCustomerNotesLabel.Text = "Special Notes: " + cust.SpecialNotes;
-            specialCustomerNotesLabel.Location = new Point(30, 130);
-            specialCustomerNotesLabel.AutoSize = true;
-            this.Controls.Add(specialCustomerNotesLabel);
-
             Label purchaseOrderLabel = new Label();
             purchaseOrderLabel.Text = "PO#:";
             purchaseOrderLabel.Location = new Point(30, 145);
@@ -304,7 +299,7 @@ namespace InvoiceMaker
         {
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, cust.SpecialNotes, 0,
+            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, "SPECIAL NOTE HERE", 0,
                 Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
                 Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
 
