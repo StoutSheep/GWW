@@ -49,15 +49,13 @@
             this.InvoiceView.TabIndex = 0;
             this.InvoiceView.Text = "Find Invoices";
             // 
-
             // invoices_textBox
             // 
             this.invoices_textBox.Location = new System.Drawing.Point(859, 97);
             this.invoices_textBox.Name = "invoices_textBox";
             this.invoices_textBox.Size = new System.Drawing.Size(660, 31);
             this.invoices_textBox.TabIndex = 2;
-            //
-
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(247, 121);
@@ -108,20 +106,18 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(42, 183);
+            this.dataGridView1.Location = new System.Drawing.Point(42, 185);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.Size = new System.Drawing.Size(1172, 612);
             this.dataGridView1.TabIndex = 7;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ViewInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1804, 929);
-            this.Controls.Add(this.invoices_textBox);
             this.ClientSize = new System.Drawing.Size(1259, 1231);
+            this.Controls.Add(this.invoices_textBox);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.PrintInvoice);
             this.Controls.Add(this.CancelInvoice);

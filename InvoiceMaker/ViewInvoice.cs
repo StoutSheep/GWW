@@ -64,10 +64,5 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

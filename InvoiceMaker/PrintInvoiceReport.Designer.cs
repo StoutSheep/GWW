@@ -1,6 +1,6 @@
 ﻿namespace InvoiceMaker
 {
-    partial class ViewInvoiceReport
+    partial class PrintInvoiceReport
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
-            // reportViewer1
+            // reportViewer
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(12, 171);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(2242, 933);
-            this.reportViewer1.TabIndex = 0;
+            this.reportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "InvoiceMaker.InvoiceReport.rdlc";
+            this.reportViewer.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer.Name = "reportViewer";
+            this.reportViewer.ServerReport.BearerToken = null;
+            this.reportViewer.Size = new System.Drawing.Size(2310, 1145);
+            this.reportViewer.TabIndex = 0;
             // 
-            // InvoiceReport
+            // PrintInvoiceReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2310, 1145);
-            this.Controls.Add(this.reportViewer1);
-            this.Name = "InvoiceReport";
-            this.Text = "InvoiceReport";
+            this.Controls.Add(this.reportViewer);
+            this.Name = "PrintInvoiceReport";
+            this.Text = "Print";
             this.Load += new System.EventHandler(this.InvoiceReport_Load);
             this.ResumeLayout(false);
 
@@ -54,6 +56,6 @@
 
         #endregion
 
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
     }
 }

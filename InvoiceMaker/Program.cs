@@ -199,8 +199,8 @@ namespace InvoiceMaker
             List<InvoiceContentInfo> sad = InvoiceContentsDatabase.GetInvoiceContents(1);
 
 
-            Invoice jk = new Invoice(1);
-            int sdas = 1;
+            //Invoice jk = new Invoice(1);
+            //int sdas = 1;
 
 
         }

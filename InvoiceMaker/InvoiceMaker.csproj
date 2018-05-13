@@ -86,16 +86,17 @@
     <Compile Include="InvoiceContentInfo.cs" />
     <Compile Include="InvoiceContentsDatabase.cs" />
     <Compile Include="InvoiceDatabase.cs" />
+    <Compile Include="InvoiceItemDetail.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ViewInvoiceReport.cs">
+    <Compile Include="PrintInvoiceReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewInvoiceReport.Designer.cs">
-      <DependentUpon>ViewInvoiceReport.cs</DependentUpon>
+    <Compile Include="PrintInvoiceReport.Designer.cs">
+      <DependentUpon>PrintInvoiceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductDatabase.cs" />
     <Compile Include="Customer.cs" />
@@ -184,8 +185,8 @@
       <DependentUpon>ExcelReadWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InvoiceReport.rdlc" />
-    <EmbeddedResource Include="ViewInvoiceReport.resx">
-      <DependentUpon>ViewInvoiceReport.cs</DependentUpon>
+    <EmbeddedResource Include="PrintInvoiceReport.resx">
+      <DependentUpon>PrintInvoiceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>
@@ -229,9 +230,37 @@
       <DependentUpon>gwwDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Customer.datasource" />
     <None Include="Properties\DataSources\CustomerDatabase.datasource" />
+    <None Include="Properties\DataSources\Dapper.CommandDefinition.datasource" />
+    <None Include="Properties\DataSources\Dapper.CustomPropertyTypeMap.datasource" />
+    <None Include="Properties\DataSources\Dapper.DbString.datasource" />
+    <None Include="Properties\DataSources\Dapper.DefaultTypeMap.datasource" />
+    <None Include="Properties\DataSources\Dapper.DynamicParameters.datasource" />
+    <None Include="Properties\DataSources\Dapper.ExplicitConstructorAttribute.datasource" />
+    <None Include="Properties\DataSources\Dapper.IWrappedDataReader.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+GridReader.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+ICustomQueryParameter.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+Identity.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+IDynamicParameters.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+IMemberMap.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+IParameterCallbacks.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+IParameterLookup.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+ITypeHandler.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+ITypeMap.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+Settings.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+StringTypeHandler`1.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+TypeHandlerCache`1.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+TypeHandler`1.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper+UdtTypeHandler.datasource" />
+    <None Include="Properties\DataSources\Dapper.SqlMapper.datasource" />
+    <None Include="Properties\DataSources\Invoice1.datasource" />
+    <None Include="Properties\DataSources\InvoiceContentInfo.datasource" />
+    <None Include="Properties\DataSources\InvoiceContentsDatabase.datasource" />
     <None Include="Properties\DataSources\InvoiceDatabase.datasource" />
+    <None Include="Properties\DataSources\InvoiceItemDetail.datasource" />
     <None Include="Properties\DataSources\ProductDatabase.datasource" />
+    <None Include="Properties\DataSources\ProvinceTax.datasource" />
     <None Include="Properties\DataSources\ProvinceTaxDatabase.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -256,5 +285,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
