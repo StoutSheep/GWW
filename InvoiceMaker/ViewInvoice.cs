@@ -15,8 +15,10 @@ namespace InvoiceMaker
 {
     public partial class ViewInvoice : Form
     {
-        ListView pickingList = new ListView();
-        ListView doubleCheckList = new ListView();
+        ListView pickingListView = new ListView();
+        ListView doubleCheckListView = new ListView();
+        List<Invoice> pickingList;
+        List<Invoice> doubleCheckList;
 
         public ViewInvoice()
         {
@@ -44,31 +46,34 @@ namespace InvoiceMaker
             doubleCheckLabel.Text = "Double Check Stage";
             this.Controls.Add(doubleCheckLabel);
 
-            pickingList.Size = new Size(500, 450);
-            pickingList.Location = new Point(50, 120);
+            pickingListView.Size = new Size(500, 450);
+            pickingListView.Location = new Point(50, 120);
 
-            pickingList.Columns.Add("Local Invoice ID", -2, HorizontalAlignment.Left);
-            pickingList.Columns.Add("Customer Name", 200, HorizontalAlignment.Left);
-            pickingList.Columns.Add("Shipping Address", 200, HorizontalAlignment.Left);
+            pickingListView.Columns.Add("Local Invoice ID", -2, HorizontalAlignment.Left);
+            pickingListView.Columns.Add("Customer Name", 200, HorizontalAlignment.Left);
+            pickingListView.Columns.Add("Shipping Address", 200, HorizontalAlignment.Left);
 
-            pickingList.GridLines = true;
-            pickingList.Scrollable = true;
-            pickingList.View = System.Windows.Forms.View.Details;
-            pickingList.DoubleClick += PickingList_DoubleClick;
-            this.Controls.Add(pickingList);
+            pickingListView.GridLines = true;
+            pickingListView.Scrollable = true;
+            pickingListView.FullRowSelect = true;
+            pickingListView.View = System.Windows.Forms.View.Details;
+            pickingListView.DoubleClick += PickingListView_DoubleClick;
+            this.Controls.Add(pickingListView);
 
-            doubleCheckList.Size = new Size(500, 450);
-            doubleCheckList.Location = new Point(600, 120);
+            doubleCheckListView.Size = new Size(500, 450);
+            doubleCheckListView.Location = new Point(600, 120);
 
-            doubleCheckList.Columns.Add("Local Invoice ID", -2, HorizontalAlignment.Left);
-            doubleCheckList.Columns.Add("Customer Name", 200, HorizontalAlignment.Left);
-            doubleCheckList.Columns.Add("Shipping Address", 200, HorizontalAlignment.Left);
+            doubleCheckListView.Columns.Add("Local Invoice ID", -2, HorizontalAlignment.Left);
+            doubleCheckListView.Columns.Add("Customer Name", 200, HorizontalAlignment.Left);
+            doubleCheckListView.Columns.Add("Shipping Address", 200, HorizontalAlignment.Left);
 
-            doubleCheckList.GridLines = true;
-            doubleCheckList.Scrollable = true;
-            doubleCheckList.View = System.Windows.Forms.View.Details;
-            doubleCheckList.DoubleClick += PickingList_DoubleClick;
-            this.Controls.Add(doubleCheckList);
+            doubleCheckListView.GridLines = true;
+            doubleCheckListView.Scrollable = true;
+            doubleCheckListView.FullRowSelect = true;
+
+            doubleCheckListView.View = System.Windows.Forms.View.Details;
+            doubleCheckListView.DoubleClick += DoubleCheckListView_DoubleClick;
+            this.Controls.Add(doubleCheckListView);
 
             Button processButton = new Button();
             processButton.Location = new Point(450, 600);
@@ -88,15 +93,32 @@ namespace InvoiceMaker
             moveButton.Text = "Move to Picking";
             this.Controls.Add(moveButton);
 
-            
-
+            pickingList = InvoiceDatabase.SearchInvoicesByStage(1);
+            doubleCheckList = InvoiceDatabase.SearchInvoicesByStage(2);
+            foreach (Invoice l in pickingList)
+            {
+                pickingListView.Items.Add(new ListViewItem(new String[] { l.InvoiceID.ToString(), l.customer.StoreName, l.customer.ShippingAddress}));
+            }
+            foreach (Invoice l in doubleCheckList)
+            {
+                doubleCheckListView.Items.Add(new ListViewItem(new String[] { l.InvoiceID.ToString(), l.customer.StoreName, l.customer.ShippingAddress }));
+            }
 
 
         }
 
-        private void PickingList_DoubleClick(object sender, EventArgs e)
+        private void DoubleCheckListView_DoubleClick(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
+
+        private void PickingListView_DoubleClick(object sender, EventArgs e)
+        {
+            InvoicePickingStage form = new InvoicePickingStage(Int32.Parse(pickingListView.SelectedItems[0].SubItems[0].Text));
+            form.Size = new System.Drawing.Size(980, 700);
+            form.Show();
+        }
+
+
     }
 }
