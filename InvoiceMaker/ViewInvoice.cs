@@ -15,54 +15,88 @@ namespace InvoiceMaker
 {
     public partial class ViewInvoice : Form
     {
-        static String pswd = "password";
+        ListView pickingList = new ListView();
+        ListView doubleCheckList = new ListView();
 
         public ViewInvoice()
         {
             InitializeComponent();
+            SetupLists();
         }
 
-        
-        private void button2_Click(object sender, EventArgs e)
+        private void SetupLists()
         {
-            this.Close();
+            Label pickingLabel = new System.Windows.Forms.Label();
+            pickingLabel.AutoSize = true;
+            pickingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            pickingLabel.Location = new System.Drawing.Point(200, 95);
+            pickingLabel.Size = new System.Drawing.Size(238, 42);
+            pickingLabel.TabIndex = 0;
+            pickingLabel.Text = "Picking Stage";
+            this.Controls.Add(pickingLabel);
+
+            Label doubleCheckLabel = new System.Windows.Forms.Label();
+            doubleCheckLabel.AutoSize = true;
+            doubleCheckLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            doubleCheckLabel.Location = new System.Drawing.Point(750, 95);
+            doubleCheckLabel.Size = new System.Drawing.Size(238, 42);
+            doubleCheckLabel.TabIndex = 0;
+            doubleCheckLabel.Text = "Double Check Stage";
+            this.Controls.Add(doubleCheckLabel);
+
+            pickingList.Size = new Size(500, 450);
+            pickingList.Location = new Point(50, 120);
+
+            pickingList.Columns.Add("Local Invoice ID", -2, HorizontalAlignment.Left);
+            pickingList.Columns.Add("Customer Name", 200, HorizontalAlignment.Left);
+            pickingList.Columns.Add("Shipping Address", 200, HorizontalAlignment.Left);
+
+            pickingList.GridLines = true;
+            pickingList.Scrollable = true;
+            pickingList.View = System.Windows.Forms.View.Details;
+            pickingList.DoubleClick += PickingList_DoubleClick;
+            this.Controls.Add(pickingList);
+
+            doubleCheckList.Size = new Size(500, 450);
+            doubleCheckList.Location = new Point(600, 120);
+
+            doubleCheckList.Columns.Add("Local Invoice ID", -2, HorizontalAlignment.Left);
+            doubleCheckList.Columns.Add("Customer Name", 200, HorizontalAlignment.Left);
+            doubleCheckList.Columns.Add("Shipping Address", 200, HorizontalAlignment.Left);
+
+            doubleCheckList.GridLines = true;
+            doubleCheckList.Scrollable = true;
+            doubleCheckList.View = System.Windows.Forms.View.Details;
+            doubleCheckList.DoubleClick += PickingList_DoubleClick;
+            this.Controls.Add(doubleCheckList);
+
+            Button processButton = new Button();
+            processButton.Location = new Point(450, 600);
+            processButton.Size = new Size(70, 40);
+            processButton.Text = "Process";
+            this.Controls.Add(processButton);
+
+            Button deleteButton = new Button();
+            deleteButton.Location = new Point(530, 600);
+            deleteButton.Size = new Size(70, 40);
+            deleteButton.Text = "Delete";
+            this.Controls.Add(deleteButton);
+
+            Button moveButton = new Button();
+            moveButton.Location = new Point(610, 600);
+            moveButton.Size = new Size(100, 40);
+            moveButton.Text = "Move to Picking";
+            this.Controls.Add(moveButton);
+
+            
+
+
+
         }
 
-        private void ModInvoice_Click(object sender, EventArgs e)
+        private void PickingList_DoubleClick(object sender, EventArgs e)
         {
-            Debug.Print("ModInvoice");
-            // TODO: Link to Invoice DB
-        }
-
-        private void DeleteInvoice_Click(object sender, EventArgs e)
-        {
-            Debug.Print("DeleteInvoice");
-            // TODO: Link to Invoice DB
-        }
-
-        private void ViewInvoice_Click(object sender, EventArgs e)
-        {
-            Debug.Print("View Invoice");
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-                sql = "SELECT * from invoices NATURAL JOIN customers;";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
+            throw new NotImplementedException();
         }
     }
 }

@@ -26,7 +26,7 @@ namespace InvoiceMaker
         {
             Debug.Print("Customer Form");
             CustomerForm customerForm = new CustomerForm();
-            customerForm.Size = new System.Drawing.Size(460, 610);
+            customerForm.Size = new System.Drawing.Size(460, 500);
             customerForm.Font = new Font(customerForm.Font.Name, customerForm.Font.Size + 1, customerForm.Font.Style);
             customerForm.Show();
         }
@@ -68,6 +68,7 @@ namespace InvoiceMaker
             //ViewInvoiceReport viewInvoiceReport = new ViewInvoiceReport();
             //viewInvoiceReport.Show();
             ViewInvoice viewInvoice = new ViewInvoice();
+            viewInvoice.Size = new System.Drawing.Size(1200, 700);
             viewInvoice.Show();
         }
 

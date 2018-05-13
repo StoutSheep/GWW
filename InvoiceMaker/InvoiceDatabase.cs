@@ -173,5 +173,40 @@ namespace InvoiceMaker
 
 
 
+
+        internal static List<Invoice> SearchInvoicesByStage(int stage)
+        {
+
+            List<Invoice> invoices = new List<Invoice>();
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT InvoiceID FROM Invoices WHERE Stage = " + stage + ";";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Invoice temp = new Invoice(Int32.Parse(rdr[0].ToString()));
+                    invoices.Add(temp);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            Console.WriteLine("Done.");
+            return invoices;
+        }
+
+
+
     }
 }

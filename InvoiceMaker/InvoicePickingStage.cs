@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,21 +11,22 @@ using System.Windows.Forms;
 
 namespace InvoiceMaker
 {
-    public partial class InvoiceForm : Form
+    public partial class InvoicePickingStage : Form
     {
         Panel panel1 = new Panel();
         int i = 0; //# of current items
         bool PST = false; //pst of customer
         int customerID;
+        Invoice invoice;
 
-        public InvoiceForm(int customerID)
+        public InvoicePickingStage(int invoiceID)
         {
             InitializeComponent();
-
+            invoice = new Invoice(1);
             this.customerID = customerID;
             Customer c = CustomerDatabase.SearchCustomersByID(customerID);
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(c.Province);
-            if(provinceTax.pst == 0)
+            if (provinceTax.pst == 0)
             {
                 PST = false;
             }
@@ -44,7 +44,7 @@ namespace InvoiceMaker
             AddTotalBoxes(customerID);
             AddItemBoxes();
 
-            
+
 
         }
 
@@ -70,7 +70,7 @@ namespace InvoiceMaker
                 AddItemBoxes();
             }
 
-            if(this.panel1.Controls["itemNumber" + t.AccessibleName].Text.Length == 0 && this.panel1.Controls["qty" + t.AccessibleName].Text.Length == 0)
+            if (this.panel1.Controls["itemNumber" + t.AccessibleName].Text.Length == 0 && this.panel1.Controls["qty" + t.AccessibleName].Text.Length == 0)
             {
                 this.panel1.Controls["loc" + t.AccessibleName].Text = "";
                 this.panel1.Controls["desc" + t.AccessibleName].Text = "";
@@ -129,13 +129,13 @@ namespace InvoiceMaker
             c.SelectionStart = c.Text.Length;
 
             List<Product> productList = ProductDatabase.SearchProductsByItemNo(c.Text);
-            
-                Object[] arr = new Object[productList.Count];
-                for (int j = 0; j < productList.Count; j++)
-                {
-                    arr[j] = productList[j].ItemNo;
-                }
-                c.Items.AddRange(arr);
+
+            Object[] arr = new Object[productList.Count];
+            for (int j = 0; j < productList.Count; j++)
+            {
+                arr[j] = productList[j].ItemNo;
+            }
+            c.Items.AddRange(arr);
         }
 
         private void AddLabels(int customerID)
@@ -144,7 +144,7 @@ namespace InvoiceMaker
             int y = 180;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
-            
+
             //customer labels
             Label storeNameLabel = new Label();
             if (cust.StoreDetails.Length != 0)
@@ -303,7 +303,7 @@ namespace InvoiceMaker
                 Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
                 Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
 
-            for(int j=0; j<i; j++)
+            for (int j = 0; j < i; j++)
             {
 
                 String itemNo = this.panel1.Controls["itemNumber" + j].Text;
@@ -314,7 +314,7 @@ namespace InvoiceMaker
                 String notes = this.panel1.Controls["specialNotes" + j].Text;
                 Debug.Print(notes);
 
-                InvoiceContentsDatabase.AddInvoiceContent(invoiceID,itemNo, qty, notes);
+                InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
             }
 
         }
@@ -358,12 +358,12 @@ namespace InvoiceMaker
             gst.AccessibleName = "gst";
             this.Controls.Add(gst);
 
-            if(PST)
+            if (PST)
             {
                 Label pstLabel = new Label();
                 pstLabel.Text = "PST";
                 pstLabel.Location = new Point(560, 560);
-                pstLabel.Size = new Size(50,25);
+                pstLabel.Size = new Size(50, 25);
                 pstLabel.TextAlign = ContentAlignment.TopRight;
                 this.Controls.Add(pstLabel);
 
@@ -416,7 +416,7 @@ namespace InvoiceMaker
 
             this.Controls["gst"].Text = "" + provinceTax.gst;
             this.Controls["pst"].Text = "" + provinceTax.pst;
-            this.Controls["invoiceTotal"].Text = "" + Single.Parse(this.Controls["subTotalAmount"].Text) * (1+gstRate+pstRate);
+            this.Controls["invoiceTotal"].Text = "" + Single.Parse(this.Controls["subTotalAmount"].Text) * (1 + gstRate + pstRate);
         }
 
         private void AddItemBoxes()
@@ -533,7 +533,7 @@ namespace InvoiceMaker
         private void Amount_TextChanged(object sender, EventArgs e)
         {
             float total = 0;
-            for(int j=0; j<i; j++)
+            for (int j = 0; j < i; j++)
             {
                 if (this.panel1.Controls["amount" + j].Text.Length != 0)
                 {
