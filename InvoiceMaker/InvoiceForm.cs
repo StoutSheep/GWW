@@ -207,12 +207,6 @@ namespace InvoiceMaker
             shippingInstructionsLabel.AutoSize = true;
             this.Controls.Add(shippingInstructionsLabel);
 
-            Label specialCustomerNotesLabel = new Label();
-            //specialCustomerNotesLabel.Text = "Special Notes: " + cust.SpecialNotes;
-            specialCustomerNotesLabel.Location = new Point(30, 130);
-            specialCustomerNotesLabel.AutoSize = true;
-            this.Controls.Add(specialCustomerNotesLabel);
-
             Label purchaseOrderLabel = new Label();
             purchaseOrderLabel.Text = "PO#:";
             purchaseOrderLabel.Location = new Point(30, 145);
@@ -305,7 +299,7 @@ namespace InvoiceMaker
         {
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, cust.SpecialNotes, 0,
+            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, "SPECIAL NOTE HERE", 0,
                 Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
                 Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
 
