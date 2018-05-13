@@ -200,6 +200,9 @@ namespace InvoiceMaker
 
 
             Invoice jk = new Invoice(1);
+
+
+            List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);
             int sdas = 1;
 
 
