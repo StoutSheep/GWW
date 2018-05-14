@@ -221,7 +221,7 @@
     <EmbeddedResource Include="ReadProduct.resx">
       <DependentUpon>ReadProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report3.rdlc" />
+    <EmbeddedResource Include="InvoiceReport.rdlc" />
     <EmbeddedResource Include="SelectCustomer.resx">
       <DependentUpon>SelectCustomer.cs</DependentUpon>
     </EmbeddedResource>

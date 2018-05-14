@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.CustomerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.InvoiceItemDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.CustomerBindingSource)).BeginInit();
+            this.CustomerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.InvoiceItemDetailBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer1
@@ -42,20 +42,21 @@
             reportDataSource1.Name = "InvoiceData";
             reportDataSource1.Value = this.InvoiceItemDetailBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "InvoiceMaker.Report3.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "InvoiceMaker.InvoiceReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(-2, 2);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1792, 970);
             this.reportViewer1.TabIndex = 0;
-            // 
-            // CustomerBindingSource
-            // 
-            this.CustomerBindingSource.DataSource = typeof(InvoiceMaker.Customer);
+            this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
             // 
             // InvoiceItemDetailBindingSource
             // 
             this.InvoiceItemDetailBindingSource.DataSource = typeof(InvoiceMaker.InvoiceItemDetail);
+            // 
+            // CustomerBindingSource
+            // 
+            this.CustomerBindingSource.DataSource = typeof(InvoiceMaker.Customer);
             // 
             // Form2
             // 
@@ -66,8 +67,8 @@
             this.Name = "Form2";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.CustomerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InvoiceItemDetailBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

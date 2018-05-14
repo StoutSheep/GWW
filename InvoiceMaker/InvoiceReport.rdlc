@@ -863,7 +863,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pCompanyAddress.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -893,7 +893,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pCompanyPhoneNumber.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -923,7 +923,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pCompanyFax.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -953,7 +953,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pCompanyTollFree.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1143,7 +1143,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pInvoiceNumber.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1169,7 +1169,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pTerms.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1223,7 +1223,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pShippingTerms.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1249,7 +1249,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pPurchaseOrder.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1318,7 +1318,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pStoreName.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1348,7 +1348,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pStoreContact.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1378,7 +1378,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pStoreAddress.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1408,7 +1408,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pStorePhone.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1502,7 +1502,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pGSTno.Value</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>
@@ -1635,7 +1635,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pSubtotal.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1665,7 +1665,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pGST.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1695,7 +1695,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!pTotal.Value</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1746,7 +1746,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="pCompanyPhone">
+    <ReportParameter Name="pCompanyPhoneNumber">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1824,11 +1824,23 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="pGST">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pTotal">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pSubtotal">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>4</NumberOfRows>
+      <NumberOfRows>5</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1843,7 +1855,7 @@
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>pCompanyPhone</ParameterName>
+          <ParameterName>pCompanyPhoneNumber</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
@@ -1904,6 +1916,21 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>3</RowIndex>
           <ParameterName>pStoreAddress</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>pGST</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>pTotal</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>pSubtotal</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
