@@ -338,8 +338,11 @@ namespace InvoiceMaker
                 invoiceItemDetails[i].InvoiceItemNote = invoice.Items[i].SpecialNotes;
             }
 
-            PrintInvoiceReport = new PrintInvoiceReport(invoice, invoiceItemDetails);
-            PrintInvoiceReport.ShowDialog();
+            Form Form2 = new Form2(invoice, invoiceItemDetails);
+            Form2.ShowDialog();
+
+            //PrintInvoiceReport = new PrintInvoiceReport(invoice, invoiceItemDetails);
+            //PrintInvoiceReport.ShowDialog();
         }
 
         private void AddTotalBoxes(int customerID)

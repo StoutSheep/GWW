@@ -40,6 +40,7 @@
             this.reportViewer.ServerReport.BearerToken = null;
             this.reportViewer.Size = new System.Drawing.Size(2310, 1145);
             this.reportViewer.TabIndex = 0;
+            this.reportViewer.Load += new System.EventHandler(this.reportViewer_Load);
             // 
             // PrintInvoiceReport
             // 

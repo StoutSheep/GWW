@@ -25,6 +25,11 @@ namespace InvoiceMaker
 
         private void InvoiceReport_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void reportViewer_Load(object sender, EventArgs e)
+        {
             var reportDataSource = new ReportDataSource("InvoiceItemData", _list);
             //var invoiceDataSource = new ReportDataSource("InvoiceData", _invoice);
             //Init data source
