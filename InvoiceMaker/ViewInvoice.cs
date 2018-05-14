@@ -109,7 +109,9 @@ namespace InvoiceMaker
 
         private void DoubleCheckListView_DoubleClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            InvoiceDoubleCheckStage form = new InvoiceDoubleCheckStage(Int32.Parse(doubleCheckListView.SelectedItems[0].SubItems[0].Text));
+            form.Size = new System.Drawing.Size(1000, 700);
+            form.Show();
         }
 
         private void PickingListView_DoubleClick(object sender, EventArgs e)
