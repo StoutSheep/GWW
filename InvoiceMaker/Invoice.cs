@@ -19,7 +19,7 @@ namespace InvoiceMaker
         public String CompanyTollFree { get; set; }
         public String GSTNo { get; set; }
 
-        public Customer Customer { get; set; }
+        public Customer customer { get; set; }
         public String CustomerName { get; set; }
         public String CustomerContact { get; set; }
         public String CustomerAddress { get; set; }
@@ -47,6 +47,8 @@ namespace InvoiceMaker
             CompanyPhoneNumber = "123-456-7890";
             CompanyFax = "123-456-7890";
             CompanyTollFree = "1-800-123-4567";
+            GSTNo = "abc123";
+
 
             Items = new List<Product>();
             String pswd = "password";
@@ -75,14 +77,14 @@ namespace InvoiceMaker
 
                     InvoiceID = Int32.Parse(rdr[0].ToString());
 
-                    Customer = CustomerDatabase.SearchCustomersByID(Int32.Parse(rdr[1].ToString()));
+                    customer = CustomerDatabase.SearchCustomersByID(Int32.Parse(rdr[1].ToString()));
 
-                    CustomerName = Customer.StoreName;
-                    CustomerContact = Customer.StoreContact;
-                    CustomerAddress = Customer.ShippingAddress;
-                    CustomerPhone = Customer.PhoneNumber;
-                    CustomerTerms = Customer.PaymentTerms;
-                    CustomerShippingTerms = Customer.ShippingInstructions;
+                    CustomerName = customer.StoreName;
+                    CustomerContact = customer.StoreContact;
+                    CustomerAddress = customer.ShippingAddress;
+                    CustomerPhone = customer.PhoneNumber;
+                    CustomerTerms = customer.PaymentTerms;
+                    CustomerShippingTerms = customer.ShippingInstructions;
 
                     PurchaseOrder = rdr[2].ToString();
 

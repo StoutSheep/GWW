@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,8 @@ namespace InvoiceMaker
 
         private void InvoiceReport_Load(object sender, EventArgs e)
         {
+            var reportDataSource = new ReportDataSource("InvoiceItemData", _list);
+            //var invoiceDataSource = new ReportDataSource("InvoiceData", _invoice);
             //Init data source
             //InvoiceItemDetailBindingSource.DataSource = _list;
             //Set parameter for your report
@@ -44,7 +47,7 @@ namespace InvoiceMaker
                 new Microsoft.Reporting.WinForms.ReportParameter("pStoreContact",_invoice.CustomerContact),
                 new Microsoft.Reporting.WinForms.ReportParameter("pStoreAddress",_invoice.CustomerAddress),
                 new Microsoft.Reporting.WinForms.ReportParameter("pStorePhone",_invoice.CustomerPhone),
-                new Microsoft.Reporting.WinForms.ReportParameter("pSubTotal",_invoice.SubTotal.ToString()),
+                new Microsoft.Reporting.WinForms.ReportParameter("pSubtotal",_invoice.SubTotal.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pGST",_invoice.Gst.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pTotal",_invoice.NetTotal.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pGSTno",_invoice.GSTNo),

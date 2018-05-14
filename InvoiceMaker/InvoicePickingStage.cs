@@ -18,6 +18,9 @@ namespace InvoiceMaker
         int customerID;
         Invoice invoice;
         List<InvoiceContentInfo> invoiceContentsList;
+        public PrintInvoiceReport PrintInvoiceReport;
+        public List<InvoiceItemDetail> invoiceItemDetails { get; set; }
+
 
         public InvoicePickingStage(int invoiceID)
         {
@@ -259,6 +262,13 @@ namespace InvoiceMaker
             okButton.Text = "OK";
             okButton.Click += OkButton_Click;
             this.Controls.Add(okButton);
+
+            Button printButton = new Button();
+            printButton.Location = new Point(200, 620);
+            printButton.Size = new Size(50, 25);
+            printButton.Text = "Print";
+            printButton.Click += PrintButton_Click;
+            this.Controls.Add(printButton);
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -305,7 +315,31 @@ namespace InvoiceMaker
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
+        }
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            invoiceItemDetails = new List<InvoiceItemDetail>();
+
+            for (int i = 0; i < invoice.Items.Count; i++)
+            {
+                invoiceItemDetails.Add(new InvoiceItemDetail());
+                //invoiceItemDetails[i].InvoiceID = invoice.Items[i].;
+                invoiceItemDetails[i].QTY = invoice.Items[i].Quantity;
+                invoiceItemDetails[i].GrabCarton = invoice.Items[i].Quantity / invoice.Items[i].PerCarton;
+                invoiceItemDetails[i].ItemNo = invoice.Items[i].ItemNo;
+                invoiceItemDetails[i].Location = invoice.Items[i].Location;
+                invoiceItemDetails[i].Description = invoice.Items[i].ItemDesc;
+                invoiceItemDetails[i].CartonTotal = invoice.Items[i].PerCarton;
+                invoiceItemDetails[i].InvoiceItemSellPrice = invoice.Items[i].SellPrice;
+                invoiceItemDetails[i].InvoiceItemAmount = invoice.Items[i].Quantity * invoice.Items[i].SellPrice;
+                invoiceItemDetails[i].InvoiceItemNote = invoice.Items[i].SpecialNotes;
+            }
+
+            PrintInvoiceReport = new PrintInvoiceReport(invoice, invoiceItemDetails);
+            PrintInvoiceReport.ShowDialog();
         }
 
         private void AddTotalBoxes(int customerID)
