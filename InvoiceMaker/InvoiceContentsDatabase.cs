@@ -239,6 +239,45 @@ namespace InvoiceMaker
 
         }
 
+        internal static List<InvoiceContentInfo> GetBackorderedItems(int invoiceID)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            List<InvoiceContentInfo> items = new List<InvoiceContentInfo>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+                MySqlDataReader rdr;
+
+                sql = "SELECT * FROM InvoiceContents" +
+                  " WHERE InvoiceID = " + invoiceID +
+                  " AND Backorder > 0" +
+                  " ORDER BY itemNo ASC;";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+                InvoiceContentInfo temp;
+
+
+                while (rdr.Read())
+                {
+                    temp = new InvoiceContentInfo(rdr[2].ToString(), Int32.Parse(rdr[3].ToString()), Int32.Parse(rdr[4].ToString()), rdr[5].ToString());
+                    items.Add(temp);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+            return items;
+
+        }
+
 
 
 
