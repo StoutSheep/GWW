@@ -16,6 +16,7 @@ namespace InvoiceMaker
         public int InvoiceID { get; set; }
         public String PurchaseOrder { get; set; }
         public String SpecialNotes { get; set; }
+        
         public int InvoiceNo { get; set; }
         public float SubTotal { get; set; }
         public float Gst { get; set; }
@@ -68,6 +69,7 @@ namespace InvoiceMaker
                         temp.SpecialNotes = items[i].SpecialNotes;
                         temp.Quantity = items[i].Quantity;
                         temp.BackOrder = items[i].Backorder;
+                        temp.BackOrderSpecialNotes = items[i].BackOrderSpecialNotes;
                         Items.Add(temp);
                         
                     }

@@ -32,6 +32,7 @@ namespace InvoiceMaker
         internal int Quantity { get; set; }
         internal String SpecialNotes { get; set; }
         internal int BackOrder { get; set; }
+        internal String BackOrderSpecialNotes { get; set; }
 
 
         //Everything is filled.
