@@ -128,6 +128,7 @@ namespace InvoiceMaker
                    "Quantity int NOT NULL," +
                    "Backorder int DEFAULT 0," +
                    "SpecialNotes varchar(40)," +
+                   "BackorderSpecialNotes varchar(40)," +
                    "PRIMARY KEY (EntryID)," +
                    "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID)," +
                    "FOREIGN KEY (ItemNo) REFERENCES Products(ItemNo)" +
@@ -202,7 +203,12 @@ namespace InvoiceMaker
             Invoice jk = new Invoice(1);
 
 
+
+            InvoiceContentsDatabase.UpdateBackorderSpecialNotes(1, "hello");
+
+
             List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);
+
             int sdas = 1;
 
 

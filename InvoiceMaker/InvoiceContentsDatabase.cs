@@ -212,6 +212,33 @@ namespace InvoiceMaker
 
         }
 
+        internal static void UpdateBackorderSpecialNotes(int entryID, String specialNotes)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "UPDATE InvoiceContents " +
+                  "SET BackorderSpecialNotes = '" + specialNotes + "'" +
+                  " WHERE EntryID = " + entryID +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
 
 
 
