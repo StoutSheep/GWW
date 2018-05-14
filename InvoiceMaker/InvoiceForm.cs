@@ -35,11 +35,9 @@ namespace InvoiceMaker
                 PST = true;
             }
 
-            panel1.Location = new Point(30, 135);
-            panel1.Size = new Size(800, 360);
+            panel1.Location = new Point(30, 195);
+            panel1.Size = new Size(800, 300);
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            panel1.AutoScroll = true;
-            panel1.BackColor = Color.AntiqueWhite;
 
             this.Controls.Add(panel1);
             AddLabels(customerID);
@@ -127,7 +125,6 @@ namespace InvoiceMaker
 
             c.Items.Clear();
             c.SelectionLength = 0;
-            Cursor.Current = Cursors.Default;
 
             c.SelectionStart = c.Text.Length;
 
@@ -144,7 +141,7 @@ namespace InvoiceMaker
         private void AddLabels(int customerID)
         {
             int x = 30;
-            int y = 120;
+            int y = 180;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
             
@@ -188,53 +185,42 @@ namespace InvoiceMaker
 
             Label phoneLabel = new Label();
             phoneLabel.Text = "Phone: " + cust.PhoneNumber;
-            phoneLabel.Location = new Point(500, 10);
+            phoneLabel.Location = new Point(30, 85);
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
 
             Label provinceLabel = new Label();
             provinceLabel.Text = "Province Tax: " + cust.Province;
-            provinceLabel.Location = new Point(500, 25);
+            provinceLabel.Location = new Point(30, 100);
             provinceLabel.AutoSize = true;
             this.Controls.Add(provinceLabel);
 
             Label paymentLabel = new Label();
             paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
-            paymentLabel.Location = new Point(500, 40);
+            paymentLabel.Location = new Point(30, 115);
             paymentLabel.AutoSize = true;
             this.Controls.Add(paymentLabel);
 
             Label shippingInstructionsLabel = new Label();
             shippingInstructionsLabel.Text = "Shipping Instructions: " + cust.ShippingInstructions;
-            shippingInstructionsLabel.Location = new Point(500, 55);
+            shippingInstructionsLabel.Location = new Point(30, 130);
             shippingInstructionsLabel.AutoSize = true;
             this.Controls.Add(shippingInstructionsLabel);
 
             Label purchaseOrderLabel = new Label();
             purchaseOrderLabel.Text = "PO#:";
-            purchaseOrderLabel.Location = new Point(30, 85);
+            purchaseOrderLabel.Location = new Point(30, 145);
             purchaseOrderLabel.AutoSize = true;
             this.Controls.Add(purchaseOrderLabel);
 
             TextBox purchaseOrder = new TextBox();
-            purchaseOrder.Location = new Point(65, 85);
+            purchaseOrder.Location = new Point(65, 145);
             purchaseOrder.Size = new Size(100, 25);
             purchaseOrder.Name = "purchaseOrder";
             purchaseOrder.AccessibleName = "purchaseOrder";
             this.Controls.Add(purchaseOrder);
 
-            Label invoiceSpecialNotesLabel = new Label();
-            invoiceSpecialNotesLabel.Text = "Special Notes:";
-            invoiceSpecialNotesLabel.Location = new Point(180, 85);
-            invoiceSpecialNotesLabel.AutoSize = true;
-            this.Controls.Add(invoiceSpecialNotesLabel);
 
-            TextBox invoiceSpecialNotes = new TextBox();
-            invoiceSpecialNotes.Location = new Point(260, 85);
-            invoiceSpecialNotes.Size = new Size(500, 25);
-            invoiceSpecialNotes.Name = "invoiceSpecialNotes";
-            purchaseOrder.AccessibleName = "invoiceSpecialNotes";
-            this.Controls.Add(invoiceSpecialNotes);
 
 
             //Invoice column headers
@@ -313,13 +299,13 @@ namespace InvoiceMaker
         {
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, 0,
+            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, "SPECIAL NOTE HERE", 0,
                 Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
                 Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
 
             for(int j=0; j<i; j++)
             {
-                
+
                 String itemNo = this.panel1.Controls["itemNumber" + j].Text;
                 Debug.Print(itemNo);
                 int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
@@ -425,18 +411,12 @@ namespace InvoiceMaker
         {
             Customer c = CustomerDatabase.SearchCustomersByID(customerID);
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(c.Province);
-            float gstRate = (float) provinceTax.gst / 100;
-            
+            float gstRate = provinceTax.gst / 100;
+            float pstRate = provinceTax.pst / 100;
 
-            this.Controls["gst"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * gstRate).ToString("0.00");
-            this.Controls["invoiceTotal"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * (1 + gstRate)).ToString("0.00");
-            if (PST)
-            {
-                float pstRate = (float) provinceTax.pst / 100;
-                this.Controls["pst"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * pstRate).ToString("0.00");
-                this.Controls["invoiceTotal"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * (1 + gstRate + pstRate)).ToString("0.00");
-            }
-
+            this.Controls["gst"].Text = "" + provinceTax.gst;
+            this.Controls["pst"].Text = "" + provinceTax.pst;
+            this.Controls["invoiceTotal"].Text = "" + Single.Parse(this.Controls["subTotalAmount"].Text) * (1+gstRate+pstRate);
         }
 
         private void AddItemBoxes()
@@ -457,7 +437,6 @@ namespace InvoiceMaker
             itemNumber.TextChanged += C_TextChanged;
             itemNumber.LostFocus += ItemNumber_LostFocus;
             itemNumber.Name = "itemNumber" + i;
-            itemNumber.MaxDropDownItems = 10;
             Debug.Print(itemNumber.Name);
             itemNumber.AccessibleName = "" + i;
             panel1.Controls.Add(itemNumber);
@@ -520,10 +499,6 @@ namespace InvoiceMaker
         private void ItemNumber_LostFocus(object sender, EventArgs e)
         {
             ComboBox c = (ComboBox)sender;
-            if (c.Items.Count == 0)
-            {
-                return;
-            }
             Product product = ProductDatabase.SearchProductByItemNo(c.Text);
             if (product != null)
             {

@@ -69,7 +69,6 @@ namespace InvoiceMaker
                 cmd.ExecuteNonQuery();
 
 
-
                 sql = "CREATE TABLE IF NOT EXISTS Customers (" +
                     "StoreID int NOT NULL AUTO_INCREMENT," +
                     "StoreName varchar(50) NOT NULL," +
@@ -108,11 +107,13 @@ namespace InvoiceMaker
                    "StoreID int NOT NULL," +
                    "PurchaseOrder varchar(20)," +
                    "SpecialNotes varchar(100)," +
+                   "BackorderSpecialNotes varchar(100)," +
                    "InvoiceNo int," +
                    "SubTotal DECIMAL(10,2)," +
                    "Gst DECIMAL(10,2)," +
                    "Pst DECIMAL(10,2)," +
                    "NetTotal DECIMAL(10,2)," +
+                   "Freight DECIMAL(10,2) DEFAULT 0," +
                    "Stage int NOT NULL," +
                    "PRIMARY KEY (InvoiceID)," +
                    "FOREIGN KEY (StoreID) REFERENCES Customers(StoreID)" +
@@ -128,10 +129,9 @@ namespace InvoiceMaker
                    "Quantity int NOT NULL," +
                    "Backorder int DEFAULT 0," +
                    "SpecialNotes varchar(40)," +
-                   "BackorderSpecialNotes varchar(40)," +
                    "PRIMARY KEY (EntryID)," +
                    "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID)," +
-                   "FOREIGN KEY (ItemNo) REFERENCES Products(ItemNo)" +
+                   "FOREIGN KEY (ItemNo) REFERENCES Products(ItemNo) ON UPDATE CASCADE" +
                    ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -153,12 +153,14 @@ namespace InvoiceMaker
 
         static void SeedData()
         {
+
             ProductDatabase.AddProduct("1234a", "cats", 3, "sdaccs", 34.0, 78.3, 3232);
             ProductDatabase.AddProduct("1234b", "dog", 3, "sdadfs", 34.2, 78.3, 32422);
             ProductDatabase.AddProduct("1234c", "animal", 3, "sd44as", 34.2, 78.3, 63242);
             ProductDatabase.AddProduct("1234d", "kangaroo", 3, "sdras", 34.2, 78.3, 73242);
             ProductDatabase.AddProduct("1234e", "rat", 3, "sdasw", 34.2, 78.3, 453242);
             ProductDatabase.AddProduct("1234f", "snek", 3, "sdas", 34.2, 78.3, 324542);
+
         }
 
 
@@ -193,22 +195,20 @@ namespace InvoiceMaker
             InvoiceDatabase.AddInvoice(1, "Invoice 4", "n/a", 3, 10, 5, 7, 12, 1);
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
+            */
 
-    */
             List<Customer> sd = CustomerDatabase.SearchCustomersByStoreName("Updated");
 
             List<InvoiceContentInfo> sad = InvoiceContentsDatabase.GetInvoiceContents(1);
 
 
+            InvoiceDatabase.UpdateFreight(1, 23.3f);
+            InvoiceDatabase.UpdateBackorderSpecialNotes(1, "sadad");
+
             Invoice jk = new Invoice(1);
 
 
-
-            InvoiceContentsDatabase.UpdateBackorderSpecialNotes(1, "hello");
-
-
             List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);
-
             int sdas = 1;
 
 
