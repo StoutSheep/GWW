@@ -261,7 +261,7 @@ namespace InvoiceMaker
 
                 while (rdr.Read())
                 {
-                    temp = new InvoiceContentInfo(rdr[2].ToString(), Int32.Parse(rdr[3].ToString()), Int32.Parse(rdr[4].ToString()), rdr[5].ToString());
+                    temp = new InvoiceContentInfo(rdr[2].ToString(), Int32.Parse(rdr[3].ToString()), Int32.Parse(rdr[4].ToString()), rdr[5].ToString(), rdr[6].ToString());
                     items.Add(temp);
                 }
 
