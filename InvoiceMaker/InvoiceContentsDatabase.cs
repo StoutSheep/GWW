@@ -159,7 +159,7 @@ namespace InvoiceMaker
 
                 sql = "SELECT * FROM InvoiceContents" +
                   " WHERE InvoiceID = " + invoiceID +
-                  ";";
+                  " ORDER BY itemNo ASC;";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
                 InvoiceContentInfo temp;

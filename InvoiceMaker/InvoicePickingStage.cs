@@ -239,13 +239,6 @@ namespace InvoiceMaker
             backorderLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(backorderLabel);
 
-            Label deleteLabel = new Label();
-            deleteLabel.Text = "Del";
-            deleteLabel.Location = new Point(x + 830, y);
-            deleteLabel.AutoSize = true;
-            deleteLabel.BackColor = System.Drawing.Color.LightGray;
-            this.Controls.Add(deleteLabel);
-
             Button cancelButton = new Button();
             cancelButton.Location = new Point(720, 620);
             cancelButton.Size = new Size(50, 25);
@@ -267,36 +260,31 @@ namespace InvoiceMaker
 
             for (int i = 0; i < invoiceContentsList.Count; i++)
             {
-                int numDeleted;
-                if(this.panel1.Controls["itemDelete" + i].Text.Length == 0)
-                {
-                    numDeleted = 0;
-                }
-                else
-                {
-                    numDeleted = Int32.Parse(this.panel1.Controls["itemDelete" + i].Text);
-                }
                 int numBO;
-                if(this.panel1.Controls["backorder" + i].Text.Length == 0)
+                String itemNo = this.panel1.Controls["itemNumber" + i].Text;
+                String notes = this.panel1.Controls["specialNotes" + i].Text;
+                int qty = Int32.Parse(this.panel1.Controls["qty" + i].Text);
+                int entryID = InvoiceContentsDatabase.GetEntryID(invoice.InvoiceID, itemNo);
+
+                if (this.panel1.Controls["backorder" + i].Text.Length == 0)
                 {
-                    numBO = 0;
+                    InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
+                    break;
                 }
                 else
                 {
                     numBO = Int32.Parse(this.panel1.Controls["backorder" + i].Text);
+                    InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
+                    InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
                 }
-                Debug.Print("Deleted" + numDeleted + "bo" + numBO);
-                String itemNo = this.panel1.Controls["itemNumber" + i].Text;
-                String notes = this.panel1.Controls["specialNotes" + i].Text;
-                int updatedQty = Int32.Parse(this.panel1.Controls["qty" + i].Text) - numDeleted;
-                int entryID = InvoiceContentsDatabase.GetEntryID(invoice.InvoiceID, itemNo);
+                
 
                 Debug.Print("entryid:" + entryID);
                 Debug.Print("invoiceid" + invoice.InvoiceID);
                 Debug.Print("itemno" + itemNo);
 
-                InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, updatedQty, notes);
-                InvoiceContentsDatabase.UpdateBackorder(entryID, numBO);
+                InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
+                InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
 
             }
             InvoiceDatabase.UpdateStage(invoice.InvoiceID, 2);
@@ -400,12 +388,17 @@ namespace InvoiceMaker
         {
             Customer c = CustomerDatabase.SearchCustomersByID(customerID);
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(c.Province);
-            float gstRate = provinceTax.gst / 100;
-            float pstRate = provinceTax.pst / 100;
+            float gstRate = (float)provinceTax.gst / 100;
 
-            this.Controls["gst"].Text = "" + provinceTax.gst;
-            this.Controls["pst"].Text = "" + provinceTax.pst;
-            this.Controls["invoiceTotal"].Text = "" + Single.Parse(this.Controls["subTotalAmount"].Text) * (1 + gstRate + pstRate);
+
+            this.Controls["gst"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * gstRate).ToString("0.00");
+            this.Controls["invoiceTotal"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * (1 + gstRate)).ToString("0.00");
+            if (PST)
+            {
+                float pstRate = (float)provinceTax.pst / 100;
+                this.Controls["pst"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * pstRate).ToString("0.00");
+                this.Controls["invoiceTotal"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * (1 + gstRate + pstRate)).ToString("0.00");
+            }
         }
 
         private void AddItemBoxes()
@@ -482,6 +475,7 @@ namespace InvoiceMaker
                 amount.Enter += Desc_Enter;
                 amount.Name = "amount" + i;
                 amount.AccessibleName = "" + i;
+                amount.TextChanged += Amount_TextChanged;
                 panel1.Controls.Add(amount);
 
                 TextBox specialNotes = new TextBox();
@@ -497,18 +491,39 @@ namespace InvoiceMaker
                 backorder.Size = new Size(30, 25);
                 backorder.Name = "backorder" + i;
                 backorder.AccessibleName = "" + i;
+                backorder.TextChanged += Backorder_TextChanged;
                 panel1.Controls.Add(backorder);
-
-                TextBox itemDelete = new TextBox();
-                itemDelete.Location = new Point(830, 0 + i * 25);
-                itemDelete.Size = new Size(30, 25);
-                itemDelete.Name = "itemDelete" + i;
-                itemDelete.AccessibleName = "" + i;
-                panel1.Controls.Add(itemDelete);
 
             }
         }
 
+        private void Amount_TextChanged(object sender, EventArgs e)
+        {
+            float total = 0;
+            for (int i = 0; i < invoiceContentsList.Count; i++)
+            {
+                if (this.panel1.Controls["amount" + i].Text.Length != 0)
+                {
+                    total += Single.Parse(this.panel1.Controls["amount" + i].Text);
+                }
+            }
+
+            this.Controls["subtotalAmount"].Text = total.ToString("0.00");
+        }
+
+        private void Backorder_TextChanged(object sender, EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+
+            if (t.Text.Length != 0)
+            {
+                this.panel1.Controls["amount" + t.AccessibleName].Text = (Int32.Parse(t.Text) * Single.Parse(this.panel1.Controls["cost" + t.AccessibleName].Text)).ToString("0.00");
+            }
+            else
+            {
+                this.panel1.Controls["amount" + t.AccessibleName].Text = (Int32.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * Single.Parse(this.panel1.Controls["cost" + t.AccessibleName].Text)).ToString("0.00");
+            }
+        }
     }
 }
 
