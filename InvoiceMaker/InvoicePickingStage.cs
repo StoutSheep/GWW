@@ -289,11 +289,9 @@ namespace InvoiceMaker
                 Debug.Print("invoiceid" + invoice.InvoiceID);
                 Debug.Print("itemno" + itemNo);
 
-                InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
-                InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
 
             }
-            InvoiceDatabase.UpdateStage(invoice.InvoiceID, 2);
+            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text),2);
 
         }
 

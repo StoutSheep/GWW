@@ -74,7 +74,7 @@ namespace InvoiceMaker
 
 
 
-        internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subtotal, int gst, int pst, int netTotal, int stage)
+        internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subtotal, float gst, float pst, float netTotal, int stage)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             try
@@ -86,9 +86,9 @@ namespace InvoiceMaker
             
                 sql = "UPDATE Invoices " +
                    "SET StoreID = " + storeID +
-                   ",PurchaseOrder = " + purchaseOrder +
-                   ",SpecialNotes = " + specialNotes +
-                   ",InvoiceNo = " + invoiceNo +
+                   ",PurchaseOrder = '" + purchaseOrder +
+                   "',SpecialNotes = '" + specialNotes +
+                   "',InvoiceNo = " + invoiceNo +
                    ",Subtotal = " + subtotal +
                    ",Gst = " + gst +
                    ",Pst = " + pst +
@@ -111,7 +111,7 @@ namespace InvoiceMaker
         }
 
 
-        internal static void UpdateTotals(int invoiceID, int subtotal, int gst, int pst, int netTotal)
+        internal static void UpdateTotals(int invoiceID, float subtotal, float gst, float pst, float netTotal)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             try

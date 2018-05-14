@@ -134,14 +134,9 @@ namespace InvoiceMaker
             }
             else
             {
-                if (char.IsDigit(productTextBox.Text[0]))
-                {
-                    list = ProductDatabase.SearchProductsByItemNo(productTextBox.Text);
-                }
-                else
-                {
-                    list = ProductDatabase.SearchProductsByDesc(productTextBox.Text);
-                }
+                list = ProductDatabase.SearchProductsByItemNo(productTextBox.Text);
+                list.AddRange(ProductDatabase.SearchProductsByDesc(productTextBox.Text));
+                
             }
             foreach (Product p in list)
             {
