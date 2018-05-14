@@ -199,7 +199,7 @@
     <EmbeddedResource Include="ExcelReadWindow.resx">
       <DependentUpon>ExcelReadWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InvoiceReport.rdlc" />
+    <EmbeddedResource Include="-.rdlc" />
     <EmbeddedResource Include="PrintInvoiceReport.resx">
       <DependentUpon>PrintInvoiceReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,8 +221,6 @@
     <EmbeddedResource Include="ReadProduct.resx">
       <DependentUpon>ReadProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report1.rdlc" />
-    <EmbeddedResource Include="Report2.rdlc" />
     <EmbeddedResource Include="Report3.rdlc" />
     <EmbeddedResource Include="SelectCustomer.resx">
       <DependentUpon>SelectCustomer.cs</DependentUpon>
