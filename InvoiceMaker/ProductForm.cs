@@ -122,12 +122,8 @@ namespace InvoiceMaker
             }
             else if(editMode && editValid)
             {
-                if (replacedItemNo != null)
-                {
-                    ProductDatabase.DeleteProductByItemNo(replacedItemNo);
-                }
-                ProductDatabase.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
-                
+                ProductDatabase.EditProduct(replacedItemNo, itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+              
                 this.Close();
             }
         }

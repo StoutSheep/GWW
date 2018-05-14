@@ -181,6 +181,19 @@ namespace InvoiceMaker
             invoiceSpecialNotesLabel.AutoSize = true;
             this.Controls.Add(invoiceSpecialNotesLabel);
 
+            Label invoiceNumberLabel = new Label();
+            invoiceNumberLabel.Text = "Invoice #: ";
+            invoiceNumberLabel.Location = new Point(700, 10);
+            invoiceNumberLabel.AutoSize = true;
+            this.Controls.Add(invoiceNumberLabel);
+
+            TextBox invoiceNumber = new TextBox();
+            invoiceNumber.Location = new Point(760, 10);
+            invoiceNumber.Size = new Size(75, 25);
+            invoiceNumber.Name = "invoiceNumber";
+            invoiceNumber.AccessibleName = "invoiceNumber";
+            this.Controls.Add(invoiceNumber);
+
             //Invoice column headers
             Label qtyLabel = new Label();
             qtyLabel.Text = "Qty";
@@ -286,7 +299,7 @@ namespace InvoiceMaker
                 Debug.Print("itemno" + itemNo);
 
             }
-            InvoiceDatabase.UpdateStage(invoice.InvoiceID, 3);
+            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
 
         }
 
@@ -349,6 +362,54 @@ namespace InvoiceMaker
                 pst.AccessibleName = "pst";
                 this.Controls.Add(pst);
 
+                Label feightLabel = new Label();
+                feightLabel.Text = "Freight";
+                feightLabel.Location = new Point(570, 590);
+                feightLabel.AutoSize = true;
+                feightLabel.TextAlign = ContentAlignment.TopRight;
+                this.Controls.Add(feightLabel);
+
+                TextBox freight = new TextBox();
+                freight.Location = new Point(610, 590);
+                freight.Size = new Size(50, 25);
+                freight.Name = "freight";
+                freight.AccessibleName = "freight";
+                freight.TextChanged += Freight_TextChanged1;
+                this.Controls.Add(freight);
+
+                Label invoiceTotalLabel = new Label();
+                invoiceTotalLabel.Text = "Invoice Total";
+                invoiceTotalLabel.Location = new Point(540, 620);
+                invoiceTotalLabel.AutoSize = true;
+                this.Controls.Add(invoiceTotalLabel);
+
+                TextBox invoiceTotal = new TextBox();
+                invoiceTotal.Location = new Point(610, 620);
+                invoiceTotal.Size = new Size(50, 25);
+                invoiceTotal.Text = invoice.NetTotal.ToString("0.00");
+                invoiceTotal.ReadOnly = true;
+                invoiceTotal.Name = "invoiceTotal";
+                invoiceTotal.AccessibleName = "invoiceTotal";
+                this.Controls.Add(invoiceTotal);
+            }
+            else //no pst
+            {
+
+                Label feightLabel = new Label();
+                feightLabel.Text = "Freight";
+                feightLabel.Location = new Point(570, 560);
+                feightLabel.AutoSize = true;
+                feightLabel.TextAlign = ContentAlignment.TopRight;
+                this.Controls.Add(feightLabel);
+
+                TextBox freight = new TextBox();
+                freight.Location = new Point(610, 560);
+                freight.Size = new Size(50, 25);
+                freight.Name = "freight";
+                freight.AccessibleName = "freight";
+                freight.TextChanged += Freight_TextChanged;
+                this.Controls.Add(freight);
+
                 Label invoiceTotalLabel = new Label();
                 invoiceTotalLabel.Text = "Invoice Total";
                 invoiceTotalLabel.Location = new Point(540, 590);
@@ -364,23 +425,38 @@ namespace InvoiceMaker
                 invoiceTotal.AccessibleName = "invoiceTotal";
                 this.Controls.Add(invoiceTotal);
             }
-            else //no pst
-            {
-                Label invoiceTotalLabel = new Label();
-                invoiceTotalLabel.Text = "Invoice Total";
-                invoiceTotalLabel.Location = new Point(540, 560);
-                invoiceTotalLabel.AutoSize = true;
-                this.Controls.Add(invoiceTotalLabel);
+        }
 
-                TextBox invoiceTotal = new TextBox();
-                invoiceTotal.Location = new Point(610, 560);
-                invoiceTotal.Size = new Size(50, 25);
-                invoiceTotal.Text = invoice.NetTotal.ToString("0.00");
-                invoiceTotal.ReadOnly = true;
-                invoiceTotal.Name = "invoiceTotal";
-                invoiceTotal.AccessibleName = "invoiceTotal";
-                this.Controls.Add(invoiceTotal);
+        private void Freight_TextChanged1(object sender, EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            float freight = 0;
+            if(t.Text.Length == 0)
+            {
+                freight = 0;
             }
+            else
+            {
+                freight = Single.Parse(t.Text);
+            }
+
+            this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
+        }
+
+        private void Freight_TextChanged(object sender, EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            float freight = 0;
+            if (t.Text.Length == 0)
+            {
+                freight = 0;
+            }
+            else
+            {
+                freight = Single.Parse(t.Text);
+            }
+
+            this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
         }
 
         private void SubtotalAmount_TextChanged(object sender, EventArgs e)

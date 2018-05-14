@@ -127,6 +127,7 @@ namespace InvoiceMaker
 
             c.Items.Clear();
             c.SelectionLength = 0;
+            Cursor.Current = Cursors.Default;
 
             c.SelectionStart = c.Text.Length;
 
@@ -456,6 +457,7 @@ namespace InvoiceMaker
             itemNumber.TextChanged += C_TextChanged;
             itemNumber.LostFocus += ItemNumber_LostFocus;
             itemNumber.Name = "itemNumber" + i;
+            itemNumber.MaxDropDownItems = 10;
             Debug.Print(itemNumber.Name);
             itemNumber.AccessibleName = "" + i;
             panel1.Controls.Add(itemNumber);
@@ -518,6 +520,10 @@ namespace InvoiceMaker
         private void ItemNumber_LostFocus(object sender, EventArgs e)
         {
             ComboBox c = (ComboBox)sender;
+            if (c.Items.Count == 0)
+            {
+                return;
+            }
             Product product = ProductDatabase.SearchProductByItemNo(c.Text);
             if (product != null)
             {
