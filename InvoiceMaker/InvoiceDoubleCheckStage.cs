@@ -313,8 +313,18 @@ namespace InvoiceMaker
                 Debug.Print("itemno" + itemNo);
 
             }
-            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
+            int invoiceNumber;
+            if(this.Controls["invoiceNumber"].Text.Length == 0)
+            {
+                invoiceNumber = -1;
+            }
+            else
+            {
+                invoiceNumber = Int32.Parse(this.Controls["invoiceNumber"].Text);
+            }
+            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
             InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
+            InvoiceDatabase.UpdateFreight(invoice.InvoiceID, Single.Parse(this.Controls["freight"].Text));
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
