@@ -69,7 +69,7 @@ namespace InvoiceMaker
 
         private void listView_DoubleClick(object sender, EventArgs e)
         {
-            InvoicePickingStage form = new InvoicePickingStage(Int32.Parse(listView.SelectedItems[0].SubItems[0].Text));
+            InvoiceCompleted form = new InvoiceCompleted(Int32.Parse(listView.SelectedItems[0].SubItems[0].Text));
             form.Size = new System.Drawing.Size(980, 700);
             form.Show();
         }

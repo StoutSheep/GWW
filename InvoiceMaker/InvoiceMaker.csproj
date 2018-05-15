@@ -83,6 +83,12 @@
     </Compile>
     <Compile Include="CustomerDatabase.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="InvoiceCompleted.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvoiceCompleted.Designer.cs">
+      <DependentUpon>InvoiceCompleted.cs</DependentUpon>
+    </Compile>
     <Compile Include="InvoiceContentInfo.cs" />
     <Compile Include="InvoiceContentsDatabase.cs" />
     <Compile Include="InvoiceDatabase.cs" />

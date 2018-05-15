@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,7 +10,7 @@ using System.Windows.Forms;
 
 namespace InvoiceMaker
 {
-    public partial class InvoiceDoubleCheckStage : Form
+    public partial class InvoiceCompleted : Form
     {
         Panel panel1 = new Panel();
         bool PST = false; //pst of customer
@@ -19,7 +18,7 @@ namespace InvoiceMaker
         Invoice invoice;
         List<InvoiceContentInfo> invoiceContentsList;
 
-        public InvoiceDoubleCheckStage(int invoiceID)
+        public InvoiceCompleted(int invoiceID)
         {
             InitializeComponent();
             invoice = new Invoice(invoiceID);
@@ -195,18 +194,10 @@ namespace InvoiceMaker
             this.Controls.Add(invoiceNumber);
 
             Label backorderInvoiceNotesLabel = new Label();
-            backorderInvoiceNotesLabel.Text = "Backorder Invoice Notes: ";
+            backorderInvoiceNotesLabel.Text = "Backorder Invoice Notes: " + invoice.BackorderNotes;
             backorderInvoiceNotesLabel.Location = new Point(30, 100);
             backorderInvoiceNotesLabel.AutoSize = true;
             this.Controls.Add(backorderInvoiceNotesLabel);
-
-            TextBox backorderInvoiceNotes = new TextBox();
-            backorderInvoiceNotes.Location = new Point(165, 100);
-            backorderInvoiceNotes.Size = new Size(700, 25);
-            backorderInvoiceNotes.Text = "ITEMS ON BACKORDER " + cust.StoreName + ". PO#: " + invoice.PurchaseOrder + " ";
-            backorderInvoiceNotes.Name = "backorderInvoiceNotes";
-            backorderInvoiceNotes.AccessibleName = "backorderInvoiceNotes";
-            this.Controls.Add(backorderInvoiceNotes);
 
             //Invoice column headers
             Label qtyLabel = new Label();
@@ -306,15 +297,10 @@ namespace InvoiceMaker
                     InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
                     InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
                 }
-
-
-                Debug.Print("entryid:" + entryID);
-                Debug.Print("invoiceid" + invoice.InvoiceID);
-                Debug.Print("itemno" + itemNo);
-
+                
             }
             InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
-            InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -445,7 +431,7 @@ namespace InvoiceMaker
         {
             TextBox t = (TextBox)sender;
             float freight = 0;
-            if(t.Text.Length == 0)
+            if (t.Text.Length == 0)
             {
                 freight = 0;
             }
@@ -627,4 +613,3 @@ namespace InvoiceMaker
         }
     }
 }
-

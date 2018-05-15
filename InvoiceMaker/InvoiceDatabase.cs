@@ -86,9 +86,9 @@ namespace InvoiceMaker
             
                 sql = "UPDATE Invoices " +
                    "SET StoreID = " + storeID +
-                   ",PurchaseOrder = " + purchaseOrder +
-                   ",SpecialNotes = " + specialNotes +
-                   ",InvoiceNo = " + invoiceNo +
+                   ",PurchaseOrder = '" + purchaseOrder +
+                   "',SpecialNotes = '" + specialNotes +
+                   "',InvoiceNo = " + invoiceNo +
                    ",Subtotal = " + subtotal +
                    ",Gst = " + gst +
                    ",Pst = " + pst +
@@ -182,8 +182,8 @@ namespace InvoiceMaker
 
 
                 sql = "UPDATE Invoices " +
-                   "SET BackorderSpecialNotes = " + notes +
-                   " WHERE InvoiceID = " + invoiceID +
+                   "SET BackorderSpecialNotes = '" + notes +
+                   "' WHERE InvoiceID = " + invoiceID +
                    ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();

@@ -24,6 +24,7 @@ namespace InvoiceMaker
         public float NetTotal { get; set; }
         public int Stage { get; set; }
         public List<Product> Items { get; set; }
+        public String BackorderNotes { get; set; }
 
 
         //constructor
@@ -54,13 +55,14 @@ namespace InvoiceMaker
                     customer = CustomerDatabase.SearchCustomersByID(Int32.Parse(rdr[1].ToString()));
                     PurchaseOrder = rdr[2].ToString();
                     SpecialNotes = rdr[3].ToString();
-                    InvoiceNo = Int32.Parse(rdr[4].ToString());
-                    SubTotal = Single.Parse(rdr[5].ToString());
+                    BackorderNotes = rdr[4].ToString();
+                    InvoiceNo = Int32.Parse(rdr[5].ToString());
+                    SubTotal = Single.Parse(rdr[6].ToString());
 
-                    Gst = Single.Parse(rdr[6].ToString());
-                    Pst = Single.Parse(rdr[7].ToString());
-                    NetTotal = Single.Parse(rdr[8].ToString());
-                    Stage = Int32.Parse(rdr[9].ToString());
+                    Gst = Single.Parse(rdr[7].ToString());
+                    Pst = Single.Parse(rdr[8].ToString());
+                    NetTotal = Single.Parse(rdr[9].ToString());
+                    Stage = Int32.Parse(rdr[10].ToString());
                     List<InvoiceContentInfo> items = InvoiceContentsDatabase.GetInvoiceContents(InvoiceID);
                     Product temp;
                     for (int i = 0; i < items.Count; i ++)

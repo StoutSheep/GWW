@@ -55,11 +55,11 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "UPDATE InvoiceContents " +
-                  "SET ItemNo = " + itemNo +
-                  ",Quantity = " + quantity +
+                  "SET ItemNo = '" + itemNo +
+                  "',Quantity = " + quantity +
                   ",InvoiceID = " + invoiceID +
-                  ",SpecialNotes = " + specialNotes +
-                  " WHERE EntryID = " + entryID +
+                  ",SpecialNotes = '" + specialNotes +
+                  "' WHERE EntryID = " + entryID +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
