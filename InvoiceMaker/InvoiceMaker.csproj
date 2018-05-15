@@ -122,12 +122,6 @@
     <Compile Include="ViewCompletedInvoices.Designer.cs">
       <DependentUpon>ViewCompletedInvoices.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewInvoiceReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewInvoiceReport.Designer.cs">
-      <DependentUpon>ViewInvoiceReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="ProductDatabase.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Form1.cs">
