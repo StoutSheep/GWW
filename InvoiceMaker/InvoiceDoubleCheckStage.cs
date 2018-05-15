@@ -192,6 +192,7 @@ namespace InvoiceMaker
             invoiceNumber.Size = new Size(75, 25);
             invoiceNumber.Name = "invoiceNumber";
             invoiceNumber.AccessibleName = "invoiceNumber";
+            invoiceNumber.KeyPress += textBoxOnlyNumb_KeyPress;
             this.Controls.Add(invoiceNumber);
 
             Label backorderInvoiceNotesLabel = new Label();
@@ -329,7 +330,7 @@ namespace InvoiceMaker
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
         }
 
         private void AddTotalBoxes(int customerID)
@@ -399,6 +400,7 @@ namespace InvoiceMaker
                 freight.Name = "freight";
                 freight.AccessibleName = "freight";
                 freight.TextChanged += Freight_TextChanged1;
+                freight.KeyPress += textBoxCurrency_KeyPress;
                 this.Controls.Add(freight);
 
                 Label invoiceTotalLabel = new Label();
@@ -633,6 +635,29 @@ namespace InvoiceMaker
             else
             {
                 this.panel1.Controls["amount" + t.AccessibleName].Text = (Int32.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * Single.Parse(this.panel1.Controls["cost" + t.AccessibleName].Text)).ToString("0.00");
+            }
+        }
+
+        private void textBoxOnlyNumb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) )
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxCurrency_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
     }
