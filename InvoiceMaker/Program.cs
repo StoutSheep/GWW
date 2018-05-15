@@ -189,7 +189,6 @@ namespace InvoiceMaker
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234d", 4, "Dork");
 
-            InvoiceDatabase.AddInvoice(1, "Invoice 3", "n/a", 2, 10, 5, 7, 12, 1);
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234c", 10, "Fork");
             InvoiceContentsDatabase.AddInvoiceContent(2, "1234d", 4, "Dork");
 
@@ -210,7 +209,6 @@ namespace InvoiceMaker
 
 
             List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);
-            int sdas = 1;
 
 
         }
