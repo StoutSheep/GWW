@@ -495,6 +495,11 @@ namespace InvoiceMaker
                 backorder.Size = new Size(30, 25);
                 backorder.Name = "backorder" + i;
                 backorder.AccessibleName = "" + i;
+                if (invoiceContentsList[i].Backorder != 0)
+                {
+                    backorder.Text = invoiceContentsList[i].Backorder.ToString();
+                }
+
                 backorder.TextChanged += Backorder_TextChanged;
                 panel1.Controls.Add(backorder);
 

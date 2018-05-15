@@ -103,6 +103,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewCompletedInvoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewCompletedInvoices.Designer.cs">
+      <DependentUpon>ViewCompletedInvoices.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewInvoiceReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,9 @@
       <DependentUpon>ExcelReadWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InvoiceReport.rdlc" />
+    <EmbeddedResource Include="ViewCompletedInvoices.resx">
+      <DependentUpon>ViewCompletedInvoices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewInvoiceReport.resx">
       <DependentUpon>ViewInvoiceReport.cs</DependentUpon>
     </EmbeddedResource>
