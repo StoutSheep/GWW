@@ -74,7 +74,7 @@ namespace InvoiceMaker
 
 
 
-        internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, int subtotal, int gst, int pst, int netTotal, int stage)
+        internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subtotal, float gst, float pst, float netTotal, int stage)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             try
