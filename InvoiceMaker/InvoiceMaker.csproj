@@ -89,10 +89,22 @@
       <DependentUpon>PrintInvoiceProgress.cs</DependentUpon>
     </Compile>
     <Compile Include="Invoice.cs" />
+    <Compile Include="InvoiceCompleted.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvoiceCompleted.Designer.cs">
+      <DependentUpon>InvoiceCompleted.cs</DependentUpon>
+    </Compile>
     <Compile Include="InvoiceContentInfo.cs" />
     <Compile Include="InvoiceContentsDatabase.cs" />
     <Compile Include="InvoiceDatabase.cs" />
     <Compile Include="InvoiceItemDetail.cs" />
+    <Compile Include="InvoiceDoubleCheckStage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvoiceDoubleCheckStage.Designer.cs">
+      <DependentUpon>InvoiceDoubleCheckStage.cs</DependentUpon>
+    </Compile>
     <Compile Include="InvoicePickingStage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +115,18 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCompletedInvoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewCompletedInvoices.Designer.cs">
+      <DependentUpon>ViewCompletedInvoices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewInvoiceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewInvoiceReport.Designer.cs">
+      <DependentUpon>ViewInvoiceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductDatabase.cs" />
     <Compile Include="Customer.cs" />

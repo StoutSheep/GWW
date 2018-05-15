@@ -58,6 +58,7 @@ namespace InvoiceMaker
             pickingListView.FullRowSelect = true;
             pickingListView.View = System.Windows.Forms.View.Details;
             pickingListView.DoubleClick += PickingListView_DoubleClick;
+            pickingListView.Enter += PickingListView_Enter;
             this.Controls.Add(pickingListView);
 
             doubleCheckListView.Size = new Size(500, 450);
@@ -70,6 +71,7 @@ namespace InvoiceMaker
             doubleCheckListView.GridLines = true;
             doubleCheckListView.Scrollable = true;
             doubleCheckListView.FullRowSelect = true;
+            doubleCheckListView.Enter += DoubleCheckListView_Enter;
 
             doubleCheckListView.View = System.Windows.Forms.View.Details;
             doubleCheckListView.DoubleClick += DoubleCheckListView_DoubleClick;
@@ -91,6 +93,7 @@ namespace InvoiceMaker
             moveButton.Location = new Point(610, 600);
             moveButton.Size = new Size(100, 40);
             moveButton.Text = "Move to Picking";
+            moveButton.Click += MoveButton_Click;
             this.Controls.Add(moveButton);
 
             pickingList = InvoiceDatabase.SearchInvoicesByStage(1);
@@ -107,9 +110,53 @@ namespace InvoiceMaker
 
         }
 
+        private void MoveButton_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem l in doubleCheckListView.SelectedItems)
+            {
+                InvoiceDatabase.UpdateStage(Int32.Parse(l.SubItems[0].Text), 1);
+            }
+        }
+
+        private void DoubleCheckListView_Enter(object sender, EventArgs e)
+        {
+            RefreshView();
+        }
+
+        private void PickingListView_Enter(object sender, EventArgs e)
+        {
+            RefreshView();
+        }
+
+
+
+        private void RefreshView()
+        {
+            foreach (ListViewItem lvItem in pickingListView.Items)
+            {
+                pickingListView.Items.Remove(lvItem);
+            }
+            foreach (ListViewItem lvItem in doubleCheckListView.Items)
+            {
+                doubleCheckListView.Items.Remove(lvItem);
+            }
+            pickingList = InvoiceDatabase.SearchInvoicesByStage(1);
+            doubleCheckList = InvoiceDatabase.SearchInvoicesByStage(2);
+            foreach (Invoice l in pickingList)
+            {
+                pickingListView.Items.Add(new ListViewItem(new String[] { l.InvoiceID.ToString(), l.customer.StoreName, l.customer.ShippingAddress }));
+            }
+            foreach (Invoice l in doubleCheckList)
+            {
+                doubleCheckListView.Items.Add(new ListViewItem(new String[] { l.InvoiceID.ToString(), l.customer.StoreName, l.customer.ShippingAddress }));
+            }
+        }
+
         private void DoubleCheckListView_DoubleClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            InvoiceDoubleCheckStage form = new InvoiceDoubleCheckStage(Int32.Parse(doubleCheckListView.SelectedItems[0].SubItems[0].Text));
+            form.Size = new System.Drawing.Size(1000, 700);
+            form.Show();
         }
 
         private void PickingListView_DoubleClick(object sender, EventArgs e)

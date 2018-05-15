@@ -55,11 +55,11 @@ namespace InvoiceMaker
                 string sql;
 
                 sql = "UPDATE InvoiceContents " +
-                  "SET ItemNo = " + itemNo +
-                  ",Quantity = " + quantity +
+                  "SET ItemNo = '" + itemNo +
+                  "',Quantity = " + quantity +
                   ",InvoiceID = " + invoiceID +
-                  ",SpecialNotes = " + specialNotes +
-                  " WHERE EntryID = " + entryID +
+                  ",SpecialNotes = '" + specialNotes +
+                  "' WHERE EntryID = " + entryID +
                   ";";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -159,7 +159,7 @@ namespace InvoiceMaker
 
                 sql = "SELECT * FROM InvoiceContents" +
                   " WHERE InvoiceID = " + invoiceID +
-                  ";";
+                  " ORDER BY itemNo ASC;";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
                 InvoiceContentInfo temp;
@@ -167,7 +167,7 @@ namespace InvoiceMaker
 
                 while (rdr.Read())
                 {
-                    temp = new InvoiceContentInfo(rdr[2].ToString(), Int32.Parse(rdr[3].ToString()), Int32.Parse(rdr[4].ToString()), rdr[5].ToString());
+                    temp = new InvoiceContentInfo(rdr[2].ToString(), Int32.Parse(rdr[3].ToString()), Int32.Parse(rdr[4].ToString()), rdr[5].ToString(), rdr[6].ToString());
                     items.Add(temp);
                 }
 
@@ -209,6 +209,72 @@ namespace InvoiceMaker
 
             conn.Close();
             Console.WriteLine("Done.");
+
+        }
+
+        internal static void UpdateBackorderSpecialNotes(int entryID, String specialNotes)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "UPDATE InvoiceContents " +
+                  "SET BackorderSpecialNotes = '" + specialNotes + "'" +
+                  " WHERE EntryID = " + entryID +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+        internal static List<InvoiceContentInfo> GetBackorderedItems(int invoiceID)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            List<InvoiceContentInfo> items = new List<InvoiceContentInfo>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+                MySqlDataReader rdr;
+
+                sql = "SELECT * FROM InvoiceContents" +
+                  " WHERE InvoiceID = " + invoiceID +
+                  " AND Backorder > 0" +
+                  " ORDER BY itemNo ASC;";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+                InvoiceContentInfo temp;
+
+
+                while (rdr.Read())
+                {
+                    temp = new InvoiceContentInfo(rdr[2].ToString(), Int32.Parse(rdr[3].ToString()), Int32.Parse(rdr[4].ToString()), rdr[5].ToString(), rdr[6].ToString());
+                    items.Add(temp);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+            return items;
 
         }
 

@@ -38,17 +38,27 @@ namespace InvoiceMaker
             Worksheet worksheet = ex.Worksheets[0];
             int maxRow = worksheet.Cells.Rows.Count;
             double readProgress = 100d / maxRow;
-            for (int row = 4; row < maxRow; ++row)
+            for (int row = 0; row < maxRow; ++row)
             {
                 String errmsg = String.Empty;
-                prod.ItemNo = worksheet.Cells[row, 0].Value.ToString();
+                
+                if(worksheet.Cells[row, 0].Value != null && worksheet.Cells[row, 0]. Value.ToString().Length < 10)
+                {
+                    prod.ItemNo = worksheet.Cells[row, 0].Value.ToString();
+                }
+                else
+                {
+                    errmsg += (worksheet.Cells[row, 0].Value != null ? "Item number too long: " + worksheet.Cells[row, 0].Value
+                        : "No Item Number detected") + " / ";
+                }
                 if (worksheet.Cells[row, 1].Value != null && worksheet.Cells[row, 1].Value.ToString().Length < 10)
                 {
                     prod.Location = worksheet.Cells[row, 1].Value.ToString();
                 }
                 else
                 {
-                    errmsg += "Invalid Location: " + worksheet.Cells[row, 1].Value + " ";
+                    errmsg += (worksheet.Cells[row, 1].Value != null ? "Item Location too long: " + worksheet.Cells[row, 1].Value
+                        : "No Item Location detected") + " / ";
                 }
                 
                 if(worksheet.Cells[row, 2].Value != null && worksheet.Cells[row, 2].Value.ToString().Length < 50)
@@ -57,7 +67,8 @@ namespace InvoiceMaker
                 }
                 else
                 {
-                    errmsg += "Invalid Description: " + worksheet.Cells[row, 2].Value + " ";
+                    errmsg += (worksheet.Cells[row, 2].Value != null ? "Item Description too long: " + worksheet.Cells[row, 2].Value
+                        : "No Item Description detected") + " / ";
                 }
                 if (worksheet.Cells[row, 3].Value != null && Int32.TryParse(worksheet.Cells[row, 3].Value.ToString(), out tempCart))
                 {
@@ -65,7 +76,8 @@ namespace InvoiceMaker
                 }
                 else
                 {
-                    errmsg += "Invalid Carton: " + worksheet.Cells[row, 3].Value + " ";
+                    errmsg += (worksheet.Cells[row, 3].Value != null ? "Invalid Carton: " + worksheet.Cells[row, 3].Value
+                        : "No Carton detected") + " / ";
                 }
                 if (worksheet.Cells[row, 4].Value != null && Single.TryParse(worksheet.Cells[row, 4].Value.ToString(), out tempCost))
                 {
@@ -73,7 +85,8 @@ namespace InvoiceMaker
                 }
                 else
                 {
-                    errmsg += "Invalid cost: " + worksheet.Cells[row, 4].Value + " ";
+                    errmsg += (worksheet.Cells[row, 4].Value != null ? "Invalid Cost: " + worksheet.Cells[row, 4].Value
+                        : "No Cost detected") + " / ";
                 }
                 if (worksheet.Cells[row, 5].Value != null && Single.TryParse(worksheet.Cells[row, 5].Value.ToString(), out tempPrice))
                 {
@@ -81,8 +94,8 @@ namespace InvoiceMaker
                 }
                 else
                 {
-                    prod.SellPrice = 0;
-                    errmsg += "Invalid Price: " + worksheet.Cells[row, 5].Value + " ";
+                    errmsg += (worksheet.Cells[row, 5].Value != null ? "Invalid Price: " + worksheet.Cells[row, 5].Value
+                        : "No Price detected") + " / ";
                 }
                 if (worksheet.Cells[row, 6].Value != null && Int64.TryParse(worksheet.Cells[row, 6].Value.ToString(), out tempUPC))
                 {
@@ -94,7 +107,7 @@ namespace InvoiceMaker
                 }
                 if(errmsg.Length != 0)
                 {
-                    errmsg = errmsg.Insert(0, "Error for Item number " + prod.ItemNo + " on row " + row + ": ");
+                    errmsg = errmsg.Insert(0, "Error on spreadsheet row " + (row + 1) + ": ");
                     errors.Add(errmsg);
                     continue;
                 }

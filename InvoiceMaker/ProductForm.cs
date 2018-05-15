@@ -28,12 +28,16 @@ namespace InvoiceMaker
         public ProductForm()
         {
             InitializeComponent();
+            setTextBoxRestricts();
+
+
         }
 
         //for editting
         public ProductForm(String itemNumber, String desc, String cp, String loc, String cost, String price, String upc)
         {
             InitializeComponent();
+            setTextBoxRestricts();
             replacedItemNo = itemNumber;
             itemNumber_textBox.Text = itemNumber;
             itemDescription_textBox.Text = desc;
@@ -44,6 +48,14 @@ namespace InvoiceMaker
             upc_textBox.Text = upc;
             editMode = true;
             itemNumber_textBox.BackColor = Color.White;
+        }
+
+        private void setTextBoxRestricts()
+        {
+            cartonPack_textBox.KeyPress += textBoxOnlyNumb_KeyPress;
+            cost_textBox.KeyPress += textBoxCurrency_KeyPress;
+            sellingPrice_textBox.KeyPress += textBoxCurrency_KeyPress;
+            upc_textBox.KeyPress += textBoxOnlyNumb_KeyPress;
         }
 
         private void cancel_button_Click(object sender, EventArgs e)
@@ -122,12 +134,8 @@ namespace InvoiceMaker
             }
             else if(editMode && editValid)
             {
-                if (replacedItemNo != null)
-                {
-                    ProductDatabase.DeleteProductByItemNo(replacedItemNo);
-                }
-                ProductDatabase.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
-                
+                ProductDatabase.EditProduct(replacedItemNo, itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+              
                 this.Close();
             }
         }
@@ -188,5 +196,29 @@ namespace InvoiceMaker
             }
 
         }
+
+        private void textBoxOnlyNumb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&(e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxCurrency_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

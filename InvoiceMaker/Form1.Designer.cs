@@ -41,6 +41,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.provinceTaxesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.history_button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,7 +119,7 @@
             // 
             // ViewInvoice
             // 
-            this.ViewInvoice.Location = new System.Drawing.Point(537, 617);
+            this.ViewInvoice.Location = new System.Drawing.Point(434, 617);
             this.ViewInvoice.Name = "ViewInvoice";
             this.ViewInvoice.Size = new System.Drawing.Size(150, 80);
             this.ViewInvoice.TabIndex = 9;
@@ -139,7 +140,7 @@
             // 
             // AddInvoice
             // 
-            this.AddInvoice.Location = new System.Drawing.Point(324, 617);
+            this.AddInvoice.Location = new System.Drawing.Point(221, 617);
             this.AddInvoice.Name = "AddInvoice";
             this.AddInvoice.Size = new System.Drawing.Size(150, 80);
             this.AddInvoice.TabIndex = 7;
@@ -154,7 +155,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1095, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1095, 40);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -163,7 +164,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.provinceTaxesToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // provinceTaxesToolStripMenuItem
@@ -173,11 +174,22 @@
             this.provinceTaxesToolStripMenuItem.Text = "Province Taxes";
             this.provinceTaxesToolStripMenuItem.Click += new System.EventHandler(this.provinceTaxesToolStripMenuItem_Click);
             // 
+            // history_button
+            // 
+            this.history_button.Location = new System.Drawing.Point(638, 617);
+            this.history_button.Name = "history_button";
+            this.history_button.Size = new System.Drawing.Size(150, 80);
+            this.history_button.TabIndex = 11;
+            this.history_button.Text = "History";
+            this.history_button.UseVisualStyleBackColor = true;
+            this.history_button.Click += new System.EventHandler(this.history_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 1002);
+            this.Controls.Add(this.history_button);
             this.Controls.Add(this.ViewInvoice);
             this.Controls.Add(this.OrderLabel);
             this.Controls.Add(this.AddInvoice);
@@ -214,6 +226,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem provinceTaxesToolStripMenuItem;
+        private System.Windows.Forms.Button history_button;
     }
 }
 

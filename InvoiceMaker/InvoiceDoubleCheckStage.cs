@@ -11,17 +11,15 @@ using System.Windows.Forms;
 
 namespace InvoiceMaker
 {
-    public partial class InvoicePickingStage : Form
+    public partial class InvoiceDoubleCheckStage : Form
     {
         Panel panel1 = new Panel();
         bool PST = false; //pst of customer
         int customerID;
         Invoice invoice;
         List<InvoiceContentInfo> invoiceContentsList;
-        public List<InvoiceItemDetail> invoiceItemDetails { get; set; }
 
-
-        public InvoicePickingStage(int invoiceID)
+        public InvoiceDoubleCheckStage(int invoiceID)
         {
             InitializeComponent();
             invoice = new Invoice(invoiceID);
@@ -39,7 +37,7 @@ namespace InvoiceMaker
             }
 
             panel1.Location = new Point(30, 135);
-            panel1.Size = new Size(880, 360);
+            panel1.Size = new Size(900, 360);
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.AutoScroll = true;
             panel1.BackColor = Color.DarkGray;
@@ -48,6 +46,8 @@ namespace InvoiceMaker
             AddLabels(customerID);
             AddTotalBoxes(customerID);
             AddItemBoxes();
+
+
 
         }
 
@@ -61,12 +61,12 @@ namespace InvoiceMaker
 
         private void Qty_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void C_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Desc_Enter(object sender, EventArgs e)
@@ -180,7 +180,34 @@ namespace InvoiceMaker
             invoiceSpecialNotesLabel.Location = new Point(180, 85);
             invoiceSpecialNotesLabel.AutoSize = true;
             this.Controls.Add(invoiceSpecialNotesLabel);
-            
+
+            Label invoiceNumberLabel = new Label();
+            invoiceNumberLabel.Text = "Invoice #: ";
+            invoiceNumberLabel.Location = new Point(700, 10);
+            invoiceNumberLabel.AutoSize = true;
+            this.Controls.Add(invoiceNumberLabel);
+
+            TextBox invoiceNumber = new TextBox();
+            invoiceNumber.Location = new Point(760, 10);
+            invoiceNumber.Size = new Size(75, 25);
+            invoiceNumber.Name = "invoiceNumber";
+            invoiceNumber.AccessibleName = "invoiceNumber";
+            this.Controls.Add(invoiceNumber);
+
+            Label backorderInvoiceNotesLabel = new Label();
+            backorderInvoiceNotesLabel.Text = "Backorder Invoice Notes: ";
+            backorderInvoiceNotesLabel.Location = new Point(30, 100);
+            backorderInvoiceNotesLabel.AutoSize = true;
+            this.Controls.Add(backorderInvoiceNotesLabel);
+
+            TextBox backorderInvoiceNotes = new TextBox();
+            backorderInvoiceNotes.Location = new Point(165, 100);
+            backorderInvoiceNotes.Size = new Size(700, 25);
+            backorderInvoiceNotes.Text = "ITEMS ON BACKORDER " + cust.StoreName + ". PO#: " + invoice.PurchaseOrder + " ";
+            backorderInvoiceNotes.Name = "backorderInvoiceNotes";
+            backorderInvoiceNotes.AccessibleName = "backorderInvoiceNotes";
+            this.Controls.Add(backorderInvoiceNotes);
+
             //Invoice column headers
             Label qtyLabel = new Label();
             qtyLabel.Text = "Qty";
@@ -258,13 +285,6 @@ namespace InvoiceMaker
             okButton.Text = "OK";
             okButton.Click += OkButton_Click;
             this.Controls.Add(okButton);
-
-            Button printButton = new Button();
-            printButton.Location = new Point(200, 620);
-            printButton.Size = new Size(50, 25);
-            printButton.Text = "Print";
-            printButton.Click += PrintButton_Click;
-            this.Controls.Add(printButton);
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -279,59 +299,27 @@ namespace InvoiceMaker
                 int qty = Int32.Parse(this.panel1.Controls["qty" + i].Text);
                 int entryID = InvoiceContentsDatabase.GetEntryID(invoice.InvoiceID, itemNo);
 
-                if (this.panel1.Controls["backorder" + i].Text.Length == 0)
-                {
-                    InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
-                    continue;
-                }
-                else
+                if (invoiceContentsList[i].Backorder > 0)
                 {
                     numBO = Int32.Parse(this.panel1.Controls["backorder" + i].Text);
                     InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
                     InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
+                    InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
                 }
-                
+
 
                 Debug.Print("entryid:" + entryID);
                 Debug.Print("invoiceid" + invoice.InvoiceID);
                 Debug.Print("itemno" + itemNo);
 
-
             }
-            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text),2);
-
+            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
+            InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
-
-        }
-
-        private void PrintButton_Click(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-            invoiceItemDetails = new List<InvoiceItemDetail>();
-
-            for (int i = 0; i < invoice.Items.Count; i++)
-            {
-                invoiceItemDetails.Add(new InvoiceItemDetail());
-                invoiceItemDetails[i].QTY = invoice.Items[i].Quantity;
-                invoiceItemDetails[i].GrabCarton = invoice.Items[i].Quantity / invoice.Items[i].PerCarton;
-                invoiceItemDetails[i].ItemNo = invoice.Items[i].ItemNo;
-                invoiceItemDetails[i].Location = invoice.Items[i].Location;
-                invoiceItemDetails[i].Description = invoice.Items[i].ItemDesc;
-                invoiceItemDetails[i].CartonTotal = invoice.Items[i].PerCarton;
-                invoiceItemDetails[i].InvoiceItemSellPrice = invoice.Items[i].SellPrice;
-                invoiceItemDetails[i].InvoiceItemAmount = invoice.Items[i].Quantity * invoice.Items[i].SellPrice;
-                invoiceItemDetails[i].InvoiceItemNote = invoice.Items[i].SpecialNotes;
-            }
-
-            Form Form2 = new PrintInvoiceProgress(invoice, invoiceItemDetails);
-            Form2.ShowDialog();
-
-            //PrintInvoiceReport = new PrintInvoiceReport(invoice, invoiceItemDetails);
-            //PrintInvoiceReport.ShowDialog();
+            throw new NotImplementedException();
         }
 
         private void AddTotalBoxes(int customerID)
@@ -388,6 +376,54 @@ namespace InvoiceMaker
                 pst.AccessibleName = "pst";
                 this.Controls.Add(pst);
 
+                Label feightLabel = new Label();
+                feightLabel.Text = "Freight";
+                feightLabel.Location = new Point(570, 590);
+                feightLabel.AutoSize = true;
+                feightLabel.TextAlign = ContentAlignment.TopRight;
+                this.Controls.Add(feightLabel);
+
+                TextBox freight = new TextBox();
+                freight.Location = new Point(610, 590);
+                freight.Size = new Size(50, 25);
+                freight.Name = "freight";
+                freight.AccessibleName = "freight";
+                freight.TextChanged += Freight_TextChanged1;
+                this.Controls.Add(freight);
+
+                Label invoiceTotalLabel = new Label();
+                invoiceTotalLabel.Text = "Invoice Total";
+                invoiceTotalLabel.Location = new Point(540, 620);
+                invoiceTotalLabel.AutoSize = true;
+                this.Controls.Add(invoiceTotalLabel);
+
+                TextBox invoiceTotal = new TextBox();
+                invoiceTotal.Location = new Point(610, 620);
+                invoiceTotal.Size = new Size(50, 25);
+                invoiceTotal.Text = invoice.NetTotal.ToString("0.00");
+                invoiceTotal.ReadOnly = true;
+                invoiceTotal.Name = "invoiceTotal";
+                invoiceTotal.AccessibleName = "invoiceTotal";
+                this.Controls.Add(invoiceTotal);
+            }
+            else //no pst
+            {
+
+                Label feightLabel = new Label();
+                feightLabel.Text = "Freight";
+                feightLabel.Location = new Point(570, 560);
+                feightLabel.AutoSize = true;
+                feightLabel.TextAlign = ContentAlignment.TopRight;
+                this.Controls.Add(feightLabel);
+
+                TextBox freight = new TextBox();
+                freight.Location = new Point(610, 560);
+                freight.Size = new Size(50, 25);
+                freight.Name = "freight";
+                freight.AccessibleName = "freight";
+                freight.TextChanged += Freight_TextChanged;
+                this.Controls.Add(freight);
+
                 Label invoiceTotalLabel = new Label();
                 invoiceTotalLabel.Text = "Invoice Total";
                 invoiceTotalLabel.Location = new Point(540, 590);
@@ -403,23 +439,38 @@ namespace InvoiceMaker
                 invoiceTotal.AccessibleName = "invoiceTotal";
                 this.Controls.Add(invoiceTotal);
             }
-            else //no pst
-            {
-                Label invoiceTotalLabel = new Label();
-                invoiceTotalLabel.Text = "Invoice Total";
-                invoiceTotalLabel.Location = new Point(540, 560);
-                invoiceTotalLabel.AutoSize = true;
-                this.Controls.Add(invoiceTotalLabel);
+        }
 
-                TextBox invoiceTotal = new TextBox();
-                invoiceTotal.Location = new Point(610, 560);
-                invoiceTotal.Size = new Size(50, 25);
-                invoiceTotal.Text = invoice.NetTotal.ToString("0.00");
-                invoiceTotal.ReadOnly = true;
-                invoiceTotal.Name = "invoiceTotal";
-                invoiceTotal.AccessibleName = "invoiceTotal";
-                this.Controls.Add(invoiceTotal);
+        private void Freight_TextChanged1(object sender, EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            float freight = 0;
+            if(t.Text.Length == 0)
+            {
+                freight = 0;
             }
+            else
+            {
+                freight = Single.Parse(t.Text);
+            }
+
+            this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
+        }
+
+        private void Freight_TextChanged(object sender, EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            float freight = 0;
+            if (t.Text.Length == 0)
+            {
+                freight = 0;
+            }
+            else
+            {
+                freight = Single.Parse(t.Text);
+            }
+
+            this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
         }
 
         private void SubtotalAmount_TextChanged(object sender, EventArgs e)
@@ -449,7 +500,7 @@ namespace InvoiceMaker
                 qty.Location = new Point(0, 0 + i * 25);
                 qty.Size = new Size(30, 25);
                 qty.Name = "qty" + i;
-                qty.Text = invoiceContentsList[i].Quantity.ToString();
+                qty.Text = (invoiceContentsList[i].Quantity - invoiceContentsList[i].Backorder).ToString();
                 qty.ReadOnly = true;
                 qty.Enter += Desc_Enter;
                 qty.AccessibleName = "" + i;
@@ -524,19 +575,26 @@ namespace InvoiceMaker
                 specialNotes.AccessibleName = "" + i;
                 panel1.Controls.Add(specialNotes);
 
-                TextBox backorder = new TextBox();
-                backorder.Location = new Point(790, 0 + i * 25);
-                backorder.Size = new Size(30, 25);
-                backorder.Name = "backorder" + i;
-                backorder.AccessibleName = "" + i;
-                if (invoiceContentsList[i].Backorder != 0)
+                if (invoiceContentsList[i].Backorder > 0)
                 {
+                    TextBox backorder = new TextBox();
+                    backorder.Location = new Point(790, 0 + i * 25);
+                    backorder.Size = new Size(30, 25);
+                    backorder.Name = "backorder" + i;
+                    backorder.AccessibleName = "" + i;
                     backorder.Text = invoiceContentsList[i].Backorder.ToString();
-                }
-                backorder.KeyPress += textBoxOnlyNumb_KeyPress;
-                backorder.TextChanged += Backorder_TextChanged;
-                panel1.Controls.Add(backorder);
+                    backorder.TextChanged += Backorder_TextChanged;
+                    backorder.ReadOnly = true;
+                    panel1.Controls.Add(backorder);
 
+                    TextBox backorderNotes = new TextBox();
+                    backorderNotes.Location = new Point(830, 0 + i * 25);
+                    backorderNotes.Size = new Size(50, 25);
+                    backorderNotes.Name = "backorderNotes" + i;
+                    backorderNotes.AccessibleName = "" + i;
+                    panel1.Controls.Add(backorderNotes);
+
+                }
             }
         }
 
@@ -565,14 +623,6 @@ namespace InvoiceMaker
             else
             {
                 this.panel1.Controls["amount" + t.AccessibleName].Text = (Int32.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * Single.Parse(this.panel1.Controls["cost" + t.AccessibleName].Text)).ToString("0.00");
-            }
-        }
-
-        private void textBoxOnlyNumb_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
             }
         }
     }
