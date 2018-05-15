@@ -47,8 +47,6 @@ namespace InvoiceMaker
             AddTotalBoxes(customerID);
             AddItemBoxes();
 
-
-
         }
 
         private void Qty_KeyPress(object sender, KeyPressEventArgs e)

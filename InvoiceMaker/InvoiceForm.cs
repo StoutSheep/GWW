@@ -38,14 +38,13 @@ namespace InvoiceMaker
             panel1.Location = new Point(30, 195);
             panel1.Size = new Size(800, 300);
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.AutoScroll = true;
+            panel1.BackColor = Color.DarkGray;
 
             this.Controls.Add(panel1);
             AddLabels(customerID);
             AddTotalBoxes(customerID);
-            AddItemBoxes();
-
-            
-
+            AddFirstRow();
         }
 
         private void Qty_KeyPress(object sender, KeyPressEventArgs e)
@@ -419,7 +418,7 @@ namespace InvoiceMaker
             this.Controls["invoiceTotal"].Text = "" + Single.Parse(this.Controls["subTotalAmount"].Text) * (1+gstRate+pstRate);
         }
 
-        private void AddItemBoxes()
+        private void AddFirstRow()
         {
             TextBox qty = new TextBox();
             qty.Location = new Point(0, 0 + i * 25);
@@ -489,6 +488,83 @@ namespace InvoiceMaker
 
             TextBox specialNotes = new TextBox();
             specialNotes.Location = new Point(640, 0 + i * 25);
+            specialNotes.Size = new Size(140, 25);
+            specialNotes.Name = "specialNotes" + i;
+            specialNotes.AccessibleName = "" + i;
+            panel1.Controls.Add(specialNotes);
+
+        }
+
+        private void AddItemBoxes()
+        {
+            TextBox qty = new TextBox();
+            qty.Location = new Point(0, this.panel1.Controls["qty"+ (i-1)].Location.Y+25);
+            qty.Size = new Size(30, 25);
+            qty.Name = "qty" + i;
+            qty.TextChanged += Qty_TextChanged;
+            qty.KeyPress += Qty_KeyPress;
+            qty.AccessibleName = "" + i;
+            panel1.Controls.Add(qty);
+
+            ComboBox itemNumber = new ComboBox();
+            itemNumber.Location = new Point(50, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
+            itemNumber.Size = new Size(100, 25);
+            itemNumber.TextUpdate += C_TextUpdated;
+            itemNumber.TextChanged += C_TextChanged;
+            itemNumber.LostFocus += ItemNumber_LostFocus;
+            itemNumber.Name = "itemNumber" + i;
+            Debug.Print(itemNumber.Name);
+            itemNumber.AccessibleName = "" + i;
+            panel1.Controls.Add(itemNumber);
+
+            TextBox loc = new TextBox();
+            loc.Location = new Point(170, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
+            loc.Size = new Size(50, 25);
+            loc.ReadOnly = true;
+            loc.Enter += Desc_Enter;
+            loc.Name = "loc" + i;
+            loc.AccessibleName = "" + i;
+            panel1.Controls.Add(loc);
+
+            TextBox desc = new TextBox();
+            desc.Location = new Point(240, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
+            desc.Size = new Size(200, 25);
+            desc.ReadOnly = true;
+            desc.Enter += Desc_Enter;
+            desc.Name = "desc" + i;
+            desc.AccessibleName = "" + i;
+            panel1.Controls.Add(desc);
+
+            TextBox cartonPack = new TextBox();
+            cartonPack.Location = new Point(460, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
+            cartonPack.Size = new Size(30, 25);
+            cartonPack.ReadOnly = true;
+            cartonPack.Enter += Desc_Enter;
+            cartonPack.Name = "carton" + i;
+            cartonPack.AccessibleName = "" + i;
+            panel1.Controls.Add(cartonPack);
+
+            TextBox cost = new TextBox();
+            cost.Location = new Point(510, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
+            cost.Size = new Size(50, 25);
+            cost.ReadOnly = true;
+            cost.Enter += Desc_Enter;
+            cost.Name = "cost" + i;
+            cost.AccessibleName = "" + i;
+            panel1.Controls.Add(cost);
+
+            TextBox amount = new TextBox();
+            amount.Location = new Point(580, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
+            amount.Size = new Size(50, 25);
+            amount.ReadOnly = true;
+            amount.Enter += Desc_Enter;
+            amount.TextChanged += Amount_TextChanged;
+            amount.Name = "amount" + i;
+            amount.AccessibleName = "" + i;
+            panel1.Controls.Add(amount);
+
+            TextBox specialNotes = new TextBox();
+            specialNotes.Location = new Point(640, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
             specialNotes.Size = new Size(140, 25);
             specialNotes.Name = "specialNotes" + i;
             specialNotes.AccessibleName = "" + i;
