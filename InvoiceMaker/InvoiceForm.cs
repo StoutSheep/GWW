@@ -309,24 +309,46 @@ namespace InvoiceMaker
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
-
-            int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, 0,
-                Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
-                Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
-
+            bool valid = true;
             for (int j = 0; j < i; j++)
             {
+                if(this.panel1.Controls["qty"+j].Text.Length == 0 & this.panel1.Controls["itemNumber"+j].Text.Length!=0)
+                {
+                    valid = false;
+                    this.panel1.Controls["qty" + j].BackColor = Color.Red;
+                }
 
-                String itemNo = this.panel1.Controls["itemNumber" + j].Text;
-                Debug.Print(itemNo);
-                int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
-                Debug.Print("" + qty);
+                if (this.panel1.Controls["qty" + j].Text.Length != 0 & this.panel1.Controls["itemNumber" + j].Text.Length == 0)
+                {
+                    valid = false;
+                    this.panel1.Controls["itemNumber" + j].BackColor = Color.Red;
+                }
+            }
 
-                String notes = this.panel1.Controls["specialNotes" + j].Text;
-                Debug.Print(notes);
+            if (valid == true)
+            {
+                Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-                InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
+                int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, 0,
+                    Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
+                    Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
+
+                for (int j = 0; j < i; j++)
+                {
+
+                    if (this.panel1.Controls["qty" + j].Text.Length != 0)
+                    {
+                        String itemNo = this.panel1.Controls["itemNumber" + j].Text;
+                        Debug.Print(itemNo);
+                        int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
+                        Debug.Print("" + qty);
+
+                        String notes = this.panel1.Controls["specialNotes" + j].Text;
+                        Debug.Print(notes);
+
+                        InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
+                    }
+                }
             }
 
         }

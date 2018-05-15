@@ -273,6 +273,13 @@ namespace InvoiceMaker
             backorderLabel.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(backorderLabel);
 
+            Label backorderNotesLabel = new Label();
+            backorderNotesLabel.Text = "B.O. Note";
+            backorderNotesLabel.Location = new Point(x + 830, y);
+            backorderNotesLabel.AutoSize = true;
+            backorderNotesLabel.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(backorderNotesLabel);
+
             Button cancelButton = new Button();
             cancelButton.Location = new Point(720, 620);
             cancelButton.Size = new Size(50, 25);
