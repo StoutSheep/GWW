@@ -111,7 +111,7 @@ namespace InvoiceMaker
         }
 
 
-        internal static void UpdateTotals(int invoiceID, int subtotal, int gst, int pst, int netTotal)
+        internal static void UpdateTotals(int invoiceID, float subtotal, float gst, float pst, float netTotal)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             try
