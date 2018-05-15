@@ -42,13 +42,13 @@ namespace InvoiceMaker
 
         public Invoice(int invoiceID)
         {
+            // WholeSale Company Information
             CompanyName = "Wholesaler";
             CompanyAddress = "1234 GRANOLA ST. NEW WESTMINISTER, BC W4T 4U2";
             CompanyPhoneNumber = "123-456-7890";
             CompanyFax = "123-456-7890";
             CompanyTollFree = "1-800-123-4567";
             GSTNo = "abc123";
-
 
             Items = new List<Product>();
             String pswd = "password";
@@ -67,9 +67,7 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
 
-
                 //InvoiceID | StoreID | PurchaseOrder | SpecialNotes | InvoiceNo | SubTotal | Gst | Pst | NetTotal | Stage |
-
 
                 if (rdr.HasRows)
                 {
@@ -119,22 +117,5 @@ namespace InvoiceMaker
             conn.Close();
             Console.WriteLine("Done.");
         }
-
-
-
-
-
-        // TODO: Query Invoices by Stage 1; Stage 2 and Stage 3
-
-        // TODO: Query Customer with associated Invoice IDS
-
-        // TODO: Join Customers based on stages
-
-        //TODO: Query all invoice items based on Invoice IDS
-        //SELECT invoicecontents.InvoiceID, invoicecontents.Quantity, invoicecontents.Quantity/products.PerCarton AS 'Grab Carton', products.Location, products.ItemDesc, products.PerCarton, products.SellPrice, invoicecontents.Quantity* products.SellPrice AS 'Amount' from invoicecontents
-        //NATURAL JOIN products;
-
-        // TODO: Join all invoice items with invoice ID based on customer and selected invoice ID
-
     }
 }

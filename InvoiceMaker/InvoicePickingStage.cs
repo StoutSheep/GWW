@@ -18,7 +18,6 @@ namespace InvoiceMaker
         int customerID;
         Invoice invoice;
         List<InvoiceContentInfo> invoiceContentsList;
-        public PrintInvoiceReport PrintInvoiceReport;
         public List<InvoiceItemDetail> invoiceItemDetails { get; set; }
 
 
@@ -326,7 +325,6 @@ namespace InvoiceMaker
             for (int i = 0; i < invoice.Items.Count; i++)
             {
                 invoiceItemDetails.Add(new InvoiceItemDetail());
-                //invoiceItemDetails[i].InvoiceID = invoice.Items[i].;
                 invoiceItemDetails[i].QTY = invoice.Items[i].Quantity;
                 invoiceItemDetails[i].GrabCarton = invoice.Items[i].Quantity / invoice.Items[i].PerCarton;
                 invoiceItemDetails[i].ItemNo = invoice.Items[i].ItemNo;
@@ -338,7 +336,7 @@ namespace InvoiceMaker
                 invoiceItemDetails[i].InvoiceItemNote = invoice.Items[i].SpecialNotes;
             }
 
-            Form Form2 = new Form2(invoice, invoiceItemDetails);
+            Form Form2 = new PrintInvoiceProgress(invoice, invoiceItemDetails);
             Form2.ShowDialog();
 
             //PrintInvoiceReport = new PrintInvoiceReport(invoice, invoiceItemDetails);

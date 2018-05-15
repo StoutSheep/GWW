@@ -10,7 +10,6 @@ namespace InvoiceMaker
     public class Product
     {
         // Unique identifier for product
-
         internal String ItemNo { get; set; }
         internal String ItemDesc { get; set; }
         // Items come in packs of cartons
@@ -26,8 +25,6 @@ namespace InvoiceMaker
         internal float SellPrice { get; set; }
         // Barcode; Sometimes information not available
         internal Int64 UPC { get; set; }
-
-        
 
         //invoiceContent info
         internal int Quantity { get; set; }
@@ -49,7 +46,6 @@ namespace InvoiceMaker
         }
 
         // Missing UPC
-
         public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice)
         {
             ItemNo = itemNo;
@@ -59,11 +55,6 @@ namespace InvoiceMaker
             Cost = cost;
             SellPrice = sellPrice;
             UPC = 0;
-        }
-
-
-
-
-       
+        }       
     }
 }

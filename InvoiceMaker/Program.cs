@@ -202,7 +202,6 @@ namespace InvoiceMaker
 
 
             List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);
-            int sdas = 1;
 
 
         }

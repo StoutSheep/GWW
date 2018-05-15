@@ -1,6 +1,6 @@
 ﻿namespace InvoiceMaker
 {
-    partial class Form2
+    partial class PrintInvoiceProgress
     {
         /// <summary>
         /// Required designer variable.

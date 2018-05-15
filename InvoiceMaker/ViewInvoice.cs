@@ -118,7 +118,5 @@ namespace InvoiceMaker
             form.Size = new System.Drawing.Size(980, 700);
             form.Show();
         }
-
-
     }
 }

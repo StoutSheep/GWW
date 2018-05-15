@@ -82,11 +82,11 @@
       <DependentUpon>AddProvinceTaxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerDatabase.cs" />
-    <Compile Include="Form2.cs">
+    <Compile Include="PrintInvoiceProgress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="PrintInvoiceProgress.Designer.cs">
+      <DependentUpon>PrintInvoiceProgress.cs</DependentUpon>
     </Compile>
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceContentInfo.cs" />
@@ -103,12 +103,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="PrintInvoiceReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PrintInvoiceReport.Designer.cs">
-      <DependentUpon>PrintInvoiceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductDatabase.cs" />
     <Compile Include="Customer.cs" />
@@ -183,8 +177,8 @@
     <EmbeddedResource Include="CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="PrintInvoiceProgress.resx">
+      <DependentUpon>PrintInvoiceProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InvoiceForm.resx">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
@@ -198,10 +192,6 @@
     <Compile Include="Product.cs" />
     <EmbeddedResource Include="ExcelReadWindow.resx">
       <DependentUpon>ExcelReadWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="-.rdlc" />
-    <EmbeddedResource Include="PrintInvoiceReport.resx">
-      <DependentUpon>PrintInvoiceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>
