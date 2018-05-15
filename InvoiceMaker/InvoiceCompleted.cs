@@ -181,17 +181,10 @@ namespace InvoiceMaker
             this.Controls.Add(invoiceSpecialNotesLabel);
 
             Label invoiceNumberLabel = new Label();
-            invoiceNumberLabel.Text = "Invoice #: ";
+            invoiceNumberLabel.Text = "Invoice #: " + invoice.InvoiceNo;
             invoiceNumberLabel.Location = new Point(700, 10);
             invoiceNumberLabel.AutoSize = true;
             this.Controls.Add(invoiceNumberLabel);
-
-            TextBox invoiceNumber = new TextBox();
-            invoiceNumber.Location = new Point(760, 10);
-            invoiceNumber.Size = new Size(75, 25);
-            invoiceNumber.Name = "invoiceNumber";
-            invoiceNumber.AccessibleName = "invoiceNumber";
-            this.Controls.Add(invoiceNumber);
 
             Label backorderInvoiceNotesLabel = new Label();
             backorderInvoiceNotesLabel.Text = "Backorder Invoice Notes: " + invoice.BackorderNotes;
@@ -375,6 +368,8 @@ namespace InvoiceMaker
                 freight.Name = "freight";
                 freight.AccessibleName = "freight";
                 freight.TextChanged += Freight_TextChanged1;
+                freight.Text = invoice.freight.ToString("0.00");
+                freight.ReadOnly = true;
                 this.Controls.Add(freight);
 
                 Label invoiceTotalLabel = new Label();
@@ -440,7 +435,7 @@ namespace InvoiceMaker
                 freight = Single.Parse(t.Text);
             }
 
-            this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
+            //this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
         }
 
         private void Freight_TextChanged(object sender, EventArgs e)
@@ -559,6 +554,7 @@ namespace InvoiceMaker
                 specialNotes.Text = invoiceContentsList[i].SpecialNotes;
                 specialNotes.Name = "specialNotes" + i;
                 specialNotes.AccessibleName = "" + i;
+                specialNotes.ReadOnly = true;
                 panel1.Controls.Add(specialNotes);
 
                 if (invoiceContentsList[i].Backorder > 0)
@@ -578,6 +574,7 @@ namespace InvoiceMaker
                     backorderNotes.Size = new Size(50, 25);
                     backorderNotes.Name = "backorderNotes" + i;
                     backorderNotes.AccessibleName = "" + i;
+                    backorderNotes.ReadOnly = true;
                     panel1.Controls.Add(backorderNotes);
 
                 }
