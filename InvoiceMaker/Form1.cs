@@ -89,7 +89,9 @@ namespace InvoiceMaker
 
         private void history_button_Click(object sender, EventArgs e)
         {
-
+            ViewCompletedInvoices viewInvoice = new ViewCompletedInvoices();
+            viewInvoice.Size = new System.Drawing.Size(900, 700);
+            viewInvoice.Show();
         }
     }
 }
