@@ -239,7 +239,7 @@ namespace InvoiceMaker
             this.Controls.Add(specialNotesLabel);
 
             Label backorderLabel = new Label();
-            backorderLabel.Text = "B.O.";
+            backorderLabel.Text = "Actual Qty";
             backorderLabel.Location = new Point(x + 790, y);
             backorderLabel.AutoSize = true;
             backorderLabel.BackColor = System.Drawing.Color.LightGray;
@@ -526,7 +526,7 @@ namespace InvoiceMaker
 
                 TextBox backorder = new TextBox();
                 backorder.Location = new Point(790, 0 + i * 25);
-                backorder.Size = new Size(30, 25);
+                backorder.Size = new Size(50, 25);
                 backorder.Name = "backorder" + i;
                 backorder.AccessibleName = "" + i;
                 if (invoiceContentsList[i].Backorder != 0)
