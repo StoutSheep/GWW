@@ -217,6 +217,7 @@ namespace InvoiceMaker
             purchaseOrder.Size = new Size(100, 25);
             purchaseOrder.Name = "purchaseOrder";
             purchaseOrder.AccessibleName = "purchaseOrder";
+            purchaseOrder.KeyPress += Qty_KeyPress;
             this.Controls.Add(purchaseOrder);
 
 
@@ -320,7 +321,7 @@ namespace InvoiceMaker
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
         }
 
         private void AddTotalBoxes(int customerID)

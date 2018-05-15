@@ -295,7 +295,7 @@ namespace InvoiceMaker
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
         }
 
         private void AddTotalBoxes(int customerID)
@@ -497,7 +497,7 @@ namespace InvoiceMaker
                 {
                     backorder.Text = invoiceContentsList[i].Backorder.ToString();
                 }
-
+                backorder.KeyPress += textBoxOnlyNumb_KeyPress;
                 backorder.TextChanged += Backorder_TextChanged;
                 panel1.Controls.Add(backorder);
 
@@ -529,6 +529,14 @@ namespace InvoiceMaker
             else
             {
                 this.panel1.Controls["amount" + t.AccessibleName].Text = (Int32.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * Single.Parse(this.panel1.Controls["cost" + t.AccessibleName].Text)).ToString("0.00");
+            }
+        }
+
+        private void textBoxOnlyNumb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
             }
         }
     }
