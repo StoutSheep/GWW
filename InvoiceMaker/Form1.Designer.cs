@@ -47,9 +47,10 @@
             // 
             // AddCustomer
             // 
-            this.AddCustomer.Location = new System.Drawing.Point(324, 159);
+            this.AddCustomer.Location = new System.Drawing.Point(162, 83);
+            this.AddCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddCustomer.Name = "AddCustomer";
-            this.AddCustomer.Size = new System.Drawing.Size(150, 80);
+            this.AddCustomer.Size = new System.Drawing.Size(75, 42);
             this.AddCustomer.TabIndex = 0;
             this.AddCustomer.Text = "Add";
             this.AddCustomer.UseVisualStyleBackColor = true;
@@ -60,17 +61,19 @@
             this.CustomerLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.CustomerLabel.AutoSize = true;
             this.CustomerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CustomerLabel.Location = new System.Drawing.Point(397, 57);
+            this.CustomerLabel.Location = new System.Drawing.Point(198, 30);
+            this.CustomerLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CustomerLabel.Name = "CustomerLabel";
-            this.CustomerLabel.Size = new System.Drawing.Size(209, 51);
+            this.CustomerLabel.Size = new System.Drawing.Size(107, 26);
             this.CustomerLabel.TabIndex = 1;
             this.CustomerLabel.Text = "Customer";
             // 
             // ViewCustomer
             // 
-            this.ViewCustomer.Location = new System.Drawing.Point(537, 159);
+            this.ViewCustomer.Location = new System.Drawing.Point(268, 83);
+            this.ViewCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ViewCustomer.Name = "ViewCustomer";
-            this.ViewCustomer.Size = new System.Drawing.Size(150, 80);
+            this.ViewCustomer.Size = new System.Drawing.Size(75, 42);
             this.ViewCustomer.TabIndex = 2;
             this.ViewCustomer.Text = "View/Modify";
             this.ViewCustomer.UseVisualStyleBackColor = true;
@@ -78,9 +81,10 @@
             // 
             // ViewProduct
             // 
-            this.ViewProduct.Location = new System.Drawing.Point(434, 382);
+            this.ViewProduct.Location = new System.Drawing.Point(217, 199);
+            this.ViewProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ViewProduct.Name = "ViewProduct";
-            this.ViewProduct.Size = new System.Drawing.Size(150, 80);
+            this.ViewProduct.Size = new System.Drawing.Size(75, 42);
             this.ViewProduct.TabIndex = 5;
             this.ViewProduct.Text = "View/Modify";
             this.ViewProduct.UseVisualStyleBackColor = true;
@@ -91,17 +95,19 @@
             this.ProductLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.ProductLabel.AutoSize = true;
             this.ProductLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductLabel.Location = new System.Drawing.Point(413, 288);
+            this.ProductLabel.Location = new System.Drawing.Point(206, 150);
+            this.ProductLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ProductLabel.Name = "ProductLabel";
-            this.ProductLabel.Size = new System.Drawing.Size(171, 51);
+            this.ProductLabel.Size = new System.Drawing.Size(87, 26);
             this.ProductLabel.TabIndex = 4;
             this.ProductLabel.Text = "Product";
             // 
             // AddProduct
             // 
-            this.AddProduct.Location = new System.Drawing.Point(221, 382);
+            this.AddProduct.Location = new System.Drawing.Point(110, 199);
+            this.AddProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddProduct.Name = "AddProduct";
-            this.AddProduct.Size = new System.Drawing.Size(150, 80);
+            this.AddProduct.Size = new System.Drawing.Size(75, 42);
             this.AddProduct.TabIndex = 3;
             this.AddProduct.Text = "Add";
             this.AddProduct.UseVisualStyleBackColor = true;
@@ -109,9 +115,10 @@
             // 
             // ReadProductExcel
             // 
-            this.ReadProductExcel.Location = new System.Drawing.Point(638, 382);
+            this.ReadProductExcel.Location = new System.Drawing.Point(319, 199);
+            this.ReadProductExcel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ReadProductExcel.Name = "ReadProductExcel";
-            this.ReadProductExcel.Size = new System.Drawing.Size(150, 80);
+            this.ReadProductExcel.Size = new System.Drawing.Size(75, 42);
             this.ReadProductExcel.TabIndex = 6;
             this.ReadProductExcel.Text = "Read Excel";
             this.ReadProductExcel.UseVisualStyleBackColor = true;
@@ -119,9 +126,10 @@
             // 
             // ViewInvoice
             // 
-            this.ViewInvoice.Location = new System.Drawing.Point(434, 617);
+            this.ViewInvoice.Location = new System.Drawing.Point(217, 321);
+            this.ViewInvoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ViewInvoice.Name = "ViewInvoice";
-            this.ViewInvoice.Size = new System.Drawing.Size(150, 80);
+            this.ViewInvoice.Size = new System.Drawing.Size(75, 42);
             this.ViewInvoice.TabIndex = 9;
             this.ViewInvoice.Text = "View/Modify";
             this.ViewInvoice.UseVisualStyleBackColor = true;
@@ -132,17 +140,19 @@
             this.OrderLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.OrderLabel.AutoSize = true;
             this.OrderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OrderLabel.Location = new System.Drawing.Point(413, 532);
+            this.OrderLabel.Location = new System.Drawing.Point(206, 277);
+            this.OrderLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.OrderLabel.Name = "OrderLabel";
-            this.OrderLabel.Size = new System.Drawing.Size(182, 51);
+            this.OrderLabel.Size = new System.Drawing.Size(92, 26);
             this.OrderLabel.TabIndex = 8;
             this.OrderLabel.Text = "Invoices";
             // 
             // AddInvoice
             // 
-            this.AddInvoice.Location = new System.Drawing.Point(221, 617);
+            this.AddInvoice.Location = new System.Drawing.Point(110, 321);
+            this.AddInvoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddInvoice.Name = "AddInvoice";
-            this.AddInvoice.Size = new System.Drawing.Size(150, 80);
+            this.AddInvoice.Size = new System.Drawing.Size(75, 42);
             this.AddInvoice.TabIndex = 7;
             this.AddInvoice.Text = "New";
             this.AddInvoice.UseVisualStyleBackColor = true;
@@ -155,7 +165,8 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1095, 40);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(548, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -164,21 +175,22 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.provinceTaxesToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.fileToolStripMenuItem.Text = "ProvinceTaxes";
             // 
             // provinceTaxesToolStripMenuItem
             // 
             this.provinceTaxesToolStripMenuItem.Name = "provinceTaxesToolStripMenuItem";
-            this.provinceTaxesToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.provinceTaxesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.provinceTaxesToolStripMenuItem.Text = "Province Taxes";
             this.provinceTaxesToolStripMenuItem.Click += new System.EventHandler(this.provinceTaxesToolStripMenuItem_Click);
             // 
             // history_button
             // 
-            this.history_button.Location = new System.Drawing.Point(638, 617);
+            this.history_button.Location = new System.Drawing.Point(319, 321);
+            this.history_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.history_button.Name = "history_button";
-            this.history_button.Size = new System.Drawing.Size(150, 80);
+            this.history_button.Size = new System.Drawing.Size(75, 42);
             this.history_button.TabIndex = 11;
             this.history_button.Text = "History";
             this.history_button.UseVisualStyleBackColor = true;
@@ -186,9 +198,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1095, 1002);
+            this.ClientSize = new System.Drawing.Size(548, 458);
             this.Controls.Add(this.history_button);
             this.Controls.Add(this.ViewInvoice);
             this.Controls.Add(this.OrderLabel);
@@ -202,6 +214,7 @@
             this.Controls.Add(this.AddCustomer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);

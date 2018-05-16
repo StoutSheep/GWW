@@ -116,7 +116,7 @@ namespace InvoiceMaker
             this.Controls.Add(storeNameLabel);
 
             Label officeLabel = new Label();
-            officeLabel.Text = "Office Address: " + cust.OfficeAddress;
+            officeLabel.Text = "Office Address: " + cust.BillingAddress;
             officeLabel.Location = new Point(30, 25);
             officeLabel.AutoSize = true;
             this.Controls.Add(officeLabel);

@@ -74,7 +74,7 @@ namespace InvoiceMaker
                     "StoreName varchar(50) NOT NULL," +
                     "StoreDetails varchar(50)," +
                     "EmailAddress varchar(50)," +
-                    "OfficeAddress varchar(50)," +
+                    "BillingAddress varchar(50)," +
                     "ShippingAddress varchar(50) NOT NULL," +
                     "StoreContact varchar(50)," +
                     "PhoneNumber varchar(15)," +
