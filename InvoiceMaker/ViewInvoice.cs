@@ -130,15 +130,29 @@ namespace InvoiceMaker
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem l in pickingListView.SelectedItems)
+            if (pickingListView.SelectedItems.Count > 0 || doubleCheckListView.SelectedItems.Count > 0)
             {
-                Debug.Print("Delete invoice");
+                var confirmResult = MessageBox.Show("Are you sure to delete this invoice?",
+                                     "Confirm Delete!",
+                                     MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    foreach (ListViewItem l in pickingListView.SelectedItems)
+                    {
+                        InvoiceDatabase.DeleteInvoice(Int32.Parse(l.SubItems[0].Text));
+                    }
+                    foreach (ListViewItem l in doubleCheckListView.SelectedItems)
+                    {
+                        InvoiceDatabase.DeleteInvoice(Int32.Parse(l.SubItems[0].Text));
+                    }
+                    RefreshView();
+                }
+                else
+                {
+                    RefreshView();
+                }
             }
-            foreach (ListViewItem l in doubleCheckListView.SelectedItems)
-            {
-                Debug.Print("Delete invoice");
-            }
-            RefreshView();
+            
         }
 
         private void MoveButton_Click(object sender, EventArgs e)

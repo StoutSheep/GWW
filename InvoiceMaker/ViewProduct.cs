@@ -72,12 +72,24 @@ namespace InvoiceMaker
 
         private void DeleteProduct_Click(object sender, EventArgs e)
         {
-            Debug.Print("Delete Product");
-            foreach (ListViewItem l in productList.SelectedItems)
+            if (productList.SelectedItems.Count > 0)
             {
-                ProductDatabase.DeleteProductByItemNo(l.SubItems[0].Text);
+                var confirmResult = MessageBox.Show("Are you sure you want to Delete these item(s)?",
+                                                 "Confirm Delete!!",
+                                                 MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    foreach (ListViewItem l in productList.SelectedItems)
+                    {
+                        ProductDatabase.DeleteProductByItemNo(l.SubItems[0].Text);
+                    }
+                    RefreshView();
+                }
+                else
+                {
+                    // If 'No', do something here.
+                }
             }
-            RefreshView();
         }
 
         private void AddButtons()

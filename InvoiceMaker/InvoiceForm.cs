@@ -351,29 +351,41 @@ namespace InvoiceMaker
 
             if (valid == true)
             {
-                Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
-
-                int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, 0,
-                    Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
-                    Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
-
-                for (int j = 0; j < i; j++)
+                var confirmResult = MessageBox.Show("Are you sure this invoice is complete?",
+                                     "Confirm Completion!!",
+                                     MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
                 {
+                    Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-                    if (this.panel1.Controls["qty" + j].Text.Length != 0)
+                    int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, 0,
+                        Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
+                        Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
+
+                    for (int j = 0; j < i; j++)
                     {
 
-                        String itemNo = this.panel1.Controls["itemNumber" + j].Text;
-                        Debug.Print(itemNo);
-                        int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
-                        Debug.Print("" + qty);
+                        if (this.panel1.Controls["qty" + j].Text.Length != 0)
+                        {
 
-                        String notes = this.panel1.Controls["specialNotes" + j].Text;
-                        Debug.Print(notes);
+                            String itemNo = this.panel1.Controls["itemNumber" + j].Text;
+                            Debug.Print(itemNo);
+                            int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
+                            Debug.Print("" + qty);
 
-                        InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
+                            String notes = this.panel1.Controls["specialNotes" + j].Text;
+                            Debug.Print(notes);
+
+                            InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
+                            this.Close();
+                        }
                     }
                 }
+                else
+                {
+                    // If 'No', do something here.
+                }
+                
             }
 
         }
