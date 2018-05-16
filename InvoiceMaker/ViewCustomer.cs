@@ -69,7 +69,7 @@ namespace InvoiceMaker
             
             ListViewItem.ListViewSubItemCollection row = customer[0].SubItems;
             CustomerForm editCust = new CustomerForm(row[0].Text, row[1].Text, row[2].Text, row[3].Text, row[4].Text,
-                row[5].Text, row[6].Text, row[7].Text, row[8].Text, row[9].Text);
+                row[5].Text, row[6].Text, row[7].Text, row[8].Text, row[9].Text, row[10].Text);
             editCust.Size = new System.Drawing.Size(460, 500);
             editCust.Font = new Font(editCust.Font.Name, editCust.Font.Size + 1, editCust.Font.Style);
             if( editCust.ShowDialog() == DialogResult.OK)
@@ -128,7 +128,7 @@ namespace InvoiceMaker
             {
                 ListViewItem.ListViewSubItemCollection row = customer[0].SubItems;
                 CustomerForm editCust = new CustomerForm(row[0].Text, row[1].Text, row[2].Text, row[3].Text, row[4].Text, 
-                    row[5].Text, row[6].Text, row[7].Text, row[8].Text, row[9].Text);
+                    row[5].Text, row[6].Text, row[7].Text, row[8].Text, row[9].Text, row[10].Text);
                 editCust.Size = new System.Drawing.Size(460, 500);
                 editCust.Font = new Font(editCust.Font.Name, editCust.Font.Size + 1, editCust.Font.Style);
                 if (editCust.ShowDialog() == DialogResult.OK)

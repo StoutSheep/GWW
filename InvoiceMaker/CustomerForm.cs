@@ -35,7 +35,7 @@ namespace InvoiceMaker
         }
 
         public CustomerForm(String storeName, String storeDetails, String officeAddress, String shippingAddress, String storeContact, String emailAddress, String phoneNumber
-          , String province ,String paymentTerms, String shippingInstructions)
+          , String province, String paymentTerms, String shippingInstructions, string rep)
         {
             InitializeComponent();
             List<ProvinceTax> provinceTaxList = ProvinceTaxDatabase.GetAllProvinces();
@@ -58,6 +58,7 @@ namespace InvoiceMaker
             paymentTerms_textBox.Text = paymentTerms;
             shippingInstructions_textBox.Text = shippingInstructions;
             provinceTax_comboBox.Text = provinceTax_comboBox.Items[provinceTax_comboBox.FindString(province)].ToString();
+            rep_textBox.Text = rep;
             editMode = true;
             storeNumber = CustomerDatabase.GetStoreID(storeName, shippingAddress);
             
@@ -242,13 +243,13 @@ namespace InvoiceMaker
             {
                 CustomerDatabase.EditCustomer(storeNumber, storeName_textBox.Text, storeDetails_textBox.Text, email_textBox.Text, officeAddress,
                     shippingAddress, storeContact_textBox.Text, phoneNumber_textBox.Text, paymentTerms_textBox.Text,
-                    shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0]);
+                    shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0], rep_textBox.Text);
             }
             else
             {
                 CustomerDatabase.AddCustomer(storeName_textBox.Text, storeDetails_textBox.Text, email_textBox.Text, officeAddress,
                     shippingAddress, storeContact_textBox.Text, phoneNumber_textBox.Text, paymentTerms_textBox.Text,
-                    shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0]);
+                    shippingInstructions_textBox.Text, provinceTax_comboBox.Text.Split(' ')[0], rep_textBox.Text);
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
