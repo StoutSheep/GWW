@@ -157,10 +157,25 @@ namespace InvoiceMaker
 
         private void MoveButton_Click(object sender, EventArgs e)
         {
-            foreach(ListViewItem l in doubleCheckListView.SelectedItems)
+            if (doubleCheckListView.SelectedItems.Count > 0)
             {
-                InvoiceDatabase.UpdateStage(Int32.Parse(l.SubItems[0].Text), 1);
+                var confirmResult = MessageBox.Show("Are you sure you want to move these to the Picking Stage?",
+                                         "Confirm Delete!!",
+                                         MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    foreach (ListViewItem l in doubleCheckListView.SelectedItems)
+                    {
+                        InvoiceDatabase.UpdateStage(Int32.Parse(l.SubItems[0].Text), 1);
+                    }
+                    RefreshView();
+                }
+                else
+                {
+                    // If 'No', do something here.
+                }
             }
+            
         }
 
         private void DoubleCheckListView_Enter(object sender, EventArgs e)

@@ -45,6 +45,7 @@ namespace InvoiceMaker
             AddLabels(customerID);
             AddTotalBoxes(customerID);
             AddFirstRow();
+
         }
 
         private void Qty_KeyPress(object sender, KeyPressEventArgs e)
@@ -76,7 +77,6 @@ namespace InvoiceMaker
             }
             if (Int32.Parse(t.AccessibleName) == i)
             {
-                i++;
                 AddItemBoxes();
             }
 
@@ -115,7 +115,6 @@ namespace InvoiceMaker
 
             if (Int32.Parse(c.AccessibleName) == i)
             {
-                i++;
                 AddItemBoxes();
             }
 
@@ -377,9 +376,10 @@ namespace InvoiceMaker
                             Debug.Print(notes);
 
                             InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
-                            this.Close();
                         }
                     }
+                    this.Close();
+
                 }
                 else
                 {
@@ -575,6 +575,8 @@ namespace InvoiceMaker
 
         private void AddItemBoxes()
         {
+            i++;
+
             TextBox qty = new TextBox();
             qty.Location = new Point(0, this.panel1.Controls["qty" + (i - 1)].Location.Y + 25);
             qty.Size = new Size(30, 25);
@@ -680,7 +682,6 @@ namespace InvoiceMaker
 
             if (Int32.Parse(c.AccessibleName) == i)
             {
-                i++;
                 AddItemBoxes();
             }
 
