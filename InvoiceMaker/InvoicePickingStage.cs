@@ -61,12 +61,34 @@ namespace InvoiceMaker
 
         private void Qty_TextChanged(object sender, EventArgs e)
         {
-            
+            TextBox t = (TextBox)sender;
+            Product product = ProductDatabase.SearchProductByItemNo(this.panel1.Controls["itemNumber" + t.AccessibleName].Text);
+            if (product != null && this.panel1.Controls["qty" + t.AccessibleName].Text.Length > 0)
+            {
+                if (this.panel1.Controls["qty" + t.AccessibleName].Text.Length == 1 && this.panel1.Controls["qty" + t.AccessibleName].Text == "-")
+                {
+                    return;
+                }
+                else
+                {
+                    this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.Cost).ToString("0.00");
+                }
+            }
+
+
+            if (this.panel1.Controls["itemNumber" + t.AccessibleName].Text.Length == 0 && this.panel1.Controls["qty" + t.AccessibleName].Text.Length == 0)
+            {
+                this.panel1.Controls["loc" + t.AccessibleName].Text = "";
+                this.panel1.Controls["desc" + t.AccessibleName].Text = "";
+                this.panel1.Controls["carton" + t.AccessibleName].Text = "";
+                this.panel1.Controls["cost" + t.AccessibleName].Text = "";
+                this.panel1.Controls["amount" + t.AccessibleName].Text = "";
+            }
         }
 
         private void C_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Desc_Enter(object sender, EventArgs e)
@@ -100,6 +122,7 @@ namespace InvoiceMaker
             int y = 120;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
 
             //customer labels
             Label storeNameLabel = new Label();
@@ -146,7 +169,7 @@ namespace InvoiceMaker
             this.Controls.Add(phoneLabel);
 
             Label provinceLabel = new Label();
-            provinceLabel.Text = "Province Tax: " + cust.Province;
+            provinceLabel.Text = "Province Tax: " + cust.Province + " - GST/PST(" + provinceTax.gst + "%/" + provinceTax.pst + "%)";
             provinceLabel.Location = new Point(500, 25);
             provinceLabel.AutoSize = true;
             this.Controls.Add(provinceLabel);
@@ -180,7 +203,7 @@ namespace InvoiceMaker
             invoiceSpecialNotesLabel.Location = new Point(180, 85);
             invoiceSpecialNotesLabel.AutoSize = true;
             this.Controls.Add(invoiceSpecialNotesLabel);
-            
+
             //Invoice column headers
             Label qtyLabel = new Label();
             qtyLabel.Text = "Qty";
@@ -239,7 +262,7 @@ namespace InvoiceMaker
             this.Controls.Add(specialNotesLabel);
 
             Label backorderLabel = new Label();
-            backorderLabel.Text = "Actual Qty";
+            backorderLabel.Text = "In stock";
             backorderLabel.Location = new Point(x + 790, y);
             backorderLabel.AutoSize = true;
             backorderLabel.BackColor = System.Drawing.Color.LightGray;
@@ -290,7 +313,7 @@ namespace InvoiceMaker
                     InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
                     InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
                 }
-                
+
 
                 Debug.Print("entryid:" + entryID);
                 Debug.Print("invoiceid" + invoice.InvoiceID);
@@ -298,7 +321,7 @@ namespace InvoiceMaker
 
 
             }
-            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text),2);
+            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 2);
 
         }
 
@@ -450,8 +473,7 @@ namespace InvoiceMaker
                 qty.Size = new Size(30, 25);
                 qty.Name = "qty" + i;
                 qty.Text = invoiceContentsList[i].Quantity.ToString();
-                qty.ReadOnly = true;
-                qty.Enter += Desc_Enter;
+                qty.TextChanged += Qty_TextChanged;
                 qty.AccessibleName = "" + i;
                 panel1.Controls.Add(qty);
 
@@ -557,6 +579,15 @@ namespace InvoiceMaker
         private void Backorder_TextChanged(object sender, EventArgs e)
         {
             TextBox t = (TextBox)sender;
+            int qty;
+            if (this.panel1.Controls["qty" + t.AccessibleName].Text.Length == 0)
+            {
+                qty = 0;
+            }
+            else
+            {
+                qty = Int32.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text);
+            }
 
             if (t.Text.Length != 0)
             {
@@ -564,7 +595,7 @@ namespace InvoiceMaker
             }
             else
             {
-                this.panel1.Controls["amount" + t.AccessibleName].Text = (Int32.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * Single.Parse(this.panel1.Controls["cost" + t.AccessibleName].Text)).ToString("0.00");
+                this.panel1.Controls["amount" + t.AccessibleName].Text = (qty * Single.Parse(this.panel1.Controls["cost" + t.AccessibleName].Text)).ToString("0.00");
             }
         }
 

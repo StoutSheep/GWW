@@ -100,6 +100,7 @@ namespace InvoiceMaker
             int y = 120;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
 
             //customer labels
             Label storeNameLabel = new Label();
@@ -146,7 +147,7 @@ namespace InvoiceMaker
             this.Controls.Add(phoneLabel);
 
             Label provinceLabel = new Label();
-            provinceLabel.Text = "Province Tax: " + cust.Province;
+            provinceLabel.Text = "Province Tax: " + cust.Province + " - GST/PST(" + provinceTax.gst + "%/" + provinceTax.pst + "%)";
             provinceLabel.Location = new Point(500, 25);
             provinceLabel.AutoSize = true;
             this.Controls.Add(provinceLabel);
@@ -297,6 +298,11 @@ namespace InvoiceMaker
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            if (this.Controls["invoiceNumber"].Text.Length == 0)
+            {
+                this.Controls["invoiceNumber"].BackColor = Color.Red;
+                return;
+            }
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
             for (int i = 0; i < invoiceContentsList.Count; i++)
@@ -322,17 +328,21 @@ namespace InvoiceMaker
 
             }
             int invoiceNumber;
-            if(this.Controls["invoiceNumber"].Text.Length == 0)
+
+            invoiceNumber = Int32.Parse(this.Controls["invoiceNumber"].Text);
+
+            float freight = 0;
+            if (this.Controls["freight"].Text.Length == 0)
             {
-                invoiceNumber = -1;
+                freight = 0;
             }
             else
             {
-                invoiceNumber = Int32.Parse(this.Controls["invoiceNumber"].Text);
+                freight = Single.Parse(this.Controls["freight"].Text);
             }
             InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
             InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
-            InvoiceDatabase.UpdateFreight(invoice.InvoiceID, Single.Parse(this.Controls["freight"].Text));
+            InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -464,7 +474,7 @@ namespace InvoiceMaker
         {
             TextBox t = (TextBox)sender;
             float freight = 0;
-            if(t.Text.Length == 0)
+            if (t.Text.Length == 0)
             {
                 freight = 0;
             }
@@ -647,7 +657,7 @@ namespace InvoiceMaker
 
         private void textBoxOnlyNumb_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) )
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }

@@ -81,12 +81,14 @@ namespace InvoiceMaker
             processButton.Location = new Point(450, 600);
             processButton.Size = new Size(70, 40);
             processButton.Text = "Process";
+            processButton.Click += ProcessButton_Click;
             this.Controls.Add(processButton);
 
             Button deleteButton = new Button();
             deleteButton.Location = new Point(530, 600);
             deleteButton.Size = new Size(70, 40);
             deleteButton.Text = "Delete";
+            deleteButton.Click += DeleteButton_Click;
             this.Controls.Add(deleteButton);
 
             Button moveButton = new Button();
@@ -108,6 +110,35 @@ namespace InvoiceMaker
             }
 
 
+        }
+
+        private void ProcessButton_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem l in pickingListView.SelectedItems)
+            {
+                InvoicePickingStage form = new InvoicePickingStage(Int32.Parse(pickingListView.SelectedItems[0].SubItems[0].Text));
+                form.Size = new System.Drawing.Size(980, 700);
+                form.Show();
+            }
+            foreach (ListViewItem l in doubleCheckListView.SelectedItems)
+            {
+                InvoiceDoubleCheckStage form = new InvoiceDoubleCheckStage(Int32.Parse(doubleCheckListView.SelectedItems[0].SubItems[0].Text));
+                form.Size = new System.Drawing.Size(1000, 700);
+                form.Show();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem l in pickingListView.SelectedItems)
+            {
+                Debug.Print("Delete invoice");
+            }
+            foreach (ListViewItem l in doubleCheckListView.SelectedItems)
+            {
+                Debug.Print("Delete invoice");
+            }
+            RefreshView();
         }
 
         private void MoveButton_Click(object sender, EventArgs e)
