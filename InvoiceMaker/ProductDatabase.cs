@@ -31,7 +31,41 @@ namespace InvoiceMaker
                     "'" + location + "'," +
                     cost + "," +
                     sellPrice + "," +
-                    upc +
+                    upc + "," +
+                    "' '" +
+                    ");";
+
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+        internal static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc, String specialNotes)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "INSERT INTO Products VALUES (" +
+                    "'" + itemNo + "'," +
+                    "'" + itemDesc + "'," +
+                    perCarton + "," +
+                    "'" + location + "'," +
+                    cost + "," +
+                    sellPrice + "," +
+                    upc + "," +
+                    "'" + specialNotes + "'" +
                     ");";
 
                 cmd = new MySqlCommand(sql, conn);
@@ -67,6 +101,40 @@ namespace InvoiceMaker
                     ",Cost = " + cost +
                     ",SellPrice = " + sellPrice +
                     ",UPC = " + upc +
+                    " WHERE ItemNo = '" + oldItemNo + "'" +
+                    ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+        }
+
+        internal static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc, String specialNotes)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "UPDATE Products " +
+                    "SET ItemNo = '" + newItemNo + "'" +
+                    ",ItemDesc = '" + itemDesc + "'" +
+                    ",PerCarton = " + perCarton +
+                    ",Location = '" + location + "'" +
+                    ",Cost = " + cost +
+                    ",SellPrice = " + sellPrice +
+                    ",UPC = " + upc +
+                    ",SpecialNotes = '" + specialNotes + "'" +
                     " WHERE ItemNo = '" + oldItemNo + "'" +
                     ";";
                 cmd = new MySqlCommand(sql, conn);
@@ -135,7 +203,7 @@ namespace InvoiceMaker
                 {
 
 
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()));
+                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()), rdr[7].ToString());
                     productList.Add(temp);
                 }
 
@@ -167,7 +235,7 @@ namespace InvoiceMaker
 
                 while (rdr.Read())
                 {
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()));
+                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()), rdr[7].ToString());
                     productList.Add(temp);
                 }
 
@@ -200,7 +268,7 @@ namespace InvoiceMaker
                 if (rdr.HasRows)
                 {
                     rdr.Read();
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()));
+                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()), rdr[7].ToString());
                     
                     conn.Close();
                     return temp;
@@ -215,6 +283,8 @@ namespace InvoiceMaker
             return null;
 
         }
+
+
         internal static List<Product> SearchProductsByItemNoOneWildCard(String itemNo)
         {
 
@@ -233,9 +303,7 @@ namespace InvoiceMaker
 
                 while (rdr.Read())
                 {
-
-
-                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()));
+                    Product temp = new Product(rdr[0].ToString(), rdr[1].ToString(), Int32.Parse(rdr[2].ToString()), rdr[3].ToString(), Single.Parse(rdr[4].ToString()), Single.Parse(rdr[5].ToString()), Int64.Parse(rdr[6].ToString()), rdr[7].ToString());
                     productList.Add(temp);
                 }
 
