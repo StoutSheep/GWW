@@ -49,7 +49,11 @@ namespace InvoiceMaker
 
         private void Qty_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '-') && ((sender as TextBox).Text.IndexOf('-') > -1))
             {
                 e.Handled = true;
             }
@@ -61,7 +65,14 @@ namespace InvoiceMaker
             Product product = ProductDatabase.SearchProductByItemNo(this.panel1.Controls["itemNumber" + t.AccessibleName].Text);
             if (product != null && this.panel1.Controls["qty" + t.AccessibleName].Text.Length > 0)
             {
-                this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.Cost).ToString("0.00");
+                if (this.panel1.Controls["qty" + t.AccessibleName].Text.Length == 1 && this.panel1.Controls["qty" + t.AccessibleName].Text == "-")
+                {
+                    return;
+                }
+                else
+                {
+                    this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.Cost).ToString("0.00");
+                }
             }
             if (Int32.Parse(t.AccessibleName) == i)
             {
@@ -91,7 +102,14 @@ namespace InvoiceMaker
                 this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString("0.00");
                 if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length > 0)
                 {
-                    this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost).ToString("0.00");
+                    if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length == 1 && this.panel1.Controls["qty" + c.AccessibleName].Text == "-")
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost).ToString("0.00");
+                    }
                 }
             }
 
@@ -144,6 +162,7 @@ namespace InvoiceMaker
             int y = 120;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
 
             //customer labels
             Label storeNameLabel = new Label();
@@ -190,7 +209,7 @@ namespace InvoiceMaker
             this.Controls.Add(phoneLabel);
 
             Label provinceLabel = new Label();
-            provinceLabel.Text = "Province Tax: " + cust.Province;
+            provinceLabel.Text = "Province Tax: " + cust.Province + " - GST/PST(" + provinceTax.gst + "%/" + provinceTax.pst + "%)";
             provinceLabel.Location = new Point(500, 25);
             provinceLabel.AutoSize = true;
             this.Controls.Add(provinceLabel);
@@ -312,7 +331,7 @@ namespace InvoiceMaker
             bool valid = true;
             for (int j = 0; j < i; j++)
             {
-                if(this.panel1.Controls["qty"+j].Text.Length == 0 & this.panel1.Controls["itemNumber"+j].Text.Length!=0)
+                if (this.panel1.Controls["qty" + j].Text.Length == 0 & this.panel1.Controls["itemNumber" + j].Text.Length != 0)
                 {
                     valid = false;
                     this.panel1.Controls["qty" + j].BackColor = Color.Red;
@@ -322,6 +341,11 @@ namespace InvoiceMaker
                 {
                     valid = false;
                     this.panel1.Controls["itemNumber" + j].BackColor = Color.Red;
+                }
+                if (this.panel1.Controls["qty" + j].Text.Length == 1 && this.panel1.Controls["qty" + j].Text == "-")
+                {
+                    valid = false;
+                    this.panel1.Controls["qty" + j].BackColor = Color.Red;
                 }
             }
 
@@ -338,6 +362,7 @@ namespace InvoiceMaker
 
                     if (this.panel1.Controls["qty" + j].Text.Length != 0)
                     {
+
                         String itemNo = this.panel1.Controls["itemNumber" + j].Text;
                         Debug.Print(itemNo);
                         int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
@@ -630,7 +655,14 @@ namespace InvoiceMaker
                 this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString("0.00");
                 if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length > 0)
                 {
-                    this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost).ToString("0.00");
+                    if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length == 1 && this.panel1.Controls["qty" + c.AccessibleName].Text == "-")
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost).ToString("0.00");
+                    }
                 }
             }
 

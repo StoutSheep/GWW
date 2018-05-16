@@ -39,6 +39,7 @@ namespace InvoiceMaker
             custList.Scrollable = true;
             custList.View = System.Windows.Forms.View.Details;
             custList.DoubleClick += CustomerList_DoubleClick;
+            custList.FullRowSelect = true;
 
             this.Controls.Add(custList);
 

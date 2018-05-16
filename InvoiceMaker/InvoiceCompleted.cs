@@ -99,6 +99,7 @@ namespace InvoiceMaker
             int y = 120;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
 
             //customer labels
             Label storeNameLabel = new Label();
@@ -145,7 +146,7 @@ namespace InvoiceMaker
             this.Controls.Add(phoneLabel);
 
             Label provinceLabel = new Label();
-            provinceLabel.Text = "Province Tax: " + cust.Province;
+            provinceLabel.Text = "Province Tax: " + cust.Province + " - GST/PST(" + provinceTax.gst + "%/" + provinceTax.pst + "%)";
             provinceLabel.Location = new Point(500, 25);
             provinceLabel.AutoSize = true;
             this.Controls.Add(provinceLabel);
