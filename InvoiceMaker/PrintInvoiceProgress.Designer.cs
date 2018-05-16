@@ -58,14 +58,14 @@
             // 
             this.CustomerBindingSource.DataSource = typeof(InvoiceMaker.Customer);
             // 
-            // Form2
+            // PrintInvoiceProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1802, 984);
             this.Controls.Add(this.reportViewer1);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "PrintInvoiceProgress";
+            this.Text = "Invoice In Progress";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.InvoiceItemDetailBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerBindingSource)).EndInit();

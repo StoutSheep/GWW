@@ -21,5 +21,6 @@ namespace InvoiceMaker
         public float InvoiceItemSellPrice { get; set; }
         public float InvoiceItemAmount { get; set; }
         public String InvoiceItemNote { get; set; }
+        public Int32 Backorder { get; set; }
     }
 }

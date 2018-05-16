@@ -63,6 +63,7 @@ namespace InvoiceMaker
                 new Microsoft.Reporting.WinForms.ReportParameter("pGST",_invoice.Gst.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pTotal",_invoice.NetTotal.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pGSTno",_invoice.GSTNo),
+                new Microsoft.Reporting.WinForms.ReportParameter("pBackorderNotes",_invoice.BackorderNotes)
             };
             this.reportViewer1.LocalReport.SetParameters(p);
 
