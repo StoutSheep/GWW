@@ -68,6 +68,8 @@
             this.provinceTax_comboBox = new System.Windows.Forms.ComboBox();
             this.email_textBox = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.rep_textBox = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -363,7 +365,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(80, 687);
+            this.label14.Location = new System.Drawing.Point(332, 690);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(162, 25);
             this.label14.TabIndex = 14;
@@ -371,15 +373,15 @@
             // 
             // paymentTerms_textBox
             // 
-            this.paymentTerms_textBox.Location = new System.Drawing.Point(85, 715);
+            this.paymentTerms_textBox.Location = new System.Drawing.Point(337, 718);
             this.paymentTerms_textBox.Name = "paymentTerms_textBox";
-            this.paymentTerms_textBox.Size = new System.Drawing.Size(328, 31);
-            this.paymentTerms_textBox.TabIndex = 16;
+            this.paymentTerms_textBox.Size = new System.Drawing.Size(208, 31);
+            this.paymentTerms_textBox.TabIndex = 17;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(431, 687);
+            this.label15.Location = new System.Drawing.Point(571, 687);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(212, 25);
             this.label15.TabIndex = 16;
@@ -387,10 +389,10 @@
             // 
             // shippingInstructions_textBox
             // 
-            this.shippingInstructions_textBox.Location = new System.Drawing.Point(436, 715);
+            this.shippingInstructions_textBox.Location = new System.Drawing.Point(576, 715);
             this.shippingInstructions_textBox.Name = "shippingInstructions_textBox";
-            this.shippingInstructions_textBox.Size = new System.Drawing.Size(347, 34);
-            this.shippingInstructions_textBox.TabIndex = 17;
+            this.shippingInstructions_textBox.Size = new System.Drawing.Size(207, 34);
+            this.shippingInstructions_textBox.TabIndex = 18;
             this.shippingInstructions_textBox.Text = "";
             // 
             // button2
@@ -453,11 +455,29 @@
             this.label19.TabIndex = 23;
             this.label19.Text = "Email";
             // 
+            // rep_textBox
+            // 
+            this.rep_textBox.Location = new System.Drawing.Point(85, 718);
+            this.rep_textBox.Name = "rep_textBox";
+            this.rep_textBox.Size = new System.Drawing.Size(232, 31);
+            this.rep_textBox.TabIndex = 16;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(85, 690);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(111, 25);
+            this.label16.TabIndex = 25;
+            this.label16.Text = "Sales Rep";
+            // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 903);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.rep_textBox);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.email_textBox);
             this.Controls.Add(this.provinceTax_comboBox);
@@ -531,5 +551,7 @@
         private System.Windows.Forms.ComboBox provinceTax_comboBox;
         private System.Windows.Forms.TextBox email_textBox;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox rep_textBox;
+        private System.Windows.Forms.Label label16;
     }
 }
