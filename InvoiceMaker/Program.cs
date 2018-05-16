@@ -131,7 +131,7 @@ namespace InvoiceMaker
                    "SpecialNotes varchar(40)," +
                    "BackorderSpecialNotes varchar(40)," +
                    "PRIMARY KEY (EntryID)," +
-                   "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID)," +
+                   "FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID) ON DELETE CASCADE," +
                    "FOREIGN KEY (ItemNo) REFERENCES Products(ItemNo) ON UPDATE CASCADE" +
                    ");";
                 cmd = new MySqlCommand(sql, conn);
@@ -208,7 +208,10 @@ namespace InvoiceMaker
             Invoice jk = new Invoice(1);
 
 
-            List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);
+            InvoiceDatabase.DeleteInvoice(1);
+
+
+            //List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);
 
 
         }
