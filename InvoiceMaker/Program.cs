@@ -208,7 +208,6 @@ namespace InvoiceMaker
             Invoice jk = new Invoice(1);
 
 
-            InvoiceDatabase.DeleteInvoice(1);
 
 
             //List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);

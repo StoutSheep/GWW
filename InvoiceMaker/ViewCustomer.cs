@@ -141,13 +141,26 @@ namespace InvoiceMaker
 
         private void DeleteCustomer_Click(object sender, EventArgs e)
         {
-            Debug.Print("Delete Customer");
-            foreach (ListViewItem l in custList.SelectedItems)
+            if (custList.SelectedItems.Count > 0)
             {
-                Debug.Print("storeID" + CustomerDatabase.GetStoreID(l.SubItems[0].Text, l.SubItems[3].Text));
-                CustomerDatabase.DeleteCustomer(CustomerDatabase.GetStoreID(l.SubItems[0].Text, l.SubItems[3].Text));
+                var confirmResult = MessageBox.Show("Are you sure to delete this item ??",
+                                                     "Confirm Delete!!",
+                                                     MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    foreach (ListViewItem l in custList.SelectedItems)
+                    {
+                        Debug.Print("storeID" + CustomerDatabase.GetStoreID(l.SubItems[0].Text, l.SubItems[3].Text));
+                        CustomerDatabase.DeleteCustomer(CustomerDatabase.GetStoreID(l.SubItems[0].Text, l.SubItems[3].Text));
+                    }
+                    RefreshView();
+                }
+                else
+                {
+                    // If 'No', do something here.
+                }
             }
-            RefreshView();
+            
         }
 
         private void customerTextBox_TextChanged(object sender, EventArgs e)
