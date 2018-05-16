@@ -81,6 +81,7 @@ namespace InvoiceMaker
                     "PaymentTerms varchar(50)," +
                     "ShippingInstructions varchar(50)," +
                     "Province varchar(3) NOT NULL," +
+                    "Rep varchar(10)," +
                     "PRIMARY KEY (StoreID)," +
                     "FOREIGN KEY (Province) REFERENCES ProvinceTax(Province)" +
                     ");";
@@ -96,6 +97,7 @@ namespace InvoiceMaker
                     "Cost decimal(10,2) NOT NULL," +
                     "SellPrice decimal(10,2) NOT NULL," +
                     "UPC bigint," +
+                    "SpecialNotes varchar(100)," +
                     "PRIMARY KEY (ItemNo)" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);

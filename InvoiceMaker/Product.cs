@@ -32,8 +32,21 @@ namespace InvoiceMaker
         internal int BackOrder { get; set; }
         internal String BackOrderSpecialNotes { get; set; }
 
+        public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, Int64 upc, String specialNotes)
 
-        //Everything is filled.
+        {
+            ItemNo = itemNo;
+            ItemDesc = itemDesc;
+            PerCarton = perCarton;
+            Location = location;
+            Cost = cost;
+            SellPrice = sellPrice;
+            UPC = upc;
+            SpecialNotes = specialNotes;
+
+        }
+        
+
         public Product(string itemNo, string itemDesc, int perCarton, string location, float cost, float sellPrice, Int64 upc)
 
         {

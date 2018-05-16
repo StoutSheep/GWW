@@ -26,6 +26,8 @@ namespace InvoiceMaker
         public String Email { get; set; }
         public String Province { get; set; }
 
+        public String Rep { get; set; }
+
         public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province)
         {
@@ -41,10 +43,30 @@ namespace InvoiceMaker
             ShippingInstructions = shippingInstructions;
             Email = emailAddress;
             Province = province;
+            Rep = "";
 
         }
-        
 
-       
+        public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+            String paymentTerms, String shippingInstructions, String province, String rep)
+        {
+
+            StoreID = storeId;
+            StoreName = storeName;
+            StoreDetails = storeDetails;
+            OfficeAddress = officeAddress;
+            ShippingAddress = shippingAddress;
+            StoreContact = storeContact;
+            PhoneNumber = phoneNumber;
+            PaymentTerms = paymentTerms;
+            ShippingInstructions = shippingInstructions;
+            Email = emailAddress;
+            Province = province;
+            Rep = rep;
+
+        }
+
+
+
     }
 }

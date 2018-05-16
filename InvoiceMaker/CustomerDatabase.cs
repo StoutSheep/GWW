@@ -26,7 +26,7 @@ namespace InvoiceMaker
 
 
                 sql = "INSERT INTO Customers (StoreName, StoreDetails, EmailAddress, OfficeAddress, ShippingAddress, " +
-                    "StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, Province) " +
+                    "StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, Province, Rep) " +
                     "VALUES (" +
                     "'" + storeName + "'," +
                     "'" + storeDetails + "'," +
@@ -37,7 +37,48 @@ namespace InvoiceMaker
                     "'" + phoneNumber + "'," +
                     "'" + paymentTerms + "'," +
                     "'" + shippingInstructions + "'," +
-                    "'" + province + "'" +
+                    "'" + province + "'," +
+                    "''" +
+                    ");";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+
+        }
+
+        internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+          String paymentTerms, String shippingInstructions, String province, String rep)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+
+                sql = "INSERT INTO Customers (StoreName, StoreDetails, EmailAddress, OfficeAddress, ShippingAddress, " +
+                    "StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, Province, Rep) " +
+                    "VALUES (" +
+                    "'" + storeName + "'," +
+                    "'" + storeDetails + "'," +
+                    "'" + emailAddress + "'," +
+                    "'" + officeAddress + "'," +
+                    "'" + shippingAddress + "'," +
+                    "'" + storeContact + "'," +
+                    "'" + phoneNumber + "'," +
+                    "'" + paymentTerms + "'," +
+                    "'" + shippingInstructions + "'," +
+                    "'" + province + "'," +
+                    "'" + rep + "'" +
                     ");";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -74,6 +115,43 @@ namespace InvoiceMaker
                     ",PaymentTerms = '" + paymentTerms + "'" +
                     ",ShippingInstructions = '" + shippingInstructions + "'" +
                     ",Province = '" + province + "'" +
+                    " WHERE StoreID = " + storeId +
+                    ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+        }
+
+        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+            String paymentTerms, String shippingInstructions, String province, String rep)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "UPDATE Customers " +
+                    "SET StoreName = '" + storeName + "'" +
+                    ",StoreDetails = '" + storeDetails + "'" +
+                    ",EmailAddress = '" + emailAddress + "'" +
+                    ",OfficeAddress = '" + officeAddress + "'" +
+                    ",ShippingAddress = '" + shippingAddress + "'" +
+                    ",StoreContact = '" + storeContact + "'" +
+                    ",PhoneNumber = '" + phoneNumber + "'" +
+                    ",PaymentTerms = '" + paymentTerms + "'" +
+                    ",ShippingInstructions = '" + shippingInstructions + "'" +
+                    ",Province = '" + province + "'" +
+                    ",Rep = '" + rep + "'" +
                     " WHERE StoreID = " + storeId +
                     ";";
                 cmd = new MySqlCommand(sql, conn);
@@ -170,7 +248,7 @@ namespace InvoiceMaker
 
                 while (rdr.Read())
                 {
-                    Customer temp = new Customer(Int32.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), rdr[5].ToString(), rdr[6].ToString(), rdr[7].ToString(), rdr[8].ToString(), rdr[9].ToString(), rdr[10].ToString());
+                    Customer temp = new Customer(Int32.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), rdr[5].ToString(), rdr[6].ToString(), rdr[7].ToString(), rdr[8].ToString(), rdr[9].ToString(), rdr[10].ToString(), rdr[11].ToString());
                     customerList.Add(temp);
                 }
             }
@@ -201,7 +279,7 @@ namespace InvoiceMaker
 
                 while (rdr.Read())
                 {
-                    customer = new Customer(Int32.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), rdr[5].ToString(), rdr[6].ToString(), rdr[7].ToString(), rdr[8].ToString(), rdr[9].ToString(), rdr[10].ToString());
+                    customer = new Customer(Int32.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), rdr[5].ToString(), rdr[6].ToString(), rdr[7].ToString(), rdr[8].ToString(), rdr[9].ToString(), rdr[10].ToString(), rdr[11].ToString());
                     break;
                 }
             }
