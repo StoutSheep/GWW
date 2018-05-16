@@ -52,6 +52,9 @@ namespace InvoiceMaker
 
         private void setTextBoxRestricts()
         {
+            itemNumber_textBox.MaxLength = 10;
+            itemDescription_textBox.MaxLength = 50;
+            warehouseLoc_textBox.MaxLength = 10;
             cartonPack_textBox.KeyPress += textBoxOnlyNumb_KeyPress;
             cost_textBox.KeyPress += textBoxCurrency_KeyPress;
             sellingPrice_textBox.KeyPress += textBoxCurrency_KeyPress;
@@ -71,57 +74,77 @@ namespace InvoiceMaker
             itemDesc = itemDescription_textBox.Text;
             Int32.TryParse(cartonPack_textBox.Text, out perCarton);
             location = warehouseLoc_textBox.Text;
-            //cost = cost_textBox.Text;
-            //sellPrice = sellingPrice_textBox.Text;
+
             Int32.TryParse(upc_textBox.Text, out upc);
-           // upc = upc_textBox.Text;
+
             if(!validItemNumber(itemNo))
             {
-                Debug.Print("Failed");
                 allValid = false;
+                itemNumber_textBox.BackColor = Color.Red;
             }
-            if(!validStringLength(itemDesc, 50))
+            else
             {
-                Debug.Print("Description Failed");
+                itemNumber_textBox.BackColor = Color.White;
+            }
+            if(itemDesc.Length == 0)
+            {
+
                 allValid = false;
                 editValid = false;
+                itemDescription_textBox.BackColor = Color.Red;
+            }
+            else
+            {
+                itemDescription_textBox.BackColor = Color.White;
             }
 
             if (!Int32.TryParse(cartonPack_textBox.Text, out perCarton))
             {
-                Debug.Print("PerCarton Failed");
+
                 allValid = false;
                 editValid = false;
+                cartonPack_textBox.BackColor = Color.Red;
+            }
+            else
+            {
+                cartonPack_textBox.BackColor = Color.White;
             }
 
-            if (!validStringLength(location, 10))
+            if (location.Length == 0)
             {
-                Debug.Print("Location Failed");
+
                 allValid = false;
                 editValid = false;
+                warehouseLoc_textBox.BackColor = Color.Red;
+            }
+            else
+            {
+                warehouseLoc_textBox.BackColor = Color.White;
             }
 
             if (!Double.TryParse(cost_textBox.Text, out cost))
             {
-                Debug.Print("Cost Failed");
+
                 allValid = false;
                 editValid = false;
+                cost_textBox.BackColor = Color.Red;
+            }
+            else
+            {
+                cost_textBox.BackColor = Color.White;
             }
 
             if (!Double.TryParse(sellingPrice_textBox.Text, out sellPrice))
             {
-                Debug.Print("Selling Price Failed");
+
                 allValid = false;
                 editValid = false;
+                sellingPrice_textBox.BackColor = Color.Red;
             }
-
-            /*
-            if (!validStringLength(upc, 20))
+            else
             {
-                Debug.Print("UPC Failed");
-                allValid = false;
+                sellingPrice_textBox.BackColor = Color.White;
             }
-            */
 
             if (editMode == false && allValid)
             {
@@ -140,9 +163,10 @@ namespace InvoiceMaker
             }
         }
 
+
         private Boolean validItemNumber(String itemNo)
         {
-            if(!validStringLength(itemNo, 10))
+            if(itemNo.Length == 0)
             {
                 return false;
             }
@@ -153,19 +177,11 @@ namespace InvoiceMaker
             return true;
         }
 
-        private Boolean validStringLength(String text, int max)
-        {
-            if (text.Length <= 0 || text.Length > max)
-            {
-                return false;
-            }
-            return true;
-        }
 
         private Boolean isUniqueItemNo(String itemNo)
         {
-            List<Product> result = ProductDatabase.SearchProductsByItemNo(itemNo);
-            if(result.Count > 0)
+            Product result = ProductDatabase.SearchProductByItemNo(itemNo);
+            if(result != null)
             {
                 return false;
             }
