@@ -35,8 +35,8 @@ namespace InvoiceMaker
                 PST = true;
             }
 
-            panel1.Location = new Point(30, 135);
-            panel1.Size = new Size(800, 360);
+            panel1.Location = new Point(30, 165);
+            panel1.Size = new Size(800, 330);
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.AutoScroll = true;
             panel1.BackColor = Color.DarkGray;
@@ -87,6 +87,8 @@ namespace InvoiceMaker
                 this.panel1.Controls["carton" + t.AccessibleName].Text = "";
                 this.panel1.Controls["cost" + t.AccessibleName].Text = "";
                 this.panel1.Controls["amount" + t.AccessibleName].Text = "";
+                this.panel1.Controls["specialNotes" + t.AccessibleName].Text = "";
+
             }
         }
 
@@ -100,6 +102,8 @@ namespace InvoiceMaker
                 this.panel1.Controls["desc" + c.AccessibleName].Text = product.ItemDesc;
                 this.panel1.Controls["carton" + c.AccessibleName].Text = product.PerCarton.ToString();
                 this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString("0.00");
+                this.panel1.Controls["specialNotes" + c.AccessibleName].Text = product.SpecialNotes;
+
                 if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length > 0)
                 {
                     if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length == 1 && this.panel1.Controls["qty" + c.AccessibleName].Text == "-")
@@ -158,10 +162,9 @@ namespace InvoiceMaker
         private void AddLabels(int customerID)
         {
             int x = 30;
-            int y = 120;
+            int y = 150;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
-            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
 
             //customer labels
             Label storeNameLabel = new Label();
@@ -203,25 +206,21 @@ namespace InvoiceMaker
 
             Label phoneLabel = new Label();
             phoneLabel.Text = "Phone: " + cust.PhoneNumber;
-            phoneLabel.Location = new Point(500, 10);
+            phoneLabel.Location = new Point(emailLabel.Location.X + emailLabel.Size.Width + 20, 70);
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
 
-            Label provinceLabel = new Label();
-            provinceLabel.Text = "Province Tax: " + cust.Province + " - GST/PST(" + provinceTax.gst + "%/" + provinceTax.pst + "%)";
-            provinceLabel.Location = new Point(500, 25);
-            provinceLabel.AutoSize = true;
-            this.Controls.Add(provinceLabel);
+            
 
             Label paymentLabel = new Label();
             paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
-            paymentLabel.Location = new Point(500, 40);
+            paymentLabel.Location = new Point(500, 10);
             paymentLabel.AutoSize = true;
             this.Controls.Add(paymentLabel);
 
             Label shippingInstructionsLabel = new Label();
             shippingInstructionsLabel.Text = "Shipping Instructions: " + cust.ShippingInstructions;
-            shippingInstructionsLabel.Location = new Point(500, 55);
+            shippingInstructionsLabel.Location = new Point(500, 25);
             shippingInstructionsLabel.AutoSize = true;
             this.Controls.Add(shippingInstructionsLabel);
 
@@ -241,15 +240,15 @@ namespace InvoiceMaker
 
             Label invoiceSpecialNotesLabel = new Label();
             invoiceSpecialNotesLabel.Text = "Special Notes:";
-            invoiceSpecialNotesLabel.Location = new Point(180, 85);
+            invoiceSpecialNotesLabel.Location = new Point(30, 110);
             invoiceSpecialNotesLabel.AutoSize = true;
             this.Controls.Add(invoiceSpecialNotesLabel);
 
             TextBox invoiceSpecialNotes = new TextBox();
-            invoiceSpecialNotes.Location = new Point(260, 85);
+            invoiceSpecialNotes.Location = new Point(110, 110);
             invoiceSpecialNotes.Size = new Size(500, 25);
             invoiceSpecialNotes.Name = "invoiceSpecialNotes";
-            purchaseOrder.AccessibleName = "invoiceSpecialNotes";
+            invoiceSpecialNotes.AccessibleName = "invoiceSpecialNotes";
             this.Controls.Add(invoiceSpecialNotes);
 
 
@@ -398,6 +397,7 @@ namespace InvoiceMaker
         private void AddTotalBoxes(int customerID)
         {
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
 
             Label subtotalLabel = new Label();
             subtotalLabel.Text = "Subtotal";
@@ -415,7 +415,7 @@ namespace InvoiceMaker
             this.Controls.Add(subtotalAmount);
 
             Label gstLabel = new Label();
-            gstLabel.Text = "GST";
+            gstLabel.Text = "GST " + provinceTax.gst +"%";
             gstLabel.Location = new Point(560, 530);
             gstLabel.Size = new Size(50, 25);
             gstLabel.TextAlign = ContentAlignment.TopRight;
@@ -432,7 +432,7 @@ namespace InvoiceMaker
             if (PST)
             {
                 Label pstLabel = new Label();
-                pstLabel.Text = "PST";
+                pstLabel.Text = "PST " + provinceTax.pst + "%";
                 pstLabel.Location = new Point(560, 560);
                 pstLabel.Size = new Size(50, 25);
                 pstLabel.TextAlign = ContentAlignment.TopRight;

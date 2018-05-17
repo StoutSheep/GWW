@@ -95,42 +95,6 @@ namespace InvoiceMaker
         }
 
         internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
-            String paymentTerms, String shippingInstructions, String province)
-        {
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd;
-                string sql;
-
-                sql = "UPDATE Customers " +
-                    "SET StoreName = '" + storeName + "'" +
-                    ",StoreDetails = '" + storeDetails + "'" +
-                    ",EmailAddress = '" + emailAddress + "'" +
-                    ",OfficeAddress = '" + officeAddress + "'" +
-                    ",ShippingAddress = '" + shippingAddress + "'" +
-                    ",StoreContact = '" + storeContact + "'" +
-                    ",PhoneNumber = '" + phoneNumber + "'" +
-                    ",PaymentTerms = '" + paymentTerms + "'" +
-                    ",ShippingInstructions = '" + shippingInstructions + "'" +
-                    ",Province = '" + province + "'" +
-                    " WHERE StoreID = " + storeId +
-                    ";";
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            Console.WriteLine("Done.");
-        }
-
-        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province, String rep)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -152,6 +116,42 @@ namespace InvoiceMaker
                     ",ShippingInstructions = '" + shippingInstructions + "'" +
                     ",Province = '" + province + "'" +
                     ",Rep = '" + rep + "'" +
+                    " WHERE StoreID = " + storeId +
+                    ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            Console.WriteLine("Done.");
+        }
+
+        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+            String paymentTerms, String shippingInstructions, String province)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "UPDATE Customers " +
+                    "SET StoreName = '" + storeName + "'" +
+                    ",StoreDetails = '" + storeDetails + "'" +
+                    ",EmailAddress = '" + emailAddress + "'" +
+                    ",OfficeAddress = '" + officeAddress + "'" +
+                    ",ShippingAddress = '" + shippingAddress + "'" +
+                    ",StoreContact = '" + storeContact + "'" +
+                    ",PhoneNumber = '" + phoneNumber + "'" +
+                    ",PaymentTerms = '" + paymentTerms + "'" +
+                    ",ShippingInstructions = '" + shippingInstructions + "'" +
+                    ",Province = '" + province + "'" +
                     " WHERE StoreID = " + storeId +
                     ";";
                 cmd = new MySqlCommand(sql, conn);

@@ -33,6 +33,8 @@ namespace InvoiceMaker
             custList.Columns.Add("Province Tax", -2, HorizontalAlignment.Left);
             custList.Columns.Add("Payment Terms", -2, HorizontalAlignment.Left);
             custList.Columns.Add("Shipping Instr", -2, HorizontalAlignment.Left);
+            custList.Columns.Add("Sales Rep", -2, HorizontalAlignment.Left);
+
             //custList.Columns.Add("Special Notes ", -2, HorizontalAlignment.Left);
 
             custList.GridLines = true;
@@ -47,7 +49,7 @@ namespace InvoiceMaker
             foreach (Customer c in list)
             {
                 custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
-                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions}));
+                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions, c.Rep}));
             }
 
         }
@@ -116,7 +118,7 @@ namespace InvoiceMaker
             foreach (Customer c in list)
             {
                 custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
-                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions}));
+                c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions, c.Rep}));
             }
         }
     }
