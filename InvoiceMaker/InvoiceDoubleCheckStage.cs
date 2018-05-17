@@ -326,11 +326,6 @@ namespace InvoiceMaker
                     InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
                 }
 
-
-                Debug.Print("entryid:" + entryID);
-                Debug.Print("invoiceid" + invoice.InvoiceID);
-                Debug.Print("itemno" + itemNo);
-
             }
             int invoiceNumber;
 
