@@ -146,7 +146,7 @@ namespace InvoiceMaker
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
 
-            
+
 
             Label paymentLabel = new Label();
             paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
@@ -418,6 +418,7 @@ namespace InvoiceMaker
             freight.Name = "freight";
             freight.AccessibleName = "freight";
             freight.TextChanged += Freight_TextChanged;
+            freight.KeyPress += Freight_KeyPress;
             this.Controls.Add(freight);
 
             Label subtotalWithFreightLabel = new Label();
@@ -469,7 +470,7 @@ namespace InvoiceMaker
                 pst.Name = "pst";
                 pst.AccessibleName = "pst";
                 this.Controls.Add(pst);
-                
+
 
                 Label invoiceTotalLabel = new Label();
                 invoiceTotalLabel.Text = "Invoice Total";
@@ -488,7 +489,7 @@ namespace InvoiceMaker
             }
             else //no pst
             {
-                
+
                 Label invoiceTotalLabel = new Label();
                 invoiceTotalLabel.Text = "Invoice Total";
                 invoiceTotalLabel.Location = new Point(540, 620);
@@ -504,6 +505,32 @@ namespace InvoiceMaker
                 invoiceTotal.AccessibleName = "invoiceTotal";
                 this.Controls.Add(invoiceTotal);
             }
+        }
+
+        private void Freight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox t = (TextBox)this.Controls["freight"];
+            if (t.Text.Length == 0)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+
+                // only allow one decimal point
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+
         }
 
         private void SubtotalWithFreight_TextChanged(object sender, EventArgs e)
