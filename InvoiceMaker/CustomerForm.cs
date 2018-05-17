@@ -259,5 +259,81 @@ namespace InvoiceMaker
         {
             this.Close();
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox c = (CheckBox)sender;
+            if(c.Checked)
+            {
+                shippingUnit_textBox.Text = officeUnit_textBox.Text;
+                shippingUnit_textBox.ReadOnly = true;
+                shippingStreet_textBox.Text = officeStreet_textBox.Text;
+                shippingStreet_textBox.ReadOnly = true;
+                shippingCity_textBox.Text = officeCity_textBox.Text;
+                shippingCity_textBox.ReadOnly = true;
+                shippingProvince_comboBox.SelectedIndex = officeProvince_comboBox.SelectedIndex;
+                shippingProvince_comboBox.Enabled = false;
+                shippingPostal_textBox.Text = officePostal_textBox.Text;
+                shippingPostal_textBox.ReadOnly = true;
+            }
+            else
+            {
+                shippingUnit_textBox.ReadOnly = false;
+                shippingStreet_textBox.ReadOnly = false;
+                shippingCity_textBox.ReadOnly = false;
+                shippingProvince_comboBox.Enabled = true;
+                shippingPostal_textBox.ReadOnly = false;
+            }
+        }
+
+        private void officeStreet_textBox_TextChanged(object sender, EventArgs e)
+        {
+            CheckBox c = (CheckBox) this.Controls["checkBox1"];
+
+            if (c.Checked)
+            {
+                shippingStreet_textBox.Text = officeStreet_textBox.Text;
+            }
+        }
+
+        private void officeUnit_textBox_TextChanged(object sender, EventArgs e)
+        {
+            CheckBox c = (CheckBox)this.Controls["checkBox1"];
+
+            if (c.Checked)
+            {
+                shippingUnit_textBox.Text = officeUnit_textBox.Text;
+            }
+        }
+
+        private void officeCity_textBox_TextChanged(object sender, EventArgs e)
+        {
+            CheckBox c = (CheckBox)this.Controls["checkBox1"];
+
+            if (c.Checked)
+            {
+                shippingCity_textBox.Text = officeCity_textBox.Text;
+            }
+        }
+
+        private void officeProvince_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckBox c = (CheckBox)this.Controls["checkBox1"];
+
+            if (c.Checked)
+            {
+                shippingProvince_comboBox.SelectedIndex = officeProvince_comboBox.SelectedIndex;
+            }
+        }
+
+        private void officePostal_textBox_TextChanged(object sender, EventArgs e)
+        {
+            CheckBox c = (CheckBox)this.Controls["checkBox1"];
+
+            if (c.Checked)
+            {
+                shippingPostal_textBox.Text = officePostal_textBox.Text;
+            }
+        }
     }
 }
