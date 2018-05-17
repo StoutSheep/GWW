@@ -41,23 +41,14 @@ namespace InvoiceMaker
             listView.DoubleClick += listView_DoubleClick;
             this.Controls.Add(listView);
 
-            Button processButton = new Button();
-            processButton.Location = new Point(450, 600);
-            processButton.Size = new Size(70, 40);
-            processButton.Text = "Process";
-            this.Controls.Add(processButton);
+            Button viewButton = new Button();
+            viewButton.Location = new Point(400, 600);
+            viewButton.Size = new Size(70, 40);
+            viewButton.Text = "View";
+            viewButton.Click += ViewButton_Click;
+            this.Controls.Add(viewButton);
 
-            Button deleteButton = new Button();
-            deleteButton.Location = new Point(530, 600);
-            deleteButton.Size = new Size(70, 40);
-            deleteButton.Text = "Delete";
-            this.Controls.Add(deleteButton);
-
-            Button moveButton = new Button();
-            moveButton.Location = new Point(610, 600);
-            moveButton.Size = new Size(100, 40);
-            moveButton.Text = "Move to Picking";
-            this.Controls.Add(moveButton);
+            
 
             list = InvoiceDatabase.SearchInvoicesByStage(3);
             foreach (Invoice l in list)
@@ -65,6 +56,17 @@ namespace InvoiceMaker
                 listView.Items.Add(new ListViewItem(new String[] { l.InvoiceID.ToString(),l.InvoiceNo.ToString() ,l.customer.StoreName, l.customer.ShippingAddress,l.NetTotal.ToString("0.00") }));
             }
         
+        }
+
+        private void ViewButton_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem l in listView.SelectedItems)
+            {
+                InvoiceCompleted form = new InvoiceCompleted(Int32.Parse(listView.SelectedItems[0].SubItems[0].Text));
+                form.Size = new System.Drawing.Size(980, 700);
+                form.Show();
+            }
+           
         }
 
         private void listView_DoubleClick(object sender, EventArgs e)

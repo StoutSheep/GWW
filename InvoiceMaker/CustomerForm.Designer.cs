@@ -70,6 +70,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.rep_textBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -122,6 +123,7 @@
             this.officeProvince_comboBox.Name = "officeProvince_comboBox";
             this.officeProvince_comboBox.Size = new System.Drawing.Size(281, 33);
             this.officeProvince_comboBox.TabIndex = 5;
+            this.officeProvince_comboBox.SelectedIndexChanged += new System.EventHandler(this.officeProvince_comboBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -157,6 +159,7 @@
             this.officePostal_textBox.Name = "officePostal_textBox";
             this.officePostal_textBox.Size = new System.Drawing.Size(161, 31);
             this.officePostal_textBox.TabIndex = 6;
+            this.officePostal_textBox.TextChanged += new System.EventHandler(this.officePostal_textBox_TextChanged);
             // 
             // label10
             // 
@@ -173,6 +176,7 @@
             this.officeCity_textBox.Name = "officeCity_textBox";
             this.officeCity_textBox.Size = new System.Drawing.Size(216, 31);
             this.officeCity_textBox.TabIndex = 4;
+            this.officeCity_textBox.TextChanged += new System.EventHandler(this.officeCity_textBox_TextChanged);
             // 
             // label5
             // 
@@ -198,6 +202,7 @@
             this.officeUnit_textBox.Name = "officeUnit_textBox";
             this.officeUnit_textBox.Size = new System.Drawing.Size(136, 31);
             this.officeUnit_textBox.TabIndex = 3;
+            this.officeUnit_textBox.TextChanged += new System.EventHandler(this.officeUnit_textBox_TextChanged);
             // 
             // label3
             // 
@@ -214,6 +219,7 @@
             this.officeStreet_textBox.Name = "officeStreet_textBox";
             this.officeStreet_textBox.Size = new System.Drawing.Size(545, 31);
             this.officeStreet_textBox.TabIndex = 2;
+            this.officeStreet_textBox.TextChanged += new System.EventHandler(this.officeStreet_textBox_TextChanged);
             // 
             // groupBox2
             // 
@@ -227,7 +233,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.shippingStreet_textBox);
             this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Location = new System.Drawing.Point(74, 304);
+            this.groupBox2.Location = new System.Drawing.Point(74, 328);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(776, 184);
             this.groupBox2.TabIndex = 7;
@@ -333,7 +339,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(74, 506);
+            this.label12.Location = new System.Drawing.Point(74, 530);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(143, 25);
             this.label12.TabIndex = 8;
@@ -341,7 +347,7 @@
             // 
             // storeContact_textBox
             // 
-            this.storeContact_textBox.Location = new System.Drawing.Point(85, 534);
+            this.storeContact_textBox.Location = new System.Drawing.Point(85, 558);
             this.storeContact_textBox.Name = "storeContact_textBox";
             this.storeContact_textBox.Size = new System.Drawing.Size(328, 31);
             this.storeContact_textBox.TabIndex = 12;
@@ -349,7 +355,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(431, 506);
+            this.label13.Location = new System.Drawing.Point(431, 530);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(155, 25);
             this.label13.TabIndex = 10;
@@ -357,7 +363,7 @@
             // 
             // phoneNumber_textBox
             // 
-            this.phoneNumber_textBox.Location = new System.Drawing.Point(436, 533);
+            this.phoneNumber_textBox.Location = new System.Drawing.Point(436, 557);
             this.phoneNumber_textBox.Name = "phoneNumber_textBox";
             this.phoneNumber_textBox.Size = new System.Drawing.Size(347, 31);
             this.phoneNumber_textBox.TabIndex = 13;
@@ -365,7 +371,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(332, 690);
+            this.label14.Location = new System.Drawing.Point(332, 714);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(162, 25);
             this.label14.TabIndex = 14;
@@ -373,7 +379,7 @@
             // 
             // paymentTerms_textBox
             // 
-            this.paymentTerms_textBox.Location = new System.Drawing.Point(337, 718);
+            this.paymentTerms_textBox.Location = new System.Drawing.Point(337, 742);
             this.paymentTerms_textBox.Name = "paymentTerms_textBox";
             this.paymentTerms_textBox.Size = new System.Drawing.Size(208, 31);
             this.paymentTerms_textBox.TabIndex = 17;
@@ -381,7 +387,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(571, 687);
+            this.label15.Location = new System.Drawing.Point(571, 711);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(212, 25);
             this.label15.TabIndex = 16;
@@ -389,7 +395,7 @@
             // 
             // shippingInstructions_textBox
             // 
-            this.shippingInstructions_textBox.Location = new System.Drawing.Point(576, 715);
+            this.shippingInstructions_textBox.Location = new System.Drawing.Point(576, 739);
             this.shippingInstructions_textBox.Name = "shippingInstructions_textBox";
             this.shippingInstructions_textBox.Size = new System.Drawing.Size(207, 34);
             this.shippingInstructions_textBox.TabIndex = 18;
@@ -424,7 +430,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(434, 590);
+            this.label18.Location = new System.Drawing.Point(434, 614);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(132, 25);
             this.label18.TabIndex = 12;
@@ -434,14 +440,14 @@
             // 
             this.provinceTax_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.provinceTax_comboBox.FormattingEnabled = true;
-            this.provinceTax_comboBox.Location = new System.Drawing.Point(436, 626);
+            this.provinceTax_comboBox.Location = new System.Drawing.Point(436, 650);
             this.provinceTax_comboBox.Name = "provinceTax_comboBox";
             this.provinceTax_comboBox.Size = new System.Drawing.Size(347, 33);
             this.provinceTax_comboBox.TabIndex = 15;
             // 
             // email_textBox
             // 
-            this.email_textBox.Location = new System.Drawing.Point(80, 626);
+            this.email_textBox.Location = new System.Drawing.Point(80, 650);
             this.email_textBox.Name = "email_textBox";
             this.email_textBox.Size = new System.Drawing.Size(333, 31);
             this.email_textBox.TabIndex = 14;
@@ -449,7 +455,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(80, 590);
+            this.label19.Location = new System.Drawing.Point(80, 614);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(65, 25);
             this.label19.TabIndex = 23;
@@ -457,7 +463,7 @@
             // 
             // rep_textBox
             // 
-            this.rep_textBox.Location = new System.Drawing.Point(85, 718);
+            this.rep_textBox.Location = new System.Drawing.Point(85, 742);
             this.rep_textBox.Name = "rep_textBox";
             this.rep_textBox.Size = new System.Drawing.Size(232, 31);
             this.rep_textBox.TabIndex = 16;
@@ -465,17 +471,29 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(85, 690);
+            this.label16.Location = new System.Drawing.Point(85, 714);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(111, 25);
             this.label16.TabIndex = 25;
             this.label16.Text = "Sales Rep";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(74, 293);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(277, 29);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Same as Billing Address";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 903);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.rep_textBox);
             this.Controls.Add(this.label19);
@@ -553,5 +571,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox rep_textBox;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
