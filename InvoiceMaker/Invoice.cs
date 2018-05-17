@@ -123,7 +123,8 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
+
         }
     }
 }

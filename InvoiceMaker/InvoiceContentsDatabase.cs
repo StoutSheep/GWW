@@ -71,7 +71,8 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
+
 
         }
 
@@ -99,7 +100,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+             
 
         }
 
@@ -139,7 +140,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+             
             return 0;
 
         }
@@ -178,7 +179,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+             
             
             return items;
        
@@ -208,7 +209,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+             
 
         }
 
@@ -235,7 +236,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+             
 
         }
 
@@ -272,7 +273,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+             
 
             return items;
 

@@ -25,7 +25,7 @@ namespace InvoiceMaker
 
             custList.Columns.Add("Store Name", 150, HorizontalAlignment.Left);
             custList.Columns.Add("Store Details", -2, HorizontalAlignment.Left);
-            custList.Columns.Add("Office Address", 190, HorizontalAlignment.Left);
+            custList.Columns.Add("Billing Address", 190, HorizontalAlignment.Left);
             custList.Columns.Add("Shipping Address", 190, HorizontalAlignment.Left);
             custList.Columns.Add("Store Contact", -2, HorizontalAlignment.Left);
             custList.Columns.Add("Email", 100, HorizontalAlignment.Left);
@@ -48,7 +48,7 @@ namespace InvoiceMaker
             List<Customer> list = CustomerDatabase.SearchCustomersByStoreName("");
             foreach (Customer c in list)
             {
-                custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
+                custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.BillingAddress,c.ShippingAddress,c.StoreContact,
                 c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions, c.Rep}));
             }
 
@@ -117,7 +117,7 @@ namespace InvoiceMaker
             }
             foreach (Customer c in list)
             {
-                custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.OfficeAddress,c.ShippingAddress,c.StoreContact,
+                custList.Items.Add(new ListViewItem(new String[] { c.StoreName, c.StoreDetails, c.BillingAddress,c.ShippingAddress,c.StoreContact,
                 c.Email, c.PhoneNumber,c.Province, c.PaymentTerms,c.ShippingInstructions, c.Rep}));
             }
         }
