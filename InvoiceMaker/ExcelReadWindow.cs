@@ -105,6 +105,15 @@ namespace InvoiceMaker
                 {
                     prod.UPC = 0;
                 }
+
+                if(worksheet.Cells[row, 7].Value != null && worksheet.Cells[row, 7].Value.ToString().Length < 100)
+                {
+                    prod.SpecialNotes = worksheet.Cells[row, 7].Value.ToString();
+                }
+                else
+                {
+                    prod.SpecialNotes = String.Empty;
+                }
                 if(errmsg.Length != 0)
                 {
                     errmsg = errmsg.Insert(0, "Error on spreadsheet row " + (row + 1) + ": ");
@@ -115,10 +124,13 @@ namespace InvoiceMaker
                 if (prodInDB == null)
                 {
                     prod.ItemDesc = InsertEscape(prod.ItemDesc);
-                    ProductDatabase.AddProduct(prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC);
+                    ProductDatabase.AddProduct(prod.ItemNo, prod.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC, prod.SpecialNotes);
                 }
                 else
                 {
+                    prod.ItemDesc = InsertEscape(prod.ItemDesc);
+                    ProductDatabase.EditProduct(prod.ItemNo, prod.ItemNo, prodInDB.ItemDesc, prod.PerCarton, prod.Location, prod.Cost, prod.SellPrice, prod.UPC, prod.SpecialNotes);
+                    /*
                     if (prodInDB.ItemDesc == prod.ItemDesc)
                     {
                         prod.ItemDesc = InsertEscape(prod.ItemDesc);
@@ -127,7 +139,7 @@ namespace InvoiceMaker
                     else
                     {
                         HandleItemNoConflict(prod);
-                    }
+                    }*/
                 }
                 backgroundWorker1.ReportProgress((int)(readProgress * row));
             }
