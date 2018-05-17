@@ -75,7 +75,7 @@ namespace InvoiceMaker
                 }
                 else
                 {
-                    this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.Cost).ToString("0.00");
+                    this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.SellPrice).ToString("0.00");
                 }
             }
             if (Int32.Parse(t.AccessibleName) == i)
@@ -104,7 +104,7 @@ namespace InvoiceMaker
                 this.panel1.Controls["loc" + c.AccessibleName].Text = product.Location;
                 this.panel1.Controls["desc" + c.AccessibleName].Text = product.ItemDesc;
                 this.panel1.Controls["carton" + c.AccessibleName].Text = product.PerCarton.ToString();
-                this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString("0.00");
+                this.panel1.Controls["cost" + c.AccessibleName].Text = product.SellPrice.ToString("0.00");
                 this.panel1.Controls["specialNotes" + c.AccessibleName].Text = product.SpecialNotes;
 
                 if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length > 0)
@@ -115,7 +115,7 @@ namespace InvoiceMaker
                     }
                     else
                     {
-                        this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost).ToString("0.00");
+                        this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.SellPrice).ToString("0.00");
                     }
                 }
             }
@@ -213,7 +213,7 @@ namespace InvoiceMaker
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
 
-            
+
 
             Label paymentLabel = new Label();
             paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
@@ -379,27 +379,27 @@ namespace InvoiceMaker
 
                     // Generate Report
 
-            Invoice printInvoice = new Invoice(invoiceID);
-            List<InvoiceItemDetail> invoiceItemDetails;
-            invoiceItemDetails = new List<InvoiceItemDetail>();
+                    Invoice printInvoice = new Invoice(invoiceID);
+                    List<InvoiceItemDetail> invoiceItemDetails;
+                    invoiceItemDetails = new List<InvoiceItemDetail>();
 
-            for (int i = 0; i < printInvoice.Items.Count; i++)
-            {
-                invoiceItemDetails.Add(new InvoiceItemDetail());
-                invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
-                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
-                invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
-                invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
-                invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
-                invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
-                invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].Cost;
-                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].Cost;
-                invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
-            }
+                    for (int i = 0; i < printInvoice.Items.Count; i++)
+                    {
+                        invoiceItemDetails.Add(new InvoiceItemDetail());
+                        invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
+                        invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
+                        invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                        invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
+                        invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
+                        invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
+                        invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                        invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
+                        invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].SellPrice;
+                        invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
+                        invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+                    }
 
-            Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+                    Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
                     Form2.ShowDialog();
                     this.Close();
 
@@ -408,7 +408,7 @@ namespace InvoiceMaker
                 {
                     // If 'No', do something here.
                 }
-                
+
             }
 
         }
@@ -439,7 +439,7 @@ namespace InvoiceMaker
             this.Controls.Add(subtotalAmount);
 
             Label gstLabel = new Label();
-            gstLabel.Text = "GST " + provinceTax.gst +"%";
+            gstLabel.Text = "GST " + provinceTax.gst + "%";
             gstLabel.Location = new Point(560, 530);
             gstLabel.Size = new Size(50, 25);
             gstLabel.TextAlign = ContentAlignment.TopRight;
@@ -690,7 +690,7 @@ namespace InvoiceMaker
                 this.panel1.Controls["loc" + c.AccessibleName].Text = product.Location;
                 this.panel1.Controls["desc" + c.AccessibleName].Text = product.ItemDesc;
                 this.panel1.Controls["carton" + c.AccessibleName].Text = product.PerCarton.ToString();
-                this.panel1.Controls["cost" + c.AccessibleName].Text = product.Cost.ToString("0.00");
+                this.panel1.Controls["cost" + c.AccessibleName].Text = product.SellPrice.ToString("0.00");
                 if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length > 0)
                 {
                     if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length == 1 && this.panel1.Controls["qty" + c.AccessibleName].Text == "-")
@@ -699,7 +699,7 @@ namespace InvoiceMaker
                     }
                     else
                     {
-                        this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.Cost).ToString("0.00");
+                        this.panel1.Controls["amount" + c.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + c.AccessibleName].Text) * product.SellPrice).ToString("0.00");
                     }
                 }
             }

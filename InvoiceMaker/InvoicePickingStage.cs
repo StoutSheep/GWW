@@ -71,7 +71,7 @@ namespace InvoiceMaker
                 }
                 else
                 {
-                    this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.Cost).ToString("0.00");
+                    this.panel1.Controls["amount" + t.AccessibleName].Text = (Single.Parse(this.panel1.Controls["qty" + t.AccessibleName].Text) * product.SellPrice).ToString("0.00");
                 }
             }
 
@@ -288,60 +288,70 @@ namespace InvoiceMaker
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
-
-            for (int i = 0; i < invoiceContentsList.Count; i++)
+            var confirmResult = MessageBox.Show("Are you sure this invoice is complete?",
+                                     "Confirm Completion!!",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                int numBO;
-                String itemNo = this.panel1.Controls["itemNumber" + i].Text;
-                String notes = this.panel1.Controls["specialNotes" + i].Text;
-                int qty = Int32.Parse(this.panel1.Controls["qty" + i].Text);
-                int entryID = InvoiceContentsDatabase.GetEntryID(invoice.InvoiceID, itemNo);
+                Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-                if (this.panel1.Controls["backorder" + i].Text.Length == 0)
+                for (int i = 0; i < invoiceContentsList.Count; i++)
                 {
-                    InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
-                    continue;
-                }
-                else
-                {
-                    numBO = Int32.Parse(this.panel1.Controls["backorder" + i].Text);
-                    InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
-                    InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
-                    InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
+                    int numBO;
+                    String itemNo = this.panel1.Controls["itemNumber" + i].Text;
+                    String notes = this.panel1.Controls["specialNotes" + i].Text;
+                    int qty = Int32.Parse(this.panel1.Controls["qty" + i].Text);
+                    int entryID = InvoiceContentsDatabase.GetEntryID(invoice.InvoiceID, itemNo);
+
+                    if (this.panel1.Controls["backorder" + i].Text.Length == 0)
+                    {
+                        InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
+                        continue;
+                    }
+                    else
+                    {
+                        numBO = Int32.Parse(this.panel1.Controls["backorder" + i].Text);
+                        InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
+                        InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
+                        InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
+
+                    }
 
                 }
-                
+                InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 2);
+
+
+                Invoice printInvoice = new Invoice(invoice.InvoiceID);
+                List<InvoiceItemDetail> invoiceItemDetails;
+                invoiceItemDetails = new List<InvoiceItemDetail>();
+
+                for (int i = 0; i < printInvoice.Items.Count; i++)
+                {
+                    invoiceItemDetails.Add(new InvoiceItemDetail());
+
+                    invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
+                    invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
+                    invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                    invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
+                    invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
+                    invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                    invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].SellPrice;
+                    invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
+                    invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+                }
+
+                Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+                Form2.ShowDialog();
+
+                this.Close();
             }
-            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 2);
-
-
-            Invoice printInvoice = new Invoice(invoice.InvoiceID);
-            List<InvoiceItemDetail> invoiceItemDetails;
-            invoiceItemDetails = new List<InvoiceItemDetail>();
-
-            for (int i = 0; i < printInvoice.Items.Count; i++)
+            else
             {
-                invoiceItemDetails.Add(new InvoiceItemDetail());
-
-                invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
-                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
-                invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
-                invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
-                invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
-                invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
-                invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].Cost;
-                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].Cost;
-                invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+                // If 'No', do something here.
             }
-
-            Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
-            Form2.ShowDialog();
-
-            this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -514,7 +524,7 @@ namespace InvoiceMaker
                 TextBox cost = new TextBox();
                 cost.Location = new Point(510, 0 + i * 25);
                 cost.Size = new Size(50, 25);
-                cost.Text = p.Cost.ToString("0.00");
+                cost.Text = p.SellPrice.ToString("0.00");
                 cost.ReadOnly = true;
                 cost.Enter += Desc_Enter;
                 cost.Name = "cost" + i;
@@ -524,7 +534,7 @@ namespace InvoiceMaker
                 TextBox amount = new TextBox();
                 amount.Location = new Point(580, 0 + i * 25);
                 amount.Size = new Size(50, 25);
-                amount.Text = (Single.Parse(this.panel1.Controls["qty" + i].Text) * p.Cost).ToString("0.00");
+                amount.Text = (Single.Parse(this.panel1.Controls["qty" + i].Text) * p.SellPrice).ToString("0.00");
                 amount.ReadOnly = true;
                 amount.Enter += Desc_Enter;
                 amount.Name = "amount" + i;
