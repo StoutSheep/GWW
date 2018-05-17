@@ -356,7 +356,7 @@ namespace InvoiceMaker
                 {
                     Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
-                    int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, 0,
+                    int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, "",
                         Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
                         Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
 

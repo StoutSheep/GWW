@@ -21,7 +21,7 @@ namespace InvoiceMaker
          * stage 2 = double check stage
          * stage 3 = done
          */
-        internal static int AddInvoice(int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subTotal, float gst, float pst, float netTotal, int stage)
+        internal static int AddInvoice(int storeID, String purchaseOrder, String specialNotes, String invoiceNo, float subTotal, float gst, float pst, float netTotal, int stage)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             try
@@ -35,7 +35,7 @@ namespace InvoiceMaker
                     storeID + "," +
                     "'" + purchaseOrder + "'," +
                     "'" + specialNotes + "'," +
-                    invoiceNo + "," +
+                    "'" + invoiceNo + "'," +
                     subTotal + "," +
                     gst + "," +
                     pst + "," +
@@ -86,9 +86,9 @@ namespace InvoiceMaker
             
                 sql = "UPDATE Invoices " +
                    "SET StoreID = " + storeID +
-                   ",PurchaseOrder = '" + purchaseOrder +
-                   "',SpecialNotes = '" + specialNotes +
-                   "',InvoiceNo = " + invoiceNo +
+                   ",PurchaseOrder = '" + purchaseOrder + "'" +
+                   ",SpecialNotes = '" + specialNotes + "'" +
+                   ",InvoiceNo = '" + invoiceNo + "'" +
                    ",Subtotal = " + subtotal +
                    ",Gst = " + gst +
                    ",Pst = " + pst +

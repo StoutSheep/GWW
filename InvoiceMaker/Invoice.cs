@@ -32,7 +32,7 @@ namespace InvoiceMaker
         public String PurchaseOrder { get; set; }
         public String SpecialNotes { get; set; }
         
-        public int InvoiceNo { get; set; }
+        public String InvoiceNo { get; set; }
         public float SubTotal { get; set; }
         public float Gst { get; set; }
         public float Pst { get; set; }
@@ -92,7 +92,7 @@ namespace InvoiceMaker
                     SpecialNotes = rdr[3].ToString();
 
                     BackorderNotes = rdr[4].ToString();
-                    InvoiceNo = Int32.Parse(rdr[5].ToString());
+                    InvoiceNo = rdr[5].ToString();
                     SubTotal = Single.Parse(rdr[6].ToString());
 
                     Gst = Single.Parse(rdr[7].ToString());
