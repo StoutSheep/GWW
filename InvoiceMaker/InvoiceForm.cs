@@ -371,13 +371,8 @@ namespace InvoiceMaker
                         {
 
                             String itemNo = this.panel1.Controls["itemNumber" + j].Text;
-                            Debug.Print(itemNo);
                             int qty = Int32.Parse(this.panel1.Controls["qty" + j].Text);
-                            Debug.Print("" + qty);
-
                             String notes = this.panel1.Controls["specialNotes" + j].Text;
-                            Debug.Print(notes);
-
                             InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
                         }
                     }

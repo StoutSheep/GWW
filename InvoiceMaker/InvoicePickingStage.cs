@@ -311,13 +311,7 @@ namespace InvoiceMaker
                     InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
 
                 }
-
-
-                Debug.Print("entryid:" + entryID);
-                Debug.Print("invoiceid" + invoice.InvoiceID);
-                Debug.Print("itemno" + itemNo);
-
-
+                
             }
             InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 2);
 
