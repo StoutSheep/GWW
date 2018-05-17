@@ -21,6 +21,14 @@
           <DataField>Backorder</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="BackorderGrabCarton">
+          <DataField>BackorderGrabCarton</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BackorderNote">
+          <DataField>BackorderNote</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="CartonTotal">
           <DataField>CartonTotal</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -41,13 +49,13 @@
           <DataField>InvoiceItemAmount</DataField>
           <rd:TypeName>System.Single</rd:TypeName>
         </Field>
+        <Field Name="InvoiceItemCost">
+          <DataField>InvoiceItemCost</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
         <Field Name="InvoiceItemNote">
           <DataField>InvoiceItemNote</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InvoiceItemSellPrice">
-          <DataField>InvoiceItemSellPrice</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
         </Field>
         <Field Name="ItemNo">
           <DataField>ItemNo</DataField>
@@ -85,6 +93,8 @@
                         <Value>=Parameters!pTotal.Value</Value>
                         <Style>
                           <FontWeight>Bold</FontWeight>
+                          <Format>'$' 0.00;'$' -0.00</Format>
+                          <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -93,18 +103,14 @@
                     </Style>
                   </Paragraph>
                 </Paragraphs>
-                <Top>0.66318in</Top>
-                <Left>4.55946in</Left>
-                <Height>0.25in</Height>
+                <Top>1.15937in</Top>
+                <Left>4.56466in</Left>
+                <Height>0.2in</Height>
                 <Width>1in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="TB_InvoiceTotalLabel">
@@ -123,19 +129,15 @@
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>0.66318in</Top>
-                <Left>3.37138in</Left>
-                <Height>0.25in</Height>
+                <Top>1.15937in</Top>
+                <Left>3.37658in</Left>
+                <Height>0.2in</Height>
                 <Width>1in</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="TB_GST_Label">
@@ -145,7 +147,19 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>GST:</Value>
+                        <Value>GST </Value>
+                        <Style>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>=Parameters!pGSTPercent.Value</Value>
+                        <Style>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>%:</Value>
                         <Style>
                           <FontWeight>Bold</FontWeight>
                         </Style>
@@ -154,19 +168,15 @@
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>0.39235in</Top>
-                <Left>3.37138in</Left>
-                <Height>0.25in</Height>
+                <Top>0.88992in</Top>
+                <Left>3.38181in</Left>
+                <Height>0.2in</Height>
                 <Width>1in</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="TB_SubtotalLabel">
@@ -187,17 +197,13 @@
                 </Paragraphs>
                 <Top>0.12152in</Top>
                 <Left>3.37658in</Left>
-                <Height>0.25in</Height>
+                <Height>0.2in</Height>
                 <Width>1in</Width>
                 <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="pSubTotal">
@@ -210,6 +216,7 @@
                         <Value>=Parameters!pSubtotal.Value</Value>
                         <Style>
                           <FontStyle>Italic</FontStyle>
+                          <Format>0.00</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -220,17 +227,13 @@
                 </Paragraphs>
                 <Top>0.12152in</Top>
                 <Left>4.56988in</Left>
-                <Height>0.25in</Height>
+                <Height>0.2in</Height>
                 <Width>1in</Width>
                 <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Textbox Name="pGST">
@@ -243,6 +246,7 @@
                         <Value>=Parameters!pGST.Value</Value>
                         <Style>
                           <FontWeight>Bold</FontWeight>
+                          <Format>0.00</Format>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -251,24 +255,20 @@
                     </Style>
                   </Paragraph>
                 </Paragraphs>
-                <Top>0.39929in</Top>
-                <Left>4.56467in</Left>
-                <Height>0.25in</Height>
+                <Top>0.88992in</Top>
+                <Left>4.5751in</Left>
+                <Height>0.2in</Height>
                 <Width>1in</Width>
                 <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
               <Line Name="InvoiceTotalLine">
-                <Top>0.67986in</Top>
-                <Left>3.1172in</Left>
+                <Top>1.13159in</Top>
+                <Left>3.1444in</Left>
                 <Height>0in</Height>
                 <Width>2.62905in</Width>
                 <ZIndex>6</ZIndex>
@@ -290,11 +290,138 @@
                   </Border>
                 </Style>
               </Line>
+              <Textbox Name="TB_SubtotalLabel2">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Freight:</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.37765in</Top>
+                <Left>3.3818in</Left>
+                <Height>0.2in</Height>
+                <Width>1in</Width>
+                <ZIndex>8</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Textbox Name="pSubTotal2">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!pFreight.Value</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <Format>0.00</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.37765in</Top>
+                <Left>4.5751in</Left>
+                <Height>0.2in</Height>
+                <Width>1in</Width>
+                <ZIndex>9</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Textbox Name="TB_GST_Label2">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>PST </Value>
+                        <Style>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>=Parameters!pPSTPercent.Value</Value>
+                        <Style>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>%:</Value>
+                        <Style>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.63379in</Top>
+                <Left>3.37137in</Left>
+                <Height>0.2in</Height>
+                <Width>1in</Width>
+                <ZIndex>10</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Textbox Name="pPST">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!pPST.Value</Value>
+                        <Style>
+                          <FontWeight>Bold</FontWeight>
+                          <Format>0.00</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>pPST</rd:DefaultName>
+                <Top>0.63379in</Top>
+                <Left>4.5751in</Left>
+                <Height>0.2in</Height>
+                <Width>1in</Width>
+                <ZIndex>11</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>0.76304in</Top>
             <Left>0.10171in</Left>
-            <Height>0.96179in</Height>
+            <Height>1.44096in</Height>
             <Width>6.8in</Width>
             <Style>
               <Border>
@@ -304,7 +431,7 @@
           </Rectangle>
           <Rectangle Name="OrderItemsContainer">
             <ReportItems>
-              <Tablix Name="Tablix1">
+              <Tablix Name="TablixOrder">
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
@@ -323,10 +450,10 @@
                       <Width>1.58274in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.32397in</Width>
+                      <Width>0.38613in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.79969in</Width>
+                      <Width>0.76253in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>0.69203in</Width>
@@ -581,13 +708,14 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox13">
+                            <Textbox Name="Textbox26">
+                              <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Price</Value>
+                                      <Value>Cost</Value>
                                       <Style>
                                         <FontSize>11pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -596,11 +724,11 @@
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Right</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox13</rd:DefaultName>
+                              <rd:DefaultName>Textbox26</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -749,6 +877,7 @@
                                       <Value>=Fields!GrabCarton.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
+                                        <Format>0.0;(0.0)</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
@@ -883,6 +1012,7 @@
                                       <Value>=First(Fields!CartonTotal.Value)</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
+                                        <Format>0;(0)</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
@@ -906,25 +1036,25 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="InvoiceItemSellPrice">
+                            <Textbox Name="InvoiceItemCost">
+                              <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!InvoiceItemSellPrice.Value)</Value>
+                                      <Value>=Fields!InvoiceItemCost.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
+                                        <Format>0.00;(0.00)</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
-                                  <Style>
-                                    <TextAlign>Right</TextAlign>
-                                  </Style>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>InvoiceItemSellPrice</rd:DefaultName>
+                              <rd:DefaultName>InvoiceItemCost</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -949,6 +1079,7 @@
                                       <Value>=First(Fields!InvoiceItemAmount.Value)</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
+                                        <Format>0.00;(0.00)</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
@@ -1042,7 +1173,7 @@
                 <Top>0.07015in</Top>
                 <Left>0.025in</Left>
                 <Height>0.5in</Height>
-                <Width>6.75205in</Width>
+                <Width>6.77705in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1055,7 +1186,7 @@
             <Top>0.04511in</Top>
             <Left>0.07751in</Left>
             <Height>0.67626in</Height>
-            <Width>6.80205in</Width>
+            <Width>6.83556in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1065,7 +1196,7 @@
           </Rectangle>
           <Rectangle Name="TablixContainer2">
             <ReportItems>
-              <Tablix Name="Tablix2">
+              <Tablix Name="Tablix_Backorder">
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
@@ -1081,13 +1212,13 @@
                       <Width>0.7875in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.13171in</Width>
+                      <Width>1.43068in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.32397in</Width>
+                      <Width>0.38613in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.79969in</Width>
+                      <Width>0.76253in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>1.24238in</Width>
@@ -1466,9 +1597,10 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!GrabCarton.Value</Value>
+                                      <Value>=Fields!BackorderGrabCarton.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
+                                        <Format>0.0;(0.0)</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
@@ -1632,7 +1764,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!InvoiceItemSellPrice.Value)</Value>
+                                      <Value>=Fields!InvoiceItemCost.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
                                         <Color>#333333</Color>
@@ -1666,7 +1798,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!InvoiceItemNote.Value</Value>
+                                      <Value>=Fields!BackorderNote.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
                                         <Color>#333333</Color>
@@ -1729,10 +1861,16 @@
                   </TablixMembers>
                 </TablixRowHierarchy>
                 <DataSetName>InvoiceData</DataSetName>
+                <SortExpressions>
+                  <SortExpression>
+                    <Value>=Fields!Backorder.Value</Value>
+                    <Direction>Descending</Direction>
+                  </SortExpression>
+                </SortExpressions>
                 <Top>0.16778in</Top>
                 <Left>0.15206in</Left>
                 <Height>0.5in</Height>
-                <Width>5.64559in</Width>
+                <Width>5.96956in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1777,8 +1915,8 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-            <Top>1.90347in</Top>
-            <Left>0.13662in</Left>
+            <Top>2.76917in</Top>
+            <Left>0.07751in</Left>
             <Height>0.70412in</Height>
             <Width>6.80205in</Width>
             <ZIndex>2</ZIndex>
@@ -1789,7 +1927,7 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>2.70958in</Height>
+        <Height>3.63666in</Height>
         <Style />
       </Body>
       <Width>7in</Width>
@@ -1827,7 +1965,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.44098in</Top>
+                  <Top>0.14931in</Top>
                   <Left>5.00146in</Left>
                   <Height>0.25in</Height>
                   <Width>1.73957in</Width>
@@ -1894,7 +2032,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.15626in</Top>
+                  <Top>0.44098in</Top>
                   <Left>5.00146in</Left>
                   <Height>0.25in</Height>
                   <Width>0.73958in</Width>
@@ -1926,9 +2064,9 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.04167in</Top>
+                  <Top>0.09931in</Top>
                   <Left>0.03726in</Left>
-                  <Height>0.36459in</Height>
+                  <Height>0.3in</Height>
                   <Width>4.63627in</Width>
                   <ZIndex>3</ZIndex>
                   <Style>
@@ -1998,16 +2136,11 @@
                     <Paragraph>
                       <TextRuns>
                         <TextRun>
-                          <Value>NOTES:</Value>
+                          <Value>NOTES: </Value>
                           <Style>
                             <FontWeight>Bold</FontWeight>
                           </Style>
                         </TextRun>
-                      </TextRuns>
-                      <Style />
-                    </Paragraph>
-                    <Paragraph>
-                      <TextRuns>
                         <TextRun>
                           <Value>=Parameters!pSpecialNotes.Value</Value>
                           <Style>
@@ -2018,9 +2151,9 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>2.39931in</Top>
+                  <Top>2.60938in</Top>
                   <Left>0.03465in</Left>
-                  <Height>0.57018in</Height>
+                  <Height>0.36011in</Height>
                   <Width>6.80205in</Width>
                   <ZIndex>6</ZIndex>
                   <Style>
@@ -2040,17 +2173,13 @@
                     <Paragraph>
                       <TextRuns>
                         <TextRun>
-                          <Value>Phone:</Value>
-                          <Style>
-                            <FontSize>8pt</FontSize>
-                          </Style>
+                          <Value>Tel:</Value>
+                          <Style />
                         </TextRun>
                         <TextRun>
                           <Label>Phone</Label>
                           <Value>=Parameters!pCompanyPhoneNumber.Value</Value>
-                          <Style>
-                            <FontSize>8pt</FontSize>
-                          </Style>
+                          <Style />
                         </TextRun>
                       </TextRuns>
                       <Style />
@@ -2079,16 +2208,12 @@
                       <TextRuns>
                         <TextRun>
                           <Value>Fax:</Value>
-                          <Style>
-                            <FontSize>8pt</FontSize>
-                          </Style>
+                          <Style />
                         </TextRun>
                         <TextRun>
                           <Label>Fax</Label>
                           <Value>=Parameters!pCompanyFax.Value</Value>
-                          <Style>
-                            <FontSize>8pt</FontSize>
-                          </Style>
+                          <Style />
                         </TextRun>
                       </TextRuns>
                       <Style />
@@ -2118,9 +2243,7 @@
                         <TextRun>
                           <Label>TollFree</Label>
                           <Value>=Parameters!pCompanyTollFree.Value</Value>
-                          <Style>
-                            <FontSize>8pt</FontSize>
-                          </Style>
+                          <Style />
                         </TextRun>
                       </TextRuns>
                       <Style />
@@ -2209,7 +2332,9 @@
                       <TextRuns>
                         <TextRun>
                           <Value>=Parameters!pStoreName.Value</Value>
-                          <Style />
+                          <Style>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style />
@@ -2260,7 +2385,20 @@
                     <Paragraph>
                       <TextRuns>
                         <TextRun>
-                          <Value>=Parameters!pStoreAddress.Value</Value>
+                          <Value>=Parameters!pStoreStreet.Value</Value>
+                          <Style />
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=Parameters!pStoreProvince.Value</Value>
+                          <Style />
+                        </TextRun>
+                        <TextRun>
+                          <Value>=Parameters!pStorePostal.Value</Value>
                           <Style />
                         </TextRun>
                       </TextRuns>
@@ -2395,7 +2533,7 @@
                         <TextRun>
                           <Value>=Today()</Value>
                           <Style>
-                            <Format>d</Format>
+                            <Format>MMM d, yyyy</Format>
                           </Style>
                         </TextRun>
                       </TextRuns>
@@ -2424,7 +2562,9 @@
                       <TextRuns>
                         <TextRun>
                           <Value>=Parameters!pInvoiceNumber.Value</Value>
-                          <Style />
+                          <Style>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style />
@@ -2520,6 +2660,36 @@
                     <Border>
                       <Style>None</Style>
                     </Border>
+                  </Style>
+                </Textbox>
+                <Textbox Name="Textbox1">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=Parameters!pSalesRep.Value</Value>
+                          <Style />
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox1</rd:DefaultName>
+                  <Top>2.36771in</Top>
+                  <Left>0.76068in</Left>
+                  <Height>0.2in</Height>
+                  <Width>2.5in</Width>
+                  <ZIndex>24</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
               </ReportItems>
@@ -2634,25 +2804,67 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="pStoreAddress">
+    <ReportParameter Name="pStoreStreet">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="pGST">
-      <DataType>String</DataType>
+      <DataType>Float</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="pTotal">
-      <DataType>String</DataType>
+      <DataType>Float</DataType>
+      <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="pSubtotal">
-      <DataType>String</DataType>
+      <DataType>Float</DataType>
+      <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="pBackorderNotes">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pStoreProvince">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pStorePostal">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pGSTPercent">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pSalesRep">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pFreight">
+      <DataType>Float</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pPST">
+      <DataType>Float</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pPSTPercent">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -2660,7 +2872,7 @@
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>5</NumberOfRows>
+      <NumberOfRows>7</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2735,7 +2947,7 @@
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>3</RowIndex>
-          <ParameterName>pStoreAddress</ParameterName>
+          <ParameterName>pStoreStreet</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
@@ -2756,6 +2968,41 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>4</RowIndex>
           <ParameterName>pBackorderNotes</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>pStoreProvince</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>pStorePostal</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>pGSTPercent</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>pSalesRep</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>pFreight</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>pPST</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>pPSTPercent</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

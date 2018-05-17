@@ -34,14 +34,24 @@ namespace InvoiceMaker
             string[] streamids;
             string mimeType, encoding, extension;
             string ExcelFileName = @"C:\Invoices\Excel\"+_invoice.InvoiceID + ".xlsx";
+            string PDFFileName = @"C:\Invoices\PDF\" + _invoice.InvoiceID + ".pdf";
 
             Directory.CreateDirectory(Path.GetDirectoryName(ExcelFileName));
-
-            string ExcelFilenameToSave = @"C:\Invoices\Excel\" + _invoice.InvoiceID + ".xlsx";
+            Directory.CreateDirectory(Path.GetDirectoryName(PDFFileName));
 
             //var invoiceDataSource = new ReportDataSource("InvoiceData", _invoice);
             //Init data source
             InvoiceItemDetailBindingSource.DataSource = _list;
+
+            String address = _invoice.CustomerAddress;
+            String[] words = address.Split(',');
+
+            String customerStreet = words[0];
+            String customerProvince = words[1];
+            String customerPostal = words[2];
+
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(_invoice.customer.Province);
+
             //Set parameter for your report
             Microsoft.Reporting.WinForms.ReportParameter[] p = new Microsoft.Reporting.WinForms.ReportParameter[]
             {
@@ -50,35 +60,48 @@ namespace InvoiceMaker
                 new Microsoft.Reporting.WinForms.ReportParameter("pCompanyPhoneNumber",_invoice.CompanyPhoneNumber),
                 new Microsoft.Reporting.WinForms.ReportParameter("pCompanyFax",_invoice.CompanyFax),
                 new Microsoft.Reporting.WinForms.ReportParameter("pCompanyTollFree",_invoice.CompanyTollFree),
+
                 new Microsoft.Reporting.WinForms.ReportParameter("pInvoiceNumber",_invoice.InvoiceNo.ToString()),
+
+                new Microsoft.Reporting.WinForms.ReportParameter("pStoreName",_invoice.CustomerName),
+                new Microsoft.Reporting.WinForms.ReportParameter("pStoreContact",_invoice.CustomerContact),
                 new Microsoft.Reporting.WinForms.ReportParameter("pTerms",_invoice.CustomerTerms),
                 new Microsoft.Reporting.WinForms.ReportParameter("pShippingTerms",_invoice.CustomerShippingTerms),
                 new Microsoft.Reporting.WinForms.ReportParameter("pPurchaseOrder",_invoice.PurchaseOrder),
                 new Microsoft.Reporting.WinForms.ReportParameter("pSpecialNotes",_invoice.SpecialNotes),
-                new Microsoft.Reporting.WinForms.ReportParameter("pStoreName",_invoice.CustomerName),
-                new Microsoft.Reporting.WinForms.ReportParameter("pStoreContact",_invoice.CustomerContact),
-                new Microsoft.Reporting.WinForms.ReportParameter("pStoreAddress",_invoice.CustomerAddress),
+
+                new Microsoft.Reporting.WinForms.ReportParameter("pStoreStreet",customerStreet),
+                new Microsoft.Reporting.WinForms.ReportParameter("pStoreProvince",customerProvince),
+                new Microsoft.Reporting.WinForms.ReportParameter("pStorePostal",customerPostal),
                 new Microsoft.Reporting.WinForms.ReportParameter("pStorePhone",_invoice.CustomerPhone),
+
                 new Microsoft.Reporting.WinForms.ReportParameter("pSubtotal",_invoice.SubTotal.ToString()),
+                new Microsoft.Reporting.WinForms.ReportParameter("pGSTPercent",provinceTax.gst.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pGST",_invoice.Gst.ToString()),
+                new Microsoft.Reporting.WinForms.ReportParameter("pPSTPercent",provinceTax.pst.ToString()),
+                new Microsoft.Reporting.WinForms.ReportParameter("pPST",_invoice.Pst.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pTotal",_invoice.NetTotal.ToString()),
                 new Microsoft.Reporting.WinForms.ReportParameter("pGSTno",_invoice.GSTNo),
-                new Microsoft.Reporting.WinForms.ReportParameter("pBackorderNotes",_invoice.BackorderNotes)
+                new Microsoft.Reporting.WinForms.ReportParameter("pBackorderNotes",_invoice.BackorderNotes),
+                new Microsoft.Reporting.WinForms.ReportParameter("pSalesRep",_invoice.customer.Rep),
+                new Microsoft.Reporting.WinForms.ReportParameter("pBackorderNotes",_invoice.BackorderNotes),
+
+                new Microsoft.Reporting.WinForms.ReportParameter("pFreight",_invoice.freight.ToString()),
             };
             this.reportViewer1.LocalReport.SetParameters(p);
 
             this.reportViewer1.RefreshReport();
 
-            FileStream newFile = new FileStream(ExcelFilenameToSave, FileMode.Create);
+            FileStream newFile = new FileStream(ExcelFileName, FileMode.Create);
 
-            string renderFormat = (ExcelFilenameToSave.EndsWith(".xlsx") ? "EXCELOPENXML" : "Excel");
+            string renderFormat = (ExcelFileName.EndsWith(".xlsx") ? "EXCELOPENXML" : "Excel");
             byte[] bytes = this.reportViewer1.LocalReport.Render(renderFormat, null, out mimeType, out encoding, out extension, out streamids, out warnings);
             newFile.Write(bytes, 0, bytes.Length);
             newFile.Close();
 
 
             Byte[] mybytes = this.reportViewer1.LocalReport.Render("PDF");
-            using (FileStream fs = File.Create(@"C:\Invoices\PDF\" + _invoice.InvoiceID + ".pdf"))
+            using (FileStream fs = File.Create(PDFFileName))
             {
                 fs.Write(mybytes, 0, mybytes.Length);
             }

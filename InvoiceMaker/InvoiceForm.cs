@@ -18,14 +18,17 @@ namespace InvoiceMaker
         int i = 0; //# of current items
         bool PST = false; //pst of customer
         int customerID;
+        Invoice invoice;
+        Customer customer;
+        List<InvoiceItemDetail> invoiceItemDetails { get; set; }
 
         public InvoiceForm(int customerID)
         {
             InitializeComponent();
 
             this.customerID = customerID;
-            Customer c = CustomerDatabase.SearchCustomersByID(customerID);
-            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(c.Province);
+            customer = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(customer.Province);
             if (provinceTax.pst == 0)
             {
                 PST = false;
@@ -322,6 +325,7 @@ namespace InvoiceMaker
             okButton.Text = "OK";
             okButton.Click += OkButton_Click;
             this.Controls.Add(okButton);
+
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -377,6 +381,31 @@ namespace InvoiceMaker
                             InvoiceContentsDatabase.AddInvoiceContent(invoiceID, itemNo, qty, notes);
                         }
                     }
+
+                    // Generate Report
+
+            Invoice printInvoice = new Invoice(invoiceID);
+            List<InvoiceItemDetail> invoiceItemDetails;
+            invoiceItemDetails = new List<InvoiceItemDetail>();
+
+            for (int i = 0; i < printInvoice.Items.Count; i++)
+            {
+                invoiceItemDetails.Add(new InvoiceItemDetail());
+                invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
+                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
+                invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
+                invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
+                invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].Cost;
+                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].Cost;
+                invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+            }
+
+            Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+                    Form2.ShowDialog();
                     this.Close();
 
                 }

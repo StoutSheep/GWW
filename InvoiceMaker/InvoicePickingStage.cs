@@ -18,7 +18,7 @@ namespace InvoiceMaker
         int customerID;
         Invoice invoice;
         List<InvoiceContentInfo> invoiceContentsList;
-        public List<InvoiceItemDetail> invoiceItemDetails { get; set; }
+
 
 
         public InvoicePickingStage(int invoiceID)
@@ -284,13 +284,6 @@ namespace InvoiceMaker
             okButton.Text = "OK";
             okButton.Click += OkButton_Click;
             this.Controls.Add(okButton);
-
-            Button printButton = new Button();
-            printButton.Location = new Point(200, 620);
-            printButton.Size = new Size(50, 25);
-            printButton.Text = "Print";
-            printButton.Click += PrintButton_Click;
-            this.Controls.Add(printButton);
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -327,6 +320,33 @@ namespace InvoiceMaker
 
             }
             InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 2);
+
+
+            Invoice printInvoice = new Invoice(invoice.InvoiceID);
+            List<InvoiceItemDetail> invoiceItemDetails;
+            invoiceItemDetails = new List<InvoiceItemDetail>();
+
+            for (int i = 0; i < printInvoice.Items.Count; i++)
+            {
+                invoiceItemDetails.Add(new InvoiceItemDetail());
+
+                invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
+                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
+                invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
+                invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
+                invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].Cost;
+                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].Cost;
+                invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+            }
+
+            Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+            Form2.ShowDialog();
+
             this.Close();
         }
 
@@ -334,32 +354,6 @@ namespace InvoiceMaker
         {
             this.Close();
 
-        }
-
-        private void PrintButton_Click(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-            invoiceItemDetails = new List<InvoiceItemDetail>();
-
-            for (int i = 0; i < invoice.Items.Count; i++)
-            {
-                invoiceItemDetails.Add(new InvoiceItemDetail());
-                invoiceItemDetails[i].QTY = invoice.Items[i].Quantity;
-                invoiceItemDetails[i].GrabCarton = invoice.Items[i].Quantity / invoice.Items[i].PerCarton;
-                invoiceItemDetails[i].ItemNo = invoice.Items[i].ItemNo;
-                invoiceItemDetails[i].Location = invoice.Items[i].Location;
-                invoiceItemDetails[i].Description = invoice.Items[i].ItemDesc;
-                invoiceItemDetails[i].CartonTotal = invoice.Items[i].PerCarton;
-                invoiceItemDetails[i].InvoiceItemSellPrice = invoice.Items[i].SellPrice;
-                invoiceItemDetails[i].InvoiceItemAmount = invoice.Items[i].Quantity * invoice.Items[i].SellPrice;
-                invoiceItemDetails[i].InvoiceItemNote = invoice.Items[i].SpecialNotes;
-            }
-
-            Form Form2 = new PrintInvoiceProgress(invoice, invoiceItemDetails);
-            Form2.ShowDialog();
-
-            //PrintInvoiceReport = new PrintInvoiceReport(invoice, invoiceItemDetails);
-            //PrintInvoiceReport.ShowDialog();
         }
 
         private void AddTotalBoxes(int customerID)
