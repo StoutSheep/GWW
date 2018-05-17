@@ -13,7 +13,7 @@ namespace InvoiceMaker
         public String StoreName { get; set; }
         public String StoreDetails { get; set; }
         // Head Office or Billing Address
-        public String OfficeAddress { get; set; }
+        public String BillingAddress { get; set; }
         // Address to send order
         public String StoreContact { get; set; }
         public String ShippingAddress { get; set; }
@@ -28,14 +28,14 @@ namespace InvoiceMaker
 
         public String Rep { get; set; }
 
-        public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+        public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province)
         {
 
             StoreID = storeId;
             StoreName = storeName;
             StoreDetails = storeDetails;
-            OfficeAddress = officeAddress;
+            BillingAddress = billingAddress;
             ShippingAddress = shippingAddress;
             StoreContact = storeContact;
             PhoneNumber = phoneNumber;
@@ -47,14 +47,14 @@ namespace InvoiceMaker
 
         }
 
-        public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+        public Customer(int storeId, String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province, String rep)
         {
 
             StoreID = storeId;
             StoreName = storeName;
             StoreDetails = storeDetails;
-            OfficeAddress = officeAddress;
+            BillingAddress = billingAddress;
             ShippingAddress = shippingAddress;
             StoreContact = storeContact;
             PhoneNumber = phoneNumber;

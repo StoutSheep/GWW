@@ -14,7 +14,7 @@ namespace InvoiceMaker
         static String user = "root";
         static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
 
-        internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+        internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
           String paymentTerms, String shippingInstructions, String province)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -25,13 +25,13 @@ namespace InvoiceMaker
                 string sql;
 
 
-                sql = "INSERT INTO Customers (StoreName, StoreDetails, EmailAddress, OfficeAddress, ShippingAddress, " +
+                sql = "INSERT INTO Customers (StoreName, StoreDetails, EmailAddress, BillingAddress, ShippingAddress, " +
                     "StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, Province, Rep) " +
                     "VALUES (" +
                     "'" + storeName + "'," +
                     "'" + storeDetails + "'," +
                     "'" + emailAddress + "'," +
-                    "'" + officeAddress + "'," +
+                    "'" + billingAddress + "'," +
                     "'" + shippingAddress + "'," +
                     "'" + storeContact + "'," +
                     "'" + phoneNumber + "'," +
@@ -54,7 +54,7 @@ namespace InvoiceMaker
 
         }
 
-        internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+        internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
           String paymentTerms, String shippingInstructions, String province, String rep)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -65,13 +65,13 @@ namespace InvoiceMaker
                 string sql;
 
 
-                sql = "INSERT INTO Customers (StoreName, StoreDetails, EmailAddress, OfficeAddress, ShippingAddress, " +
+                sql = "INSERT INTO Customers (StoreName, StoreDetails, EmailAddress, BillingAddress, ShippingAddress, " +
                     "StoreContact, PhoneNumber, PaymentTerms, ShippingInstructions, Province, Rep) " +
                     "VALUES (" +
                     "'" + storeName + "'," +
                     "'" + storeDetails + "'," +
                     "'" + emailAddress + "'," +
-                    "'" + officeAddress + "'," +
+                    "'" + billingAddress + "'," +
                     "'" + shippingAddress + "'," +
                     "'" + storeContact + "'," +
                     "'" + phoneNumber + "'," +
@@ -94,7 +94,7 @@ namespace InvoiceMaker
 
         }
 
-        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province, String rep)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -108,7 +108,7 @@ namespace InvoiceMaker
                     "SET StoreName = '" + storeName + "'" +
                     ",StoreDetails = '" + storeDetails + "'" +
                     ",EmailAddress = '" + emailAddress + "'" +
-                    ",OfficeAddress = '" + officeAddress + "'" +
+                    ",BillingAddress = '" + billingAddress + "'" +
                     ",ShippingAddress = '" + shippingAddress + "'" +
                     ",StoreContact = '" + storeContact + "'" +
                     ",PhoneNumber = '" + phoneNumber + "'" +
@@ -131,7 +131,7 @@ namespace InvoiceMaker
             Console.WriteLine("Done.");
         }
 
-        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String officeAddress, String shippingAddress, String storeContact, String phoneNumber,
+        internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -145,7 +145,7 @@ namespace InvoiceMaker
                     "SET StoreName = '" + storeName + "'" +
                     ",StoreDetails = '" + storeDetails + "'" +
                     ",EmailAddress = '" + emailAddress + "'" +
-                    ",OfficeAddress = '" + officeAddress + "'" +
+                    ",BillingAddress = '" + billingAddress + "'" +
                     ",ShippingAddress = '" + shippingAddress + "'" +
                     ",StoreContact = '" + storeContact + "'" +
                     ",PhoneNumber = '" + phoneNumber + "'" +

@@ -149,7 +149,7 @@
             this.groupBox1.Size = new System.Drawing.Size(776, 184);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Office Address";
+            this.groupBox1.Text = "Billing Address";
             // 
             // officePostal_textBox
             // 
