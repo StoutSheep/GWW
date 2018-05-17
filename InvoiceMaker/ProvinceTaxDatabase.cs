@@ -11,13 +11,9 @@ namespace InvoiceMaker
     static class ProvinceTaxDatabase
     {
 
-        static String pswd = "password";
-        static String user = "root";
-        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
-
         internal static void AddProvinceTax(String province, int pst, int gst)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -48,7 +44,7 @@ namespace InvoiceMaker
 
         internal static void EditProvinceTax(String province, int pst, int gst)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -77,7 +73,7 @@ namespace InvoiceMaker
         {
 
             List<ProvinceTax> provinceTaxList = new List<ProvinceTax>();
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -108,8 +104,7 @@ namespace InvoiceMaker
         internal static ProvinceTax GetProvinceByName(string province)
         {
 
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();

@@ -11,19 +11,9 @@ namespace InvoiceMaker
     static class InvoiceDatabase
     {
 
-        static String pswd = "password";
-        static String user = "root";
-        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
-
-       
-        /*
-         * stage 1 = picking stage
-         * stage 2 = double check stage
-         * stage 3 = done
-         */
         internal static int AddInvoice(int storeID, String purchaseOrder, String specialNotes, String invoiceNo, float subTotal, float gst, float pst, float netTotal, int stage)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -76,7 +66,7 @@ namespace InvoiceMaker
 
         internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subtotal, float gst, float pst, float netTotal, int stage)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -113,7 +103,7 @@ namespace InvoiceMaker
 
         internal static void UpdateTotals(int invoiceID, float subtotal, float gst, float pst, float netTotal)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -145,7 +135,7 @@ namespace InvoiceMaker
 
         internal static void UpdateStage(int invoiceID, int stage)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -173,7 +163,7 @@ namespace InvoiceMaker
 
         internal static void UpdateBackorderSpecialNotes(int invoiceID, String notes)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -202,7 +192,7 @@ namespace InvoiceMaker
 
         internal static void UpdateFreight(int invoiceID, float freight)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -232,7 +222,7 @@ namespace InvoiceMaker
         {
 
             List<Invoice> invoices = new List<Invoice>();
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -266,7 +256,7 @@ namespace InvoiceMaker
         {
 
             List<Invoice> invoices = new List<Invoice>();
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -299,7 +289,7 @@ namespace InvoiceMaker
 
         internal static void DeleteInvoice(int invoiceID)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();

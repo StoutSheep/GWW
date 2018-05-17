@@ -11,13 +11,9 @@ namespace InvoiceMaker
     static class ProductDatabase
     {
 
-        static String pswd = "password";
-        static String user = "root";
-        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
-
         internal static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -50,7 +46,7 @@ namespace InvoiceMaker
 
         internal static void AddProduct(String itemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc, String specialNotes)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -86,7 +82,7 @@ namespace InvoiceMaker
 
         internal static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -119,7 +115,7 @@ namespace InvoiceMaker
 
         internal static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc, String specialNotes)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -155,7 +151,7 @@ namespace InvoiceMaker
 
         internal static void DeleteProduct(String itemNo)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -187,7 +183,7 @@ namespace InvoiceMaker
         {
 
             List<Product> productList = new List<Product>();
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -221,7 +217,7 @@ namespace InvoiceMaker
         {
 
             List<Product> productList = new List<Product>();
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -253,7 +249,7 @@ namespace InvoiceMaker
 
         internal static Product SearchProductByItemNo(String itemNo)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -289,7 +285,7 @@ namespace InvoiceMaker
         {
 
             List<Product> productList = new List<Product>();
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -319,7 +315,7 @@ namespace InvoiceMaker
 
         internal static void DeleteProductByItemNo(String itemNo)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();

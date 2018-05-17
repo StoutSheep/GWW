@@ -10,14 +10,11 @@ namespace InvoiceMaker
 {
     static class CustomerDatabase
     {
-        static String pswd = "password";
-        static String user = "root";
-        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
 
         internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
           String paymentTerms, String shippingInstructions, String province)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -57,7 +54,7 @@ namespace InvoiceMaker
         internal static void AddCustomer(String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
           String paymentTerms, String shippingInstructions, String province, String rep)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -97,7 +94,7 @@ namespace InvoiceMaker
         internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province, String rep)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -134,7 +131,7 @@ namespace InvoiceMaker
         internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
             String paymentTerms, String shippingInstructions, String province)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -170,7 +167,7 @@ namespace InvoiceMaker
 
         internal static void DeleteCustomer(int storeID)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -195,7 +192,7 @@ namespace InvoiceMaker
 
         internal static int GetStoreID(String storeName, String shippingAddress)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -235,7 +232,7 @@ namespace InvoiceMaker
         {
 
             List<Customer> customerList = new List<Customer>();
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -266,7 +263,7 @@ namespace InvoiceMaker
         {
 
             Customer customer = null;
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
