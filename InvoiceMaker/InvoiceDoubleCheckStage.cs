@@ -36,8 +36,8 @@ namespace InvoiceMaker
                 PST = true;
             }
 
-            panel1.Location = new Point(30, 135);
-            panel1.Size = new Size(900, 360);
+            panel1.Location = new Point(30, 165);
+            panel1.Size = new Size(900, 330);
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.AutoScroll = true;
             panel1.BackColor = Color.DarkGray;
@@ -97,7 +97,7 @@ namespace InvoiceMaker
         private void AddLabels(int customerID)
         {
             int x = 30;
-            int y = 120;
+            int y = 150;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
@@ -142,31 +142,27 @@ namespace InvoiceMaker
 
             Label phoneLabel = new Label();
             phoneLabel.Text = "Phone: " + cust.PhoneNumber;
-            phoneLabel.Location = new Point(500, 10);
+            phoneLabel.Location = new Point(emailLabel.Location.X + emailLabel.Size.Width + 20, 70);
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
 
-            Label provinceLabel = new Label();
-            provinceLabel.Text = "Province Tax: " + cust.Province + " - GST/PST(" + provinceTax.gst + "%/" + provinceTax.pst + "%)";
-            provinceLabel.Location = new Point(500, 25);
-            provinceLabel.AutoSize = true;
-            this.Controls.Add(provinceLabel);
+            
 
             Label paymentLabel = new Label();
             paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
-            paymentLabel.Location = new Point(500, 40);
+            paymentLabel.Location = new Point(500, 45);
             paymentLabel.AutoSize = true;
             this.Controls.Add(paymentLabel);
 
             Label shippingInstructionsLabel = new Label();
             shippingInstructionsLabel.Text = "Shipping Instructions: " + cust.ShippingInstructions;
-            shippingInstructionsLabel.Location = new Point(500, 55);
+            shippingInstructionsLabel.Location = new Point(500, 60);
             shippingInstructionsLabel.AutoSize = true;
             this.Controls.Add(shippingInstructionsLabel);
 
             Label invoiceIDLabel = new Label();
             invoiceIDLabel.Text = "Local Invoice ID: " + invoice.InvoiceID;
-            invoiceIDLabel.Location = new Point(500, 70);
+            invoiceIDLabel.Location = new Point(500, 10);
             invoiceIDLabel.AutoSize = true;
             this.Controls.Add(invoiceIDLabel);
 
@@ -177,19 +173,27 @@ namespace InvoiceMaker
             this.Controls.Add(purchaseOrderLabel);
 
             Label invoiceSpecialNotesLabel = new Label();
-            invoiceSpecialNotesLabel.Text = "Special Notes: " + invoice.SpecialNotes;
-            invoiceSpecialNotesLabel.Location = new Point(180, 85);
+            invoiceSpecialNotesLabel.Text = "Special Notes: ";
+            invoiceSpecialNotesLabel.Location = new Point(30, 100);
             invoiceSpecialNotesLabel.AutoSize = true;
             this.Controls.Add(invoiceSpecialNotesLabel);
 
+            TextBox invoiceSpecialNotes = new TextBox();
+            invoiceSpecialNotes.Location = new Point(110, 100);
+            invoiceSpecialNotes.Size = new Size(500, 25);
+            invoiceSpecialNotes.Text = invoice.SpecialNotes;
+            invoiceSpecialNotes.Name = "invoiceSpecialNotes";
+            invoiceSpecialNotes.AccessibleName = "invoiceSpecialNotes";
+            this.Controls.Add(invoiceSpecialNotes);
+
             Label invoiceNumberLabel = new Label();
             invoiceNumberLabel.Text = "Invoice #: ";
-            invoiceNumberLabel.Location = new Point(700, 10);
+            invoiceNumberLabel.Location = new Point(500, 25);
             invoiceNumberLabel.AutoSize = true;
             this.Controls.Add(invoiceNumberLabel);
 
             TextBox invoiceNumber = new TextBox();
-            invoiceNumber.Location = new Point(760, 10);
+            invoiceNumber.Location = new Point(560, 25);
             invoiceNumber.Size = new Size(75, 25);
             invoiceNumber.Name = "invoiceNumber";
             invoiceNumber.AccessibleName = "invoiceNumber";
@@ -198,12 +202,12 @@ namespace InvoiceMaker
 
             Label backorderInvoiceNotesLabel = new Label();
             backorderInvoiceNotesLabel.Text = "Backorder Invoice Notes: ";
-            backorderInvoiceNotesLabel.Location = new Point(30, 100);
+            backorderInvoiceNotesLabel.Location = new Point(30, 125);
             backorderInvoiceNotesLabel.AutoSize = true;
             this.Controls.Add(backorderInvoiceNotesLabel);
 
             TextBox backorderInvoiceNotes = new TextBox();
-            backorderInvoiceNotes.Location = new Point(165, 100);
+            backorderInvoiceNotes.Location = new Point(165, 125);
             backorderInvoiceNotes.Size = new Size(700, 25);
             backorderInvoiceNotes.Text = "ITEMS ON BACKORDER " + cust.StoreName + ". PO#: " + invoice.PurchaseOrder + " ";
             backorderInvoiceNotes.Name = "backorderInvoiceNotes";
@@ -341,8 +345,8 @@ namespace InvoiceMaker
                 freight = Single.Parse(this.Controls["freight"].Text);
             }
             InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
-            InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
             InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -353,6 +357,7 @@ namespace InvoiceMaker
         private void AddTotalBoxes(int customerID)
         {
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(cust.Province);
 
             Label subtotalLabel = new Label();
             subtotalLabel.Text = "Subtotal";
@@ -371,7 +376,7 @@ namespace InvoiceMaker
             this.Controls.Add(subtotalAmount);
 
             Label gstLabel = new Label();
-            gstLabel.Text = "GST";
+            gstLabel.Text = "GST " + provinceTax.gst + "%";
             gstLabel.Location = new Point(560, 530);
             gstLabel.Size = new Size(50, 25);
             gstLabel.TextAlign = ContentAlignment.TopRight;
@@ -389,7 +394,7 @@ namespace InvoiceMaker
             if (PST)
             {
                 Label pstLabel = new Label();
-                pstLabel.Text = "PST";
+                pstLabel.Text = "PST " + provinceTax.pst + "%";
                 pstLabel.Location = new Point(560, 560);
                 pstLabel.Size = new Size(50, 25);
                 pstLabel.TextAlign = ContentAlignment.TopRight;
@@ -621,6 +626,8 @@ namespace InvoiceMaker
                     backorderNotes.Size = new Size(50, 25);
                     backorderNotes.Name = "backorderNotes" + i;
                     backorderNotes.AccessibleName = "" + i;
+                    backorderNotes.ReadOnly = true;
+                    backorderNotes.Text = invoiceContentsList[i].BackOrderSpecialNotes.ToString();
                     panel1.Controls.Add(backorderNotes);
 
                 }

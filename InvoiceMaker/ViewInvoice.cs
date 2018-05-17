@@ -117,7 +117,7 @@ namespace InvoiceMaker
             foreach (ListViewItem l in pickingListView.SelectedItems)
             {
                 InvoicePickingStage form = new InvoicePickingStage(Int32.Parse(pickingListView.SelectedItems[0].SubItems[0].Text));
-                form.Size = new System.Drawing.Size(980, 700);
+                form.Size = new System.Drawing.Size(1080, 700);
                 form.Show();
             }
             foreach (ListViewItem l in doubleCheckListView.SelectedItems)
@@ -222,7 +222,7 @@ namespace InvoiceMaker
         private void PickingListView_DoubleClick(object sender, EventArgs e)
         {
             InvoicePickingStage form = new InvoicePickingStage(Int32.Parse(pickingListView.SelectedItems[0].SubItems[0].Text));
-            form.Size = new System.Drawing.Size(980, 700);
+            form.Size = new System.Drawing.Size(1080, 700);
             form.Show();
         }
     }
