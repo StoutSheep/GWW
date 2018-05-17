@@ -691,6 +691,8 @@ namespace InvoiceMaker
                 this.panel1.Controls["desc" + c.AccessibleName].Text = product.ItemDesc;
                 this.panel1.Controls["carton" + c.AccessibleName].Text = product.PerCarton.ToString();
                 this.panel1.Controls["cost" + c.AccessibleName].Text = product.SellPrice.ToString("0.00");
+                this.panel1.Controls["specialNotes" + c.AccessibleName].Text = product.SpecialNotes;
+
                 if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length > 0)
                 {
                     if (this.panel1.Controls["qty" + c.AccessibleName].Text.Length == 1 && this.panel1.Controls["qty" + c.AccessibleName].Text == "-")
