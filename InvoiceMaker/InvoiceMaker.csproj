@@ -236,6 +236,9 @@
     <EmbeddedResource Include="SelectCustomer.resx">
       <DependentUpon>SelectCustomer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewCompletedInvoices.resx">
+      <DependentUpon>ViewCompletedInvoices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewCustomer.resx">
       <DependentUpon>ViewCustomer.cs</DependentUpon>
     </EmbeddedResource>
