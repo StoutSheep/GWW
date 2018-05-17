@@ -38,6 +38,7 @@
             this.invoices_textBox.Name = "invoices_textBox";
             this.invoices_textBox.Size = new System.Drawing.Size(660, 31);
             this.invoices_textBox.TabIndex = 4;
+            this.invoices_textBox.TextChanged += new System.EventHandler(this.invoices_textBox_TextChanged);
             // 
             // searchLabel
             // 

@@ -74,7 +74,30 @@ namespace InvoiceMaker
             form.Show();
         }
 
+        private void invoices_textBox_TextChanged(object sender, EventArgs e)
+        {
+            RefreshView();
+        }
 
+        private void RefreshView()
+        {
+            foreach (ListViewItem lvItem in listView.Items)
+            {
+                listView.Items.Remove(lvItem);
+            }
+            if (invoices_textBox.Text.Length == 0)
+            {
+                list = InvoiceDatabase.SearchInvoicesByStage(3);
+            }
+            else
+            {
+                //list = InvoiceDatabase.SearchInvoicesByStage(3);
+            }
+            foreach (Invoice p in list)
+            {
+                //productList.Items.Add(new ListViewItem(new String[] { p.ItemNo, p.ItemDesc, p.PerCarton.ToString(), p.Location, p.Cost.ToString("0.00"), p.SellPrice.ToString("0.00"), p.UPC.ToString() }));
+            }
+        }
     }
 }
 

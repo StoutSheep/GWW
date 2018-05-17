@@ -34,7 +34,7 @@ namespace InvoiceMaker
             pickingLabel.Location = new System.Drawing.Point(200, 95);
             pickingLabel.Size = new System.Drawing.Size(238, 42);
             pickingLabel.TabIndex = 0;
-            pickingLabel.Text = "Picking Stage";
+            pickingLabel.Text = "Double Check Stage";
             this.Controls.Add(pickingLabel);
 
             Label doubleCheckLabel = new System.Windows.Forms.Label();
@@ -43,7 +43,7 @@ namespace InvoiceMaker
             doubleCheckLabel.Location = new System.Drawing.Point(750, 95);
             doubleCheckLabel.Size = new System.Drawing.Size(238, 42);
             doubleCheckLabel.TabIndex = 0;
-            doubleCheckLabel.Text = "Double Check Stage";
+            doubleCheckLabel.Text = "Final Stage";
             this.Controls.Add(doubleCheckLabel);
 
             pickingListView.Size = new Size(500, 450);
@@ -94,7 +94,7 @@ namespace InvoiceMaker
             Button moveButton = new Button();
             moveButton.Location = new Point(610, 600);
             moveButton.Size = new Size(100, 40);
-            moveButton.Text = "Move to Picking";
+            moveButton.Text = "Move to double check";
             moveButton.Click += MoveButton_Click;
             this.Controls.Add(moveButton);
 
@@ -159,7 +159,7 @@ namespace InvoiceMaker
         {
             if (doubleCheckListView.SelectedItems.Count > 0)
             {
-                var confirmResult = MessageBox.Show("Are you sure you want to move these to the Picking Stage?",
+                var confirmResult = MessageBox.Show("Are you sure you want to move these to the Double Checking Stage?",
                                          "Confirm Delete!!",
                                          MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
