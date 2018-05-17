@@ -110,7 +110,7 @@ namespace InvoiceMaker
                    "PurchaseOrder varchar(20)," +
                    "SpecialNotes varchar(100)," +
                    "BackorderSpecialNotes varchar(100)," +
-                   "InvoiceNo int," +
+                   "InvoiceNo varchar(10)," +
                    "SubTotal DECIMAL(10,2)," +
                    "Gst DECIMAL(10,2)," +
                    "Pst DECIMAL(10,2)," +
@@ -181,7 +181,7 @@ namespace InvoiceMaker
             int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
             //CustomerDatabase.DeleteCustomer(custID);
 
-            InvoiceDatabase.AddInvoice(1, "Invoice 1", "n/a", 0, 10, 5, 7, 12, 1);
+            InvoiceDatabase.AddInvoice(1, "Invoice 1", "n/a", "", 10, 5, 7, 12, 1);
 
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 4, "Bork");
