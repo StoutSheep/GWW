@@ -85,6 +85,7 @@
       <DependentUpon>AddProvinceTaxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerDatabase.cs" />
+    <Compile Include="LoginInfo.cs" />
     <Compile Include="PrintInvoiceProgress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,7 +249,7 @@
     <EmbeddedResource Include="ViewProduct.resx">
       <DependentUpon>ViewProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="SqlServerTypes\app.config" />
     <None Include="app.manifest" />
     <None Include="gwwDataSet.xsc">
       <DependentUpon>gwwDataSet.xsd</DependentUpon>

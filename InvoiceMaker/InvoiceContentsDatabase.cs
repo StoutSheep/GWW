@@ -11,13 +11,9 @@ namespace InvoiceMaker
     static class InvoiceContentsDatabase
     {
 
-        static String pswd = "password";
-        static String user = "root";
-        static string connStr = "server=localhost;user=" + user + ";database=GWW;port=3306;password=" + pswd;
-
         internal static void AddInvoiceContent(int invoiceID, String itemNo, int quantity, String specialNotes) 
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -47,7 +43,7 @@ namespace InvoiceMaker
 
         internal static void EditInvoiceContent(int entryID, int invoiceID, String itemNo, int quantity, String specialNotes)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -80,7 +76,7 @@ namespace InvoiceMaker
 
         internal static void DeleteInvoiceContent(int entryID)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -109,7 +105,7 @@ namespace InvoiceMaker
 
         internal static int GetEntryID(int invoiceID, String itemNo)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -149,7 +145,7 @@ namespace InvoiceMaker
 
         internal static List<InvoiceContentInfo> GetInvoiceContents(int invoiceID)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             List<InvoiceContentInfo> items = new List<InvoiceContentInfo>();
             try
             {
@@ -188,7 +184,7 @@ namespace InvoiceMaker
 
         internal static void UpdateBackorder(int entryID, int backorder)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -215,7 +211,7 @@ namespace InvoiceMaker
 
         internal static void UpdateBackorderSpecialNotes(int entryID, String specialNotes)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -242,7 +238,7 @@ namespace InvoiceMaker
 
         internal static List<InvoiceContentInfo> GetBackorderedItems(int invoiceID)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             List<InvoiceContentInfo> items = new List<InvoiceContentInfo>();
             try
             {
