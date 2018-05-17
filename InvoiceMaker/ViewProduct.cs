@@ -46,9 +46,11 @@ namespace InvoiceMaker
             }
         }
 
-        private void ProductList_UpdateRow(int rowIndex, int itemNo)
+        private void ProductList_UpdateRow(int rowIndex, String itemNo)
         {
-
+            Product prod = ProductDatabase.SearchProductByItemNo(itemNo);
+            productList.Items.RemoveAt(rowIndex);
+            productList.Items.Insert(rowIndex, new ListViewItem(new String[] { prod.ItemNo, prod.ItemDesc, prod.PerCarton.ToString(), prod.Location, prod.Cost.ToString("0.00"), prod.SellPrice.ToString("0.00"), prod.UPC.ToString(), prod.SpecialNotes }));
         }
 
         private void ProductList_DoubleClick(object sender, EventArgs e)
@@ -65,7 +67,8 @@ namespace InvoiceMaker
             productForm.Font = new Font(productForm.Font.Name, productForm.Font.Size + 1, productForm.Font.Style);
             if (productForm.ShowDialog() == DialogResult.OK)
             {
-                RefreshView();
+                //RefreshView();
+                ProductList_UpdateRow(productList.SelectedIndices[0], productList.SelectedItems[0].SubItems[0].Text);
             }
         }
 
@@ -90,7 +93,7 @@ namespace InvoiceMaker
                 productForm.Font = new Font(productForm.Font.Name, productForm.Font.Size + 1, productForm.Font.Style);
                 if( productForm.ShowDialog() == DialogResult.OK)
                 {
-                    RefreshView();
+                    ProductList_UpdateRow(productList.SelectedIndices[0], productList.SelectedItems[0].SubItems[0].Text);
                 }
             }
             

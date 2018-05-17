@@ -40,6 +40,7 @@ namespace InvoiceMaker
             InitializeComponent();
             setTextBoxRestricts();
             replacedItemNo = itemNumber;
+            itemNumber_textBox.ReadOnly = true;
             itemNumber_textBox.Text = itemNumber;
             itemDescription_textBox.Text = desc;
             cartonPack_textBox.Text = cp;
@@ -49,7 +50,7 @@ namespace InvoiceMaker
             upc_textBox.Text = upc;
             specNote_textBox.Text = specNote;
             editMode = true;
-            itemNumber_textBox.BackColor = Color.White;
+            itemNumber_textBox.BackColor = Color.LightGray;
         }
 
         private void setTextBoxRestricts()
@@ -80,15 +81,17 @@ namespace InvoiceMaker
             location = warehouseLoc_textBox.Text;
             Int64.TryParse(upc_textBox.Text, out upc);
             specNotes = specNote_textBox.Text;
-
-            if(!validItemNumber(itemNo))
+            if (!editMode)
             {
-                allValid = false;
-                itemNumber_textBox.BackColor = Color.Red;
-            }
-            else
-            {
-                itemNumber_textBox.BackColor = Color.White;
+                if (!validItemNumber(itemNo))
+                {
+                    allValid = false;
+                    itemNumber_textBox.BackColor = Color.Red;
+                }
+                else
+                {
+                    itemNumber_textBox.BackColor = Color.White;
+                }
             }
             if(itemDesc.Length == 0)
             {
