@@ -20,7 +20,8 @@ namespace InvoiceMaker
         String location;
         double cost;
         double sellPrice;
-        int upc;
+        Int64 upc;
+        String specNotes;
         String replacedItemNo = null;
         bool editMode = false;
 
@@ -34,11 +35,12 @@ namespace InvoiceMaker
         }
 
         //for editting
-        public ProductForm(String itemNumber, String desc, String cp, String loc, String cost, String price, String upc)
+        public ProductForm(String itemNumber, String desc, String cp, String loc, String cost, String price, String upc, String specNote)
         {
             InitializeComponent();
             setTextBoxRestricts();
             replacedItemNo = itemNumber;
+            itemNumber_textBox.ReadOnly = true;
             itemNumber_textBox.Text = itemNumber;
             itemDescription_textBox.Text = desc;
             cartonPack_textBox.Text = cp;
@@ -46,8 +48,9 @@ namespace InvoiceMaker
             cost_textBox.Text = cost;
             sellingPrice_textBox.Text = price;
             upc_textBox.Text = upc;
+            specNote_textBox.Text = specNote;
             editMode = true;
-            itemNumber_textBox.BackColor = Color.White;
+            itemNumber_textBox.BackColor = Color.LightGray;
         }
 
         private void setTextBoxRestricts()
@@ -55,6 +58,8 @@ namespace InvoiceMaker
             itemNumber_textBox.MaxLength = 10;
             itemDescription_textBox.MaxLength = 50;
             warehouseLoc_textBox.MaxLength = 10;
+            specNote_textBox.MaxLength = 50;
+            upc_textBox.MaxLength = 12;
             cartonPack_textBox.KeyPress += textBoxOnlyNumb_KeyPress;
             cost_textBox.KeyPress += textBoxCurrency_KeyPress;
             sellingPrice_textBox.KeyPress += textBoxCurrency_KeyPress;
@@ -74,17 +79,19 @@ namespace InvoiceMaker
             itemDesc = itemDescription_textBox.Text;
             Int32.TryParse(cartonPack_textBox.Text, out perCarton);
             location = warehouseLoc_textBox.Text;
-
-            Int32.TryParse(upc_textBox.Text, out upc);
-
-            if(!validItemNumber(itemNo))
+            Int64.TryParse(upc_textBox.Text, out upc);
+            specNotes = specNote_textBox.Text;
+            if (!editMode)
             {
-                allValid = false;
-                itemNumber_textBox.BackColor = Color.Red;
-            }
-            else
-            {
-                itemNumber_textBox.BackColor = Color.White;
+                if (!validItemNumber(itemNo))
+                {
+                    allValid = false;
+                    itemNumber_textBox.BackColor = Color.Red;
+                }
+                else
+                {
+                    itemNumber_textBox.BackColor = Color.White;
+                }
             }
             if(itemDesc.Length == 0)
             {
@@ -148,17 +155,18 @@ namespace InvoiceMaker
 
             if (editMode == false && allValid)
             {
-                ProductDatabase.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
+                ProductDatabase.AddProduct(itemNo, itemDesc, perCarton, location, cost, sellPrice, upc, specNotes);
                 if(replacedItemNo != null)
                 {
                     ProductDatabase.DeleteProductByItemNo(replacedItemNo);
                 }
+                DialogResult = DialogResult.OK;
                 this.Close();   
             }
             else if(editMode && editValid)
             {
-                ProductDatabase.EditProduct(replacedItemNo, itemNo, itemDesc, perCarton, location, cost, sellPrice, upc);
-              
+                ProductDatabase.EditProduct(replacedItemNo, itemNo, itemDesc, perCarton, location, cost, sellPrice, upc, specNotes);
+                DialogResult = DialogResult.OK;
                 this.Close();
             }
         }

@@ -44,6 +44,8 @@
             this.upc_textBox = new System.Windows.Forms.TextBox();
             this.cancel_button = new System.Windows.Forms.Button();
             this.submit_button = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.specNote_textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -170,7 +172,7 @@
             this.upc_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.upc_textBox.Location = new System.Drawing.Point(69, 465);
             this.upc_textBox.Name = "upc_textBox";
-            this.upc_textBox.Size = new System.Drawing.Size(100, 31);
+            this.upc_textBox.Size = new System.Drawing.Size(161, 31);
             this.upc_textBox.TabIndex = 13;
             // 
             // cancel_button
@@ -193,11 +195,29 @@
             this.submit_button.UseVisualStyleBackColor = true;
             this.submit_button.Click += new System.EventHandler(this.submit_button_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(332, 433);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(145, 25);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Special Notes";
+            // 
+            // specNote_textBox
+            // 
+            this.specNote_textBox.Location = new System.Drawing.Point(337, 465);
+            this.specNote_textBox.Name = "specNote_textBox";
+            this.specNote_textBox.Size = new System.Drawing.Size(161, 31);
+            this.specNote_textBox.TabIndex = 14;
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 670);
+            this.Controls.Add(this.specNote_textBox);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.submit_button);
             this.Controls.Add(this.cancel_button);
             this.Controls.Add(this.upc_textBox);
@@ -239,5 +259,7 @@
         private System.Windows.Forms.TextBox upc_textBox;
         private System.Windows.Forms.Button cancel_button;
         private System.Windows.Forms.Button submit_button;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox specNote_textBox;
     }
 }

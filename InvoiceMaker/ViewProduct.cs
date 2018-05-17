@@ -23,12 +23,13 @@ namespace InvoiceMaker
             productList.Location = new Point(50, 100);
             
             productList.Columns.Add("Item Number", 80, HorizontalAlignment.Left);
-            productList.Columns.Add("Description", 350, HorizontalAlignment.Left);
+            productList.Columns.Add("Description", 275, HorizontalAlignment.Left);
             productList.Columns.Add("Carton Pack", -2, HorizontalAlignment.Left);
             productList.Columns.Add("Warehouse Location", -2, HorizontalAlignment.Left);
             productList.Columns.Add("Cost", 80, HorizontalAlignment.Left);
             productList.Columns.Add("Selling Price", 80, HorizontalAlignment.Left);
             productList.Columns.Add("UPC", -2, HorizontalAlignment.Left);
+            productList.Columns.Add("Special Note", -2, HorizontalAlignment.Left);
 
             productList.GridLines = true;
             productList.Scrollable = true;
@@ -41,10 +42,16 @@ namespace InvoiceMaker
             List<Product> list = ProductDatabase.SearchProductsByItemNo("");
             foreach (Product p in list)
             {
-                productList.Items.Add(new ListViewItem(new String[] { p.ItemNo, p.ItemDesc, p.PerCarton.ToString(), p.Location, p.Cost.ToString("0.00"), p.SellPrice.ToString("0.00"), p.UPC.ToString() }));
+                productList.Items.Add(new ListViewItem(new String[] { p.ItemNo, p.ItemDesc, p.PerCarton.ToString(), p.Location, p.Cost.ToString("0.00"), p.SellPrice.ToString("0.00"), p.UPC.ToString(), p.SpecialNotes }));
             }
         }
 
+        private void ProductList_UpdateRow(int rowIndex, String itemNo)
+        {
+            Product prod = ProductDatabase.SearchProductByItemNo(itemNo);
+            productList.Items.RemoveAt(rowIndex);
+            productList.Items.Insert(rowIndex, new ListViewItem(new String[] { prod.ItemNo, prod.ItemDesc, prod.PerCarton.ToString(), prod.Location, prod.Cost.ToString("0.00"), prod.SellPrice.ToString("0.00"), prod.UPC.ToString(), prod.SpecialNotes }));
+        }
 
         private void ProductList_DoubleClick(object sender, EventArgs e)
         {
@@ -55,9 +62,14 @@ namespace InvoiceMaker
                 productList.SelectedItems[0].SubItems[3].Text,
                 productList.SelectedItems[0].SubItems[4].Text, 
                 productList.SelectedItems[0].SubItems[5].Text,
-                productList.SelectedItems[0].SubItems[6].Text);
+                productList.SelectedItems[0].SubItems[6].Text,
+                productList.SelectedItems[0].SubItems[7].Text);
             productForm.Font = new Font(productForm.Font.Name, productForm.Font.Size + 1, productForm.Font.Style);
-            productForm.Show();
+            if (productForm.ShowDialog() == DialogResult.OK)
+            {
+                //RefreshView();
+                ProductList_UpdateRow(productList.SelectedIndices[0], productList.SelectedItems[0].SubItems[0].Text);
+            }
         }
 
         private void CancelProduct_Click(object sender, EventArgs e)
@@ -68,6 +80,23 @@ namespace InvoiceMaker
         private void ModProduct_Click(object sender, EventArgs e)
         {
             Debug.Print("Mod Product");
+            if(productList.SelectedItems.Count == 1)
+            {
+                ProductForm productForm = new ProductForm(productList.SelectedItems[0].SubItems[0].Text,
+                    productList.SelectedItems[0].SubItems[1].Text,
+                    productList.SelectedItems[0].SubItems[2].Text,
+                    productList.SelectedItems[0].SubItems[3].Text,
+                    productList.SelectedItems[0].SubItems[4].Text,
+                    productList.SelectedItems[0].SubItems[5].Text,
+                    productList.SelectedItems[0].SubItems[6].Text,
+                    productList.SelectedItems[0].SubItems[7].Text);
+                productForm.Font = new Font(productForm.Font.Name, productForm.Font.Size + 1, productForm.Font.Style);
+                if( productForm.ShowDialog() == DialogResult.OK)
+                {
+                    ProductList_UpdateRow(productList.SelectedIndices[0], productList.SelectedItems[0].SubItems[0].Text);
+                }
+            }
+            
         }
 
         private void DeleteProduct_Click(object sender, EventArgs e)
@@ -152,7 +181,7 @@ namespace InvoiceMaker
             }
             foreach (Product p in list)
             {
-                productList.Items.Add(new ListViewItem(new String[] { p.ItemNo, p.ItemDesc, p.PerCarton.ToString(), p.Location, p.Cost.ToString("0.00"), p.SellPrice.ToString("0.00"), p.UPC.ToString() }));
+                productList.Items.Add(new ListViewItem(new String[] { p.ItemNo, p.ItemDesc, p.PerCarton.ToString(), p.Location, p.Cost.ToString("0.00"), p.SellPrice.ToString("0.00"), p.UPC.ToString(), p.SpecialNotes }));
             }
         }
 
