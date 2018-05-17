@@ -83,7 +83,8 @@ namespace InvoiceMaker
                 fs.Write(mybytes, 0, mybytes.Length);
             }
             
-            Console.WriteLine("Done.");
+            
+
         }
 
         private void reportViewer1_Load(object sender, EventArgs e)

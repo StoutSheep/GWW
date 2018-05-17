@@ -150,7 +150,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -181,8 +181,8 @@ namespace InvoiceMaker
             int custID2 = CustomerDatabase.GetStoreID("Games", "somehwereElse 9931");
             //CustomerDatabase.DeleteCustomer(custID);
 
-            InvoiceDatabase.AddInvoice(1, "Invoice 1", "n/a", "", 10, 5, 7, 12, 1);
-
+            InvoiceDatabase.AddInvoice(1, "Invoice 1", "n/a", "1234566", 10, 5, 7, 12, 1);
+            
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234b", 10, "2 red");
             InvoiceContentsDatabase.AddInvoiceContent(1, "1234c", 4, "Bork");
 
@@ -209,7 +209,7 @@ namespace InvoiceMaker
 
             Invoice jk = new Invoice(1);
 
-
+            List<Invoice> l = InvoiceDatabase.SearchInvoicesByInvoiceNo("1");
 
 
             //List<Invoice> sda = InvoiceDatabase.SearchInvoicesByStage(1);

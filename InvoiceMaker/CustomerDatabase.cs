@@ -50,7 +50,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -90,7 +90,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -128,7 +128,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
         }
 
         internal static void EditCustomer(int storeId, String storeName, String storeDetails, String emailAddress, String billingAddress, String shippingAddress, String storeContact, String phoneNumber,
@@ -164,7 +164,8 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
+
         }
 
         internal static void DeleteCustomer(int storeID)
@@ -188,7 +189,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -224,7 +225,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
             return 0;
 
         }
@@ -257,7 +258,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
             return customerList;
         }
 
@@ -288,7 +289,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
             return customer;
         }
     }

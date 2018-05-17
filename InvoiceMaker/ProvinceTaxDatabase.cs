@@ -40,7 +40,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -70,7 +70,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+             
         }
 
         internal static List<ProvinceTax> GetAllProvinces()
@@ -100,7 +100,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+             
             return provinceTaxList;
         }
 
@@ -133,7 +133,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+             
             return null;
         }
     }

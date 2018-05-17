@@ -68,7 +68,7 @@ namespace InvoiceMaker
             }
 
             conn.Close(); 
-            Console.WriteLine("Done.");
+            
             return 0;
         }
 
@@ -106,7 +106,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -138,7 +138,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -167,7 +167,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -195,7 +195,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -221,7 +221,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -256,7 +256,42 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
+            return invoices;
+        }
+
+
+
+        internal static List<Invoice> SearchInvoicesByInvoiceNo(String invoiceNo)
+        {
+
+            List<Invoice> invoices = new List<Invoice>();
+            MySqlConnection conn = new MySqlConnection(connStr);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                MySqlDataReader rdr;
+                string sql;
+
+                sql = "SELECT InvoiceID FROM Invoices WHERE InvoiceNo LIKE '" + invoiceNo + "%';";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Invoice temp = new Invoice(Int32.Parse(rdr[0].ToString()));
+                    invoices.Add(temp);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            
+
             return invoices;
         }
 
@@ -282,7 +317,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 

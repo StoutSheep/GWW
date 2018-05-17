@@ -44,7 +44,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -77,7 +77,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -114,7 +114,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
         }
 
         internal static void EditProduct(String oldItemNo, String newItemNo, String itemDesc, int perCarton, String location, double cost, double sellPrice, Int64 upc, String specialNotes)
@@ -148,7 +148,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
         }
 
 
@@ -175,7 +175,7 @@ namespace InvoiceMaker
             }
 
             conn.Close();
-            Console.WriteLine("Done.");
+            
 
         }
 
@@ -213,7 +213,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
             return productList;
         }
 
@@ -245,7 +245,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+           
             return productList;
         }
 
@@ -279,7 +279,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
             return null;
 
         }
@@ -313,7 +313,7 @@ namespace InvoiceMaker
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine("Done.");
+            
             return productList;
         }
 
@@ -338,7 +338,7 @@ namespace InvoiceMaker
             {
                 Console.WriteLine(ex.ToString());
             }
-            Console.WriteLine("Done.");
+            
             return;
 
         }
