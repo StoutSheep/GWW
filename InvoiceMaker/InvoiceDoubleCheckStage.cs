@@ -303,71 +303,80 @@ namespace InvoiceMaker
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (this.Controls["invoiceNumber"].Text.Length == 0)
+            var confirmResult = MessageBox.Show("Are you sure this invoice is complete?",
+                                     "Confirm Completion!!",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                this.Controls["invoiceNumber"].BackColor = Color.Red;
-                return;
-            }
-            Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
-
-            for (int i = 0; i < invoiceContentsList.Count; i++)
-            {
-                int numBO;
-                String itemNo = this.panel1.Controls["itemNumber" + i].Text;
-                String notes = this.panel1.Controls["specialNotes" + i].Text;
-                int qty = Int32.Parse(this.panel1.Controls["qty" + i].Text);
-                int entryID = InvoiceContentsDatabase.GetEntryID(invoice.InvoiceID, itemNo);
-
-                if (invoiceContentsList[i].Backorder > 0)
+                if (this.Controls["invoiceNumber"].Text.Length == 0)
                 {
-                    numBO = Int32.Parse(this.panel1.Controls["backorder" + i].Text);
-                    InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
-                    InvoiceContentsDatabase.UpdateBackorder(entryID, qty - numBO);
-                    InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
+                    this.Controls["invoiceNumber"].BackColor = Color.Red;
+                    return;
+                }
+                Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
+
+                for (int i = 0; i < invoiceContentsList.Count; i++)
+                {
+                    int numBO;
+                    String itemNo = this.panel1.Controls["itemNumber" + i].Text;
+                    String notes = this.panel1.Controls["specialNotes" + i].Text;
+                    int qty = Int32.Parse(this.panel1.Controls["qty" + i].Text);
+                    int entryID = InvoiceContentsDatabase.GetEntryID(invoice.InvoiceID, itemNo);
+
+                    if (invoiceContentsList[i].Backorder > 0)
+                    {
+                        numBO = Int32.Parse(this.panel1.Controls["backorder" + i].Text);
+                        InvoiceContentsDatabase.EditInvoiceContent(entryID, invoice.InvoiceID, itemNo, qty, notes);
+                        InvoiceContentsDatabase.UpdateBackorderSpecialNotes(entryID, this.panel1.Controls["backorderNotes" + i].Text);
+                    }
+
+                }
+                int invoiceNumber;
+
+                invoiceNumber = Int32.Parse(this.Controls["invoiceNumber"].Text);
+
+                float freight = 0;
+                if (this.Controls["freight"].Text.Length == 0)
+                {
+                    freight = 0;
+                }
+                else
+                {
+                    freight = Single.Parse(this.Controls["freight"].Text);
+                }
+                InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
+                InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
+
+                Invoice printInvoice = new Invoice(invoice.InvoiceID);
+                List<InvoiceItemDetail> invoiceItemDetails;
+                invoiceItemDetails = new List<InvoiceItemDetail>();
+
+                for (int i = 0; i < printInvoice.Items.Count; i++)
+                {
+                    invoiceItemDetails.Add(new InvoiceItemDetail());
+                    invoiceItemDetails[i].Backorder = printInvoice.Items[i].Quantity - printInvoice.Items[i].BackOrder;
+                    invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
+                    invoiceItemDetails[i].BackorderGrabCarton = invoiceItemDetails[i].Backorder / printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                    invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
+                    invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
+                    invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                    invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].SellPrice;
+                    invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
+                    invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
                 }
 
-            }
-            int invoiceNumber;
+                Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+                Form2.ShowDialog();
 
-            invoiceNumber = Int32.Parse(this.Controls["invoiceNumber"].Text);
-
-            float freight = 0;
-            if (this.Controls["freight"].Text.Length == 0)
-            {
-                freight = 0;
+                this.Close();
             }
             else
             {
-                freight = Single.Parse(this.Controls["freight"].Text);
+                // If 'No', do something here.
             }
-            InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
-            InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
-
-            Invoice printInvoice = new Invoice(invoice.InvoiceID);
-            List<InvoiceItemDetail> invoiceItemDetails;
-            invoiceItemDetails = new List<InvoiceItemDetail>();
-
-            for (int i = 0; i < printInvoice.Items.Count; i++)
-            {
-                invoiceItemDetails.Add(new InvoiceItemDetail());
-                invoiceItemDetails[i].Backorder = printInvoice.Items[i].Quantity - printInvoice.Items[i].BackOrder;
-                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
-                invoiceItemDetails[i].BackorderGrabCarton = invoiceItemDetails[i].Backorder / printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
-                invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;                
-                invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
-                invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
-                invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
-                invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].Cost;
-                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].Cost;
-                invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
-            }
-
-            Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
-            Form2.ShowDialog();
-
-            this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -396,15 +405,46 @@ namespace InvoiceMaker
             subtotalAmount.TextChanged += SubtotalAmount_TextChanged;
             this.Controls.Add(subtotalAmount);
 
+            Label feightLabel = new Label();
+            feightLabel.Text = "Freight";
+            feightLabel.Location = new Point(570, 530);
+            feightLabel.AutoSize = true;
+            feightLabel.TextAlign = ContentAlignment.TopRight;
+            this.Controls.Add(feightLabel);
+
+            TextBox freight = new TextBox();
+            freight.Location = new Point(610, 530);
+            freight.Size = new Size(50, 25);
+            freight.Name = "freight";
+            freight.AccessibleName = "freight";
+            freight.TextChanged += Freight_TextChanged;
+            this.Controls.Add(freight);
+
+            Label subtotalWithFreightLabel = new Label();
+            subtotalWithFreightLabel.Text = "Subtotal w/ Freight";
+            subtotalWithFreightLabel.Location = new Point(510, 560);
+            subtotalWithFreightLabel.AutoSize = true;
+            subtotalWithFreightLabel.TextAlign = ContentAlignment.TopRight;
+            this.Controls.Add(subtotalWithFreightLabel);
+
+            TextBox subtotalWithFreight = new TextBox();
+            subtotalWithFreight.Location = new Point(610, 560);
+            subtotalWithFreight.Size = new Size(50, 25);
+            subtotalWithFreight.Name = "subtotalWithFreight";
+            subtotalWithFreight.AccessibleName = "subtotalWithFreight";
+            subtotalWithFreight.TextChanged += SubtotalWithFreight_TextChanged;
+            subtotalWithFreight.ReadOnly = true;
+            this.Controls.Add(subtotalWithFreight);
+
             Label gstLabel = new Label();
             gstLabel.Text = "GST " + provinceTax.gst + "%";
-            gstLabel.Location = new Point(560, 530);
+            gstLabel.Location = new Point(560, 590);
             gstLabel.Size = new Size(50, 25);
             gstLabel.TextAlign = ContentAlignment.TopRight;
             this.Controls.Add(gstLabel);
 
             TextBox gst = new TextBox();
-            gst.Location = new Point(610, 530);
+            gst.Location = new Point(610, 590);
             gst.Size = new Size(50, 25);
             gst.Text = invoice.Gst.ToString("0.00");
             gst.ReadOnly = true;
@@ -416,36 +456,39 @@ namespace InvoiceMaker
             {
                 Label pstLabel = new Label();
                 pstLabel.Text = "PST " + provinceTax.pst + "%";
-                pstLabel.Location = new Point(560, 560);
+                pstLabel.Location = new Point(560, 620);
                 pstLabel.Size = new Size(50, 25);
                 pstLabel.TextAlign = ContentAlignment.TopRight;
                 this.Controls.Add(pstLabel);
 
                 TextBox pst = new TextBox();
-                pst.Location = new Point(610, 560);
+                pst.Location = new Point(610, 620);
                 pst.Size = new Size(50, 25);
                 pst.Text = invoice.Pst.ToString("0.00");
                 pst.ReadOnly = true;
                 pst.Name = "pst";
                 pst.AccessibleName = "pst";
                 this.Controls.Add(pst);
+                
 
-                Label feightLabel = new Label();
-                feightLabel.Text = "Freight";
-                feightLabel.Location = new Point(570, 590);
-                feightLabel.AutoSize = true;
-                feightLabel.TextAlign = ContentAlignment.TopRight;
-                this.Controls.Add(feightLabel);
+                Label invoiceTotalLabel = new Label();
+                invoiceTotalLabel.Text = "Invoice Total";
+                invoiceTotalLabel.Location = new Point(540, 650);
+                invoiceTotalLabel.AutoSize = true;
+                this.Controls.Add(invoiceTotalLabel);
 
-                TextBox freight = new TextBox();
-                freight.Location = new Point(610, 590);
-                freight.Size = new Size(50, 25);
-                freight.Name = "freight";
-                freight.AccessibleName = "freight";
-                freight.TextChanged += Freight_TextChanged1;
-                freight.KeyPress += textBoxCurrency_KeyPress;
-                this.Controls.Add(freight);
-
+                TextBox invoiceTotal = new TextBox();
+                invoiceTotal.Location = new Point(610, 650);
+                invoiceTotal.Size = new Size(50, 25);
+                invoiceTotal.Text = invoice.NetTotal.ToString("0.00");
+                invoiceTotal.ReadOnly = true;
+                invoiceTotal.Name = "invoiceTotal";
+                invoiceTotal.AccessibleName = "invoiceTotal";
+                this.Controls.Add(invoiceTotal);
+            }
+            else //no pst
+            {
+                
                 Label invoiceTotalLabel = new Label();
                 invoiceTotalLabel.Text = "Invoice Total";
                 invoiceTotalLabel.Location = new Point(540, 620);
@@ -461,55 +504,25 @@ namespace InvoiceMaker
                 invoiceTotal.AccessibleName = "invoiceTotal";
                 this.Controls.Add(invoiceTotal);
             }
-            else //no pst
-            {
-
-                Label feightLabel = new Label();
-                feightLabel.Text = "Freight";
-                feightLabel.Location = new Point(570, 560);
-                feightLabel.AutoSize = true;
-                feightLabel.TextAlign = ContentAlignment.TopRight;
-                this.Controls.Add(feightLabel);
-
-                TextBox freight = new TextBox();
-                freight.Location = new Point(610, 560);
-                freight.Size = new Size(50, 25);
-                freight.Name = "freight";
-                freight.AccessibleName = "freight";
-                freight.TextChanged += Freight_TextChanged;
-                this.Controls.Add(freight);
-
-                Label invoiceTotalLabel = new Label();
-                invoiceTotalLabel.Text = "Invoice Total";
-                invoiceTotalLabel.Location = new Point(540, 590);
-                invoiceTotalLabel.AutoSize = true;
-                this.Controls.Add(invoiceTotalLabel);
-
-                TextBox invoiceTotal = new TextBox();
-                invoiceTotal.Location = new Point(610, 590);
-                invoiceTotal.Size = new Size(50, 25);
-                invoiceTotal.Text = invoice.NetTotal.ToString("0.00");
-                invoiceTotal.ReadOnly = true;
-                invoiceTotal.Name = "invoiceTotal";
-                invoiceTotal.AccessibleName = "invoiceTotal";
-                this.Controls.Add(invoiceTotal);
-            }
         }
 
-        private void Freight_TextChanged1(object sender, EventArgs e)
+        private void SubtotalWithFreight_TextChanged(object sender, EventArgs e)
         {
             TextBox t = (TextBox)sender;
-            float freight = 0;
-            if (t.Text.Length == 0)
+
+            Customer c = CustomerDatabase.SearchCustomersByID(customerID);
+            ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(c.Province);
+            float gstRate = (float)provinceTax.gst / 100;
+
+            this.Controls["gst"].Text = (Single.Parse(this.Controls["subtotalWithFreight"].Text) * gstRate).ToString("0.00");
+            this.Controls["invoiceTotal"].Text = (Single.Parse(this.Controls["subtotalWithFreight"].Text) * (1 + gstRate)).ToString("0.00");
+            if (PST)
             {
-                freight = 0;
-            }
-            else
-            {
-                freight = Single.Parse(t.Text);
+                float pstRate = (float)provinceTax.pst / 100;
+                this.Controls["pst"].Text = (Single.Parse(this.Controls["subtotalWithFreight"].Text) * pstRate).ToString("0.00");
+                this.Controls["invoiceTotal"].Text = (Single.Parse(this.Controls["subtotalWithFreight"].Text) * (1 + gstRate + pstRate)).ToString("0.00");
             }
 
-            this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
         }
 
         private void Freight_TextChanged(object sender, EventArgs e)
@@ -524,8 +537,8 @@ namespace InvoiceMaker
             {
                 freight = Single.Parse(t.Text);
             }
+            this.Controls["subtotalWithFreight"].Text = (invoice.SubTotal + freight).ToString("0.00");
 
-            this.Controls["invoiceTotal"].Text = (invoice.NetTotal + freight).ToString("0.00");
         }
 
         private void SubtotalAmount_TextChanged(object sender, EventArgs e)
@@ -604,7 +617,7 @@ namespace InvoiceMaker
                 TextBox cost = new TextBox();
                 cost.Location = new Point(510, 0 + i * 25);
                 cost.Size = new Size(50, 25);
-                cost.Text = p.Cost.ToString("0.00");
+                cost.Text = p.SellPrice.ToString("0.00");
                 cost.ReadOnly = true;
                 cost.Enter += Desc_Enter;
                 cost.Name = "cost" + i;
@@ -614,7 +627,7 @@ namespace InvoiceMaker
                 TextBox amount = new TextBox();
                 amount.Location = new Point(580, 0 + i * 25);
                 amount.Size = new Size(50, 25);
-                amount.Text = (Single.Parse(this.panel1.Controls["qty" + i].Text) * p.Cost).ToString("0.00");
+                amount.Text = (Single.Parse(this.panel1.Controls["qty" + i].Text) * p.SellPrice).ToString("0.00");
                 amount.ReadOnly = true;
                 amount.Enter += Desc_Enter;
                 amount.Name = "amount" + i;
