@@ -184,7 +184,7 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox29">
+                            <Textbox Name="Textbox57">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -200,7 +200,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox29</rd:DefaultName>
+                              <rd:DefaultName>Textbox57</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -215,7 +215,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox30">
+                            <Textbox Name="Textbox58">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -234,7 +234,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox30</rd:DefaultName>
+                              <rd:DefaultName>Textbox58</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -254,7 +254,7 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox31">
+                            <Textbox Name="Textbox59">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -270,7 +270,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox31</rd:DefaultName>
+                              <rd:DefaultName>Textbox59</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -285,7 +285,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox32">
+                            <Textbox Name="Textbox60">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -304,7 +304,7 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox32</rd:DefaultName>
+                              <rd:DefaultName>Textbox60</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -574,54 +574,22 @@
                 </TablixColumnHierarchy>
                 <TablixRowHierarchy>
                   <TablixMembers>
+                    <TablixMember />
                     <TablixMember>
-                      <KeepWithGroup>After</KeepWithGroup>
+                      <Visibility>
+                        <Hidden>=IIF(Parameters!pFreight.Value="0.00",True,False)</Hidden>
+                      </Visibility>
                     </TablixMember>
                     <TablixMember>
-                      <Group Name="Details1">
-                        <Filters>
-                          <Filter>
-                            <FilterExpression>=Parameters!pFreight.Value</FilterExpression>
-                            <Operator>GreaterThan</Operator>
-                            <FilterValues>
-                              <FilterValue DataType="Float">0</FilterValue>
-                            </FilterValues>
-                          </Filter>
-                        </Filters>
-                      </Group>
-                      <TablixMembers>
-                        <TablixMember>
-                          <Visibility>
-                            <Hidden>=IIF(Parameters!pFreight.Value="0.00",True,False)</Hidden>
-                          </Visibility>
-                        </TablixMember>
-                        <TablixMember>
-                          <Visibility>
-                            <Hidden>=IIF(Parameters!pFreight.Value="0.00",True,False)</Hidden>
-                          </Visibility>
-                        </TablixMember>
-                      </TablixMembers>
+                      <Visibility>
+                        <Hidden>=IIF(Parameters!pFreight.Value="0.00",True,False)</Hidden>
+                      </Visibility>
                     </TablixMember>
-                    <TablixMember>
-                      <KeepWithGroup>Before</KeepWithGroup>
-                    </TablixMember>
-                    <TablixMember>
-                      <KeepWithGroup>Before</KeepWithGroup>
-                    </TablixMember>
-                    <TablixMember>
-                      <KeepWithGroup>Before</KeepWithGroup>
-                    </TablixMember>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
                   </TablixMembers>
                 </TablixRowHierarchy>
-                <Filters>
-                  <Filter>
-                    <FilterExpression>=Parameters!pFreight.Value</FilterExpression>
-                    <Operator>GreaterThan</Operator>
-                    <FilterValues>
-                      <FilterValue DataType="Float">0</FilterValue>
-                    </FilterValues>
-                  </Filter>
-                </Filters>
                 <Top>0.10955in</Top>
                 <Left>2.49904in</Left>
                 <Height>1.5in</Height>
@@ -637,7 +605,7 @@
             <KeepTogether>true</KeepTogether>
             <Top>0.76304in</Top>
             <Left>0.10171in</Left>
-            <Height>1.65937in</Height>
+            <Height>2.10955in</Height>
             <Width>6.8in</Width>
             <Style>
               <Border>
@@ -1090,7 +1058,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!GrabCarton.Value</Value>
+                                      <Value>=iif((Fields!GrabCarton.Value)=0.0,"",Fields!GrabCarton.Value)</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
                                         <Format>0.0;(0.0)</Format>
@@ -1394,6 +1362,15 @@
                 </TablixRowHierarchy>
                 <RepeatColumnHeaders>true</RepeatColumnHeaders>
                 <DataSetName>InvoiceData</DataSetName>
+                <Filters>
+                  <Filter>
+                    <FilterExpression>=Fields!GrabCarton.Value</FilterExpression>
+                    <Operator>GreaterThan</Operator>
+                    <FilterValues>
+                      <FilterValue DataType="Integer">0</FilterValue>
+                    </FilterValues>
+                  </Filter>
+                </Filters>
                 <SortExpressions>
                   <SortExpression>
                     <Value>=Fields!Location.Value</Value>
@@ -1504,7 +1481,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!BackorderGrabCarton.Value</Value>
+                                      <Value>=iif((Fields!BackorderGrabCarton.Value)=0.0,"",Fields!BackorderGrabCarton.Value)</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
                                         <Format>0.0;(0.0)</Format>
@@ -1751,17 +1728,10 @@
                 <TablixRowHierarchy>
                   <TablixMembers>
                     <TablixMember>
-                      <Group Name="Details2">
-                        <Filters>
-                          <Filter>
-                            <FilterExpression>=Fields!Backorder.Value</FilterExpression>
-                            <Operator>GreaterThan</Operator>
-                            <FilterValues>
-                              <FilterValue DataType="Integer">0</FilterValue>
-                            </FilterValues>
-                          </Filter>
-                        </Filters>
-                      </Group>
+                      <Group Name="Details2" />
+                      <Visibility>
+                        <Hidden>=IIF(Fields!Backorder.Value="0.00",True,False)</Hidden>
+                      </Visibility>
                     </TablixMember>
                   </TablixMembers>
                 </TablixRowHierarchy>
@@ -1779,9 +1749,6 @@
                 <Left>0.1532in</Left>
                 <Height>0.25in</Height>
                 <Width>5.96956in</Width>
-                <Visibility>
-                  <Hidden>=IIF(Sum(Fields!Backorder.Value, "InvoiceData") &gt; 0.00,True,False)</Hidden>
-                </Visibility>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1814,6 +1781,9 @@
                 <Height>0.2478in</Height>
                 <Width>6.80205in</Width>
                 <ZIndex>1</ZIndex>
+                <Visibility>
+                  <Hidden>=Parameters!pBackorderNotes.Value = ""</Hidden>
+                </Visibility>
                 <Style>
                   <Border>
                     <Style>None</Style>
