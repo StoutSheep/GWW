@@ -404,7 +404,23 @@ namespace InvoiceMaker
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            String backordernotes = this.Controls["backorderInvoiceNotes"].Text;
+            int backordertotal = 0;
+
+            for (int i = 0; i < invoice.Items.Count; i++)
+            {
+                backordertotal = +invoice.Items[i].BackOrder;
+            }
+
+            String backordernotes;
+
+            if (backordertotal > 0)
+            {
+                backordernotes = this.Controls["backorderInvoiceNotes"].Text;
+            }
+            else
+            {
+                backordernotes = "";
+            }
 
             float freight = 0;
             if (this.Controls["freight"].Text.Length == 0)
@@ -441,7 +457,7 @@ namespace InvoiceMaker
                 invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
                 invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
             }
-
+            printInvoice.BackorderNotes = backordernotes;
             printInvoice.freight = freight;
 
             Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);

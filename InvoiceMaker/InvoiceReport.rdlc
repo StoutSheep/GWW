@@ -1835,10 +1835,12 @@
                           <Style />
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.14931in</Top>
+                  <Top>0.08542in</Top>
                   <Left>5.00146in</Left>
                   <Height>0.25in</Height>
                   <Width>1.73957in</Width>
@@ -1874,7 +1876,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.7257in</Top>
+                  <Top>0.63264in</Top>
                   <Left>5.00146in</Left>
                   <Height>0.19618in</Height>
                   <Width>1.73957in</Width>
@@ -1905,19 +1907,15 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.44098in</Top>
+                  <Top>0.40487in</Top>
                   <Left>5.00146in</Left>
-                  <Height>0.25in</Height>
+                  <Height>0.2in</Height>
                   <Width>0.73958in</Width>
                   <ZIndex>2</ZIndex>
                   <Style>
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
                 <Textbox Name="TB_CompanyName">
@@ -1939,17 +1937,13 @@
                   </Paragraphs>
                   <Top>0.09931in</Top>
                   <Left>0.03726in</Left>
-                  <Height>0.3in</Height>
+                  <Height>0.25in</Height>
                   <Width>4.63627in</Width>
                   <ZIndex>3</ZIndex>
                   <Style>
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
                 <Textbox Name="TB_InvoiceNoLabel">
@@ -2057,7 +2051,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.7257in</Top>
+                  <Top>0.63264in</Top>
                   <Left>0.03726in</Left>
                   <Height>0.25in</Height>
                   <Width>1.3807in</Width>
@@ -2066,10 +2060,6 @@
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
                 <Textbox Name="TB_CompanyFax">
@@ -2091,8 +2081,8 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.7257in</Top>
-                  <Left>1.4874in</Left>
+                  <Top>0.63264in</Top>
+                  <Left>1.49782in</Left>
                   <Height>0.25in</Height>
                   <Width>1.25542in</Width>
                   <ZIndex>8</ZIndex>
@@ -2100,10 +2090,6 @@
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
                 <Textbox Name="TB_CompanyTollFree">
@@ -2121,7 +2107,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.7257in</Top>
+                  <Top>0.63264in</Top>
                   <Left>2.81226in</Left>
                   <Height>0.25in</Height>
                   <Width>1.46023in</Width>
@@ -2130,10 +2116,6 @@
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
                 <Textbox Name="TB_CompanyAddress">
@@ -2152,19 +2134,15 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.44098in</Top>
+                  <Top>0.40487in</Top>
                   <Left>0.03726in</Left>
-                  <Height>0.25in</Height>
+                  <Height>0.2in</Height>
                   <Width>4.63627in</Width>
                   <ZIndex>10</ZIndex>
                   <Style>
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
                 <Textbox Name="TB_ShipToLabel">
@@ -2182,7 +2160,7 @@
                     </Paragraph>
                   </Paragraphs>
                   <Top>1.03091in</Top>
-                  <Left>0.03205in</Left>
+                  <Left>0.03726in</Left>
                   <Height>0.2in</Height>
                   <Width>0.64062in</Width>
                   <ZIndex>11</ZIndex>

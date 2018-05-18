@@ -46,12 +46,12 @@ namespace InvoiceMaker
         public Invoice(int invoiceID)
         {
             // WholeSale Company Information
-            CompanyName = "Wholesaler";
-            CompanyAddress = "1234 GRANOLA ST. NEW WESTMINISTER, BC W4T 4U2";
-            CompanyPhoneNumber = "123-456-7890";
-            CompanyFax = "123-456-7890";
-            CompanyTollFree = "1-800-123-4567";
-            GSTNo = "abc123";
+            CompanyName = "Great West Wholesale LTD";
+            CompanyAddress = "1670 PANDORA ST. VANCOUVER, BC V5L 1L6";
+            CompanyPhoneNumber = "604-255-9588";
+            CompanyFax = "604-255-9589";
+            CompanyTollFree = "1-800-901-9588";
+            GSTNo = "R102186178";
 
             Items = new List<Product>();
             String pswd = "password";
