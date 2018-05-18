@@ -605,7 +605,7 @@
             <KeepTogether>true</KeepTogether>
             <Top>0.76304in</Top>
             <Left>0.10171in</Left>
-            <Height>2.10955in</Height>
+            <Height>1.60955in</Height>
             <Width>6.8in</Width>
             <Style>
               <Border>
@@ -1362,15 +1362,6 @@
                 </TablixRowHierarchy>
                 <RepeatColumnHeaders>true</RepeatColumnHeaders>
                 <DataSetName>InvoiceData</DataSetName>
-                <Filters>
-                  <Filter>
-                    <FilterExpression>=Fields!GrabCarton.Value</FilterExpression>
-                    <Operator>GreaterThan</Operator>
-                    <FilterValues>
-                      <FilterValue DataType="Integer">0</FilterValue>
-                    </FilterValues>
-                  </Filter>
-                </Filters>
                 <SortExpressions>
                   <SortExpression>
                     <Value>=Fields!Location.Value</Value>

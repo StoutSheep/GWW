@@ -13,7 +13,7 @@ namespace InvoiceMaker
     {
         public Int32 InvoiceID { get; set; }
         public Int32 QTY { get; set; }
-        public int GrabCarton { get; set; }
+        public float GrabCarton { get; set; }
         public String ItemNo { get; set; }
         public String Location { get; set; }
         public String Description { get; set; }
