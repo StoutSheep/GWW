@@ -1193,7 +1193,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=First(Fields!CartonTotal.Value)</Value>
+                                      <Value>=iif((Fields!CartonTotal.Value)=-1,"",Fields!GrabCarton.Value)</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
                                         <Format>0;(0)</Format>
@@ -1475,7 +1475,7 @@
                                       <Value>=iif((Fields!BackorderGrabCarton.Value)=0.0,"",Fields!BackorderGrabCarton.Value)</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
-                                        <Format>0.0;(0.0)</Format>
+                                        <Format>0.0</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>

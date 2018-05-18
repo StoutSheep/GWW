@@ -352,13 +352,28 @@ namespace InvoiceMaker
                 }
                 InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
                 InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
-                InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
+
+                int backordertotal = 0;
+
+                for (int i = 0; i < invoice.Items.Count; i++)
+                {
+                    backordertotal =+ invoice.Items[i].BackOrder;
+                }            
+
+                if(backordertotal > 0)
+                {
+                    InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
+                } else
+                {
+                    InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, "");
+                }
+
                 
                 Invoice printInvoice = new Invoice(invoice.InvoiceID);
                 List<InvoiceItemDetail> invoiceItemDetails;
                 invoiceItemDetails = new List<InvoiceItemDetail>();
 
-                for (int i = 0; i < printInvoice.Items.Count; i++)
+                for (int i = 0; i < invoice.Items.Count; i++)
                 {
                     invoiceItemDetails.Add(new InvoiceItemDetail());
                     invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
@@ -366,6 +381,7 @@ namespace InvoiceMaker
                     invoiceItemDetails[i].GrabCarton = 0.0f;
                     invoiceItemDetails[i].ItemNo = invoice.Items[i].ItemNo;
                     invoiceItemDetails[i].Description = invoice.Items[i].ItemDesc;
+                    invoiceItemDetails[i].CartonTotal = -1;
                     invoiceItemDetails[i].InvoiceItemSellPrice = invoice.Items[i].SellPrice;
                     invoiceItemDetails[i].InvoiceItemAmount = invoice.Items[i].Quantity * invoice.Items[i].SellPrice;
                     invoiceItemDetails[i].InvoiceItemNote = invoice.Items[i].SpecialNotes;
