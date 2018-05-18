@@ -15,13 +15,13 @@ namespace InvoiceMaker
     public partial class ExcelReadWindow : Form
     {
         
-        String file;
+        Workbook ex;
         internal List<String> errors;
-        public ExcelReadWindow(String excelFile)
+        public ExcelReadWindow(Workbook excelFile)
         {
             
             InitializeComponent();
-            file = excelFile;
+            ex = excelFile;
             errors = new List<String>();
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.RunWorkerAsync();
@@ -34,7 +34,7 @@ namespace InvoiceMaker
             int tempCart;
             Int64 tempUPC;
             float tempCost, tempPrice;
-            Workbook ex = Workbook.Load(file);
+            //Workbook ex = Workbook.Load(file);
             Worksheet worksheet = ex.Worksheets[0];
             int maxRow = worksheet.Cells.Rows.Count;
             double readProgress = 100d / maxRow;
@@ -61,7 +61,7 @@ namespace InvoiceMaker
                         : "No Item Location detected") + " / ";
                 }
                 
-                if(worksheet.Cells[row, 2].Value != null && worksheet.Cells[row, 2].Value.ToString().Length < 50)
+                if(worksheet.Cells[row, 2].Value != null && worksheet.Cells[row, 2].Value.ToString().Length < 100)
                 {
                     prod.ItemDesc = worksheet.Cells[row, 2].Value.ToString();
                 }

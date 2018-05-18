@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.CancelRead = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.save_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -76,7 +77,7 @@
             // 
             // CancelRead
             // 
-            this.CancelRead.Location = new System.Drawing.Point(844, 548);
+            this.CancelRead.Location = new System.Drawing.Point(649, 548);
             this.CancelRead.Name = "CancelRead";
             this.CancelRead.Size = new System.Drawing.Size(165, 51);
             this.CancelRead.TabIndex = 5;
@@ -93,11 +94,22 @@
             this.listBox1.Size = new System.Drawing.Size(960, 329);
             this.listBox1.TabIndex = 6;
             // 
+            // save_button
+            // 
+            this.save_button.Location = new System.Drawing.Point(839, 548);
+            this.save_button.Name = "save_button";
+            this.save_button.Size = new System.Drawing.Size(165, 51);
+            this.save_button.TabIndex = 7;
+            this.save_button.Text = "Save";
+            this.save_button.UseVisualStyleBackColor = true;
+            this.save_button.Click += new System.EventHandler(this.save_button_Click);
+            // 
             // ReadProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 631);
+            this.Controls.Add(this.save_button);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.CancelRead);
             this.Controls.Add(this.label2);
@@ -119,5 +131,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button CancelRead;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button save_button;
     }
 }
