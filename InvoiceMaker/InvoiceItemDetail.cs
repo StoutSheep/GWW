@@ -24,7 +24,7 @@ namespace InvoiceMaker
         public String InvoiceItemNote { get; set; }
         public Int32 Backorder { get; set; }
         public String BackorderNote { get; set; }
-        public int BackorderGrabCarton { get; set; }
+        public float BackorderGrabCarton { get; set; }
 
     }
 }

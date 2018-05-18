@@ -377,17 +377,17 @@ namespace InvoiceMaker
                 {
                     invoiceItemDetails.Add(new InvoiceItemDetail());
                     invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
-                    invoiceItemDetails[i].QTY = invoice.Items[i].Quantity;
+                    invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
                     invoiceItemDetails[i].GrabCarton = 0.0f;
-                    invoiceItemDetails[i].ItemNo = invoice.Items[i].ItemNo;
-                    invoiceItemDetails[i].Description = invoice.Items[i].ItemDesc;
-                    invoiceItemDetails[i].CartonTotal = -1;
-                    invoiceItemDetails[i].InvoiceItemSellPrice = invoice.Items[i].SellPrice;
-                    invoiceItemDetails[i].InvoiceItemAmount = invoice.Items[i].Quantity * invoice.Items[i].SellPrice;
-                    invoiceItemDetails[i].InvoiceItemNote = invoice.Items[i].SpecialNotes;
+                    invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
+                    invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                    invoiceItemDetails[i].CartonTotal = 0;
+                    invoiceItemDetails[i].InvoiceItemSellPrice = printInvoice.Items[i].SellPrice;
+                    invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
+                    invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
 
                     invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
-                    invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].BackorderGrabCarton = 0.0f;
                     invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
                 }
 
@@ -406,6 +406,16 @@ namespace InvoiceMaker
         {
             String backordernotes = this.Controls["backorderInvoiceNotes"].Text;
 
+            float freight = 0;
+            if (this.Controls["freight"].Text.Length == 0)
+            {
+                freight = 0;
+            }
+            else
+            {
+                freight = Single.Parse(this.Controls["freight"].Text);
+            }
+
             Invoice printInvoice = new Invoice(invoice.InvoiceID);
             List<InvoiceItemDetail> invoiceItemDetails;
             invoiceItemDetails = new List<InvoiceItemDetail>();
@@ -414,20 +424,25 @@ namespace InvoiceMaker
             {
                 invoiceItemDetails.Add(new InvoiceItemDetail());
                 invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
-                invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                // Quantity not updated in DB; Subtraction required
+                int SubQuantity = printInvoice.Items[i].Quantity - printInvoice.Items[i].BackOrder;
+
+                invoiceItemDetails[i].QTY = SubQuantity;
                 invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
                 invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
                 invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
                 invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
                 invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
                 invoiceItemDetails[i].InvoiceItemSellPrice = printInvoice.Items[i].SellPrice;
-                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
+                invoiceItemDetails[i].InvoiceItemAmount = SubQuantity * printInvoice.Items[i].SellPrice;
                 invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
 
                 invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
                 invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
-                invoiceItemDetails[i].BackorderNote = backordernotes;
+                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
             }
+
+            printInvoice.freight = freight;
 
             Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
             Form2.ShowDialog();
