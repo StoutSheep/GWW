@@ -39,16 +39,15 @@ namespace InvoiceMaker
             Directory.CreateDirectory(Path.GetDirectoryName(ExcelFileName));
             Directory.CreateDirectory(Path.GetDirectoryName(PDFFileName));
 
-            //var invoiceDataSource = new ReportDataSource("InvoiceData", _invoice);
             //Init data source
             InvoiceItemDetailBindingSource.DataSource = _list;
 
             String address = _invoice.CustomerAddress;
             String[] words = address.Split(',');
 
-            String customerStreet = words[0];
-            String customerProvince = words[1];
-            String customerPostal = words[2];
+            String customerStreet = words[0].TrimStart();
+            String customerProvince = words[1].TrimStart();
+            String customerPostal = words[2].TrimStart();
 
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(_invoice.customer.Province);
 
@@ -106,13 +105,7 @@ namespace InvoiceMaker
                 fs.Write(mybytes, 0, mybytes.Length);
             }
             
-            
-
         }
 
-        private void reportViewer1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
