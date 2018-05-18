@@ -557,7 +557,7 @@ namespace InvoiceMaker
                 backorder.AccessibleName = "" + i;
                 if (invoiceContentsList[i].Backorder != 0)
                 {
-                    backorder.Text = invoiceContentsList[i].Backorder.ToString();
+                    backorder.Text = (invoiceContentsList[i].Quantity - invoiceContentsList[i].Backorder).ToString();
                 }
                 backorder.KeyPress += textBoxOnlyNumb_KeyPress;
                 backorder.TextChanged += Backorder_TextChanged;
