@@ -43,7 +43,7 @@
         </Field>
         <Field Name="InvoiceID">
           <DataField>InvoiceID</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="InvoiceItemAmount">
           <DataField>InvoiceItemAmount</DataField>
@@ -56,6 +56,10 @@
         <Field Name="InvoiceItemNote">
           <DataField>InvoiceItemNote</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvoiceItemSellPrice">
+          <DataField>InvoiceItemSellPrice</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
         </Field>
         <Field Name="ItemNo">
           <DataField>ItemNo</DataField>
@@ -593,7 +597,7 @@
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=Parameters!pFreight.Value &gt; 0</Hidden>
+                            <Hidden>=IIF(Parameters!pFreight.Value="0.00",True,False)</Hidden>
                           </Visibility>
                         </TablixMember>
                       </TablixMembers>
@@ -775,7 +779,7 @@
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Left</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -855,7 +859,7 @@
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Left</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1016,7 +1020,7 @@
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Left</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1129,7 +1133,7 @@
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Center</TextAlign>
+                                    <TextAlign>Left</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1255,10 +1259,10 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!InvoiceItemCost.Value</Value>
+                                      <Value>=Fields!InvoiceItemSellPrice.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
-                                        <Format>0.00;(0.00)</Format>
+                                        <Format>0.00</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
@@ -1323,6 +1327,13 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
+                                      <Value xml:space="preserve"> </Value>
+                                      <Style>
+                                        <FontWeight>Normal</FontWeight>
+                                        <Color>#333333</Color>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
                                       <Value>=Fields!InvoiceItemNote.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
@@ -1331,7 +1342,7 @@
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Left</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1381,7 +1392,16 @@
                     </TablixMember>
                   </TablixMembers>
                 </TablixRowHierarchy>
+                <RepeatColumnHeaders>true</RepeatColumnHeaders>
                 <DataSetName>InvoiceData</DataSetName>
+                <SortExpressions>
+                  <SortExpression>
+                    <Value>=Fields!Location.Value</Value>
+                  </SortExpression>
+                  <SortExpression>
+                    <Value>=Fields!ItemNo.Value</Value>
+                  </SortExpression>
+                </SortExpressions>
                 <Top>0.07015in</Top>
                 <Left>0.025in</Left>
                 <Height>0.5in</Height>
@@ -1442,332 +1462,6 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox33">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox4</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox35">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Right</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox3</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox36">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox5</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox37">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox7</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox38">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox9</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox39">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Right</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox11</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox40">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox13</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox48">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>#666666</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox47</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BottomBorder>
-                                  <Color>LightGrey</Color>
-                                  <Style>Solid</Style>
-                                  <Width>1pt</Width>
-                                </BottomBorder>
-                                <BackgroundColor>White</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                      </TablixCells>
-                    </TablixRow>
-                    <TablixRow>
-                      <Height>0.25in</Height>
-                      <TablixCells>
-                        <TablixCell>
-                          <CellContents>
                             <Textbox Name="Backorder2">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
@@ -1778,6 +1472,7 @@
                                       <Value>=Fields!Backorder.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
+                                        <Format>0</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
@@ -1976,9 +1671,10 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!InvoiceItemCost.Value</Value>
+                                      <Value>=Fields!InvoiceItemSellPrice.Value</Value>
                                       <Style>
                                         <FontWeight>Normal</FontWeight>
+                                        <Format>0.00</Format>
                                         <Color>#333333</Color>
                                       </Style>
                                     </TextRun>
@@ -2055,9 +1751,6 @@
                 <TablixRowHierarchy>
                   <TablixMembers>
                     <TablixMember>
-                      <KeepWithGroup>After</KeepWithGroup>
-                    </TablixMember>
-                    <TablixMember>
                       <Group Name="Details2">
                         <Filters>
                           <Filter>
@@ -2078,11 +1771,17 @@
                     <Value>=Fields!Backorder.Value</Value>
                     <Direction>Descending</Direction>
                   </SortExpression>
+                  <SortExpression>
+                    <Value>=Fields!ItemNo.Value</Value>
+                  </SortExpression>
                 </SortExpressions>
                 <Top>0.36871in</Top>
                 <Left>0.1532in</Left>
-                <Height>0.5in</Height>
+                <Height>0.25in</Height>
                 <Width>5.96956in</Width>
+                <Visibility>
+                  <Hidden>=IIF(Sum(Fields!Backorder.Value, "InvoiceData") &gt; 0.00,True,False)</Hidden>
+                </Visibility>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -2130,7 +1829,7 @@
             <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
             <Top>2.49185in</Top>
             <Left>0.07637in</Left>
-            <Height>0.89289in</Height>
+            <Height>0.63248in</Height>
             <Width>6.80319in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -2140,13 +1839,13 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>3.45437in</Height>
+        <Height>3.19395in</Height>
         <Style />
       </Body>
       <Width>7in</Width>
       <Page>
         <PageHeader>
-          <Height>2.95519in</Height>
+          <Height>2.78852in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2365,7 +2064,7 @@
                     </Paragraph>
                   </Paragraphs>
                   <Top>2.42327in</Top>
-                  <Height>0.36011in</Height>
+                  <Height>0.25in</Height>
                   <Width>6.80205in</Width>
                   <ZIndex>6</ZIndex>
                   <Style>
@@ -2530,10 +2229,6 @@
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
                 <Textbox Name="pStoreName">
@@ -2607,6 +2302,10 @@
                       <TextRuns>
                         <TextRun>
                           <Value>=Parameters!pStoreProvince.Value</Value>
+                          <Style />
+                        </TextRun>
+                        <TextRun>
+                          <Value>, </Value>
                           <Style />
                         </TextRun>
                         <TextRun>
@@ -2898,17 +2597,13 @@
                     <Border>
                       <Style>None</Style>
                     </Border>
-                    <PaddingLeft>2pt</PaddingLeft>
-                    <PaddingRight>2pt</PaddingRight>
-                    <PaddingTop>2pt</PaddingTop>
-                    <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
               </ReportItems>
               <KeepTogether>true</KeepTogether>
               <Top>0.06209in</Top>
               <Left>0.07637in</Left>
-              <Height>2.84694in</Height>
+              <Height>2.68028in</Height>
               <Width>6.8367in</Width>
               <Style>
                 <Border>

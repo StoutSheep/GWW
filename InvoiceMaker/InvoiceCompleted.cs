@@ -318,16 +318,18 @@ namespace InvoiceMaker
             for (int i = 0; i < printInvoice.Items.Count; i++)
             {
                 invoiceItemDetails.Add(new InvoiceItemDetail());
-                invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
-                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
-                invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
                 invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
                 invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
                 invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
                 invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
-                invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].Cost;
-                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].Cost;
+                invoiceItemDetails[i].InvoiceItemSellPrice = printInvoice.Items[i].SellPrice;
+                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
                 invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+
+                invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
+                invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
             }
 
             Form Form2 = new PrintInvoiceProgress(invoice, invoiceItemDetails);

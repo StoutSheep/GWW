@@ -299,6 +299,12 @@ namespace InvoiceMaker
             okButton.Click += OkButton_Click;
             this.Controls.Add(okButton);
 
+            Button printButton = new Button();
+            printButton.Location = new Point(665, 620);
+            printButton.Size = new Size(50, 25);
+            printButton.Text = "Print";
+            printButton.Click += PrintButton_Click;
+            this.Controls.Add(printButton);
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -346,7 +352,8 @@ namespace InvoiceMaker
                 }
                 InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
                 InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
-
+                InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
+                
                 Invoice printInvoice = new Invoice(invoice.InvoiceID);
                 List<InvoiceItemDetail> invoiceItemDetails;
                 invoiceItemDetails = new List<InvoiceItemDetail>();
@@ -354,18 +361,17 @@ namespace InvoiceMaker
                 for (int i = 0; i < printInvoice.Items.Count; i++)
                 {
                     invoiceItemDetails.Add(new InvoiceItemDetail());
-                    invoiceItemDetails[i].Backorder = printInvoice.Items[i].Quantity - printInvoice.Items[i].BackOrder;
-                    invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
-                    invoiceItemDetails[i].BackorderGrabCarton = invoiceItemDetails[i].Backorder / printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
                     invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
-                    invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
                     invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
-                    invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
                     invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
-                    invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
-                    invoiceItemDetails[i].InvoiceItemCost = printInvoice.Items[i].SellPrice;
+                    invoiceItemDetails[i].InvoiceItemSellPrice = printInvoice.Items[i].SellPrice;
                     invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
                     invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+
+                    invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
+                    invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
+                    invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
                 }
 
                 Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
@@ -377,6 +383,35 @@ namespace InvoiceMaker
             {
                 // If 'No', do something here.
             }
+        }
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            Invoice printInvoice = new Invoice(invoice.InvoiceID);
+            List<InvoiceItemDetail> invoiceItemDetails;
+            invoiceItemDetails = new List<InvoiceItemDetail>();
+
+            for (int i = 0; i < printInvoice.Items.Count; i++)
+            {
+                invoiceItemDetails.Add(new InvoiceItemDetail());
+                invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
+                invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
+                invoiceItemDetails[i].Location = printInvoice.Items[i].Location;
+                invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                invoiceItemDetails[i].CartonTotal = printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].InvoiceItemSellPrice = printInvoice.Items[i].SellPrice;
+                invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
+                invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
+
+                invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
+                invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
+                invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
+            }
+
+            Form Form2 = new PrintInvoiceProgress(invoice, invoiceItemDetails);
+            Form2.ShowDialog();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
