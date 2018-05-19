@@ -70,12 +70,19 @@ namespace InvoiceMaker
 
         private void save_button_Click(object sender, EventArgs e)
         {
-            String logfile = textBox1.Text.Replace(".xls", "Log.txt");
-            using (StreamWriter fs = new StreamWriter(logfile))
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.DefaultExt = "txt";
+            saveDialog.Filter = "txt files (*.txt)| *.txt";
+            saveDialog.FileName = Path.GetFileNameWithoutExtension(textBox1.Text) + "_Log.txt";
+            if (saveDialog.ShowDialog() == DialogResult.OK)
             {
-                foreach(String str in listBox1.Items)
+                String logfile = saveDialog.FileName;
+                using (StreamWriter fs = new StreamWriter(logfile))
                 {
-                    fs.WriteLine(str + '\n');
+                    foreach (String str in listBox1.Items)
+                    {
+                        fs.WriteLine(str + '\n');
+                    }
                 }
             }
         }
