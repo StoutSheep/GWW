@@ -346,6 +346,7 @@ namespace InvoiceMaker
                 }
                 InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, invoiceNumber, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 3);
                 InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
+                InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
 
                 Invoice printInvoice = new Invoice(invoice.InvoiceID);
                 List<InvoiceItemDetail> invoiceItemDetails;
