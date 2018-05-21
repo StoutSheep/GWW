@@ -18,7 +18,6 @@ namespace InvoiceMaker
         int i = 0; //# of current items
         bool PST = false; //pst of customer
         int customerID;
-        Invoice invoice;
         Customer customer;
         List<InvoiceItemDetail> invoiceItemDetails { get; set; }
 
@@ -38,7 +37,7 @@ namespace InvoiceMaker
                 PST = true;
             }
 
-            panel1.Location = new Point(30, 165);
+            panel1.Location = new Point(30, 145);
             panel1.Size = new Size(800, 330);
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.AutoScroll = true;
@@ -166,7 +165,7 @@ namespace InvoiceMaker
         private void AddLabels(int customerID)
         {
             int x = 30;
-            int y = 150;
+            int y = 130;
 
             Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
 
@@ -230,12 +229,12 @@ namespace InvoiceMaker
 
             Label purchaseOrderLabel = new Label();
             purchaseOrderLabel.Text = "PO#:";
-            purchaseOrderLabel.Location = new Point(30, 85);
+            purchaseOrderLabel.Location = new Point(500, 40);
             purchaseOrderLabel.AutoSize = true;
             this.Controls.Add(purchaseOrderLabel);
 
             TextBox purchaseOrder = new TextBox();
-            purchaseOrder.Location = new Point(65, 85);
+            purchaseOrder.Location = new Point(535, 40);
             purchaseOrder.Size = new Size(100, 25);
             purchaseOrder.Name = "purchaseOrder";
             purchaseOrder.AccessibleName = "purchaseOrder";
@@ -244,12 +243,12 @@ namespace InvoiceMaker
 
             Label invoiceSpecialNotesLabel = new Label();
             invoiceSpecialNotesLabel.Text = "Special Notes:";
-            invoiceSpecialNotesLabel.Location = new Point(30, 110);
+            invoiceSpecialNotesLabel.Location = new Point(30, 85);
             invoiceSpecialNotesLabel.AutoSize = true;
             this.Controls.Add(invoiceSpecialNotesLabel);
 
             TextBox invoiceSpecialNotes = new TextBox();
-            invoiceSpecialNotes.Location = new Point(110, 110);
+            invoiceSpecialNotes.Location = new Point(110, 85);
             invoiceSpecialNotes.Size = new Size(500, 25);
             invoiceSpecialNotes.Name = "invoiceSpecialNotes";
             invoiceSpecialNotes.AccessibleName = "invoiceSpecialNotes";

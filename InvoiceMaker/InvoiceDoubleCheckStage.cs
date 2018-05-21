@@ -144,43 +144,12 @@ namespace InvoiceMaker
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
 
-            Label paymentLabel = new Label();
-            paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
-            paymentLabel.Location = new Point(500, 45);
-            paymentLabel.AutoSize = true;
-            this.Controls.Add(paymentLabel);
-
-            Label shippingInstructionsLabel = new Label();
-            shippingInstructionsLabel.Text = "Shipping Instructions: " + cust.ShippingInstructions;
-            shippingInstructionsLabel.Location = new Point(500, 60);
-            shippingInstructionsLabel.AutoSize = true;
-            this.Controls.Add(shippingInstructionsLabel);
 
             Label invoiceIDLabel = new Label();
             invoiceIDLabel.Text = "Local Invoice ID: " + invoice.InvoiceID;
             invoiceIDLabel.Location = new Point(500, 10);
             invoiceIDLabel.AutoSize = true;
             this.Controls.Add(invoiceIDLabel);
-
-            Label purchaseOrderLabel = new Label();
-            purchaseOrderLabel.Text = "PO#:" + invoice.PurchaseOrder;
-            purchaseOrderLabel.Location = new Point(30, 85);
-            purchaseOrderLabel.AutoSize = true;
-            this.Controls.Add(purchaseOrderLabel);
-
-            Label invoiceSpecialNotesLabel = new Label();
-            invoiceSpecialNotesLabel.Text = "Special Notes: ";
-            invoiceSpecialNotesLabel.Location = new Point(30, 100);
-            invoiceSpecialNotesLabel.AutoSize = true;
-            this.Controls.Add(invoiceSpecialNotesLabel);
-
-            TextBox invoiceSpecialNotes = new TextBox();
-            invoiceSpecialNotes.Location = new Point(110, 100);
-            invoiceSpecialNotes.Size = new Size(500, 25);
-            invoiceSpecialNotes.Text = invoice.SpecialNotes;
-            invoiceSpecialNotes.Name = "invoiceSpecialNotes";
-            invoiceSpecialNotes.AccessibleName = "invoiceSpecialNotes";
-            this.Controls.Add(invoiceSpecialNotes);
 
             Label invoiceNumberLabel = new Label();
             invoiceNumberLabel.Text = "Invoice #: ";
@@ -196,14 +165,48 @@ namespace InvoiceMaker
             invoiceNumber.KeyPress += textBoxOnlyNumb_KeyPress;
             this.Controls.Add(invoiceNumber);
 
+            Label paymentLabel = new Label();
+            paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
+            paymentLabel.Location = new Point(500, 45);
+            paymentLabel.AutoSize = true;
+            this.Controls.Add(paymentLabel);
+
+            Label shippingInstructionsLabel = new Label();
+            shippingInstructionsLabel.Text = "Shipping Instructions: " + cust.ShippingInstructions;
+            shippingInstructionsLabel.Location = new Point(500, 60);
+            shippingInstructionsLabel.AutoSize = true;
+            this.Controls.Add(shippingInstructionsLabel);
+
+
+            Label purchaseOrderLabel = new Label();
+            purchaseOrderLabel.Text = "PO#:" + invoice.PurchaseOrder;
+            purchaseOrderLabel.Location = new Point(500, 75);
+            purchaseOrderLabel.AutoSize = true;
+            this.Controls.Add(purchaseOrderLabel);
+
+            Label invoiceSpecialNotesLabel = new Label();
+            invoiceSpecialNotesLabel.Text = "Special Notes: ";
+            invoiceSpecialNotesLabel.Location = new Point(30, 90);
+            invoiceSpecialNotesLabel.AutoSize = true;
+            this.Controls.Add(invoiceSpecialNotesLabel);
+
+            TextBox invoiceSpecialNotes = new TextBox();
+            invoiceSpecialNotes.Location = new Point(110, 90);
+            invoiceSpecialNotes.Size = new Size(500, 25);
+            invoiceSpecialNotes.Text = invoice.SpecialNotes;
+            invoiceSpecialNotes.Name = "invoiceSpecialNotes";
+            invoiceSpecialNotes.AccessibleName = "invoiceSpecialNotes";
+            this.Controls.Add(invoiceSpecialNotes);
+
+
             Label backorderInvoiceNotesLabel = new Label();
             backorderInvoiceNotesLabel.Text = "Backorder Invoice Notes: ";
-            backorderInvoiceNotesLabel.Location = new Point(30, 125);
+            backorderInvoiceNotesLabel.Location = new Point(30, 115);
             backorderInvoiceNotesLabel.AutoSize = true;
             this.Controls.Add(backorderInvoiceNotesLabel);
 
             TextBox backorderInvoiceNotes = new TextBox();
-            backorderInvoiceNotes.Location = new Point(165, 125);
+            backorderInvoiceNotes.Location = new Point(165, 115);
             backorderInvoiceNotes.Size = new Size(700, 25);
             backorderInvoiceNotes.Text = "ITEMS ON BACKORDER " + cust.StoreName + ". PO#: " + invoice.PurchaseOrder + " ";
             backorderInvoiceNotes.Name = "backorderInvoiceNotes";

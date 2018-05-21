@@ -12,25 +12,21 @@ namespace InvoiceMaker
 {
     static class Program
     {
-        static String pswd = "password";
        
         [STAThread]
         static void Main()
         {
-            InitializeDatabase();
-            TestFunctions();
-
+            //DropTables();
+            CreateTables();
+            //SeedData();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            List<Product> asd = ProductDatabase.SearchProductsByItemNo("123");
             Application.Run(new Form1());
         }
 
-        static void InitializeDatabase()
+        static void DropTables()
         {
-            string connStr = "server=localhost;user=root;database=GWW;port=3306;password=" + pswd;
-            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
             try
             {
                 conn.Open();
@@ -57,6 +53,25 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+        }
+
+
+
+
+        static void CreateTables()
+        {
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
 
                 sql = "CREATE TABLE IF NOT EXISTS ProvinceTax (" +
                   "Province varchar(3) NOT NULL," +
@@ -139,10 +154,6 @@ namespace InvoiceMaker
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-
-                SeedData();
-
-
             }
             catch (Exception ex)
             {
@@ -188,6 +199,7 @@ namespace InvoiceMaker
             int custID;
             custID = CustomerDatabase.GetStoreID("Splash Toys", "1201 Main st, Vancouver, BC  V6G9K7");
             InvoiceDatabase.AddInvoice(custID, "2312343", "", "", 0, 0, 0, 0, 1);
+            InvoiceDatabase.UpdateBackorderSpecialNotes(custID, "monday only not friday");
             InvoiceContentsDatabase.AddInvoiceContent(1, "12121", 10, "2 Red");
             InvoiceContentsDatabase.AddInvoiceContent(1, "24235", 8, "");
             InvoiceContentsDatabase.AddInvoiceContent(1, "89675", 12, "1 Pink");
@@ -207,13 +219,6 @@ namespace InvoiceMaker
 
         static void TestFunctions()
         {
-           
-            
-
-           
-
-            
-
 
         }
 

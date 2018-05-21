@@ -85,6 +85,9 @@
       <DependentUpon>AddProvinceTaxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerDatabase.cs" />
+    <Compile Include="gwwDataSet.cs">
+      <DependentUpon>gwwDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="LoginInfo.cs" />
     <Compile Include="PrintInvoiceProgress.cs">
       <SubType>Form</SubType>
