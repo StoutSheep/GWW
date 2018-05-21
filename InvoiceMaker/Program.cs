@@ -105,10 +105,10 @@ namespace InvoiceMaker
 
 
                 sql = "CREATE TABLE IF NOT EXISTS Products (" +
-                    "ItemNo varchar(10) NOT NULL," +
+                    "ItemNo varchar(20) NOT NULL," +
                     "ItemDesc varchar(100) NOT NULL," +
                     "PerCarton int NOT NULL," +
-                    "Location varchar(10) NOT NULL," +
+                    "Location varchar(20) NOT NULL," +
                     "Cost decimal(10,2) NOT NULL," +
                     "SellPrice decimal(10,2) NOT NULL," +
                     "UPC bigint," +

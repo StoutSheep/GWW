@@ -158,7 +158,11 @@ namespace InvoiceMaker
 
         private void productTextBox_TextChanged(object sender, EventArgs e)
         {
-            RefreshView();
+            TextBox s = (TextBox)sender;
+            if (s.Text.Length >= 3)
+            {
+                RefreshView();
+            }
         }
         
 
