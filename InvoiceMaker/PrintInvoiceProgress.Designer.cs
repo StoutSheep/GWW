@@ -65,7 +65,7 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "PrintInvoiceProgress";
             this.Text = "Invoice In Progress";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.Load += new System.EventHandler(this.PrintInvoiceProgress_Load);
             ((System.ComponentModel.ISupportInitialize)(this.InvoiceItemDetailBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerBindingSource)).EndInit();
             this.ResumeLayout(false);

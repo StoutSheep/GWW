@@ -378,15 +378,18 @@ namespace InvoiceMaker
                         }
                     }
 
-                    // Generate Report
-
+                    // Query DB for updated results.
                     Invoice printInvoice = new Invoice(invoiceID);
+
+                    // Define & populate Object to define Table columns for datasource in .rdlc Report
                     List<InvoiceItemDetail> invoiceItemDetails;
                     invoiceItemDetails = new List<InvoiceItemDetail>();
 
                     for (int i = 0; i < printInvoice.Items.Count; i++)
                     {
                         invoiceItemDetails.Add(new InvoiceItemDetail());
+
+                        // Invoice Order Data
                         invoiceItemDetails[i].InvoiceID = invoiceID;
                         invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
                         invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
@@ -398,15 +401,16 @@ namespace InvoiceMaker
                         invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
                         invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
 
+                        // Backorder Data
                         invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
                         invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
                         invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
                     }
 
-                    Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
-                    Form2.ShowDialog();
-                    this.Close();
+                    Form PrintForm = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+                    PrintForm.ShowDialog();
 
+                    this.Close();
                 }
                 else
                 {

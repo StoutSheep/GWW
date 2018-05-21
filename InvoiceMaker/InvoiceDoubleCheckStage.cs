@@ -47,8 +47,6 @@ namespace InvoiceMaker
             AddTotalBoxes(customerID);
             AddItemBoxes();
 
-
-
         }
 
         private void Qty_KeyPress(object sender, KeyPressEventArgs e)
@@ -145,8 +143,6 @@ namespace InvoiceMaker
             phoneLabel.Location = new Point(emailLabel.Location.X + emailLabel.Size.Width + 20, 70);
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
-
-
 
             Label paymentLabel = new Label();
             paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
@@ -358,42 +354,50 @@ namespace InvoiceMaker
 
                 for (int i = 0; i < invoice.Items.Count; i++)
                 {
-                    backordertotal =+ invoice.Items[i].BackOrder;
-                }            
+                    backordertotal = +invoice.Items[i].BackOrder;
+                }
 
-                if(backordertotal > 0)
+                if (backordertotal > 0)
                 {
                     InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
-                } else
+                }
+                else
                 {
                     InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, "");
                 }
 
-                
+                // Query DB for updated results.
                 Invoice printInvoice = new Invoice(invoice.InvoiceID);
+
+                // Define & populate Object to define Table columns for datasource in .rdlc Report
                 List<InvoiceItemDetail> invoiceItemDetails;
                 invoiceItemDetails = new List<InvoiceItemDetail>();
 
                 for (int i = 0; i < invoice.Items.Count; i++)
                 {
                     invoiceItemDetails.Add(new InvoiceItemDetail());
+
+                    // Invoice Order Data
                     invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
                     invoiceItemDetails[i].QTY = printInvoice.Items[i].Quantity;
+                    // Hide GrabCarton in Final Invoice Report
                     invoiceItemDetails[i].GrabCarton = 0.0f;
                     invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
                     invoiceItemDetails[i].Description = printInvoice.Items[i].ItemDesc;
+                    // Hide CartonTotal in Final Invoice Report
                     invoiceItemDetails[i].CartonTotal = 0;
                     invoiceItemDetails[i].InvoiceItemSellPrice = printInvoice.Items[i].SellPrice;
                     invoiceItemDetails[i].InvoiceItemAmount = printInvoice.Items[i].Quantity * printInvoice.Items[i].SellPrice;
                     invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
 
+                    // Backorder Data
                     invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
                     invoiceItemDetails[i].BackorderGrabCarton = 0.0f;
                     invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
                 }
 
-                Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
-                Form2.ShowDialog();
+                Form PrintForm = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+                PrintForm.ShowDialog();
 
                 this.Close();
             }
@@ -433,17 +437,22 @@ namespace InvoiceMaker
                 freight = Single.Parse(this.Controls["freight"].Text);
             }
 
+            // Query DB for Invoice
             Invoice printInvoice = new Invoice(invoice.InvoiceID);
+
+            // Define & populate Object to define Table columns for datasource in .rdlc Report
             List<InvoiceItemDetail> invoiceItemDetails;
             invoiceItemDetails = new List<InvoiceItemDetail>();
 
             for (int i = 0; i < printInvoice.Items.Count; i++)
             {
                 invoiceItemDetails.Add(new InvoiceItemDetail());
-                invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
+
                 // Quantity not updated in DB; Subtraction required
                 int SubQuantity = printInvoice.Items[i].Quantity - printInvoice.Items[i].BackOrder;
 
+                // Invoice Data
+                invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
                 invoiceItemDetails[i].QTY = SubQuantity;
                 invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
                 invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
@@ -454,6 +463,7 @@ namespace InvoiceMaker
                 invoiceItemDetails[i].InvoiceItemAmount = SubQuantity * printInvoice.Items[i].SellPrice;
                 invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
 
+                // Backorder Data
                 invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
                 invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
                 invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
@@ -461,8 +471,8 @@ namespace InvoiceMaker
             printInvoice.BackorderNotes = backordernotes;
             printInvoice.freight = freight;
 
-            Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
-            Form2.ShowDialog();
+            Form PrintForm = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+            PrintForm.ShowDialog();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
