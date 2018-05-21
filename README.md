@@ -1,10 +1,8 @@
 # GWW
 
-A BCIT Student project for a small wholesale buisness.
+A BCIT Student project for a small wholesale buisness to generate sales Invoices.
 
-This codebase contains the source C# code for a Windows 10 application utilizing C# WinForms.
-This program allows users to Create, Update, Read and Delete (CRUD) invoices in a MySQL database.  
-A employee would use the program for the following activities:
+This codebase contains the source C# code for a Windows 10 application utilizing C# WinForms. This program allows users to Create, Update, Read and Delete (CRUD) invoices in a MySQL database. A employee would use the program for the following activities:
 
 * Process and save customer orders
 * Checking an order before shipment
@@ -55,7 +53,7 @@ Utilizing Microsoft Visual Studio, You must download and configure the following
 
 Utilizing Microsoft Visual Studio:
 
-####Compile the Code:
+### Compile the Code:
 ```
 1. Build > Configuration Manager
 2. Select Release Option
