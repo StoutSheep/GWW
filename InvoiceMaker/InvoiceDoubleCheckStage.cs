@@ -357,7 +357,7 @@ namespace InvoiceMaker
 
                 for (int i = 0; i < invoice.Items.Count; i++)
                 {
-                    backordertotal = +invoice.Items[i].BackOrder;
+                    backordertotal += invoice.Items[i].BackOrder;
                 }
 
                 if (backordertotal > 0)
@@ -640,7 +640,7 @@ namespace InvoiceMaker
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(c.Province);
             float gstRate = (float)provinceTax.gst / 100;
 
-            this.Controls["gst"].Text = (Single.Parse(this.Controls["subtotalWithFreight"].Text) * gstRate).ToString("0.00");
+            this.Controls["gst"].Text = (Single.Parse(this.Controls["subTotalAmount"].Text) * gstRate).ToString("0.00");
             this.Controls["invoiceTotal"].Text = (Single.Parse(this.Controls["subtotalWithFreight"].Text) * (1 + gstRate)).ToString("0.00");
             if (PST)
             {
