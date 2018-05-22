@@ -69,6 +69,32 @@ namespace InvoiceMaker
              
         }
 
+        internal static void DeleteProvinceTax(String provinceName)
+        {
+            MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd;
+                string sql;
+
+                sql = "DELETE FROM ProvinceTax" +
+                  " WHERE Province = '" + provinceName + "'" +
+                  ";";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+
+
+        }
+
         internal static List<ProvinceTax> GetAllProvinces()
         {
 

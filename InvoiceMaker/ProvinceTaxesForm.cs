@@ -49,15 +49,33 @@ namespace InvoiceMaker
             deleteButton.Location = new Point(190, 410);
             deleteButton.Size = new Size(70, 30);
             deleteButton.Text = "DELETE";
+            deleteButton.Click += DeleteButton_Click;
             this.Controls.Add(deleteButton);
 
-            List<ProvinceTax> provinceList = ProvinceTaxDatabase.GetAllProvinces();
-            foreach(ProvinceTax p in provinceList)
+            RefreshView();
+
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            if (provinceTaxesList.SelectedItems.Count > 0)
             {
-                provinceTaxesList.Items.Add(new ListViewItem(new String[] { p.provinceTax, p.gst.ToString(), p.pst.ToString() }));
-
+                var confirmResult = MessageBox.Show("Are you sure you want to Delete these item(s)?",
+                                                 "Confirm Delete!!",
+                                                 MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    foreach (ListViewItem l in provinceTaxesList.SelectedItems)
+                    {
+                        ProvinceTaxDatabase.DeleteProvinceTax(l.SubItems[0].Text);
+                    }
+                    RefreshView();
+                }
+                else
+                {
+                    // If 'No', do something here.
+                }
             }
-
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -86,6 +104,20 @@ namespace InvoiceMaker
             addProvinceTaxForm.Size = new System.Drawing.Size(280, 200);
             addProvinceTaxForm.Show();
             this.Close();
+        }
+
+        private void RefreshView()
+        {
+            foreach (ListViewItem lvItem in provinceTaxesList.Items)
+            {
+                provinceTaxesList.Items.Remove(lvItem);
+            }
+            List<ProvinceTax> provinceList = ProvinceTaxDatabase.GetAllProvinces();
+            foreach (ProvinceTax p in provinceList)
+            {
+                provinceTaxesList.Items.Add(new ListViewItem(new String[] { p.provinceTax, p.gst.ToString(), p.pst.ToString() }));
+
+            }
         }
     }
 }
