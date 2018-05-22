@@ -168,35 +168,35 @@ namespace InvoiceMaker
             phoneLabel.AutoSize = true;
             this.Controls.Add(phoneLabel);
 
-            
+
+            Label invoiceIDLabel = new Label();
+            invoiceIDLabel.Text = "Local Invoice ID: " + invoice.InvoiceID;
+            invoiceIDLabel.Location = new Point(500, 10);
+            invoiceIDLabel.AutoSize = true;
+            this.Controls.Add(invoiceIDLabel);
 
             Label paymentLabel = new Label();
             paymentLabel.Text = "Payment Terms: " + cust.PaymentTerms;
-            paymentLabel.Location = new Point(500, 10);
+            paymentLabel.Location = new Point(500, 25);
             paymentLabel.AutoSize = true;
             this.Controls.Add(paymentLabel);
 
             Label shippingInstructionsLabel = new Label();
             shippingInstructionsLabel.Text = "Shipping Instructions: " + cust.ShippingInstructions;
-            shippingInstructionsLabel.Location = new Point(500, 25);
+            shippingInstructionsLabel.Location = new Point(500, 40);
             shippingInstructionsLabel.AutoSize = true;
             this.Controls.Add(shippingInstructionsLabel);
 
-            Label invoiceIDLabel = new Label();
-            invoiceIDLabel.Text = "Local Invoice ID: " + invoice.InvoiceID;
-            invoiceIDLabel.Location = new Point(500, 40);
-            invoiceIDLabel.AutoSize = true;
-            this.Controls.Add(invoiceIDLabel);
-
             Label purchaseOrderLabel = new Label();
             purchaseOrderLabel.Text = "PO#:" + invoice.PurchaseOrder;
-            purchaseOrderLabel.Location = new Point(30, 85);
+            purchaseOrderLabel.Location = new Point(500, 55);
             purchaseOrderLabel.AutoSize = true;
             this.Controls.Add(purchaseOrderLabel);
 
+
             Label invoiceSpecialNotesLabel = new Label();
             invoiceSpecialNotesLabel.Text = "Special Notes: " + invoice.SpecialNotes;
-            invoiceSpecialNotesLabel.Location = new Point(30, 100);
+            invoiceSpecialNotesLabel.Location = new Point(30, 85);
             invoiceSpecialNotesLabel.AutoSize = true;
             this.Controls.Add(invoiceSpecialNotesLabel);
 
@@ -320,8 +320,10 @@ namespace InvoiceMaker
                 }
                 InvoiceDatabase.EditInvoice(invoice.InvoiceID, cust.StoreID, invoice.PurchaseOrder, invoice.SpecialNotes, 0, Single.Parse(this.Controls["subTotalAmount"].Text), Single.Parse(this.Controls["gst"].Text), Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 2);
 
-
+                // Query DB for Invoice
                 Invoice printInvoice = new Invoice(invoice.InvoiceID);
+
+                // Define & populate Object to define Table columns for datasource in .rdlc Report
                 List<InvoiceItemDetail> invoiceItemDetails;
                 invoiceItemDetails = new List<InvoiceItemDetail>();
 
@@ -329,9 +331,11 @@ namespace InvoiceMaker
                 {
                     invoiceItemDetails.Add(new InvoiceItemDetail());
                     invoiceItemDetails[i].InvoiceID = invoice.InvoiceID;
+
                     // Quantity not updated in DB; Subtraction required
                     int SubQuantity = printInvoice.Items[i].Quantity - printInvoice.Items[i].BackOrder;
 
+                    // Invoice Data
                     invoiceItemDetails[i].QTY = SubQuantity;
                     invoiceItemDetails[i].GrabCarton = printInvoice.Items[i].Quantity / printInvoice.Items[i].PerCarton;
                     invoiceItemDetails[i].ItemNo = printInvoice.Items[i].ItemNo;
@@ -342,13 +346,14 @@ namespace InvoiceMaker
                     invoiceItemDetails[i].InvoiceItemAmount = SubQuantity * printInvoice.Items[i].SellPrice;
                     invoiceItemDetails[i].InvoiceItemNote = printInvoice.Items[i].SpecialNotes;
 
+                    // Backorder Data
                     invoiceItemDetails[i].Backorder = printInvoice.Items[i].BackOrder;
                     invoiceItemDetails[i].BackorderGrabCarton = printInvoice.Items[i].BackOrder / printInvoice.Items[i].PerCarton;
                     invoiceItemDetails[i].BackorderNote = printInvoice.Items[i].BackOrderSpecialNotes;
                 }
 
-                Form Form2 = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
-                Form2.ShowDialog();
+                Form PrintForm = new PrintInvoiceProgress(printInvoice, invoiceItemDetails);
+                PrintForm.ShowDialog();
 
                 this.Close();
             }

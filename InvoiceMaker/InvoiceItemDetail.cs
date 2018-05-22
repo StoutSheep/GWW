@@ -9,6 +9,7 @@ using Dapper;
 
 namespace InvoiceMaker
 {
+    // Defines and Holds column data for Report tables
     public class InvoiceItemDetail
     {
         public Int32 InvoiceID { get; set; }

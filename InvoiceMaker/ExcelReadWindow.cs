@@ -48,7 +48,7 @@ namespace InvoiceMaker
                 }
                 String errmsg = String.Empty;
                 
-                if(worksheet.Cells[row, 0].Value != null && worksheet.Cells[row, 0]. Value.ToString().Length < 10)
+                if(worksheet.Cells[row, 0].Value != null && worksheet.Cells[row, 0]. Value.ToString().Length < 20)
                 {
                     prod.ItemNo = worksheet.Cells[row, 0].Value.ToString();
                 }
@@ -57,7 +57,7 @@ namespace InvoiceMaker
                     errmsg += (worksheet.Cells[row, 0].Value != null ? "Item number too long: " + worksheet.Cells[row, 0].Value
                         : "No Item Number detected") + " / ";
                 }
-                if (worksheet.Cells[row, 1].Value != null && worksheet.Cells[row, 1].Value.ToString().Length < 10)
+                if (worksheet.Cells[row, 1].Value != null && worksheet.Cells[row, 1].Value.ToString().Length <20)
                 {
                     prod.Location = worksheet.Cells[row, 1].Value.ToString();
                 }

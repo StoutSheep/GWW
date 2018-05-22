@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "[ProjectName].[FolderName if Exist].[ReportName].rdlc";
             this.InvoiceItemDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CustomerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.InvoiceItemDetailBindingSource)).BeginInit();
@@ -65,7 +66,7 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "PrintInvoiceProgress";
             this.Text = "Invoice In Progress";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.Load += new System.EventHandler(this.PrintInvoiceProgress_Load);
             ((System.ComponentModel.ISupportInitialize)(this.InvoiceItemDetailBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerBindingSource)).EndInit();
             this.ResumeLayout(false);

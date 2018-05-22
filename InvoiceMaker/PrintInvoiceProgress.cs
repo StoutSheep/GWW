@@ -27,9 +27,10 @@ namespace InvoiceMaker
             _list = list;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void PrintInvoiceProgress_Load(object sender, EventArgs e)
         {
-            // Variables needed for ReportViewer Render method
+            // Creating File directory & save files
+
             Warning[] warnings;
             string[] streamids;
             string mimeType, encoding, extension;
@@ -39,7 +40,7 @@ namespace InvoiceMaker
             Directory.CreateDirectory(Path.GetDirectoryName(ExcelFileName));
             Directory.CreateDirectory(Path.GetDirectoryName(PDFFileName));
 
-            //Init data source
+            //Init data source for tables
             InvoiceItemDetailBindingSource.DataSource = _list;
 
             String address = _invoice.CustomerAddress;
@@ -51,7 +52,7 @@ namespace InvoiceMaker
 
             ProvinceTax provinceTax = ProvinceTaxDatabase.GetProvinceByName(_invoice.customer.Province);
 
-            //Set parameter for your report
+            // Create & Set report parameter data
             Microsoft.Reporting.WinForms.ReportParameter[] p = new Microsoft.Reporting.WinForms.ReportParameter[]
             {
                 new Microsoft.Reporting.WinForms.ReportParameter("pCompanyName",_invoice.CompanyName),
@@ -88,17 +89,18 @@ namespace InvoiceMaker
                 new Microsoft.Reporting.WinForms.ReportParameter("pFreight",_invoice.freight.ToString()),
             };
             this.reportViewer1.LocalReport.SetParameters(p);
-
             this.reportViewer1.RefreshReport();
 
+            // Create Excel
             FileStream newFile = new FileStream(ExcelFileName, FileMode.Create);
-
             string renderFormat = (ExcelFileName.EndsWith(".xlsx") ? "EXCELOPENXML" : "Excel");
             byte[] bytes = this.reportViewer1.LocalReport.Render(renderFormat, null, out mimeType, out encoding, out extension, out streamids, out warnings);
             newFile.Write(bytes, 0, bytes.Length);
             newFile.Close();
 
 
+
+            // Create PDF
             Byte[] mybytes = this.reportViewer1.LocalReport.Render("PDF");
             using (FileStream fs = File.Create(PDFFileName))
             {
@@ -106,6 +108,5 @@ namespace InvoiceMaker
             }
             
         }
-
     }
 }

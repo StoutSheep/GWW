@@ -10,7 +10,6 @@ namespace InvoiceMaker
 {
     static class InvoiceDatabase
     {
-
         internal static int AddInvoice(int storeID, String purchaseOrder, String specialNotes, String invoiceNo, float subTotal, float gst, float pst, float netTotal, int stage)
         {
             MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
@@ -62,8 +61,6 @@ namespace InvoiceMaker
             return 0;
         }
 
-
-
         internal static void EditInvoice(int invoiceID, int storeID, String purchaseOrder, String specialNotes, int invoiceNo, float subtotal, float gst, float pst, float netTotal, int stage)
         {
             MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
@@ -100,7 +97,6 @@ namespace InvoiceMaker
 
         }
 
-
         internal static void UpdateTotals(int invoiceID, float subtotal, float gst, float pst, float netTotal)
         {
             MySqlConnection conn = new MySqlConnection(LoginInfo.LoginCreds);
@@ -131,7 +127,6 @@ namespace InvoiceMaker
             
 
         }
-
 
         internal static void UpdateStage(int invoiceID, int stage)
         {
@@ -186,9 +181,7 @@ namespace InvoiceMaker
 
             conn.Close();
             
-
         }
-
 
         internal static void UpdateFreight(int invoiceID, float freight)
         {
@@ -214,9 +207,6 @@ namespace InvoiceMaker
             
 
         }
-
-
-
 
         internal static List<Invoice> SearchInvoicesByStage(int stage)
         {
@@ -250,8 +240,6 @@ namespace InvoiceMaker
             return invoices;
         }
 
-
-
         internal static List<Invoice> SearchInvoicesByInvoiceNo(String invoiceNo)
         {
 
@@ -284,8 +272,6 @@ namespace InvoiceMaker
 
             return invoices;
         }
-
-
 
         internal static void DeleteInvoice(int invoiceID)
         {
