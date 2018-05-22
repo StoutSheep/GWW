@@ -353,14 +353,18 @@ namespace InvoiceMaker
                 InvoiceDatabase.UpdateFreight(invoice.InvoiceID, freight);
                 InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
 
-                int backordertotal = 0;
+                bool hasBackorder = false;
 
                 for (int i = 0; i < invoice.Items.Count; i++)
                 {
-                    backordertotal += invoice.Items[i].BackOrder;
+                    if(invoice.Items[i].BackOrder > 0)
+                    {
+                        hasBackorder = true;
+                        break;
+                    }
                 }
 
-                if (backordertotal > 0)
+                if (hasBackorder)
                 {
                     InvoiceDatabase.UpdateBackorderSpecialNotes(invoice.InvoiceID, this.Controls["backorderInvoiceNotes"].Text);
                 }
@@ -412,16 +416,19 @@ namespace InvoiceMaker
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            int backordertotal = 0;
+            String backordernotes;
+            bool hasBackorder = false;
 
             for (int i = 0; i < invoice.Items.Count; i++)
             {
-                backordertotal = +invoice.Items[i].BackOrder;
+                if (invoice.Items[i].BackOrder > 0)
+                {
+                    hasBackorder = true;
+                    break;
+                }
             }
 
-            String backordernotes;
-
-            if (backordertotal > 0)
+            if (hasBackorder)
             {
                 backordernotes = this.Controls["backorderInvoiceNotes"].Text;
             }
@@ -442,6 +449,7 @@ namespace InvoiceMaker
 
             // Query DB for Invoice
             Invoice printInvoice = new Invoice(invoice.InvoiceID);
+            printInvoice.InvoiceID = invoice.InvoiceID;
 
             // Define & populate Object to define Table columns for datasource in .rdlc Report
             List<InvoiceItemDetail> invoiceItemDetails;

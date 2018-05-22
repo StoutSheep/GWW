@@ -62,6 +62,7 @@ namespace InvoiceMaker
                 new Microsoft.Reporting.WinForms.ReportParameter("pCompanyTollFree",_invoice.CompanyTollFree),
 
                 new Microsoft.Reporting.WinForms.ReportParameter("pInvoiceNumber",_invoice.InvoiceNo.ToString()),
+                new Microsoft.Reporting.WinForms.ReportParameter("pInvoiceID",_invoice.InvoiceID.ToString()),
 
                 new Microsoft.Reporting.WinForms.ReportParameter("pStoreName",_invoice.CustomerName),
                 new Microsoft.Reporting.WinForms.ReportParameter("pStoreContact",_invoice.CustomerContact),

@@ -388,6 +388,7 @@ namespace InvoiceMaker
 
                     // Query DB for updated results.
                     Invoice printInvoice = new Invoice(invoiceID);
+                    printInvoice.InvoiceNo = "0";
 
                     // Define & populate Object to define Table columns for datasource in .rdlc Report
                     List<InvoiceItemDetail> invoiceItemDetails;

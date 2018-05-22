@@ -105,7 +105,7 @@
                       <Width>2.356in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.69203in</Width>
+                      <Width>0.71418in</Width>
                     </TablixColumn>
                   </TablixColumns>
                   <TablixRows>
@@ -581,7 +581,7 @@
                 <Top>0.10955in</Top>
                 <Left>2.49904in</Left>
                 <Height>1.5in</Height>
-                <Width>3.04803in</Width>
+                <Width>3.07018in</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
@@ -616,16 +616,16 @@
                       <Width>0.70419in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.66044in</Width>
+                      <Width>0.63544in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.58274in</Width>
+                      <Width>1.67704in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.38613in</Width>
+                      <Width>0.36398in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.76253in</Width>
+                      <Width>0.73753in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>0.69203in</Width>
@@ -1343,7 +1343,7 @@
                 <Top>0.07015in</Top>
                 <Left>0.025in</Left>
                 <Height>0.5in</Height>
-                <Width>6.77705in</Width>
+                <Width>6.7992in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1768,7 +1768,7 @@
       <Width>7in</Width>
       <Page>
         <PageHeader>
-          <Height>2.78852in</Height>
+          <Height>2.41873in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1802,7 +1802,6 @@
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.08542in</Top>
                   <Left>5.00146in</Left>
                   <Height>0.25in</Height>
                   <Width>1.73957in</Width>
@@ -1838,7 +1837,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.63264in</Top>
+                  <Top>0.49167in</Top>
                   <Left>5.00146in</Left>
                   <Height>0.19618in</Height>
                   <Width>1.73957in</Width>
@@ -1869,7 +1868,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.40487in</Top>
+                  <Top>0.26389in</Top>
                   <Left>5.00146in</Left>
                   <Height>0.2in</Height>
                   <Width>0.73958in</Width>
@@ -1897,7 +1896,6 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.09931in</Top>
                   <Left>0.03726in</Left>
                   <Height>0.25in</Height>
                   <Width>4.63627in</Width>
@@ -1922,7 +1920,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.03091in</Top>
+                  <Top>0.73333in</Top>
                   <Left>3.65149in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -1947,7 +1945,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.71597in</Top>
+                  <Top>1.41839in</Top>
                   <Left>3.65149in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -1980,7 +1978,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>2.42327in</Top>
+                  <Top>2.11562in</Top>
                   <Height>0.25in</Height>
                   <Width>6.80205in</Width>
                   <ZIndex>6</ZIndex>
@@ -2013,9 +2011,9 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.63264in</Top>
+                  <Top>0.49167in</Top>
                   <Left>0.03726in</Left>
-                  <Height>0.25in</Height>
+                  <Height>0.2in</Height>
                   <Width>1.3807in</Width>
                   <ZIndex>7</ZIndex>
                   <Style>
@@ -2043,9 +2041,9 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.63264in</Top>
+                  <Top>0.49167in</Top>
                   <Left>1.49782in</Left>
-                  <Height>0.25in</Height>
+                  <Height>0.2in</Height>
                   <Width>1.25542in</Width>
                   <ZIndex>8</ZIndex>
                   <Style>
@@ -2069,9 +2067,9 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.63264in</Top>
+                  <Top>0.49167in</Top>
                   <Left>2.81226in</Left>
-                  <Height>0.25in</Height>
+                  <Height>0.2in</Height>
                   <Width>1.46023in</Width>
                   <ZIndex>9</ZIndex>
                   <Style>
@@ -2096,7 +2094,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.40487in</Top>
+                  <Top>0.26389in</Top>
                   <Left>0.03726in</Left>
                   <Height>0.2in</Height>
                   <Width>4.63627in</Width>
@@ -2121,7 +2119,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.03091in</Top>
+                  <Top>0.73333in</Top>
                   <Left>0.03726in</Left>
                   <Height>0.2in</Height>
                   <Width>0.64062in</Width>
@@ -2149,7 +2147,7 @@
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>pStoreName</rd:DefaultName>
-                  <Top>1.03091in</Top>
+                  <Top>0.73333in</Top>
                   <Left>0.76068in</Left>
                   <Height>0.2in</Height>
                   <Width>2.5in</Width>
@@ -2175,7 +2173,7 @@
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>pStoreContact</rd:DefaultName>
-                  <Top>1.25955in</Top>
+                  <Top>0.96197in</Top>
                   <Left>0.76068in</Left>
                   <Height>0.2in</Height>
                   <Width>2.5in</Width>
@@ -2218,7 +2216,7 @@
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>pStoreAddress</rd:DefaultName>
-                  <Top>1.4882in</Top>
+                  <Top>1.19062in</Top>
                   <Left>0.76068in</Left>
                   <Height>0.4in</Height>
                   <Width>2.5in</Width>
@@ -2248,7 +2246,7 @@
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>pStorePhone</rd:DefaultName>
-                  <Top>1.94375in</Top>
+                  <Top>1.64617in</Top>
                   <Left>0.76068in</Left>
                   <Height>0.2in</Height>
                   <Width>2.5in</Width>
@@ -2273,7 +2271,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.25955in</Top>
+                  <Top>0.96197in</Top>
                   <Left>3.65149in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -2298,7 +2296,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.4882in</Top>
+                  <Top>1.19062in</Top>
                   <Left>3.65149in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -2325,7 +2323,7 @@
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.94375in</Top>
+                  <Top>1.64617in</Top>
                   <Left>3.65149in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -2354,7 +2352,7 @@
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.25869in</Top>
+                  <Top>0.96111in</Top>
                   <Left>5.27819in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -2381,11 +2379,14 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.03091in</Top>
+                  <Top>0.73333in</Top>
                   <Left>5.27819in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
                   <ZIndex>20</ZIndex>
+                  <Visibility>
+                    <Hidden>=IIF(Parameters!pInvoiceNumber.Value Like "0",True,False)</Hidden>
+                  </Visibility>
                   <Style>
                     <Border>
                       <Style>None</Style>
@@ -2406,7 +2407,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.48647in</Top>
+                  <Top>1.18889in</Top>
                   <Left>5.27819in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -2431,7 +2432,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.71598in</Top>
+                  <Top>1.4184in</Top>
                   <Left>5.27819in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -2458,7 +2459,7 @@
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.94375in</Top>
+                  <Top>1.64617in</Top>
                   <Left>5.27819in</Left>
                   <Height>0.2in</Height>
                   <Width>1.5in</Width>
@@ -2483,7 +2484,7 @@
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>2.16771in</Top>
+                  <Top>1.87013in</Top>
                   <Left>0.76068in</Left>
                   <Height>0.2in</Height>
                   <Width>2.5in</Width>
@@ -2494,11 +2495,74 @@
                     </Border>
                   </Style>
                 </Textbox>
+                <Textbox Name="TB_InvoiceID">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=Parameters!pInvoiceID.Value</Value>
+                          <Style>
+                            <FontStyle>Italic</FontStyle>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>1.86006in</Top>
+                  <Left>5.27819in</Left>
+                  <Height>0.2in</Height>
+                  <Width>1.5in</Width>
+                  <ZIndex>25</ZIndex>
+                  <Visibility>
+                    <Hidden>=IIF(Parameters!pInvoiceNumber.Value Like "0",False,True)</Hidden>
+                  </Visibility>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Textbox>
+                <Textbox Name="TB_InvoiceIDLabel">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>Invoice ID:</Value>
+                          <Style>
+                            <FontStyle>Italic</FontStyle>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>1.86006in</Top>
+                  <Left>3.65149in</Left>
+                  <Height>0.2in</Height>
+                  <Width>1.5in</Width>
+                  <ZIndex>26</ZIndex>
+                  <Visibility>
+                    <Hidden>=IIF(Parameters!pInvoiceNumber.Value.ToString="0",False,True)</Hidden>
+                  </Visibility>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Textbox>
               </ReportItems>
               <KeepTogether>true</KeepTogether>
-              <Top>0.06209in</Top>
               <Left>0.07637in</Left>
-              <Height>2.68028in</Height>
+              <Height>2.3882in</Height>
               <Width>6.8367in</Width>
               <Style>
                 <Border>
@@ -2513,10 +2577,10 @@
             </Border>
           </Style>
         </PageHeader>
-        <LeftMargin>0.75in</LeftMargin>
-        <RightMargin>0.75in</RightMargin>
-        <TopMargin>0.75in</TopMargin>
-        <BottomMargin>0.75in</BottomMargin>
+        <LeftMargin>0.5in</LeftMargin>
+        <RightMargin>0.5in</RightMargin>
+        <TopMargin>0.5in</TopMargin>
+        <BottomMargin>0.5in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -2670,6 +2734,11 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="pInvoiceID">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -2805,6 +2874,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>pPSTPercent</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>pInvoiceID</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
