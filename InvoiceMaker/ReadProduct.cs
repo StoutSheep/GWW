@@ -56,6 +56,7 @@ namespace InvoiceMaker
 
                 if (errmsg.Count > 0)
                 {
+                    errmsg.Insert(0, "Total number of row errors: " + errmsg.Count);
                     listBox1.DataSource = errmsg;
                     save_button.Enabled = true;
                 }

@@ -30,6 +30,7 @@ namespace InvoiceMaker
         private void PrintInvoiceProgress_Load(object sender, EventArgs e)
         {
             // Creating File directory & save files
+
             Warning[] warnings;
             string[] streamids;
             string mimeType, encoding, extension;
@@ -96,6 +97,8 @@ namespace InvoiceMaker
             byte[] bytes = this.reportViewer1.LocalReport.Render(renderFormat, null, out mimeType, out encoding, out extension, out streamids, out warnings);
             newFile.Write(bytes, 0, bytes.Length);
             newFile.Close();
+
+
 
             // Create PDF
             Byte[] mybytes = this.reportViewer1.LocalReport.Render("PDF");

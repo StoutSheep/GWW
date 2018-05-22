@@ -92,7 +92,7 @@ namespace InvoiceMaker
             }
             else
             {
-                Int32.Parse(pstTax.Text);
+                pst = Int32.Parse(pstTax.Text);
             }
             ProvinceTaxDatabase.AddProvinceTax(provinceTax.Text, Int32.Parse(gstTax.Text), pst);
             if(editMode)

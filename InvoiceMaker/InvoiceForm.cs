@@ -359,10 +359,19 @@ namespace InvoiceMaker
                 if (confirmResult == DialogResult.Yes)
                 {
                     Customer cust = CustomerDatabase.SearchCustomersByID(customerID);
-
-                    int invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, "",
+                    int invoiceID;
+                    if (PST)
+                    {
+                        invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, "",
                         Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
                         Single.Parse(this.Controls["pst"].Text), Single.Parse(this.Controls["invoiceTotal"].Text), 1);
+                    }
+                    else
+                    {
+                        invoiceID = InvoiceDatabase.AddInvoice(customerID, this.Controls["purchaseOrder"].Text, this.Controls["invoiceSpecialNotes"].Text, "",
+                        Single.Parse(this.Controls["subtotalAmount"].Text), Single.Parse(this.Controls["gst"].Text),
+                        0, Single.Parse(this.Controls["invoiceTotal"].Text), 1);
+                    }
 
                     for (int j = 0; j < i; j++)
                     {
