@@ -524,7 +524,7 @@ namespace InvoiceMaker
                 qty.Location = new Point(0, 0 + i * 25);
                 qty.Size = new Size(30, 25);
                 qty.Name = "qty" + i;
-                qty.Text = (invoiceContentsList[i].Quantity - invoiceContentsList[i].Backorder).ToString();
+                qty.Text = (invoiceContentsList[i].Quantity).ToString();
                 qty.ReadOnly = true;
                 qty.Enter += Desc_Enter;
                 qty.AccessibleName = "" + i;
